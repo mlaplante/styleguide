@@ -1,0 +1,30 @@
+---
+import DocsLayout from '../../layouts/DocsLayout.astro';
+---
+<DocsLayout title="Service" description="Service card component.">
+<div class="wrap">
+  <div class="svc">
+    <div class="glyph"><div class="g-shield"></div></div>
+    <h4>Security Architecture</h4>
+    <p>Assess your infrastructure, identify gaps, design defense-in-depth strategies.</p>
+  </div>
+  <div class="svc">
+    <div class="glyph"><div class="g-cloud"></div></div>
+    <h4>Cloud Security Strategy</h4>
+    <p>Build secure multi-cloud architectures across AWS, Azure, and GCP with zero-trust.</p>
+  </div>
+</div>
+</DocsLayout>
+
+<style is:global>
+  html,body{margin:0;background:#F1F1F1;font-family:var(--lp-font-display);color:var(--lp-ink-900)}
+  .wrap{padding:30px 34px;height:100%;box-sizing:border-box;display:grid;grid-template-columns:1fr 1fr;gap:28px;align-items:center}
+  .svc{display:flex;flex-direction:column;gap:10px}
+  .svc .glyph{width:64px;height:64px;border-radius:14px;background:rgba(63,81,181,0.08);display:flex;align-items:center;justify-content:center;color:#3F51B5;font-size:32px;font-weight:300;line-height:1}
+  .svc h4{margin:2px 0 0;font-size:16px;font-weight:700;text-transform:uppercase;letter-spacing:2px;color:#202020}
+  .svc p{margin:0;color:rgba(0,0,0,.6);font-size:13px;line-height:1.75}
+  /* simple CSS-drawn monoline glyphs (placeholder for Linea) */
+  .g-shield{position:relative;width:36px;height:42px;border:1.5px solid currentColor;border-radius:6px 6px 20px 20px / 6px 6px 28px 28px;border-top-width:2px}
+  .g-cloud{position:relative;width:42px;height:26px;border:1.5px solid currentColor;border-radius:22px}
+  .g-cloud::before{content:'';position:absolute;width:16px;height:16px;border-radius:50%;border:1.5px solid currentColor;background:rgba(63,81,181,0.08);top:-10px;left:10px}
+</style>

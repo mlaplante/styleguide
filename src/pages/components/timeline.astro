@@ -1,0 +1,28 @@
+---
+import DocsLayout from '../../layouts/DocsLayout.astro';
+---
+<DocsLayout title="Timeline" description="Career timeline component.">
+<div class="wrap">
+  <ul class="tl">
+    <li class="current"><div class="date">January 2026 — Present</div><div class="content"><h4>Proforma</h4><span class="role">SVP of Information Security and Operations</span></div></li>
+    <li><div class="date">April 2022 — January 2026</div><div class="content"><h4>Proforma</h4><span class="role">Vice President of Technology</span></div></li>
+    <li><div class="date">Nov 2021 — April 2022</div><div class="content"><h4>Proforma</h4><span class="role">Director of Engineering</span></div></li>
+  </ul>
+</div>
+</DocsLayout>
+
+<style is:global>
+  html,body{margin:0;background:#fff;font-family:var(--lp-font-display);color:var(--lp-ink-900)}
+  .wrap{padding:28px 32px;height:100%;box-sizing:border-box;display:flex;flex-direction:column;justify-content:center}
+  .tl{list-style:none;padding:20px 0;margin:0;position:relative}
+  .tl::before{content:'';position:absolute;height:100%;width:1px;left:0;top:0;background:#E0E0E0}
+  li{margin-bottom:30px;position:relative;display:grid;grid-template-columns:180px 1fr;gap:10px}
+  li:last-child{margin-bottom:0}
+  .date,.content{padding-left:30px}
+  .content{position:relative}
+  .content::before{content:'';height:12px;width:12px;border-radius:50%;border:1px solid #BBB;background:#F0F0F0;position:absolute;left:-6px;top:4px}
+  li.current .content::before{border-color:rgba(0,0,0,.2);background:#3F51B5}
+  .date{font-family:var(--lp-font-mono);font-size:13px;color:rgba(0,0,0,.6)}
+  h4{margin:0 0 4px;font-size:16px;font-weight:700}
+  span.role{color:rgba(0,0,0,.6);font-size:13px}
+</style>
