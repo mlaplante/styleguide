@@ -1,0 +1,28 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><link rel="stylesheet" href="../colors_and_type.css">
+<style>
+  html,body{margin:0;background:#fff;font-family:var(--lp-font-display);color:var(--lp-ink-900)}
+  .wrap{padding:30px 36px;height:100%;box-sizing:border-box;display:flex;flex-direction:column;gap:22px;justify-content:center}
+  .mi{position:relative;max-width:360px}
+  .mi input,.mi textarea{background:transparent;border:none;border-bottom:1px solid #ddd;outline:none;padding:10px 0;width:100%;font-family:inherit;font-size:16px;color:#333;box-sizing:border-box}
+  .mi.focus input{border-bottom-color:#3F51B5}
+  .mi label{position:absolute;left:0;top:6px;font-size:14px;color:#808080;font-weight:300;font-family:var(--lp-font-mono);transition:all .3s ease;pointer-events:none}
+  .mi.filled label, .mi.focus label{top:-15px;font-size:12px;color:#3F51B5}
+  .lbl{font-family:var(--lp-font-mono);font-size:9px;letter-spacing:1.5px;text-transform:uppercase;color:#9ca3af}
+</style></head>
+<body>
+<div class="wrap">
+  <div>
+    <div class="lbl">Empty</div>
+    <div class="mi"><input type="text" placeholder=" "><label>Name</label></div>
+  </div>
+  <div>
+    <div class="lbl">Focused</div>
+    <div class="mi focus"><input type="text" value="" placeholder=" "><label>Email</label></div>
+  </div>
+  <div>
+    <div class="lbl">Filled</div>
+    <div class="mi filled"><input type="text" value="michael@laplante.dev" placeholder=" "><label>Email</label></div>
+  </div>
+</div>
+</body></html>

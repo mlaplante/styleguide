@@ -1,0 +1,284 @@
+/* ==========================================================================
+   La Plante Web Development — Design Tokens
+   Source of truth for colors, typography, spacing, radii, shadows.
+   Derived from mlaplante/resumesite (Astro) + uploaded logo assets.
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   Fonts — self-hosted where possible, Google Fonts fallback via @import.
+   Poppins = display/UI, Roboto Mono = accents/labels/meta.
+   -------------------------------------------------------------------------- */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Roboto+Mono:wght@300;400;500;700&display=swap');
+
+:root {
+  /* ---------- Color · Brand ---------- */
+  --lp-indigo-500: #3F51B5;      /* primary — portfolio accent + buttons */
+  --lp-indigo-600: #3849a1;
+  --lp-indigo-700: #303f8c;
+  --lp-indigo-100: rgba(63, 81, 181, 0.1);
+  --lp-indigo-200: rgba(63, 81, 181, 0.4);
+
+  --lp-blog-blue-500: #2980b9;   /* blog accent — sticky nav gradient start */
+  --lp-blog-blue-600: #1a6da3;   /* blog accent — gradient end */
+  --lp-blog-blue-700: #1a5276;   /* blog dark-mode nav */
+  --lp-blog-blue-900: #154360;
+  --lp-link-dark: #60a5fa;       /* dark-mode link color */
+
+  /* ---------- Color · Material accents (theme switcher) ---------- */
+  --lp-accent-blue-grey: #607D8B;
+  --lp-accent-teal:      #009688;
+  --lp-accent-pink:      #FF4081;
+  --lp-accent-blue:      #2196F3;
+  --lp-accent-green:     #4CAF50;
+  --lp-accent-purple:    #9C27B0;
+
+  /* ---------- Color · Neutrals ---------- */
+  --lp-ink-900: #111827;   /* strongest text */
+  --lp-ink-800: #1a1a1a;   /* dark-mode bg / body */
+  --lp-ink-700: #1f2937;
+  --lp-ink-600: #202020;   /* near-black text */
+  --lp-ink-500: #374151;   /* article body */
+  --lp-ink-400: #4b5563;   /* muted */
+  --lp-ink-300: #6b7280;   /* meta */
+  --lp-ink-200: #808080;   /* form labels */
+  --lp-ink-100: #9ca3af;
+  --lp-line:    #E0E0E0;   /* timeline rule */
+  --lp-line-2:  #e5e7eb;   /* card borders */
+  --lp-paper:   #F1F1F1;   /* portfolio body bg */
+  --lp-paper-2: #f8f9fa;   /* blog body bg */
+  --lp-paper-3: #F0F0F0;   /* timeline dots */
+  --lp-white:   #FFFFFF;
+
+  /* ---------- Color · Dark mode ---------- */
+  --lp-dark-bg:      #0f172a;
+  --lp-dark-bg-2:    #1a1a1a;
+  --lp-dark-surface: #1e293b;
+  --lp-dark-surface-2: #222222;
+  --lp-dark-border:  #334155;
+  --lp-dark-text:    #e0e0e0;
+  --lp-dark-text-2:  #cbd5e1;
+  --lp-dark-muted:   #94a3b8;
+
+  /* ---------- Color · Code / inline ---------- */
+  --lp-code-bg:      #0d1117;
+  --lp-code-bg-light: #f0f1f3;
+  --lp-code-accent:  #c7254e;
+  --lp-code-accent-dark: #e879a0;
+
+  /* ---------- Color · Semantic ---------- */
+  --lp-fg-1: var(--lp-ink-900);
+  --lp-fg-2: var(--lp-ink-500);
+  --lp-fg-3: var(--lp-ink-300);
+  --lp-fg-mute: var(--lp-ink-200);
+  --lp-bg-1: var(--lp-white);
+  --lp-bg-2: var(--lp-paper-2);
+  --lp-bg-3: var(--lp-paper);
+  --lp-border-subtle: var(--lp-line-2);
+  --lp-border: var(--lp-line);
+  --lp-accent: var(--lp-indigo-500);
+  --lp-accent-blog: var(--lp-blog-blue-500);
+
+  /* ---------- Typography · Families ---------- */
+  --lp-font-display: 'Poppins', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --lp-font-body:    'Poppins', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --lp-font-mono:    'Roboto Mono', 'SF Mono', Menlo, Consolas, monospace;
+
+  /* ---------- Typography · Weights ---------- */
+  --lp-w-light:    300;
+  --lp-w-regular:  400;
+  --lp-w-medium:   500;
+  --lp-w-semibold: 600;
+  --lp-w-bold:     700;
+
+  /* ---------- Typography · Scale ---------- */
+  --lp-t-hero:   68px;  /* intro name */
+  --lp-t-xl:     44px;  /* about-large */
+  --lp-t-lg:     36px;  /* blog h1 */
+  --lp-t-md:     26px;  /* blog h2 */
+  --lp-t-sm:     21px;  /* blog h3 */
+  --lp-t-base:   17px;  /* article body */
+  --lp-t-ui:     16px;  /* UI base */
+  --lp-t-meta:   14px;  /* section labels, meta */
+  --lp-t-caption: 13px;
+  --lp-t-micro:  12px;  /* eyebrows, tag pills */
+
+  /* ---------- Typography · Letter-spacing ---------- */
+  --lp-ls-tight: -0.5px;  /* large headings */
+  --lp-ls-snug:  -0.3px;  /* h2 */
+  --lp-ls-normal: 0;
+  --lp-ls-wide:  1px;
+  --lp-ls-wider: 2px;     /* section eyebrows, labels */
+  --lp-ls-widest: 3px;    /* social links */
+
+  /* ---------- Typography · Line heights ---------- */
+  --lp-lh-tight: 1em;
+  --lp-lh-snug:  1.25;
+  --lp-lh-normal: 1.5;
+  --lp-lh-body:  1.8;     /* article */
+  --lp-lh-loose: 2em;
+
+  /* ---------- Spacing scale ---------- */
+  --lp-space-1: 4px;
+  --lp-space-2: 8px;
+  --lp-space-3: 12px;
+  --lp-space-4: 16px;
+  --lp-space-5: 20px;
+  --lp-space-6: 24px;
+  --lp-space-8: 32px;
+  --lp-space-10: 40px;
+  --lp-space-12: 48px;
+  --lp-space-14: 55px;
+  --lp-space-18: 72px;
+  --lp-space-22: 90px;   /* section top pad */
+  --lp-space-30: 120px;  /* hero top pad */
+
+  /* ---------- Radii ---------- */
+  --lp-radius-sm: 3px;
+  --lp-radius:    4px;    /* buttons, menu */
+  --lp-radius-md: 6px;    /* CTA */
+  --lp-radius-lg: 8px;    /* article images, code blocks */
+  --lp-radius-xl: 10px;   /* post cards */
+  --lp-radius-pill: 100px;
+  --lp-radius-full: 50%;  /* person image, timeline dots */
+
+  /* ---------- Shadows ---------- */
+  --lp-shadow-hero:   0 0 40px 0 rgba(0,0,0,.45);   /* hero section */
+  --lp-shadow-img:    0 0 25px 0 rgba(0,0,0,.15);   /* person image */
+  --lp-shadow-menu:   0 0 30px 0 rgba(0,0,0,.2);    /* menu */
+  --lp-shadow-card:   0 4px 16px 0 rgba(0,0,0,.06); /* post card hover */
+  --lp-shadow-btn:    0 4px 15px rgba(63, 81, 181, 0.4);
+  --lp-shadow-btn-hover: 0 10px 30px rgba(63, 81, 181, 0.5);
+  --lp-shadow-blog-nav: 0 2px 8px rgba(0, 0, 0, 0.15);
+  --lp-shadow-img-article: 0 2px 12px rgba(0, 0, 0, 0.08);
+  --lp-shadow-img-article-dark: 0 2px 12px rgba(0, 0, 0, 0.3);
+
+  /* ---------- Motion ---------- */
+  --lp-ease:       ease;
+  --lp-ease-out:   ease-out;
+  --lp-dur-fast:   0.2s;
+  --lp-dur:        0.3s;
+  --lp-dur-slow:   0.6s;
+
+  /* ---------- Layout ---------- */
+  --lp-container: 1024px;      /* portfolio */
+  --lp-container-blog: 1080px; /* blog */
+  --lp-nav-h: 64px;
+}
+
+/* --------------------------------------------------------------------------
+   Semantic typography — element-level defaults.
+   -------------------------------------------------------------------------- */
+
+body {
+  font-family: var(--lp-font-body);
+  font-weight: var(--lp-w-regular);
+  font-size: var(--lp-t-ui);
+  line-height: var(--lp-lh-normal);
+  color: var(--lp-fg-1);
+  background: var(--lp-paper);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Hero title — huge, light-weight, letter-spaced */
+.lp-t-hero {
+  font-family: var(--lp-font-display);
+  font-size: var(--lp-t-hero);
+  font-weight: var(--lp-w-light);
+  line-height: var(--lp-lh-tight);
+  letter-spacing: var(--lp-ls-wider);
+  margin: 0;
+}
+.lp-t-hero strong { font-weight: var(--lp-w-light); }
+
+/* H1 — blog post */
+.lp-t-h1 {
+  font-family: var(--lp-font-display);
+  font-size: var(--lp-t-lg);
+  font-weight: var(--lp-w-bold);
+  line-height: var(--lp-lh-snug);
+  letter-spacing: var(--lp-ls-tight);
+  color: var(--lp-ink-800);
+  margin: 0 0 var(--lp-space-3);
+}
+
+/* H2 — article */
+.lp-t-h2 {
+  font-family: var(--lp-font-display);
+  font-size: var(--lp-t-md);
+  font-weight: var(--lp-w-bold);
+  letter-spacing: var(--lp-ls-snug);
+  color: var(--lp-ink-800);
+  margin: var(--lp-space-12) 0 var(--lp-space-4);
+}
+
+/* H3 */
+.lp-t-h3 {
+  font-family: var(--lp-font-display);
+  font-size: var(--lp-t-sm);
+  font-weight: var(--lp-w-semibold);
+  color: var(--lp-ink-700);
+  margin: 36px 0 var(--lp-space-3);
+}
+
+/* Section eyebrow — lowercased, monospaced, underlined with indigo wash */
+.lp-t-eyebrow {
+  font-family: var(--lp-font-mono);
+  font-size: 18px;
+  font-weight: var(--lp-w-bold);
+  line-height: var(--lp-lh-tight);
+  color: rgba(0,0,0,.8);
+  text-transform: lowercase;
+  letter-spacing: var(--lp-ls-wider);
+  position: relative;
+  display: inline-block;
+  z-index: 3;
+  margin: 0;
+}
+.lp-t-eyebrow::after {
+  content: '';
+  position: absolute;
+  bottom: 1px;
+  left: 0;
+  height: 4px;
+  width: 100%;
+  background: var(--lp-indigo-500);
+  opacity: 0.4;
+  z-index: -1;
+}
+
+/* Service titles — uppercased, letter-spaced */
+.lp-t-label {
+  font-family: var(--lp-font-display);
+  font-size: 18px;
+  font-weight: var(--lp-w-bold);
+  text-transform: uppercase;
+  letter-spacing: var(--lp-ls-wider);
+}
+
+/* Meta / intro tagline — mono, light color */
+.lp-t-meta {
+  font-family: var(--lp-font-mono);
+  font-size: var(--lp-t-meta);
+  font-weight: var(--lp-w-light);
+  color: var(--lp-fg-3);
+  letter-spacing: var(--lp-ls-wide);
+}
+
+/* Body paragraph */
+.lp-t-body {
+  font-family: var(--lp-font-display);
+  font-size: var(--lp-t-base);
+  line-height: var(--lp-lh-body);
+  color: var(--lp-fg-2);
+}
+
+/* Inline code */
+.lp-t-code {
+  font-family: var(--lp-font-mono);
+  font-size: var(--lp-t-meta);
+  background: var(--lp-code-bg-light);
+  color: var(--lp-code-accent);
+  padding: 2px 7px;
+  border-radius: var(--lp-radius);
+}

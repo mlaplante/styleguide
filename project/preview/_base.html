@@ -1,0 +1,102 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Card</title>
+<link rel="stylesheet" href="../colors_and_type.css">
+<style>
+  html, body { margin: 0; background: #fff; }
+  body {
+    font-family: var(--lp-font-display);
+    color: var(--lp-fg-1);
+    padding: 20px;
+    box-sizing: border-box;
+  }
+  .card-inner { box-sizing: border-box; }
+
+  /* ---------- Brand logo ---------- */
+  .logo-row {
+    display: flex;
+    gap: 16px;
+    align-items: stretch;
+    height: 100%;
+  }
+  .logo-row > div {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    padding: 18px;
+    box-sizing: border-box;
+  }
+  .logo-row .light { background: #F1F1F1; }
+  .logo-row .dark  { background: #202020; }
+  .logo-row img { max-width: 100%; max-height: 100%; object-fit: contain; }
+
+  /* ---------- Color swatch grid ---------- */
+  .swatches {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 10px;
+  }
+  .sw {
+    border-radius: 8px;
+    padding: 10px 12px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    height: 100px;
+    box-sizing: border-box;
+    font-family: var(--lp-font-mono);
+    font-size: 10px;
+    letter-spacing: 0.5px;
+  }
+  .sw .name {
+    font-weight: 700;
+    font-size: 11px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 3px;
+  }
+  .sw .hex { opacity: 0.85; }
+  .sw.light { border: 1px solid var(--lp-line-2); }
+
+  /* ---------- Type specimens ---------- */
+  .type-stack { display: flex; flex-direction: column; gap: 14px; }
+  .type-row {
+    display: grid;
+    grid-template-columns: 120px 1fr;
+    gap: 18px;
+    align-items: center;
+    padding-bottom: 14px;
+    border-bottom: 1px solid var(--lp-line-2);
+  }
+  .type-row:last-child { border-bottom: none; padding-bottom: 0; }
+  .type-label {
+    font-family: var(--lp-font-mono);
+    font-size: 11px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--lp-ink-300);
+  }
+  .type-label small {
+    display: block;
+    font-weight: 400;
+    text-transform: none;
+    letter-spacing: 0.5px;
+    color: var(--lp-ink-100);
+    margin-top: 2px;
+    font-size: 10px;
+  }
+
+  /* ---------- Misc layout ---------- */
+  .row { display: flex; gap: 14px; align-items: center; }
+  .pad { padding: 8px 0; }
+
+  /* reset some h / p */
+  h1, h2, h3, h4, p { margin: 0; }
+</style>
+</head>
+<body></body>
+</html>

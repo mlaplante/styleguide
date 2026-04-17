@@ -1,0 +1,21 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><link rel="stylesheet" href="../colors_and_type.css">
+<style>
+  html,body{margin:0;background:#F1F1F1;font-family:var(--lp-font-display);color:var(--lp-ink-900)}
+  .wrap{padding:34px 32px;height:100%;box-sizing:border-box;display:flex;align-items:center;justify-content:space-around;gap:14px;flex-wrap:wrap}
+  .stack{display:flex;flex-direction:column;align-items:center;gap:12px}
+  .tile{width:88px;height:64px;background:#fff;border-radius:8px}
+  .tile.hero{background:#3F51B5}
+  .tile.btn{background:#3F51B5;border-radius:6px}
+  .meta{font-family:var(--lp-font-mono);font-size:10px;letter-spacing:1.2px;text-transform:uppercase;color:#6b7280;text-align:center;max-width:120px}
+  .meta small{display:block;color:#9ca3af;font-weight:400;font-size:10px;letter-spacing:.3px;text-transform:none;margin-top:2px}
+</style></head>
+<body>
+<div class="wrap">
+  <div class="stack"><div class="tile" style="box-shadow:0 0 25px 0 rgba(0,0,0,.15)"></div><div class="meta">Image rim<small>25px · 15%</small></div></div>
+  <div class="stack"><div class="tile" style="box-shadow:0 4px 16px 0 rgba(0,0,0,.06)"></div><div class="meta">Card hover<small>4/16 · 6%</small></div></div>
+  <div class="stack"><div class="tile hero" style="box-shadow:0 0 40px 0 rgba(0,0,0,.45)"></div><div class="meta">Hero block<small>40px · 45%</small></div></div>
+  <div class="stack"><div class="tile btn" style="box-shadow:0 4px 15px rgba(63,81,181,0.4)"></div><div class="meta">Button<small>4/15 · 40% indigo</small></div></div>
+  <div class="stack"><div class="tile btn" style="box-shadow:0 10px 30px rgba(63,81,181,0.5);transform:translateY(-3px)"></div><div class="meta">Button hover<small>10/30 · 50% indigo</small></div></div>
+</div>
+</body></html>
