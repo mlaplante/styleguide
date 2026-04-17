@@ -1,0 +1,63 @@
+---
+import '../styles/global.css';
+import Sidebar from '../components/Sidebar.astro';
+
+export interface Props {
+  title: string;
+  description?: string;
+}
+
+const { title, description } = Astro.props;
+const pageTitle = `${title} — La Plante Web Dev Style Guide`;
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{pageTitle}</title>
+    {description && <meta name="description" content={description} />}
+    <link rel="icon" href="/assets/favicon.ico" />
+  </head>
+  <body>
+    <header class="topbar">
+      <a class="brand" href="/">La Plante Web Dev — Style Guide</a>
+      <a class="home" href="https://michaellaplante.com" rel="noopener">michaellaplante.com ↗</a>
+    </header>
+    <div class="shell">
+      <Sidebar />
+      <main class="content">
+        <header class="page-head">
+          <h1>{title}</h1>
+          {description && <p class="lede">{description}</p>}
+        </header>
+        <section class="preview">
+          <slot />
+        </section>
+      </main>
+    </div>
+
+    <style>
+      :root { --sidebar-w: 260px; --topbar-h: 56px; }
+      * { box-sizing: border-box; }
+      body { margin: 0; background: #fff; color: var(--lp-fg-1, #111); font-family: var(--lp-font-display, system-ui, sans-serif); }
+      .topbar {
+        position: sticky; top: 0; z-index: 10;
+        display: flex; align-items: center; justify-content: space-between;
+        height: var(--topbar-h); padding: 0 20px;
+        background: #fff; border-bottom: 1px solid #e5e7eb;
+      }
+      .brand { font-weight: 700; font-size: 14px; letter-spacing: 1px; text-transform: uppercase; color: inherit; text-decoration: none; }
+      .home { font-size: 12px; color: #6b7280; text-decoration: none; }
+      .shell { display: grid; grid-template-columns: var(--sidebar-w) 1fr; min-height: calc(100vh - var(--topbar-h)); }
+      .content { padding: 32px 40px 80px; max-width: 1100px; }
+      .page-head h1 { font-size: 28px; margin: 0 0 8px; }
+      .lede { color: #6b7280; margin: 0 0 32px; font-size: 15px; }
+      .preview { border: 1px solid #e5e7eb; border-radius: 10px; padding: 24px; background: #fff; }
+
+      @media (max-width: 768px) {
+        .shell { grid-template-columns: 1fr; }
+      }
+    </style>
+  </body>
+</html>

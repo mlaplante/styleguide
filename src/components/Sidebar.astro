@@ -1,0 +1,96 @@
+---
+const groups = [
+  {
+    title: 'Foundations',
+    items: [
+      { href: '/colors/primary', label: 'Colors — Primary' },
+      { href: '/colors/accent-palette', label: 'Colors — Accent Palette' },
+      { href: '/colors/neutrals', label: 'Colors — Neutrals' },
+      { href: '/type/hero', label: 'Type — Hero' },
+      { href: '/type/headings', label: 'Type — Headings' },
+      { href: '/type/body', label: 'Type — Body' },
+      { href: '/type/eyebrow', label: 'Type — Eyebrow' },
+      { href: '/spacing/scale', label: 'Spacing — Scale' },
+      { href: '/spacing/radii', label: 'Spacing — Radii' },
+      { href: '/spacing/shadows', label: 'Spacing — Shadows' },
+    ],
+  },
+  {
+    title: 'Components',
+    items: [
+      { href: '/components/buttons', label: 'Buttons' },
+      { href: '/components/input', label: 'Input' },
+      { href: '/components/blog-nav', label: 'Blog Nav' },
+      { href: '/components/post-card', label: 'Post Card' },
+      { href: '/components/service', label: 'Service' },
+      { href: '/components/timeline', label: 'Timeline' },
+    ],
+  },
+  {
+    title: 'UI Kits',
+    items: [
+      { href: '/ui-kits/blog', label: 'Blog' },
+      { href: '/ui-kits/portfolio', label: 'Portfolio' },
+    ],
+  },
+];
+
+const current = Astro.url.pathname.replace(/\/$/, '');
+---
+<aside class="sidebar">
+  <nav>
+    {groups.map((g) => (
+      <section>
+        <h2>{g.title}</h2>
+        <ul>
+          {g.items.map((it) => {
+            const active = current === it.href;
+            return (
+              <li>
+                <a href={it.href} class={active ? 'active' : ''}>{it.label}</a>
+              </li>
+            );
+          })}
+        </ul>
+      </section>
+    ))}
+  </nav>
+</aside>
+
+<style>
+  .sidebar {
+    border-right: 1px solid #e5e7eb;
+    padding: 24px 16px;
+    background: #fafafa;
+    position: sticky;
+    top: var(--topbar-h);
+    align-self: start;
+    max-height: calc(100vh - var(--topbar-h));
+    overflow-y: auto;
+  }
+  nav section + section { margin-top: 24px; }
+  h2 {
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: #9ca3af;
+    margin: 0 0 8px 8px;
+    font-weight: 700;
+  }
+  ul { list-style: none; margin: 0; padding: 0; }
+  li { margin: 0; }
+  a {
+    display: block;
+    padding: 6px 8px;
+    border-radius: 6px;
+    color: #374151;
+    text-decoration: none;
+    font-size: 13px;
+  }
+  a:hover { background: #f0f0f0; }
+  a.active { background: #111; color: #fff; }
+
+  @media (max-width: 768px) {
+    .sidebar { position: static; max-height: none; border-right: none; border-bottom: 1px solid #e5e7eb; }
+  }
+</style>
