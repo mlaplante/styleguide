@@ -3,22 +3,67 @@ import DocsLayout from '../layouts/DocsLayout.astro';
 
 const sections = [
   { href: '/logo', title: 'Logo', eyebrow: 'Foundations', blurb: 'Primary and alternate marks.', visual: 'logo' },
-  { href: '/colors/primary', title: 'Colors', eyebrow: 'Foundations', blurb: 'Primary, accent, and neutral palettes.' },
-  { href: '/type/hero', title: 'Type', eyebrow: 'Foundations', blurb: 'Hero, headings, body, and eyebrow specimens.' },
-  { href: '/spacing/scale', title: 'Spacing', eyebrow: 'Foundations', blurb: 'Scale, radii, and elevation tokens.' },
-  { href: '/components/buttons', title: 'Components', eyebrow: 'Library', blurb: 'Buttons, inputs, cards, and more.' },
-  { href: '/ui-kits/blog', title: 'UI Kits', eyebrow: 'Compositions', blurb: 'Full blog and portfolio compositions.' },
+  { href: '/colors/primary', title: 'Colors', eyebrow: 'Foundations', blurb: 'Primary, accent, and neutral palettes.', visual: 'colors' },
+  { href: '/type/hero', title: 'Type', eyebrow: 'Foundations', blurb: 'Hero, headings, body, and eyebrow specimens.', visual: 'type' },
+  { href: '/spacing/scale', title: 'Spacing', eyebrow: 'Foundations', blurb: 'Scale, radii, and elevation tokens.', visual: 'spacing' },
+  { href: '/components/buttons', title: 'Components', eyebrow: 'Library', blurb: 'Buttons, inputs, cards, and more.', visual: 'components' },
+  { href: '/ui-kits/blog', title: 'UI Kits', eyebrow: 'Compositions', blurb: 'Full blog and portfolio compositions.', visual: 'ui-kits' },
 ];
 ---
 <DocsLayout title="Style Guide" description="The La Plante Web Dev design system.">
   <div class="grid">
     {sections.map((s) => (
-      <a class={`card${s.visual === 'logo' ? ' card--logo' : ''}`} href={s.href}>
-        {s.visual === 'logo' && (
-          <div class="logo-tile">
-            <img src="/assets/laplante-logo.png" alt="La Plante Web Dev" />
-          </div>
-        )}
+      <a class={`card card--${s.visual}`} href={s.href}>
+        <div class="preview-tile" aria-hidden="true">
+          {s.visual === 'logo' && (
+            <img class="logo-img" src="/assets/laplante-logo.png" alt="" />
+          )}
+          {s.visual === 'colors' && (
+            <div class="color-row">
+              <span style="background:#3F51B5"></span>
+              <span style="background:#2980b9"></span>
+              <span style="background:#009688"></span>
+              <span style="background:#FF4081"></span>
+              <span style="background:#111827"></span>
+              <span style="background:#F1F1F1;border:1px solid #e5e7eb"></span>
+            </div>
+          )}
+          {s.visual === 'type' && (
+            <div class="type-demo">
+              <span class="type-aa">Aa</span>
+              <div class="type-stack">
+                <span class="type-eyebrow">POPPINS · ROBOTO MONO</span>
+                <span class="type-head">Headline</span>
+                <span class="type-body">Supporting copy set in body.</span>
+              </div>
+            </div>
+          )}
+          {s.visual === 'spacing' && (
+            <div class="spacing-demo">
+              <span style="width:12px"></span>
+              <span style="width:20px"></span>
+              <span style="width:32px"></span>
+              <span style="width:48px"></span>
+              <span style="width:72px"></span>
+            </div>
+          )}
+          {s.visual === 'components' && (
+            <div class="components-demo">
+              <span class="btn-demo">Schedule a Call</span>
+              <span class="btn-demo btn-demo--ghost">Learn More</span>
+            </div>
+          )}
+          {s.visual === 'ui-kits' && (
+            <div class="kit-demo">
+              <span class="kit-bar"></span>
+              <div class="kit-body">
+                <span class="kit-line kit-line--lg"></span>
+                <span class="kit-line"></span>
+                <span class="kit-line kit-line--sm"></span>
+              </div>
+            </div>
+          )}
+        </div>
         <span class="eyebrow">{s.eyebrow}</span>
         <h3>{s.title}</h3>
         <p>{s.blurb}</p>
@@ -68,28 +113,154 @@ const sections = [
   .card:hover::before { transform: scaleY(1); }
   .card:hover .arrow { transform: translateX(4px); color: var(--lp-indigo-500); }
 
-  .logo-tile {
+  .preview-tile {
     background: var(--lp-paper);
-    border-radius: var(--lp-radius-lg);
-    padding: var(--lp-space-8) var(--lp-space-5);
+    padding: var(--lp-space-6) var(--lp-space-5);
     margin: calc(var(--lp-space-6) * -1) calc(var(--lp-space-6) * -1) var(--lp-space-5);
     display: flex;
     align-items: center;
     justify-content: center;
     min-height: 120px;
     border-bottom: 1px solid var(--lp-border-subtle);
-    border-top-left-radius: var(--lp-radius-xl);
-    border-top-right-radius: var(--lp-radius-xl);
-    border-bottom-left-radius: 0;
-    border-bottom-right-radius: 0;
+    overflow: hidden;
   }
-  .logo-tile img {
+
+  /* Logo */
+  .logo-img {
     max-width: 80%;
     max-height: 80px;
     object-fit: contain;
     transition: transform var(--lp-dur) var(--lp-ease);
   }
-  .card--logo:hover .logo-tile img { transform: scale(1.03); }
+  .card--logo:hover .logo-img { transform: scale(1.03); }
+
+  /* Colors */
+  .color-row {
+    display: flex;
+    gap: var(--lp-space-2);
+    width: 80%;
+  }
+  .color-row span {
+    flex: 1;
+    aspect-ratio: 1 / 1;
+    border-radius: var(--lp-radius-md);
+    box-shadow: var(--lp-shadow-card);
+    transition: transform var(--lp-dur-fast) var(--lp-ease);
+  }
+  .card--colors:hover .color-row span { transform: translateY(-2px); }
+
+  /* Type */
+  .type-demo {
+    display: flex;
+    align-items: center;
+    gap: var(--lp-space-5);
+    width: 100%;
+    padding: 0 var(--lp-space-4);
+  }
+  .type-aa {
+    font-family: var(--lp-font-display);
+    font-size: 64px;
+    font-weight: var(--lp-w-bold);
+    line-height: 1;
+    letter-spacing: var(--lp-ls-tight);
+    color: var(--lp-ink-900);
+  }
+  .type-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    min-width: 0;
+  }
+  .type-eyebrow {
+    font-family: var(--lp-font-mono);
+    font-size: 9px;
+    letter-spacing: var(--lp-ls-wider);
+    color: var(--lp-ink-300);
+  }
+  .type-head {
+    font-family: var(--lp-font-display);
+    font-size: 18px;
+    font-weight: var(--lp-w-bold);
+    color: var(--lp-ink-900);
+    letter-spacing: var(--lp-ls-snug);
+  }
+  .type-body {
+    font-family: var(--lp-font-display);
+    font-size: 12px;
+    color: var(--lp-ink-400);
+    line-height: var(--lp-lh-normal);
+  }
+
+  /* Spacing */
+  .spacing-demo {
+    display: flex;
+    flex-direction: column;
+    gap: var(--lp-space-2);
+    align-items: flex-start;
+  }
+  .spacing-demo span {
+    height: 8px;
+    background: var(--lp-indigo-500);
+    border-radius: var(--lp-radius-sm);
+    transition: transform var(--lp-dur-fast) var(--lp-ease);
+  }
+  .card--spacing:hover .spacing-demo span { transform: scaleX(1.05); transform-origin: left; }
+
+  /* Components */
+  .components-demo {
+    display: flex;
+    gap: var(--lp-space-3);
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .btn-demo {
+    display: inline-block;
+    padding: 10px 22px;
+    background: var(--lp-indigo-500);
+    color: var(--lp-white);
+    border-radius: var(--lp-radius-md);
+    font-weight: var(--lp-w-bold);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: var(--lp-ls-wide);
+    border: 2px solid var(--lp-indigo-500);
+    box-shadow: var(--lp-shadow-btn);
+  }
+  .btn-demo--ghost {
+    background: transparent;
+    color: var(--lp-indigo-500);
+    box-shadow: none;
+  }
+
+  /* UI Kits */
+  .kit-demo {
+    width: 85%;
+    background: var(--lp-white);
+    border-radius: var(--lp-radius-md);
+    box-shadow: var(--lp-shadow-card);
+    overflow: hidden;
+    border: 1px solid var(--lp-border-subtle);
+  }
+  .kit-bar {
+    display: block;
+    height: 14px;
+    background: linear-gradient(90deg, var(--lp-blog-blue-500), var(--lp-blog-blue-600));
+  }
+  .kit-body {
+    padding: var(--lp-space-3) var(--lp-space-4);
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .kit-line {
+    height: 6px;
+    background: var(--lp-paper-3);
+    border-radius: var(--lp-radius-sm);
+    width: 75%;
+  }
+  .kit-line--lg { width: 90%; height: 8px; background: var(--lp-ink-500); }
+  .kit-line--sm { width: 50%; }
 
   .eyebrow {
     display: block;
