@@ -25,7 +25,6 @@ const pageTitle = `${title} — La Plante Web Dev Style Guide`;
         <img class="brand-logo" src="/assets/laplante-logo.png" alt="La Plante Web Dev" />
         <span class="brand-suffix">— Style Guide</span>
       </a>
-      <a class="home" href="https://michaellaplante.com" rel="noopener">michaellaplante.com ↗</a>
     </header>
     <div class="shell">
       <Sidebar />
@@ -75,15 +74,6 @@ const pageTitle = `${title} — La Plante Web Dev Style Guide`;
         text-transform: uppercase;
         color: var(--lp-ink-300);
       }
-      .home {
-        font-family: var(--lp-font-mono);
-        font-size: var(--lp-t-caption);
-        letter-spacing: var(--lp-ls-wide);
-        color: var(--lp-ink-400);
-        text-decoration: none;
-        transition: color var(--lp-dur-fast) var(--lp-ease);
-      }
-      .home:hover { color: var(--lp-indigo-500); }
       .shell { display: grid; grid-template-columns: var(--sidebar-w) 1fr; min-height: calc(100vh - var(--topbar-h)); }
       .content { padding: var(--lp-space-10) var(--lp-space-12) var(--lp-space-18); max-width: 1100px; }
       .page-head { margin-bottom: var(--lp-space-8); }
