@@ -1,7 +1,37 @@
 ---
+import DocsLayout from '../layouts/DocsLayout.astro';
+
+const sections = [
+  { href: '/colors/primary', title: 'Colors', blurb: 'Primary, accent, and neutral palettes.' },
+  { href: '/type/hero', title: 'Type', blurb: 'Hero, headings, body, and eyebrow specimens.' },
+  { href: '/spacing/scale', title: 'Spacing', blurb: 'Scale, radii, and elevation tokens.' },
+  { href: '/components/buttons', title: 'Components', blurb: 'Buttons, inputs, cards, and more.' },
+  { href: '/ui-kits/blog', title: 'UI Kits', blurb: 'Full blog and portfolio compositions.' },
+];
 ---
-<!doctype html>
-<html lang="en">
-  <head><meta charset="utf-8" /><title>Styleguide</title></head>
-  <body><h1>Scaffold OK</h1></body>
-</html>
+<DocsLayout title="Style Guide" description="The La Plante Web Dev design system.">
+  <div class="grid">
+    {sections.map((s) => (
+      <a class="card" href={s.href}>
+        <h3>{s.title}</h3>
+        <p>{s.blurb}</p>
+      </a>
+    ))}
+  </div>
+</DocsLayout>
+
+<style>
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 16px; }
+  .card {
+    display: block;
+    padding: 20px;
+    border: 1px solid #e5e7eb;
+    border-radius: 10px;
+    text-decoration: none;
+    color: inherit;
+    background: #fff;
+  }
+  .card:hover { border-color: #111; }
+  .card h3 { margin: 0 0 6px; font-size: 18px; }
+  .card p { margin: 0; color: #6b7280; font-size: 14px; }
+</style>
