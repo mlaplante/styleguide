@@ -1,0 +1,26 @@
+---
+import DocsLayout from '../../layouts/DocsLayout.astro';
+---
+<DocsLayout title="Type — Headings" description="Heading specimens.">
+<div class="wrap">
+  <div class="row"><div class="meta">H1<small>700 / 36 / -0.5</small></div><div class="h1">Securing multi-cloud environments</div></div>
+  <div class="row"><div class="meta">H2<small>700 / 26 / -0.3</small></div><div class="h2">Practical strategies for DevSecOps teams</div></div>
+  <div class="row"><div class="meta">H3<small>600 / 21 / 0</small></div><div class="h3">Threat modelling in production</div></div>
+  <div class="row"><div class="meta">H4 · Label<small>700 / 18 / 2px / UPPER</small></div><div class="h4">Cloud Security Strategy</div></div>
+  <div class="row"><div class="meta">Stat<small>600 / 66 / 1em</small></div><div class="stat">$800M</div></div>
+</div>
+</DocsLayout>
+
+<style is:global>
+  html,body{margin:0;background:#fff;font-family:var(--lp-font-display);color:var(--lp-ink-900)}
+  .wrap{padding:26px 30px;height:100%;box-sizing:border-box;display:flex;flex-direction:column;gap:18px;justify-content:center}
+  .row{display:grid;grid-template-columns:110px 1fr;gap:20px;align-items:baseline;padding-bottom:14px;border-bottom:1px solid #eee}
+  .row:last-child{border-bottom:none;padding-bottom:0}
+  .meta{font-family:var(--lp-font-mono);font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:#6b7280}
+  .meta small{display:block;font-weight:400;text-transform:none;letter-spacing:.3px;color:#9ca3af;margin-top:2px;font-size:10px}
+  .h1{font-size:34px;font-weight:700;letter-spacing:-0.5px;line-height:1.2;color:#1a1a1a}
+  .h2{font-size:24px;font-weight:700;letter-spacing:-0.3px;color:#1a1a1a}
+  .h3{font-size:20px;font-weight:600;color:#1f2937}
+  .h4{font-size:16px;font-weight:700;text-transform:uppercase;letter-spacing:2px}
+  .stat{font-size:48px;font-weight:600;line-height:1em;color:#1a1a1a}
+</style>

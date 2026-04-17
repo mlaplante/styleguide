@@ -1,0 +1,28 @@
+---
+import DocsLayout from '../../layouts/DocsLayout.astro';
+---
+<DocsLayout title="Type — Eyebrow" description="Eyebrow label specimen.">
+<div class="wrap">
+  <div>
+    <div class="lbl">Portfolio eyebrow</div>
+    <span class="eyebrow">about me</span>
+  </div>
+  <div>
+    <div class="lbl">Portfolio eyebrow · alt</div>
+    <span class="eyebrow">by the numbers</span>
+  </div>
+  <div>
+    <div class="lbl">Blog eyebrow</div>
+    <span class="eyebrow blog">latest posts</span>
+  </div>
+</div>
+</DocsLayout>
+
+<style is:global>
+  html,body{margin:0;background:#fff;font-family:var(--lp-font-display);color:var(--lp-ink-900)}
+  .wrap{padding:30px 34px;height:100%;box-sizing:border-box;display:flex;flex-direction:column;gap:28px;justify-content:center}
+  .eyebrow{font-family:var(--lp-font-mono);font-size:18px;font-weight:700;line-height:1em;color:rgba(0,0,0,.8);text-transform:lowercase;letter-spacing:2px;position:relative;display:inline-block;z-index:1}
+  .eyebrow::after{content:'';position:absolute;bottom:1px;left:0;height:5px;width:100%;background:#3F51B5;opacity:.4;z-index:-1}
+  .lbl{font-family:var(--lp-font-mono);font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:#9ca3af;margin-bottom:8px}
+  .eyebrow.blog::after{background:#2980b9}
+</style>
