@@ -2,7 +2,7 @@
 import DocsLayout from '../layouts/DocsLayout.astro';
 
 const sections = [
-  { href: '/logo', title: 'Logo', eyebrow: 'Foundations', blurb: 'Primary and alternate marks.' },
+  { href: '/logo', title: 'Logo', eyebrow: 'Foundations', blurb: 'Primary and alternate marks.', visual: 'logo' },
   { href: '/colors/primary', title: 'Colors', eyebrow: 'Foundations', blurb: 'Primary, accent, and neutral palettes.' },
   { href: '/type/hero', title: 'Type', eyebrow: 'Foundations', blurb: 'Hero, headings, body, and eyebrow specimens.' },
   { href: '/spacing/scale', title: 'Spacing', eyebrow: 'Foundations', blurb: 'Scale, radii, and elevation tokens.' },
@@ -13,7 +13,12 @@ const sections = [
 <DocsLayout title="Style Guide" description="The La Plante Web Dev design system.">
   <div class="grid">
     {sections.map((s) => (
-      <a class="card" href={s.href}>
+      <a class={`card${s.visual === 'logo' ? ' card--logo' : ''}`} href={s.href}>
+        {s.visual === 'logo' && (
+          <div class="logo-tile">
+            <img src="/assets/laplante-logo.png" alt="La Plante Web Dev" />
+          </div>
+        )}
         <span class="eyebrow">{s.eyebrow}</span>
         <h3>{s.title}</h3>
         <p>{s.blurb}</p>
@@ -62,6 +67,29 @@ const sections = [
   }
   .card:hover::before { transform: scaleY(1); }
   .card:hover .arrow { transform: translateX(4px); color: var(--lp-indigo-500); }
+
+  .logo-tile {
+    background: var(--lp-paper);
+    border-radius: var(--lp-radius-lg);
+    padding: var(--lp-space-8) var(--lp-space-5);
+    margin: calc(var(--lp-space-6) * -1) calc(var(--lp-space-6) * -1) var(--lp-space-5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 120px;
+    border-bottom: 1px solid var(--lp-border-subtle);
+    border-top-left-radius: var(--lp-radius-xl);
+    border-top-right-radius: var(--lp-radius-xl);
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+  .logo-tile img {
+    max-width: 80%;
+    max-height: 80px;
+    object-fit: contain;
+    transition: transform var(--lp-dur) var(--lp-ease);
+  }
+  .card--logo:hover .logo-tile img { transform: scale(1.03); }
 
   .eyebrow {
     display: block;
