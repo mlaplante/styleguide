@@ -1,22 +1,58 @@
-# CODING AGENTS: READ THIS FIRST
+# La Plante Web Dev — Style Guide
 
-This is a **handoff bundle** from Claude Design (claude.ai/design).
+Live site: **https://brand.michaellaplante.com**
 
-A user mocked up designs in HTML/CSS/JS using an AI design tool, then exported this bundle so a coding agent can implement the designs for real.
+The design system for La Plante Web Dev, built as an Astro static site and deployed on Cloudflare Pages. Covers the brand foundations (logo, colors, type, spacing), reusable components, and full UI kits.
 
-## What you should do — IMPORTANT
+## What's in the repo
 
-**Find the primary design file under `la-plante-web-dev-design-system/project/` and read it top to bottom.** Then **follow its imports**: open every file it pulls in (shared components, CSS, scripts) so you understand how the pieces fit together before you start implementing.
+- `src/pages/` — every styleguide page, one `.astro` file per preview
+  - `index.astro` — landing page with preview-tile cards
+  - `logo.astro` — brand marks on light and dark tiles
+  - `colors/`, `type/`, `spacing/` — foundation specimens
+  - `components/` — buttons, input, blog nav, post card, service, timeline
+  - `ui-kits/` — full blog and portfolio compositions
+- `src/layouts/DocsLayout.astro` — shared chrome (topbar, sidebar, content frame)
+- `src/components/Sidebar.astro` — grouped navigation
+- `src/styles/global.css` — single source of truth for design tokens (colors, typography, spacing, radii, shadows)
+- `public/assets/` — logo PNGs and other static assets
+- `project/` — original design bundle from Claude Design (kept as the source of truth for the prototypes that each page was ported from)
 
-**If anything is ambiguous, ask the user to confirm before you start implementing.** It's much cheaper to clarify scope up front than to build the wrong thing.
+## Local development
 
-## About the design files
+```bash
+npm install
+npm run dev        # http://localhost:4321
+npm run build      # → dist/
+npm run preview    # serve the built site
+```
 
-The design medium is **HTML/CSS/JS** — these are prototypes, not production code. Your job is to **recreate them pixel-perfectly** in whatever technology makes sense for the target codebase (React, Vue, native, whatever fits). Match the visual output; don't copy the prototype's internal structure unless it happens to fit.
+Requires Node 20.
 
-**Don't render these files in a browser or take screenshots unless the user asks you to.** Everything you need — dimensions, colors, layout rules — is spelled out in the source. Read the HTML and CSS directly; a screenshot won't tell you anything they don't.
+## Deployment
 
-## Bundle contents
+Pushes to `main` deploy automatically to Cloudflare Pages. Other branches get preview URLs.
 
-- `la-plante-web-dev-design-system/README.md` — this file
-- `la-plante-web-dev-design-system/project/` — the `La Plante Web Dev Design System` project files (HTML prototypes, assets, components)
+**Build config (Cloudflare Pages):**
+- Framework preset: Astro
+- Build command: `npm run build`
+- Output directory: `dist`
+- Env var: `NODE_VERSION=20`
+
+## Adding a page
+
+1. Create `src/pages/<group>/<name>.astro`:
+   ```astro
+   ---
+   import DocsLayout from '../../layouts/DocsLayout.astro';
+   ---
+   <DocsLayout title="My Page" description="What this shows.">
+     <!-- content -->
+   </DocsLayout>
+   ```
+2. Add a link in `src/components/Sidebar.astro` under the appropriate group.
+3. Use tokens from `src/styles/global.css` (`var(--lp-*)`) rather than hard-coded values — that's the whole point of the styleguide.
+
+## Design tokens
+
+All tokens live in `src/styles/global.css` as CSS custom properties on `:root`. Typography uses Poppins (display/body) and Roboto Mono (labels/meta), loaded via Google Fonts. Colors center on an indigo primary (`--lp-indigo-500: #3F51B5`) with a blog-blue secondary, Material-style accents, and a full neutral scale.
