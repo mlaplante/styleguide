@@ -1,0 +1,371 @@
+---
+import DocsLayout from '../../layouts/DocsLayout.astro';
+---
+<DocsLayout title="UI Kit — Blog" description="Full blog composition.">
+
+  <!-- ===== NAV ===== -->
+  <nav class="b-nav">
+    <div class="b-nav-inner">
+      <a class="b-brand">Michael LaPlante</a>
+      <ul class="b-links">
+        <li><a class="active">blog</a></li>
+        <li><a>archive</a></li>
+        <li><a>categories</a></li>
+        <li><a>about</a></li>
+      </ul>
+    </div>
+    <div class="b-progress"></div>
+  </nav>
+
+  <!-- ===== SHELL ===== -->
+  <div class="b-shell">
+
+    <!-- Post List -->
+    <div class="b-list">
+      <header class="b-list-header">
+        <h1 class="b-list-title">Writing</h1>
+        <p class="b-list-sub">Development sessions, security notes, and thoughts on building resilient systems.</p>
+      </header>
+      <div class="b-posts">
+
+        <!-- Post Card 1 -->
+        <a class="b-card">
+          <div class="b-card-meta">
+            <span class="b-cat b-cat-dev-session">dev-session</span>
+            <span class="b-date">May 2025</span>
+            <span class="b-sep">·</span>
+            <span class="b-read">8 min read</span>
+          </div>
+          <h3 class="b-card-title">Migrating the Contact Form from Netlify Functions to Cloudflare Workers</h3>
+          <p class="b-card-excerpt">When Netlify announced their function pricing changes, I started looking for alternatives. Here's how I moved the portfolio contact form to Cloudflare Workers without breaking Turnstile or rate-limiting.</p>
+        </a>
+
+        <!-- Post Card 2 -->
+        <a class="b-card">
+          <div class="b-card-meta">
+            <span class="b-cat b-cat-thought-leadership">thought-leadership</span>
+            <span class="b-date">Mar 2025</span>
+            <span class="b-sep">·</span>
+            <span class="b-read">5 min read</span>
+          </div>
+          <h3 class="b-card-title">Why Zero-Trust Is a Mindset, Not a Product</h3>
+          <p class="b-card-excerpt">Every vendor claims to sell zero-trust. What they're actually selling is a perimeter with better marketing. Here's how to tell the difference and build the real thing.</p>
+        </a>
+
+        <!-- Post Card 3 -->
+        <a class="b-card">
+          <div class="b-card-meta">
+            <span class="b-cat b-cat-dev-session">dev-session</span>
+            <span class="b-date">Jan 2025</span>
+            <span class="b-sep">·</span>
+            <span class="b-read">12 min read</span>
+          </div>
+          <h3 class="b-card-title">Building a Multi-Tenant Rate Limiter on Cloudflare KV</h3>
+          <p class="b-card-excerpt">A walkthrough of implementing a sliding-window rate limiter using Cloudflare Workers and KV storage, with per-tenant configuration and real-time burst detection.</p>
+        </a>
+
+        <!-- Post Card 4 -->
+        <a class="b-card">
+          <div class="b-card-meta">
+            <span class="b-cat b-cat-thought-leadership">thought-leadership</span>
+            <span class="b-date">Nov 2024</span>
+            <span class="b-sep">·</span>
+            <span class="b-read">6 min read</span>
+          </div>
+          <h3 class="b-card-title">SOC 2 Without the Consultant: What We Learned Doing It In-House</h3>
+          <p class="b-card-excerpt">Most mid-market companies overpay for SOC 2 compliance. We ran our own program, picked our own auditor, and came in under budget — here's what worked and what didn't.</p>
+        </a>
+
+      </div>
+    </div>
+
+    <!-- Article (expanded view of post 1) -->
+    <article class="b-article" style="margin-top: 60px; padding-top: 40px; border-top: 2px dashed #e5e7eb;">
+      <button class="b-back">← back to writing</button>
+      <header class="b-article-header">
+        <div class="b-card-meta">
+          <span class="b-cat b-cat-dev-session">dev-session</span>
+          <span class="b-date">May 2025</span>
+          <span class="b-sep">·</span>
+          <span class="b-read">8 min read</span>
+        </div>
+        <h1 class="b-article-title">Migrating the Contact Form from Netlify Functions to Cloudflare Workers</h1>
+        <p class="b-article-lead">When Netlify announced their function pricing changes, I started looking for alternatives for the portfolio contact form.</p>
+      </header>
+      <div class="b-article-body">
+        <p>
+          When Netlify announced their function pricing changes, I started looking for alternatives
+          for the portfolio contact form. The existing setup was a standard serverless function —
+          short, pragmatic, and locked to a single vendor.
+        </p>
+        <h2>Goal</h2>
+        <p>
+          Move the form off Netlify Functions and onto a Cloudflare Worker, keeping the same
+          Turnstile verification, rate-limiting, and email delivery — with zero Netlify-specific
+          code left behind once we're done.
+        </p>
+        <h2>The migration</h2>
+        <p>
+          Cloudflare Workers give us a lot of the same affordances as Netlify Functions: a small
+          request/response handler, a generous free tier, and first-class edge deployment. The
+          differences are mostly in how secrets and bindings are declared in
+          <code>wrangler.toml</code>, and in which runtime globals are available.
+        </p>
+        <blockquote>
+          "The point isn't that Cloudflare is better than Netlify — it's that our infrastructure
+          should survive a vendor outage, a pricing change, or a routine platform pivot without
+          rewriting the app."
+        </blockquote>
+        <h2>What we kept</h2>
+        <ul>
+          <li>Turnstile bot protection in front of every submission</li>
+          <li>A per-IP rate limit (10 requests / 15 minutes)</li>
+          <li>Postmark for transactional delivery</li>
+        </ul>
+        <p>
+          The working version is deployed and the old Netlify function is gone. Total round-trip
+          time — from first commit to production — was under four hours.
+        </p>
+      </div>
+    </article>
+
+  </div>
+
+</DocsLayout>
+
+<style is:global>
+html, body { margin: 0; }
+body {
+  font-family: var(--lp-font-display);
+  background: var(--lp-paper-2);
+  color: #374151;
+  -webkit-font-smoothing: antialiased;
+}
+* { box-sizing: border-box; }
+
+/* ---------- Sticky gradient nav ---------- */
+.b-nav {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: linear-gradient(135deg, #2980b9 0%, #1a6da3 100%);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+}
+.b-nav-inner {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 18px 28px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.b-brand {
+  color: #fff;
+  font-family: var(--lp-font-mono);
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: lowercase;
+  cursor: pointer;
+  text-decoration: none;
+}
+.b-links { list-style: none; margin: 0; padding: 0; display: flex; gap: 28px; }
+.b-links a {
+  color: rgba(255,255,255,.85);
+  font-family: var(--lp-font-mono);
+  font-size: 13px;
+  letter-spacing: 1px;
+  text-transform: lowercase;
+  cursor: pointer;
+  text-decoration: none;
+  transition: color .2s;
+}
+.b-links a:hover, .b-links a.active { color: #fff; }
+.b-progress {
+  height: 3px;
+  background: #60a5fa;
+  width: 0%;
+  transition: width .1s linear;
+  animation: b-progress-scroll linear;
+  animation-timeline: scroll(root);
+}
+@keyframes b-progress-scroll { from { width: 0%; } to { width: 100%; } }
+
+/* ---------- Shell ---------- */
+.b-shell { max-width: 780px; margin: 0 auto; padding: 56px 28px 120px; }
+
+/* ---------- List ---------- */
+.b-list-header { margin-bottom: 40px; }
+.b-list-title {
+  font-size: 40px;
+  font-weight: 700;
+  color: #111827;
+  margin: 0 0 10px;
+  letter-spacing: -0.5px;
+}
+.b-list-sub {
+  font-size: 17px;
+  color: #6b7280;
+  margin: 0;
+  max-width: 560px;
+  line-height: 1.6;
+}
+.b-posts { display: flex; flex-direction: column; gap: 16px; }
+
+.b-card {
+  display: block;
+  padding: 22px 26px;
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+  text-decoration: none;
+  color: inherit;
+  transition: all .2s;
+  cursor: pointer;
+}
+.b-card:hover {
+  transform: translateY(-2px);
+  border-color: #d1d5db;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+}
+.b-card-meta {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+  font-family: var(--lp-font-mono);
+  font-size: 12px;
+}
+.b-date { color: #9ca3af; }
+.b-sep { color: #d1d5db; }
+.b-read { color: #9ca3af; }
+.b-card-title {
+  margin: 0 0 8px;
+  font-size: 20px;
+  font-weight: 600;
+  color: #111827;
+  line-height: 1.35;
+}
+.b-card-excerpt {
+  margin: 0;
+  color: #6b7280;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+/* ---------- Category pill ---------- */
+.b-cat {
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: 100px;
+  font-family: var(--lp-font-mono);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.3px;
+}
+.b-cat-dev-session {
+  background: rgba(41,128,185,.08);
+  color: #2980b9;
+}
+.b-cat-thought-leadership {
+  background: rgba(63,81,181,.08);
+  color: var(--lp-indigo-500);
+}
+
+/* ---------- Article ---------- */
+.b-article { }
+.b-back {
+  background: transparent;
+  border: none;
+  padding: 0 0 18px;
+  color: #2980b9;
+  font-family: var(--lp-font-mono);
+  font-size: 13px;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  text-transform: lowercase;
+}
+.b-article-header {
+  padding-bottom: 30px;
+  border-bottom: 1px solid #e5e7eb;
+  margin-bottom: 36px;
+}
+.b-article-title {
+  margin: 12px 0 14px;
+  font-size: 40px;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+  line-height: 1.15;
+  color: #111827;
+}
+.b-article-lead {
+  font-size: 19px;
+  line-height: 1.55;
+  color: #4b5563;
+  margin: 0;
+}
+
+.b-article-body { font-size: 17px; line-height: 1.8; color: #374151; }
+.b-article-body h2 {
+  margin: 44px 0 16px;
+  font-size: 24px;
+  font-weight: 700;
+  color: #111827;
+  letter-spacing: -0.3px;
+}
+.b-article-body p { margin: 0 0 20px; }
+.b-article-body ul { padding-left: 22px; margin: 0 0 20px; }
+.b-article-body li { margin-bottom: 6px; }
+.b-article-body code {
+  font-family: var(--lp-font-mono);
+  font-size: 15px;
+  background: rgba(41,128,185,.08);
+  color: #1a6da3;
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+.b-article-body blockquote {
+  margin: 28px 0;
+  padding: 18px 24px;
+  background: rgba(63,81,181,.04);
+  border-left: 3px solid var(--lp-indigo-500);
+  color: #4b5563;
+  font-style: italic;
+  border-radius: 0 8px 8px 0;
+}
+
+/* ---------- Dark mode ---------- */
+body.b-dark { background: #0f172a; color: #cbd5e1; }
+body.b-dark .b-nav { background: linear-gradient(135deg, #1a5276 0%, #154360 100%); }
+body.b-dark .b-list-title,
+body.b-dark .b-card-title,
+body.b-dark .b-article-title,
+body.b-dark .b-article-body h2 { color: #f1f5f9; }
+body.b-dark .b-list-sub,
+body.b-dark .b-card-excerpt,
+body.b-dark .b-article-lead,
+body.b-dark .b-article-body { color: #cbd5e1; }
+body.b-dark .b-card {
+  background: #1e293b;
+  border-color: #334155;
+}
+body.b-dark .b-card:hover { border-color: #475569; }
+body.b-dark .b-article-header { border-color: #334155; }
+body.b-dark .b-cat-dev-session {
+  background: rgba(96,165,250,.15);
+  color: #60a5fa;
+}
+body.b-dark .b-cat-thought-leadership {
+  background: rgba(129,140,248,.15);
+  color: #818cf8;
+}
+body.b-dark .b-article-body code {
+  background: rgba(96,165,250,.15);
+  color: #93c5fd;
+}
+body.b-dark .b-article-body blockquote {
+  background: rgba(129,140,248,.08);
+  border-color: #818cf8;
+  color: #cbd5e1;
+}
+</style>
