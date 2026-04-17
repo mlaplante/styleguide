@@ -2,36 +2,98 @@
 import DocsLayout from '../layouts/DocsLayout.astro';
 
 const sections = [
-  { href: '/colors/primary', title: 'Colors', blurb: 'Primary, accent, and neutral palettes.' },
-  { href: '/type/hero', title: 'Type', blurb: 'Hero, headings, body, and eyebrow specimens.' },
-  { href: '/spacing/scale', title: 'Spacing', blurb: 'Scale, radii, and elevation tokens.' },
-  { href: '/components/buttons', title: 'Components', blurb: 'Buttons, inputs, cards, and more.' },
-  { href: '/ui-kits/blog', title: 'UI Kits', blurb: 'Full blog and portfolio compositions.' },
+  { href: '/logo', title: 'Logo', eyebrow: 'Foundations', blurb: 'Primary and alternate marks.' },
+  { href: '/colors/primary', title: 'Colors', eyebrow: 'Foundations', blurb: 'Primary, accent, and neutral palettes.' },
+  { href: '/type/hero', title: 'Type', eyebrow: 'Foundations', blurb: 'Hero, headings, body, and eyebrow specimens.' },
+  { href: '/spacing/scale', title: 'Spacing', eyebrow: 'Foundations', blurb: 'Scale, radii, and elevation tokens.' },
+  { href: '/components/buttons', title: 'Components', eyebrow: 'Library', blurb: 'Buttons, inputs, cards, and more.' },
+  { href: '/ui-kits/blog', title: 'UI Kits', eyebrow: 'Compositions', blurb: 'Full blog and portfolio compositions.' },
 ];
 ---
 <DocsLayout title="Style Guide" description="The La Plante Web Dev design system.">
   <div class="grid">
     {sections.map((s) => (
       <a class="card" href={s.href}>
+        <span class="eyebrow">{s.eyebrow}</span>
         <h3>{s.title}</h3>
         <p>{s.blurb}</p>
+        <span class="arrow" aria-hidden="true">→</span>
       </a>
     ))}
   </div>
 </DocsLayout>
 
 <style>
-  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 16px; }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: var(--lp-space-4);
+  }
   .card {
+    position: relative;
     display: block;
-    padding: 20px;
-    border: 1px solid #e5e7eb;
-    border-radius: 10px;
+    padding: var(--lp-space-6);
+    border: 1px solid var(--lp-border-subtle);
+    border-radius: var(--lp-radius-xl);
     text-decoration: none;
     color: inherit;
-    background: #fff;
+    background: var(--lp-white);
+    box-shadow: var(--lp-shadow-card);
+    transition:
+      transform var(--lp-dur-fast) var(--lp-ease),
+      border-color var(--lp-dur-fast) var(--lp-ease),
+      box-shadow var(--lp-dur-fast) var(--lp-ease);
+    overflow: hidden;
   }
-  .card:hover { border-color: #111; }
-  .card h3 { margin: 0 0 6px; font-size: 18px; }
-  .card p { margin: 0; color: #6b7280; font-size: 14px; }
+  .card::before {
+    content: '';
+    position: absolute;
+    inset: 0 auto 0 0;
+    width: 3px;
+    background: var(--lp-indigo-500);
+    transform: scaleY(0);
+    transform-origin: top;
+    transition: transform var(--lp-dur) var(--lp-ease);
+  }
+  .card:hover {
+    border-color: var(--lp-indigo-200);
+    transform: translateY(-2px);
+    box-shadow: var(--lp-shadow-btn);
+  }
+  .card:hover::before { transform: scaleY(1); }
+  .card:hover .arrow { transform: translateX(4px); color: var(--lp-indigo-500); }
+
+  .eyebrow {
+    display: block;
+    font-family: var(--lp-font-mono);
+    font-size: var(--lp-t-micro);
+    letter-spacing: var(--lp-ls-wider);
+    text-transform: uppercase;
+    color: var(--lp-ink-300);
+    margin-bottom: var(--lp-space-3);
+    font-weight: var(--lp-w-medium);
+  }
+  .card h3 {
+    margin: 0 0 var(--lp-space-2);
+    font-family: var(--lp-font-display);
+    font-size: var(--lp-t-md);
+    font-weight: var(--lp-w-bold);
+    letter-spacing: var(--lp-ls-snug);
+    color: var(--lp-ink-900);
+  }
+  .card p {
+    margin: 0;
+    color: var(--lp-ink-400);
+    font-size: var(--lp-t-caption);
+    line-height: var(--lp-lh-normal);
+  }
+  .arrow {
+    position: absolute;
+    right: var(--lp-space-6);
+    bottom: var(--lp-space-6);
+    font-family: var(--lp-font-mono);
+    font-size: var(--lp-t-ui);
+    color: var(--lp-ink-200);
+    transition: transform var(--lp-dur-fast) var(--lp-ease), color var(--lp-dur-fast) var(--lp-ease);
+  }
 </style>
