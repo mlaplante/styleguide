@@ -252,6 +252,36 @@ import DocsLayout from '../../layouts/DocsLayout.astro';
 
 </DocsLayout>
 
+<script is:inline>
+  (function () {
+    const nav  = document.querySelector('.p-nav');
+    const burg = document.querySelector('.p-menu-btn');
+    const dark = document.querySelector('.p-dark-toggle');
+    if (burg && nav) {
+      burg.addEventListener('click', () => {
+        nav.classList.toggle('open');
+        nav.querySelectorAll('.p-l').forEach((l) => l.classList.toggle('x'));
+      });
+    }
+    if (dark) {
+      dark.addEventListener('click', () => {
+        const on = document.body.classList.toggle('p-dark');
+        dark.textContent = on ? '🌙' : '☀️';
+      });
+    }
+    document.querySelectorAll('.p-mi input, .p-mi textarea').forEach((el) => {
+      const wrap = el.closest('.p-mi');
+      const sync = () => {
+        wrap.classList.toggle('filled', !!el.value);
+      };
+      el.addEventListener('focus',  () => wrap.classList.add('focus'));
+      el.addEventListener('blur',   () => { wrap.classList.remove('focus'); sync(); });
+      el.addEventListener('input',  sync);
+      sync();
+    });
+  })();
+</script>
+
 <style is:global>
 /* Portfolio UI kit — scoped overrides. Pulls tokens from colors_and_type.css */
 

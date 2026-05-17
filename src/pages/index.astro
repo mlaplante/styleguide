@@ -1,18 +1,10 @@
 ---
 import DocsLayout from '../layouts/DocsLayout.astro';
-
-const sections = [
-  { href: '/logo', title: 'Logo', eyebrow: 'Foundations', blurb: 'Primary and alternate marks.', visual: 'logo' },
-  { href: '/colors/primary', title: 'Colors', eyebrow: 'Foundations', blurb: 'Primary, accent, and neutral palettes.', visual: 'colors' },
-  { href: '/type/hero', title: 'Type', eyebrow: 'Foundations', blurb: 'Hero, headings, body, and eyebrow specimens.', visual: 'type' },
-  { href: '/spacing/scale', title: 'Spacing', eyebrow: 'Foundations', blurb: 'Scale, radii, and elevation tokens.', visual: 'spacing' },
-  { href: '/components/buttons', title: 'Components', eyebrow: 'Library', blurb: 'Buttons, inputs, cards, and more.', visual: 'components' },
-  { href: '/ui-kits/blog', title: 'UI Kits', eyebrow: 'Compositions', blurb: 'Full blog and portfolio compositions.', visual: 'ui-kits' },
-];
+import { landing } from '../data/nav';
 ---
 <DocsLayout title="Style Guide" description="The La Plante Web Dev design system.">
   <div class="grid">
-    {sections.map((s) => (
+    {landing.map((s) => (
       <a class={`card card--${s.visual}`} href={s.href}>
         <div class="preview-tile" aria-hidden="true">
           {s.visual === 'logo' && (
@@ -45,6 +37,13 @@ const sections = [
               <span style="width:32px"></span>
               <span style="width:48px"></span>
               <span style="width:72px"></span>
+            </div>
+          )}
+          {s.visual === 'motion' && (
+            <div class="motion-demo">
+              <span class="motion-dot motion-dot--fast"></span>
+              <span class="motion-dot motion-dot--base"></span>
+              <span class="motion-dot motion-dot--slow"></span>
             </div>
           )}
           {s.visual === 'components' && (
@@ -205,6 +204,26 @@ const sections = [
     transition: transform var(--lp-dur-fast) var(--lp-ease);
   }
   .card--spacing:hover .spacing-demo span { transform: scaleX(1.05); transform-origin: left; }
+
+  /* Motion */
+  .motion-demo {
+    display: flex;
+    gap: var(--lp-space-3);
+    align-items: center;
+  }
+  .motion-dot {
+    width: 14px; height: 14px;
+    border-radius: var(--lp-radius-full);
+    background: var(--lp-indigo-500);
+    transition: transform var(--lp-dur) var(--lp-ease);
+  }
+  .motion-dot--fast { transition-duration: var(--lp-dur-fast); }
+  .motion-dot--base { transition-duration: var(--lp-dur); }
+  .motion-dot--slow { transition-duration: var(--lp-dur-slow); }
+  .card--motion:hover .motion-dot { transform: translateX(40px); }
+  .card--motion:hover .motion-dot--fast { background: var(--lp-accent-pink); }
+  .card--motion:hover .motion-dot--base { background: var(--lp-accent-teal); }
+  .card--motion:hover .motion-dot--slow { background: var(--lp-accent-purple); }
 
   /* Components */
   .components-demo {

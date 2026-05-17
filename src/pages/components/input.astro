@@ -1,30 +1,68 @@
 ---
 import DocsLayout from '../../layouts/DocsLayout.astro';
 ---
-<DocsLayout title="Input" description="Form input styles.">
-<div class="wrap">
-  <div>
-    <div class="lbl">Empty</div>
-    <div class="mi"><input type="text" placeholder=" "><label>Name</label></div>
+<DocsLayout title="Input" description="Underlined text input with a floating-label pattern (Material-ish, custom).">
+  <div class="sg-frame--stack">
+    <div>
+      <div class="lbl">Empty</div>
+      <div class="mi"><input type="text" placeholder=" " /><label>Name</label></div>
+    </div>
+    <div>
+      <div class="lbl">Focused</div>
+      <div class="mi mi--focus"><input type="text" placeholder=" " /><label>Email</label></div>
+    </div>
+    <div>
+      <div class="lbl">Filled</div>
+      <div class="mi mi--filled"><input type="text" value="michael@laplante.dev" placeholder=" " /><label>Email</label></div>
+    </div>
+    <div>
+      <div class="lbl">Textarea</div>
+      <div class="mi mi--filled"><textarea rows="3" placeholder=" ">Tell us about the engagement.</textarea><label>Message</label></div>
+    </div>
   </div>
-  <div>
-    <div class="lbl">Focused</div>
-    <div class="mi focus"><input type="text" value="" placeholder=" "><label>Email</label></div>
-  </div>
-  <div>
-    <div class="lbl">Filled</div>
-    <div class="mi filled"><input type="text" value="michael@laplante.dev" placeholder=" "><label>Email</label></div>
-  </div>
-</div>
 </DocsLayout>
 
-<style is:global>
-  html,body{margin:0;background:#fff;font-family:var(--lp-font-display);color:var(--lp-ink-900)}
-  .wrap{padding:30px 36px;height:100%;box-sizing:border-box;display:flex;flex-direction:column;gap:22px;justify-content:center}
-  .mi{position:relative;max-width:360px}
-  .mi input,.mi textarea{background:transparent;border:none;border-bottom:1px solid #ddd;outline:none;padding:10px 0;width:100%;font-family:inherit;font-size:16px;color:#333;box-sizing:border-box}
-  .mi.focus input{border-bottom-color:#3F51B5}
-  .mi label{position:absolute;left:0;top:6px;font-size:14px;color:#808080;font-weight:300;font-family:var(--lp-font-mono);transition:all .3s ease;pointer-events:none}
-  .mi.filled label, .mi.focus label{top:-15px;font-size:12px;color:#3F51B5}
-  .lbl{font-family:var(--lp-font-mono);font-size:9px;letter-spacing:1.5px;text-transform:uppercase;color:#9ca3af}
+<style>
+  .lbl {
+    font-family: var(--lp-font-mono);
+    font-size: var(--lp-t-micro);
+    letter-spacing: var(--lp-ls-wider);
+    text-transform: uppercase;
+    color: var(--lp-ink-100);
+    margin-bottom: var(--lp-space-2);
+  }
+  .mi { position: relative; max-width: 420px; }
+  .mi input,
+  .mi textarea {
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid var(--lp-line);
+    outline: none;
+    padding: var(--lp-space-2) 0;
+    width: 100%;
+    font-family: inherit;
+    font-size: var(--lp-t-ui);
+    color: var(--lp-fg-1);
+    box-sizing: border-box;
+    resize: vertical;
+  }
+  .mi--focus input,
+  .mi--focus textarea { border-bottom-color: var(--lp-indigo-500); }
+  .mi label {
+    position: absolute;
+    left: 0;
+    top: 6px;
+    font-family: var(--lp-font-mono);
+    font-size: var(--lp-t-meta);
+    color: var(--lp-ink-200);
+    font-weight: var(--lp-w-light);
+    transition: top var(--lp-dur) var(--lp-ease), font-size var(--lp-dur) var(--lp-ease), color var(--lp-dur) var(--lp-ease);
+    pointer-events: none;
+  }
+  .mi--filled label,
+  .mi--focus label {
+    top: -15px;
+    font-size: var(--lp-t-micro);
+    color: var(--lp-indigo-500);
+  }
 </style>

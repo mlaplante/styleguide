@@ -282,3 +282,89 @@ body {
   padding: 2px 7px;
   border-radius: var(--lp-radius);
 }
+
+/* ==========================================================================
+   Style-guide preview scaffolding
+   Shared utility classes used by preview pages to lay out specimens.
+   `sg-` prefix avoids collisions with anything the previews themselves emit.
+   ========================================================================== */
+
+.sg-frame {
+  padding: var(--lp-space-6) var(--lp-space-8);
+  box-sizing: border-box;
+}
+.sg-frame--center { display: flex; align-items: center; justify-content: center; }
+.sg-frame--stack  { display: flex; flex-direction: column; gap: var(--lp-space-5); justify-content: center; }
+.sg-frame--row    { display: flex; align-items: center; gap: var(--lp-space-5); flex-wrap: wrap; justify-content: space-around; }
+.sg-frame--paper  { background: var(--lp-paper); border-radius: var(--lp-radius-lg); }
+.sg-frame--ink    { background: var(--lp-ink-600); border-radius: var(--lp-radius-lg); color: var(--lp-white); }
+
+/* Two-column spec row: label cell + specimen cell */
+.sg-row {
+  display: grid;
+  grid-template-columns: 130px 1fr;
+  gap: var(--lp-space-5);
+  align-items: baseline;
+  padding-bottom: var(--lp-space-3);
+  border-bottom: 1px solid var(--lp-line-2);
+}
+.sg-row:last-child { border-bottom: none; padding-bottom: 0; }
+
+/* Mono caption / label cell */
+.sg-meta {
+  font-family: var(--lp-font-mono);
+  font-size: var(--lp-t-micro);
+  letter-spacing: var(--lp-ls-wider);
+  text-transform: uppercase;
+  color: var(--lp-ink-300);
+}
+.sg-meta small {
+  display: block;
+  font-weight: var(--lp-w-regular);
+  text-transform: none;
+  letter-spacing: 0.3px;
+  color: var(--lp-ink-100);
+  margin-top: 2px;
+  font-size: var(--lp-t-micro);
+}
+
+/* Vertical specimen stack (used by spacing / radii / shadow tiles) */
+.sg-stack {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--lp-space-2);
+}
+.sg-stack .sg-meta { text-align: center; max-width: 140px; }
+
+/* Color swatch grid */
+.sg-swatches {
+  display: grid;
+  gap: var(--lp-space-2);
+}
+.sg-swatch {
+  border-radius: var(--lp-radius-lg);
+  padding: var(--lp-space-3) var(--lp-space-4);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 120px;
+  box-sizing: border-box;
+  font-family: var(--lp-font-mono);
+  font-size: var(--lp-t-micro);
+}
+.sg-swatch .sg-swatch-name {
+  font-weight: var(--lp-w-bold);
+  font-size: var(--lp-t-micro);
+  letter-spacing: var(--lp-ls-wide);
+  text-transform: uppercase;
+  margin-bottom: 2px;
+}
+.sg-swatch .sg-swatch-role {
+  font-family: var(--lp-font-display);
+  font-weight: var(--lp-w-medium);
+  font-size: var(--lp-t-micro);
+  opacity: 0.85;
+}
+.sg-swatch .sg-swatch-hex { opacity: 0.85; }
+.sg-swatch--outline { border: 1px solid var(--lp-line-2); }

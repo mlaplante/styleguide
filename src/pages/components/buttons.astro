@@ -1,21 +1,85 @@
 ---
 import DocsLayout from '../../layouts/DocsLayout.astro';
 ---
-<DocsLayout title="Buttons" description="Primary button styles.">
-<div class="wrap">
-  <div class="group"><div class="lbl">Primary</div><a class="btn">Schedule a Consultation</a></div>
-  <div class="group"><div class="lbl">Hover</div><a class="btn hover">Discuss Your Needs</a></div>
-  <div class="group"><div class="lbl">Compact</div><a class="btn small">View All Posts</a></div>
-</div>
+<DocsLayout title="Buttons" description="Primary CTA, hover state, and compact list-action button.">
+  <div class="frame">
+    <div class="group">
+      <div class="lbl">Primary</div>
+      <a class="btn" href="#">Schedule a Consultation</a>
+    </div>
+    <div class="group">
+      <div class="lbl">Hover (lifted)</div>
+      <a class="btn btn--hover" href="#">Discuss Your Needs</a>
+    </div>
+    <div class="group">
+      <div class="lbl">Ghost</div>
+      <a class="btn btn--ghost" href="#">Learn More</a>
+    </div>
+    <div class="group">
+      <div class="lbl">Compact</div>
+      <a class="btn btn--sm" href="#">View All Posts</a>
+    </div>
+  </div>
 </DocsLayout>
 
-<style is:global>
-  html,body{margin:0;background:#F1F1F1;font-family:var(--lp-font-display);color:var(--lp-ink-900)}
-  .wrap{padding:30px 34px;height:100%;box-sizing:border-box;display:flex;align-items:center;gap:22px;flex-wrap:wrap}
-  .lbl{font-family:var(--lp-font-mono);font-size:9px;letter-spacing:1.5px;text-transform:uppercase;color:#9ca3af;margin-bottom:6px}
-  .group{display:flex;flex-direction:column;align-items:flex-start;gap:2px}
-  .btn{display:inline-block;padding:16px 36px;background:#3F51B5;color:#fff;text-decoration:none;border-radius:6px;font-weight:700;font-size:14px;text-transform:uppercase;letter-spacing:1.5px;border:2px solid #3F51B5;box-shadow:0 4px 15px rgba(63,81,181,0.4);cursor:pointer;font-family:inherit}
-  .btn.hover{background:transparent;color:#3F51B5;transform:translateY(-3px);box-shadow:0 10px 30px rgba(63,81,181,0.5)}
-  .btn.ghost{background:transparent;color:#3F51B5;box-shadow:none}
-  .btn.small{padding:10px 22px;font-size:12px;letter-spacing:1.2px;border-radius:4px;box-shadow:none}
+<style>
+  .frame {
+    background: var(--lp-paper);
+    border-radius: var(--lp-radius-lg);
+    padding: var(--lp-space-8);
+    display: flex;
+    align-items: center;
+    gap: var(--lp-space-6);
+    flex-wrap: wrap;
+  }
+  .lbl {
+    font-family: var(--lp-font-mono);
+    font-size: var(--lp-t-micro);
+    letter-spacing: var(--lp-ls-wider);
+    text-transform: uppercase;
+    color: var(--lp-ink-100);
+    margin-bottom: var(--lp-space-2);
+  }
+  .group { display: flex; flex-direction: column; align-items: flex-start; }
+  .btn {
+    display: inline-block;
+    padding: var(--lp-space-4) var(--lp-space-10);
+    background: var(--lp-indigo-500);
+    color: var(--lp-white);
+    text-decoration: none;
+    border-radius: var(--lp-radius-md);
+    font-family: var(--lp-font-display);
+    font-weight: var(--lp-w-bold);
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    border: 2px solid var(--lp-indigo-500);
+    box-shadow: var(--lp-shadow-btn);
+    cursor: pointer;
+    transition: transform var(--lp-dur) var(--lp-ease), box-shadow var(--lp-dur) var(--lp-ease), background var(--lp-dur) var(--lp-ease), color var(--lp-dur) var(--lp-ease);
+  }
+  .btn:hover {
+    background: transparent;
+    color: var(--lp-indigo-500);
+    transform: translateY(-3px);
+    box-shadow: var(--lp-shadow-btn-hover);
+  }
+  .btn--hover {
+    background: transparent;
+    color: var(--lp-indigo-500);
+    transform: translateY(-3px);
+    box-shadow: var(--lp-shadow-btn-hover);
+  }
+  .btn--ghost {
+    background: transparent;
+    color: var(--lp-indigo-500);
+    box-shadow: none;
+  }
+  .btn--sm {
+    padding: var(--lp-space-2) var(--lp-space-5);
+    font-size: 12px;
+    letter-spacing: var(--lp-ls-wide);
+    border-radius: var(--lp-radius);
+    box-shadow: none;
+  }
 </style>

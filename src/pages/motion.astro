@@ -1,0 +1,117 @@
+---
+import DocsLayout from '../layouts/DocsLayout.astro';
+
+const durations = [
+  { name: 'fast', token: '--lp-dur-fast', value: '0.2s', use: 'hover · link · button colour' },
+  { name: 'base', token: '--lp-dur',      value: '0.3s', use: 'menu · label rise · most UI' },
+  { name: 'slow', token: '--lp-dur-slow', value: '0.6s', use: 'panel sweep · radial reveal' },
+];
+---
+<DocsLayout title="Motion" description="Duration and easing tokens. Hover the cards to see each duration in action.">
+  <section class="set">
+    <h2>Durations</h2>
+    <div class="grid">
+      {durations.map((d) => (
+        <div class="card" data-dur={d.name}>
+          <div class="bar" style={`transition-duration: var(${d.token})`}></div>
+          <div class="card-meta">
+            <div class="card-name">{d.name}</div>
+            <div class="card-value">{d.value}</div>
+            <div class="card-use">{d.use}</div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <section class="set">
+    <h2>Easing</h2>
+    <ul class="easing">
+      <li><code>--lp-ease</code><span>ease — most transitions</span></li>
+      <li><code>--lp-ease-out</code><span>ease-out — entering elements</span></li>
+    </ul>
+  </section>
+</DocsLayout>
+
+<style>
+  .set + .set { margin-top: var(--lp-space-8); }
+  h2 {
+    font-family: var(--lp-font-mono);
+    font-size: 10px;
+    letter-spacing: var(--lp-ls-wider);
+    text-transform: uppercase;
+    color: var(--lp-ink-300);
+    margin: 0 0 var(--lp-space-4);
+    font-weight: var(--lp-w-bold);
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--lp-space-4);
+  }
+  .card {
+    background: var(--lp-paper);
+    border-radius: var(--lp-radius-lg);
+    padding: var(--lp-space-5);
+    overflow: hidden;
+    cursor: default;
+  }
+  .bar {
+    height: 12px;
+    background: var(--lp-indigo-500);
+    border-radius: var(--lp-radius-sm);
+    width: 24px;
+    transition-property: width, background;
+    transition-timing-function: var(--lp-ease);
+    margin-bottom: var(--lp-space-3);
+  }
+  .card:hover .bar { width: 100%; background: var(--lp-accent-teal); }
+  .card-name {
+    font-family: var(--lp-font-mono);
+    font-size: var(--lp-t-micro);
+    letter-spacing: var(--lp-ls-wider);
+    text-transform: uppercase;
+    color: var(--lp-ink-700);
+    font-weight: var(--lp-w-bold);
+  }
+  .card-value {
+    font-family: var(--lp-font-mono);
+    font-size: var(--lp-t-caption);
+    color: var(--lp-ink-300);
+    margin-top: 2px;
+  }
+  .card-use {
+    font-family: var(--lp-font-display);
+    font-size: var(--lp-t-caption);
+    color: var(--lp-ink-400);
+    margin-top: var(--lp-space-2);
+  }
+
+  .easing { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: var(--lp-space-2); }
+  .easing li {
+    display: grid;
+    grid-template-columns: 180px 1fr;
+    align-items: baseline;
+    padding: var(--lp-space-3) 0;
+    border-bottom: 1px solid var(--lp-line-2);
+  }
+  .easing li:last-child { border-bottom: none; }
+  .easing code {
+    font-family: var(--lp-font-mono);
+    font-size: var(--lp-t-meta);
+    background: var(--lp-code-bg-light);
+    color: var(--lp-code-accent);
+    padding: 2px 8px;
+    border-radius: var(--lp-radius);
+    justify-self: start;
+  }
+  .easing span {
+    color: var(--lp-fg-2);
+    font-size: var(--lp-t-caption);
+  }
+
+  @media (max-width: 768px) {
+    .grid { grid-template-columns: 1fr; }
+    .easing li { grid-template-columns: 1fr; gap: var(--lp-space-1); }
+  }
+</style>

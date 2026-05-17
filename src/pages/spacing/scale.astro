@@ -1,24 +1,32 @@
 ---
 import DocsLayout from '../../layouts/DocsLayout.astro';
+
+const scale = [
+  { token: '--lp-space-1',  step: '1',  px: 4   },
+  { token: '--lp-space-2',  step: '2',  px: 8   },
+  { token: '--lp-space-4',  step: '4',  px: 16  },
+  { token: '--lp-space-6',  step: '6',  px: 24  },
+  { token: '--lp-space-10', step: '10', px: 40  },
+  { token: '--lp-space-18', step: '18', px: 72  },
+  { token: '--lp-space-22', step: '22', px: 90,  note: 'section' },
+  { token: '--lp-space-30', step: '30', px: 120, note: 'hero' },
+];
 ---
-<DocsLayout title="Spacing — Scale" description="Spacing scale.">
-<div class="wrap">
-  <div class="stack"><div class="bar" style="width:4px"></div><div class="meta">1<small>4 px</small></div></div>
-  <div class="stack"><div class="bar" style="width:8px"></div><div class="meta">2<small>8 px</small></div></div>
-  <div class="stack"><div class="bar" style="width:16px"></div><div class="meta">4<small>16 px</small></div></div>
-  <div class="stack"><div class="bar" style="width:24px"></div><div class="meta">6<small>24 px</small></div></div>
-  <div class="stack"><div class="bar" style="width:40px"></div><div class="meta">10<small>40 px</small></div></div>
-  <div class="stack"><div class="bar" style="width:72px"></div><div class="meta">18<small>72 px</small></div></div>
-  <div class="stack"><div class="bar" style="width:90px"></div><div class="meta">22<small>90 px · section</small></div></div>
-  <div class="stack"><div class="bar" style="width:120px"></div><div class="meta">30<small>120 px · hero</small></div></div>
-</div>
+<DocsLayout title="Spacing — Scale" description="Spacing scale used across components and sections.">
+  <div class="sg-frame--row">
+    {scale.map((s) => (
+      <div class="sg-stack">
+        <div class="bar" style={`width: var(${s.token})`}></div>
+        <div class="sg-meta">{s.step}<small>{s.px} px{s.note ? ` · ${s.note}` : ''}</small></div>
+      </div>
+    ))}
+  </div>
 </DocsLayout>
 
-<style is:global>
-  html,body{margin:0;background:#fff;font-family:var(--lp-font-display);color:var(--lp-ink-900)}
-  .wrap{padding:24px 30px;height:100%;box-sizing:border-box;display:flex;align-items:center;justify-content:space-around;gap:10px;flex-wrap:wrap}
-  .stack{display:flex;flex-direction:column;align-items:center;gap:8px}
-  .bar{background:#3F51B5;height:10px;border-radius:2px}
-  .meta{font-family:var(--lp-font-mono);font-size:10px;letter-spacing:1.2px;text-transform:uppercase;color:#6b7280}
-  .meta small{display:block;color:#9ca3af;font-weight:400;font-size:10px;letter-spacing:.3px;text-transform:none;margin-top:2px}
+<style>
+  .bar {
+    background: var(--lp-indigo-500);
+    height: 10px;
+    border-radius: var(--lp-radius-sm);
+  }
 </style>

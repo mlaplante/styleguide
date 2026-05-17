@@ -1,46 +1,11 @@
 ---
-const groups = [
-  {
-    title: 'Foundations',
-    items: [
-      { href: '/logo', label: 'Logo' },
-      { href: '/colors/primary', label: 'Colors — Primary' },
-      { href: '/colors/accent-palette', label: 'Colors — Accent Palette' },
-      { href: '/colors/neutrals', label: 'Colors — Neutrals' },
-      { href: '/type/hero', label: 'Type — Hero' },
-      { href: '/type/headings', label: 'Type — Headings' },
-      { href: '/type/body', label: 'Type — Body' },
-      { href: '/type/eyebrow', label: 'Type — Eyebrow' },
-      { href: '/spacing/scale', label: 'Spacing — Scale' },
-      { href: '/spacing/radii', label: 'Spacing — Radii' },
-      { href: '/spacing/shadows', label: 'Spacing — Shadows' },
-    ],
-  },
-  {
-    title: 'Components',
-    items: [
-      { href: '/components/buttons', label: 'Buttons' },
-      { href: '/components/input', label: 'Input' },
-      { href: '/components/blog-nav', label: 'Blog Nav' },
-      { href: '/components/post-card', label: 'Post Card' },
-      { href: '/components/service', label: 'Service' },
-      { href: '/components/timeline', label: 'Timeline' },
-    ],
-  },
-  {
-    title: 'UI Kits',
-    items: [
-      { href: '/ui-kits/blog', label: 'Blog' },
-      { href: '/ui-kits/portfolio', label: 'Portfolio' },
-    ],
-  },
-];
+import { nav } from '../data/nav';
 
 const current = Astro.url.pathname.replace(/\/$/, '');
 ---
 <aside class="sidebar">
   <nav>
-    {groups.map((g) => (
+    {nav.map((g) => (
       <section>
         <h2>{g.title}</h2>
         <ul>
@@ -48,7 +13,7 @@ const current = Astro.url.pathname.replace(/\/$/, '');
             const active = current === it.href;
             return (
               <li>
-                <a href={it.href} class={active ? 'active' : ''}>{it.label}</a>
+                <a href={it.href} class={active ? 'active' : ''} aria-current={active ? 'page' : undefined}>{it.label}</a>
               </li>
             );
           })}

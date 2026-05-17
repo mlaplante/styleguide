@@ -1,49 +1,34 @@
 ---
 import DocsLayout from '../../layouts/DocsLayout.astro';
+
+const indigo = [
+  { name: 'Indigo 500', hex: '#3F51B5', role: 'Primary / Hero',  bg: 'var(--lp-indigo-500)', fg: 'var(--lp-white)' },
+  { name: 'Indigo 600', hex: '#3849A1', role: 'Hover',           bg: 'var(--lp-indigo-600)', fg: 'var(--lp-white)' },
+  { name: 'Indigo 700', hex: '#303F8C', role: 'Pressed',         bg: 'var(--lp-indigo-700)', fg: 'var(--lp-white)' },
+  { name: 'Indigo 10%', hex: 'rgba(63,81,181,.1)', role: 'Eyebrow wash', bg: 'var(--lp-indigo-100)', fg: 'var(--lp-indigo-500)', outline: true },
+];
+const blog = [
+  { name: 'Blog 500',  hex: '#2980B9', role: 'Blog nav start', bg: 'var(--lp-blog-blue-500)', fg: 'var(--lp-white)' },
+  { name: 'Blog 600',  hex: '#1A6DA3', role: 'Blog nav end',   bg: 'var(--lp-blog-blue-600)', fg: 'var(--lp-white)' },
+  { name: 'Blog 700',  hex: '#1A5276', role: 'Dark nav',        bg: 'var(--lp-blog-blue-700)', fg: 'var(--lp-white)' },
+  { name: 'Link Dark', hex: '#60A5FA', role: 'Dark-mode link',  bg: 'var(--lp-link-dark)',     fg: 'var(--lp-dark-bg)' },
+];
 ---
 <DocsLayout title="Colors — Primary" description="Primary brand palette.">
-  <div class="wrap">
-    <div class="sw" style="background:#3F51B5;color:#fff">
-      <div><div class="name">Indigo 500</div><div class="role">Primary / Hero</div></div>
-      <div class="hex">#3F51B5</div>
-    </div>
-    <div class="sw" style="background:#3849a1;color:#fff">
-      <div><div class="name">Indigo 600</div><div class="role">Hover</div></div>
-      <div class="hex">#3849A1</div>
-    </div>
-    <div class="sw" style="background:#303f8c;color:#fff">
-      <div><div class="name">Indigo 700</div><div class="role">Pressed</div></div>
-      <div class="hex">#303F8C</div>
-    </div>
-    <div class="sw" style="background:rgba(63,81,181,0.1);color:#3F51B5;border:1px solid rgba(63,81,181,0.2)">
-      <div><div class="name">Indigo 10%</div><div class="role">Eyebrow wash</div></div>
-      <div class="hex">rgba(63,81,181,.1)</div>
-    </div>
-
-    <div class="sw" style="background:#2980b9;color:#fff">
-      <div><div class="name">Blog 500</div><div class="role">Blog nav start</div></div>
-      <div class="hex">#2980B9</div>
-    </div>
-    <div class="sw" style="background:#1a6da3;color:#fff">
-      <div><div class="name">Blog 600</div><div class="role">Blog nav end</div></div>
-      <div class="hex">#1A6DA3</div>
-    </div>
-    <div class="sw" style="background:#1a5276;color:#fff">
-      <div><div class="name">Blog 700</div><div class="role">Dark nav</div></div>
-      <div class="hex">#1A5276</div>
-    </div>
-    <div class="sw" style="background:#60a5fa;color:#0f172a">
-      <div><div class="name">Link Dark</div><div class="role">Dark-mode link</div></div>
-      <div class="hex">#60A5FA</div>
-    </div>
+  <div class="sg-swatches grid">
+    {[...indigo, ...blog].map((s) => (
+      <div class={`sg-swatch ${s.outline ? 'sg-swatch--outline' : ''}`} style={`background:${s.bg};color:${s.fg}`}>
+        <div>
+          <div class="sg-swatch-name">{s.name}</div>
+          <div class="sg-swatch-role">{s.role}</div>
+        </div>
+        <div class="sg-swatch-hex">{s.hex}</div>
+      </div>
+    ))}
   </div>
 </DocsLayout>
 
-<style is:global>
-  html,body{margin:0;background:#fff;font-family:var(--lp-font-mono);color:var(--lp-fg-1)}
-  .wrap{padding:20px;display:grid;grid-template-columns:repeat(4,1fr);gap:10px;height:100%;box-sizing:border-box}
-  .sw{border-radius:10px;padding:12px 14px;display:flex;flex-direction:column;justify-content:space-between;min-height:120px;box-sizing:border-box;font-size:10px;letter-spacing:0.5px}
-  .sw .name{font-weight:700;font-size:11px;letter-spacing:1.2px;text-transform:uppercase;margin-bottom:2px}
-  .sw .hex{font-family:var(--lp-font-mono);opacity:.85}
-  .sw .role{font-family:var(--lp-font-display);font-weight:500;font-size:11px;opacity:.85}
+<style>
+  .grid { grid-template-columns: repeat(4, 1fr); }
+  @media (max-width: 900px) { .grid { grid-template-columns: repeat(2, 1fr); } }
 </style>
