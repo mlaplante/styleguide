@@ -1,0 +1,101 @@
+---
+import DocsLayout from '../../layouts/DocsLayout.astro';
+---
+<DocsLayout title="Badges" description="Category pills, status badges, and inline code chips.">
+  <section class="set">
+    <h2>Category pills · blog</h2>
+    <div class="row">
+      <span class="pill pill--blog">dev-session</span>
+      <span class="pill pill--indigo">thought-leadership</span>
+      <span class="pill pill--teal">case-study</span>
+      <span class="pill pill--purple">talk</span>
+    </div>
+  </section>
+
+  <section class="set">
+    <h2>Status</h2>
+    <div class="row">
+      <span class="status status--ok">Operational</span>
+      <span class="status status--warn">Degraded</span>
+      <span class="status status--err">Outage</span>
+      <span class="status status--info">In review</span>
+    </div>
+  </section>
+
+  <section class="set">
+    <h2>Inline code</h2>
+    <p class="prose">
+      Set <code class="code">--lp-radius-md</code> on CTA buttons and
+      <code class="code">--lp-radius-xl</code> on cards. Article body inherits
+      <code class="code">var(--lp-font-display)</code>.
+    </p>
+  </section>
+</DocsLayout>
+
+<style>
+  .set + .set { margin-top: var(--lp-space-6); }
+  h2 {
+    font-family: var(--lp-font-mono);
+    font-size: 10px;
+    letter-spacing: var(--lp-ls-wider);
+    text-transform: uppercase;
+    color: var(--lp-ink-300);
+    margin: 0 0 var(--lp-space-3);
+    font-weight: var(--lp-w-bold);
+  }
+  .row { display: flex; flex-wrap: wrap; gap: var(--lp-space-2); }
+
+  .pill {
+    display: inline-block;
+    padding: 3px 10px;
+    border-radius: var(--lp-radius-pill);
+    font-family: var(--lp-font-mono);
+    font-size: var(--lp-t-micro);
+    font-weight: var(--lp-w-medium);
+    letter-spacing: 0.3px;
+  }
+  .pill--blog   { background: rgba(41, 128, 185, 0.08); color: var(--lp-blog-blue-500); }
+  .pill--indigo { background: var(--lp-indigo-100);     color: var(--lp-indigo-500); }
+  .pill--teal   { background: rgba(0, 150, 136, 0.10);  color: var(--lp-accent-teal); }
+  .pill--purple { background: rgba(156, 39, 176, 0.10); color: var(--lp-accent-purple); }
+
+  .status {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 3px 10px 3px 8px;
+    border-radius: var(--lp-radius-pill);
+    font-family: var(--lp-font-mono);
+    font-size: var(--lp-t-micro);
+    font-weight: var(--lp-w-medium);
+    border: 1px solid currentColor;
+  }
+  .status::before {
+    content: '';
+    width: 6px;
+    height: 6px;
+    border-radius: var(--lp-radius-full);
+    background: currentColor;
+  }
+  .status--ok   { color: var(--lp-accent-green); }
+  .status--warn { color: #b8860b; }
+  .status--err  { color: var(--lp-code-accent); }
+  .status--info { color: var(--lp-blog-blue-500); }
+
+  .prose {
+    font-family: var(--lp-font-display);
+    font-size: var(--lp-t-base);
+    line-height: var(--lp-lh-body);
+    color: var(--lp-fg-2);
+    max-width: 60ch;
+    margin: 0;
+  }
+  .code {
+    font-family: var(--lp-font-mono);
+    font-size: var(--lp-t-meta);
+    background: var(--lp-code-bg-light);
+    color: var(--lp-code-accent);
+    padding: 2px 7px;
+    border-radius: var(--lp-radius);
+  }
+</style>

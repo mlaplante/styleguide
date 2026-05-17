@@ -1,30 +1,70 @@
 ---
 import DocsLayout from '../../layouts/DocsLayout.astro';
 ---
-<DocsLayout title="Service" description="Service card component.">
-<div class="wrap">
-  <div class="svc">
-    <div class="glyph"><div class="g-shield"></div></div>
-    <h4>Security Architecture</h4>
-    <p>Assess your infrastructure, identify gaps, design defense-in-depth strategies.</p>
+<DocsLayout title="Service" description="Service card — monoline glyph + uppercase title + supporting copy.">
+  <div class="frame">
+    <div class="svc">
+      <div class="glyph" aria-hidden="true">
+        <svg width="44" height="44" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.5">
+          <path d="M32 6 L52 14 V32 C52 46 42 54 32 58 C22 54 12 46 12 32 V14 Z" />
+          <path d="M24 32 L30 38 L42 26" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+      </div>
+      <h4>Security Architecture</h4>
+      <p>Assess your infrastructure, identify gaps, design defense-in-depth strategies tailored to your risk profile.</p>
+    </div>
+    <div class="svc">
+      <div class="glyph" aria-hidden="true">
+        <svg width="44" height="44" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.5">
+          <path d="M18 44 C10 44 6 38 6 32 C6 24 14 20 20 22 C22 14 30 10 38 14 C46 10 56 18 54 28 C60 30 60 42 52 44 Z" />
+        </svg>
+      </div>
+      <h4>Cloud Security Strategy</h4>
+      <p>Build secure multi-cloud architectures across AWS, Azure, and GCP with zero-trust principles and continuous monitoring.</p>
+    </div>
   </div>
-  <div class="svc">
-    <div class="glyph"><div class="g-cloud"></div></div>
-    <h4>Cloud Security Strategy</h4>
-    <p>Build secure multi-cloud architectures across AWS, Azure, and GCP with zero-trust.</p>
-  </div>
-</div>
 </DocsLayout>
 
-<style is:global>
-  html,body{margin:0;background:#F1F1F1;font-family:var(--lp-font-display);color:var(--lp-ink-900)}
-  .wrap{padding:30px 34px;height:100%;box-sizing:border-box;display:grid;grid-template-columns:1fr 1fr;gap:28px;align-items:center}
-  .svc{display:flex;flex-direction:column;gap:10px}
-  .svc .glyph{width:64px;height:64px;border-radius:14px;background:rgba(63,81,181,0.08);display:flex;align-items:center;justify-content:center;color:#3F51B5;font-size:32px;font-weight:300;line-height:1}
-  .svc h4{margin:2px 0 0;font-size:16px;font-weight:700;text-transform:uppercase;letter-spacing:2px;color:#202020}
-  .svc p{margin:0;color:rgba(0,0,0,.6);font-size:13px;line-height:1.75}
-  /* simple CSS-drawn monoline glyphs (placeholder for Linea) */
-  .g-shield{position:relative;width:36px;height:42px;border:1.5px solid currentColor;border-radius:6px 6px 20px 20px / 6px 6px 28px 28px;border-top-width:2px}
-  .g-cloud{position:relative;width:42px;height:26px;border:1.5px solid currentColor;border-radius:22px}
-  .g-cloud::before{content:'';position:absolute;width:16px;height:16px;border-radius:50%;border:1.5px solid currentColor;background:rgba(63,81,181,0.08);top:-10px;left:10px}
+<style>
+  .frame {
+    background: var(--lp-paper);
+    border-radius: var(--lp-radius-lg);
+    padding: var(--lp-space-8);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--lp-space-8);
+  }
+  .svc {
+    display: flex;
+    flex-direction: column;
+    gap: var(--lp-space-2);
+    color: var(--lp-indigo-500);
+  }
+  .glyph {
+    width: 64px;
+    height: 64px;
+    border-radius: 14px;
+    background: var(--lp-indigo-100);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--lp-indigo-500);
+  }
+  .svc h4 {
+    margin: var(--lp-space-1) 0 0;
+    font-size: 16px;
+    font-weight: var(--lp-w-bold);
+    text-transform: uppercase;
+    letter-spacing: var(--lp-ls-wider);
+    color: var(--lp-ink-600);
+  }
+  .svc p {
+    margin: 0;
+    color: var(--lp-fg-2);
+    font-size: var(--lp-t-caption);
+    line-height: var(--lp-lh-body);
+  }
+  @media (max-width: 640px) {
+    .frame { grid-template-columns: 1fr; }
+  }
 </style>

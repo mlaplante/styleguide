@@ -8,13 +8,15 @@ The design system for La Plante Web Dev, built as an Astro static site and deplo
 
 - `src/pages/` — every styleguide page, one `.astro` file per preview
   - `index.astro` — landing page with preview-tile cards
-  - `logo.astro` — brand marks on light and dark tiles
+  - `logo.astro` — brand mark on light and dark tiles
   - `colors/`, `type/`, `spacing/` — foundation specimens
-  - `components/` — buttons, input, blog nav, post card, service, timeline
+  - `motion.astro` — duration and easing specimens
+  - `components/` — buttons, input, blog nav, post card, service, timeline, badges, callouts
   - `ui-kits/` — full blog and portfolio compositions
 - `src/layouts/DocsLayout.astro` — shared chrome (topbar, sidebar, content frame)
-- `src/components/Sidebar.astro` — grouped navigation
-- `src/styles/global.css` — single source of truth for design tokens (colors, typography, spacing, radii, shadows)
+- `src/components/Sidebar.astro` — grouped navigation, driven by `src/data/nav.ts`
+- `src/data/nav.ts` — single source of truth for sidebar groups and the landing-page section grid
+- `src/styles/global.css` — design tokens (colors, typography, spacing, radii, shadows, motion) plus shared `sg-*` preview-scaffolding utilities
 - `public/assets/` — logo PNGs and other static assets
 - `project/` — original design bundle from Claude Design (kept as the source of truth for the prototypes that each page was ported from)
 
@@ -49,9 +51,13 @@ Pushes to `main` deploy automatically to Cloudflare Pages. Other branches get pr
    <DocsLayout title="My Page" description="What this shows.">
      <!-- content -->
    </DocsLayout>
+
+   <style>
+     /* Use scoped <style> — not `is:global` — so selectors don't leak. */
+   </style>
    ```
-2. Add a link in `src/components/Sidebar.astro` under the appropriate group.
-3. Use tokens from `src/styles/global.css` (`var(--lp-*)`) rather than hard-coded values — that's the whole point of the styleguide.
+2. Add an entry in `src/data/nav.ts` under the appropriate group. The Sidebar and the landing-page card grid both consume that registry, so a single edit picks them both up.
+3. Use tokens from `src/styles/global.css` (`var(--lp-*)`) rather than hard-coded values — that's the whole point of the styleguide. Shared preview-scaffolding utilities are available via `sg-*` classes (e.g. `sg-row`, `sg-meta`, `sg-stack`, `sg-swatch`).
 
 ## Design tokens
 
