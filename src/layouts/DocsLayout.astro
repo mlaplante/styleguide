@@ -18,13 +18,11 @@ const pageTitle = `${title} — La Plante Web Dev Style Guide`;
     <title>{pageTitle}</title>
     {description && <meta name="description" content={description} />}
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%233F51B5'/><text x='16' y='22' font-family='Poppins,system-ui,sans-serif' font-size='18' font-weight='700' fill='white' text-anchor='middle'>L</text></svg>" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   </head>
   <body>
     <header class="topbar">
       <a class="brand" href="/">
-        <img class="brand-logo" src="/assets/laplante-logo.png" alt="La Plante Web Dev" />
+        <img class="brand-logo" src="/assets/laplante-logo.png" width="310" height="110" alt="La Plante Web Dev" decoding="async" fetchpriority="high" />
         <span class="brand-suffix">— Style Guide</span>
       </a>
     </header>
