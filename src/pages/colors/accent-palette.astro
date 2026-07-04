@@ -2,23 +2,26 @@
 import DocsLayout from '../../layouts/DocsLayout.astro';
 
 const accents = [
-  { name: 'Blue-Grey', hex: '#607D8B', bg: 'var(--lp-accent-blue-grey)' },
-  { name: 'Teal',      hex: '#009688', bg: 'var(--lp-accent-teal)' },
-  { name: 'Pink',      hex: '#FF4081', bg: 'var(--lp-accent-pink)' },
-  { name: 'Blue',      hex: '#2196F3', bg: 'var(--lp-accent-blue)' },
-  { name: 'Green',     hex: '#4CAF50', bg: 'var(--lp-accent-green)' },
-  { name: 'Purple',    hex: '#9C27B0', bg: 'var(--lp-accent-purple)' },
+  { name: 'Blue-Grey', hex: '#607D8B', token: '--lp-accent-blue-grey' },
+  { name: 'Teal',      hex: '#009688', token: '--lp-accent-teal' },
+  { name: 'Pink',      hex: '#FF4081', token: '--lp-accent-pink' },
+  { name: 'Blue',      hex: '#2196F3', token: '--lp-accent-blue' },
+  { name: 'Green',     hex: '#4CAF50', token: '--lp-accent-green' },
+  { name: 'Purple',    hex: '#9C27B0', token: '--lp-accent-purple' },
 ];
 ---
-<DocsLayout title="Colors — Accent Palette" description="Theme accents available via the portfolio's accent switcher.">
+<DocsLayout title="Colors — Accent Palette" description="Theme accents available via the portfolio's accent switcher. Click a token or hex value to copy it.">
   <div class="sg-swatches grid">
     {accents.map((s) => (
-      <div class="sg-swatch" style={`background:${s.bg};color:var(--lp-white)`}>
+      <div class="sg-swatch" style={`background:var(${s.token});color:var(--lp-white)`}>
         <div>
           <div class="sg-swatch-name">{s.name}</div>
           <div class="sg-swatch-role">Accent opt-in</div>
         </div>
-        <div class="sg-swatch-hex">{s.hex}</div>
+        <div class="sg-swatch-tokens">
+          <button class="sg-copy" type="button" data-copy={`var(${s.token})`}>{s.token}</button>
+          <button class="sg-copy" type="button" data-copy={s.hex}>{s.hex}</button>
+        </div>
       </div>
     ))}
   </div>
@@ -26,6 +29,7 @@ const accents = [
 
 <style>
   .grid { grid-template-columns: repeat(6, 1fr); }
+  .grid :global(.sg-copy) { font-size: 10px; }
   @media (max-width: 900px) { .grid { grid-template-columns: repeat(3, 1fr); } }
   @media (max-width: 480px) { .grid { grid-template-columns: repeat(2, 1fr); } }
 </style>
