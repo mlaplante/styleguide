@@ -4,10 +4,14 @@ import { nav } from '../data/nav';
 const current = Astro.url.pathname.replace(/\/$/, '');
 ---
 <aside class="sidebar">
-  <nav>
+  <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="sg-nav">
+    <span class="nav-toggle-icon" aria-hidden="true"></span>
+    Menu
+  </button>
+  <nav id="sg-nav" aria-label="Styleguide pages">
     {nav.map((g) => (
-      <section>
-        <h2>{g.title}</h2>
+      <section aria-label={g.title}>
+        <p class="group-label">{g.title}</p>
         <ul>
           {g.items.map((it) => {
             const active = current === it.href;
@@ -23,11 +27,23 @@ const current = Astro.url.pathname.replace(/\/$/, '');
   </nav>
 </aside>
 
+<script is:inline>
+  (function () {
+    var toggle = document.querySelector('.nav-toggle');
+    var sidebar = document.querySelector('.sidebar');
+    if (!toggle || !sidebar) return;
+    toggle.addEventListener('click', function () {
+      var open = sidebar.classList.toggle('open');
+      toggle.setAttribute('aria-expanded', String(open));
+    });
+  })();
+</script>
+
 <style>
   .sidebar {
-    border-right: 1px solid var(--lp-border-subtle);
+    border-right: 1px solid var(--sg-border);
     padding: var(--lp-space-6) var(--lp-space-4);
-    background: var(--lp-paper-2);
+    background: var(--sg-surface-2);
     position: sticky;
     top: var(--topbar-h);
     align-self: start;
@@ -35,13 +51,14 @@ const current = Astro.url.pathname.replace(/\/$/, '');
     overflow-y: auto;
     font-family: var(--lp-font-display);
   }
+  .nav-toggle { display: none; }
   nav section + section { margin-top: var(--lp-space-6); }
-  h2 {
+  .group-label {
     font-family: var(--lp-font-mono);
     font-size: 10px;
     letter-spacing: var(--lp-ls-wider);
     text-transform: uppercase;
-    color: var(--lp-ink-300);
+    color: var(--sg-fg-soft);
     margin: 0 0 var(--lp-space-2) var(--lp-space-2);
     font-weight: var(--lp-w-bold);
   }
@@ -51,13 +68,13 @@ const current = Astro.url.pathname.replace(/\/$/, '');
     display: block;
     padding: var(--lp-space-2) var(--lp-space-3);
     border-radius: var(--lp-radius-md);
-    color: var(--lp-ink-500);
+    color: var(--sg-nav-link);
     text-decoration: none;
     font-size: 13px;
     font-weight: var(--lp-w-medium);
     transition: background var(--lp-dur-fast) var(--lp-ease), color var(--lp-dur-fast) var(--lp-ease);
   }
-  a:hover { background: var(--lp-indigo-100); color: var(--lp-indigo-700); }
+  a:hover { background: var(--sg-nav-hover-bg); color: var(--sg-nav-hover-fg); }
   a.active {
     background: var(--lp-indigo-500);
     color: var(--lp-white);
@@ -65,6 +82,48 @@ const current = Astro.url.pathname.replace(/\/$/, '');
   }
 
   @media (max-width: 768px) {
-    .sidebar { position: static; max-height: none; border-right: none; border-bottom: 1px solid var(--lp-border-subtle); }
+    .sidebar {
+      position: static;
+      max-height: none;
+      border-right: none;
+      border-bottom: 1px solid var(--sg-border);
+      padding: var(--lp-space-3) var(--lp-space-4);
+    }
+    .nav-toggle {
+      display: flex;
+      align-items: center;
+      gap: var(--lp-space-2);
+      width: 100%;
+      background: transparent;
+      border: none;
+      padding: var(--lp-space-2) var(--lp-space-2);
+      font-family: var(--lp-font-mono);
+      font-size: var(--lp-t-caption);
+      letter-spacing: var(--lp-ls-wider);
+      text-transform: uppercase;
+      color: var(--sg-fg-muted);
+      cursor: pointer;
+      border-radius: var(--lp-radius-md);
+    }
+    .nav-toggle-icon,
+    .nav-toggle-icon::before,
+    .nav-toggle-icon::after {
+      display: block;
+      width: 16px;
+      height: 2px;
+      border-radius: 1px;
+      background: currentColor;
+    }
+    .nav-toggle-icon { position: relative; }
+    .nav-toggle-icon::before,
+    .nav-toggle-icon::after {
+      content: '';
+      position: absolute;
+      left: 0;
+    }
+    .nav-toggle-icon::before { top: -5px; }
+    .nav-toggle-icon::after { top: 5px; }
+    nav { display: none; padding-top: var(--lp-space-3); }
+    .sidebar.open nav { display: block; }
   }
 </style>

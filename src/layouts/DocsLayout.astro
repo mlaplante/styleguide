@@ -1,5 +1,6 @@
 ---
 import '../styles/global.css';
+import '../styles/components.css';
 import Sidebar from '../components/Sidebar.astro';
 
 export interface Props {
@@ -9,6 +10,8 @@ export interface Props {
 
 const { title, description } = Astro.props;
 const pageTitle = `${title} — La Plante Web Dev Style Guide`;
+const canonical = Astro.site ? new URL(Astro.url.pathname, Astro.site) : undefined;
+const ogImage = Astro.site ? new URL('/assets/laplante-logo.png', Astro.site) : undefined;
 ---
 <!doctype html>
 <html lang="en">
@@ -17,18 +20,45 @@ const pageTitle = `${title} — La Plante Web Dev Style Guide`;
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{pageTitle}</title>
     {description && <meta name="description" content={description} />}
+    {canonical && <link rel="canonical" href={canonical} />}
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="La Plante Web Dev Style Guide" />
+    <meta property="og:title" content={pageTitle} />
+    {description && <meta property="og:description" content={description} />}
+    {canonical && <meta property="og:url" content={canonical} />}
+    {ogImage && <meta property="og:image" content={ogImage} />}
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content={pageTitle} />
+    {description && <meta name="twitter:description" content={description} />}
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%233F51B5'/><text x='16' y='22' font-family='Poppins,system-ui,sans-serif' font-size='18' font-weight='700' fill='white' text-anchor='middle'>L</text></svg>" />
+    <script is:inline>
+      // Apply the saved (or OS-preferred) chrome theme before first paint.
+      (function () {
+        try {
+          var t = localStorage.getItem('sg-theme');
+          if (t === 'dark' || (!t && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.dataset.theme = 'dark';
+          }
+        } catch (e) {}
+      })();
+    </script>
   </head>
   <body>
+    <a class="skip-link" href="#main">Skip to content</a>
     <header class="topbar">
       <a class="brand" href="/">
-        <img class="brand-logo" src="/assets/laplante-logo.png" width="310" height="110" alt="La Plante Web Dev" decoding="async" fetchpriority="high" />
+        <img class="brand-logo sg-light-only" src="/assets/laplante-logo.png" width="310" height="110" alt="La Plante Web Dev" decoding="async" fetchpriority="high" />
+        <img class="brand-logo sg-dark-only" src="/assets/laplante-logo-white.png" width="310" height="110" alt="La Plante Web Dev" decoding="async" />
         <span class="brand-suffix">— Style Guide</span>
       </a>
+      <button class="theme-toggle" type="button" aria-label="Toggle dark mode">
+        <span class="sg-light-only" aria-hidden="true">☾</span>
+        <span class="sg-dark-only" aria-hidden="true">☀</span>
+      </button>
     </header>
     <div class="shell">
       <Sidebar />
-      <main class="content">
+      <main id="main" class="content">
         <header class="page-head">
           <h1>{title}</h1>
           {description && <p class="lede">{description}</p>}
@@ -39,13 +69,54 @@ const pageTitle = `${title} — La Plante Web Dev Style Guide`;
       </main>
     </div>
 
+    <script is:inline>
+      // Chrome theme toggle.
+      (function () {
+        var btn = document.querySelector('.theme-toggle');
+        if (!btn) return;
+        btn.addEventListener('click', function () {
+          var root = document.documentElement;
+          var dark = root.dataset.theme === 'dark';
+          if (dark) {
+            delete root.dataset.theme;
+          } else {
+            root.dataset.theme = 'dark';
+          }
+          try {
+            localStorage.setItem('sg-theme', dark ? 'light' : 'dark');
+          } catch (e) {}
+        });
+      })();
+
+      // Click-to-copy for any [data-copy] element (token chips, snippets).
+      document.addEventListener('click', function (e) {
+        var btn = e.target.closest('[data-copy]');
+        if (!btn) return;
+        var write = navigator.clipboard
+          ? navigator.clipboard.writeText(btn.getAttribute('data-copy'))
+          : Promise.reject();
+        write.then(function () {
+          if (btn.dataset.restoreTimer) clearTimeout(Number(btn.dataset.restoreTimer));
+          if (!btn.dataset.originalText) btn.dataset.originalText = btn.textContent;
+          btn.textContent = '✓ copied';
+          btn.classList.add('copied');
+          btn.dataset.restoreTimer = String(
+            setTimeout(function () {
+              btn.textContent = btn.dataset.originalText;
+              btn.classList.remove('copied');
+              delete btn.dataset.originalText;
+              delete btn.dataset.restoreTimer;
+            }, 1200)
+          );
+        }).catch(function () {});
+      });
+    </script>
+
     <style>
-      :root { --sidebar-w: 260px; --topbar-h: 64px; }
-      * { box-sizing: border-box; }
       body {
         margin: 0;
-        background: var(--lp-bg-1);
-        color: var(--lp-fg-1);
+        background: var(--sg-bg);
+        color: var(--sg-fg);
         font-family: var(--lp-font-display);
         font-weight: var(--lp-w-regular);
         line-height: var(--lp-lh-normal);
@@ -54,8 +125,8 @@ const pageTitle = `${title} — La Plante Web Dev Style Guide`;
         position: sticky; top: 0; z-index: 10;
         display: flex; align-items: center; justify-content: space-between;
         height: var(--topbar-h); padding: 0 var(--lp-space-6);
-        background: var(--lp-white);
-        border-bottom: 1px solid var(--lp-border-subtle);
+        background: var(--sg-surface);
+        border-bottom: 1px solid var(--sg-border);
         box-shadow: var(--lp-shadow-blog-nav);
       }
       .brand {
@@ -72,8 +143,25 @@ const pageTitle = `${title} — La Plante Web Dev Style Guide`;
         font-weight: var(--lp-w-medium);
         letter-spacing: var(--lp-ls-wider);
         text-transform: uppercase;
-        color: var(--lp-ink-300);
+        color: var(--sg-fg-soft);
       }
+      .theme-toggle {
+        background: transparent;
+        border: 1px solid var(--sg-border);
+        border-radius: var(--lp-radius-full);
+        width: 36px;
+        height: 36px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        color: var(--sg-fg-muted);
+        font-size: 16px;
+        line-height: 1;
+        padding: 0;
+        transition: border-color var(--lp-dur-fast) var(--lp-ease), color var(--lp-dur-fast) var(--lp-ease);
+      }
+      .theme-toggle:hover { border-color: var(--lp-indigo-500); color: var(--lp-indigo-500); }
       .shell { display: grid; grid-template-columns: var(--sidebar-w) 1fr; min-height: calc(100vh - var(--topbar-h)); }
       .content { padding: var(--lp-space-10) var(--lp-space-12) var(--lp-space-18); max-width: 1100px; }
       .page-head { margin-bottom: var(--lp-space-8); }
@@ -84,21 +172,22 @@ const pageTitle = `${title} — La Plante Web Dev Style Guide`;
         letter-spacing: var(--lp-ls-tight);
         line-height: var(--lp-lh-snug);
         margin: 0 0 var(--lp-space-2);
-        color: var(--lp-ink-900);
+        color: var(--sg-fg);
       }
       .lede {
-        color: var(--lp-ink-400);
+        color: var(--sg-fg-muted);
         margin: 0;
         font-size: var(--lp-t-ui);
         line-height: var(--lp-lh-normal);
         max-width: 60ch;
       }
       .preview {
-        border: 1px solid var(--lp-border-subtle);
+        border: 1px solid var(--sg-border);
         border-radius: var(--lp-radius-xl);
         padding: var(--lp-space-8);
         background: var(--lp-white);
         box-shadow: var(--lp-shadow-card);
+        color: var(--lp-fg-1);
       }
 
       @media (max-width: 768px) {
