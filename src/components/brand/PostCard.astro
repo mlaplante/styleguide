@@ -1,0 +1,25 @@
+---
+/**
+ * Blog post card. Styles live in src/styles/components.css (.lp-post-card).
+ */
+export interface Props {
+  href?: string;
+  category: string;
+  categoryVariant?: 'blog' | 'indigo' | 'teal' | 'purple';
+  date: string;
+  readTime: string;
+  title: string;
+  excerpt: string;
+}
+const { href = '#', category, categoryVariant = 'blog', date, readTime, title, excerpt } = Astro.props;
+---
+<a class="lp-post-card" href={href}>
+  <div class="lp-post-meta">
+    <span class={`lp-pill lp-pill--${categoryVariant}`}>{category}</span>
+    <span class="lp-post-date">{date}</span>
+    <span class="lp-post-sep">·</span>
+    <span class="lp-post-read">{readTime}</span>
+  </div>
+  <h3 class="lp-post-title">{title}</h3>
+  <p class="lp-post-excerpt">{excerpt}</p>
+</a>

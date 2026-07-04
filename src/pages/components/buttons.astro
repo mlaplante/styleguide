@@ -1,25 +1,34 @@
 ---
 import DocsLayout from '../../layouts/DocsLayout.astro';
+import Button from '../../components/brand/Button.astro';
+import CodeSnippet from '../../components/CodeSnippet.astro';
+
+const snippet = `<a class="lp-btn" href="#">Schedule a Consultation</a>
+<a class="lp-btn lp-btn--ghost" href="#">Learn More</a>
+<a class="lp-btn lp-btn--sm" href="#">View All Posts</a>
+
+<!-- Styles: .lp-btn in src/styles/components.css -->`;
 ---
 <DocsLayout title="Buttons" description="Primary CTA, hover state, and compact list-action button.">
   <div class="frame">
     <div class="group">
       <div class="lbl">Primary</div>
-      <a class="btn" href="#">Schedule a Consultation</a>
+      <Button href="#">Schedule a Consultation</Button>
     </div>
     <div class="group">
       <div class="lbl">Hover (lifted)</div>
-      <a class="btn btn--hover" href="#">Discuss Your Needs</a>
+      <Button href="#" lifted>Discuss Your Needs</Button>
     </div>
     <div class="group">
       <div class="lbl">Ghost</div>
-      <a class="btn btn--ghost" href="#">Learn More</a>
+      <Button href="#" variant="ghost">Learn More</Button>
     </div>
     <div class="group">
       <div class="lbl">Compact</div>
-      <a class="btn btn--sm" href="#">View All Posts</a>
+      <Button href="#" variant="sm">View All Posts</Button>
     </div>
   </div>
+  <CodeSnippet code={snippet} />
 </DocsLayout>
 
 <style>
@@ -41,45 +50,4 @@ import DocsLayout from '../../layouts/DocsLayout.astro';
     margin-bottom: var(--lp-space-2);
   }
   .group { display: flex; flex-direction: column; align-items: flex-start; }
-  .btn {
-    display: inline-block;
-    padding: var(--lp-space-4) var(--lp-space-10);
-    background: var(--lp-indigo-500);
-    color: var(--lp-white);
-    text-decoration: none;
-    border-radius: var(--lp-radius-md);
-    font-family: var(--lp-font-display);
-    font-weight: var(--lp-w-bold);
-    font-size: 14px;
-    text-transform: uppercase;
-    letter-spacing: 1.5px;
-    border: 2px solid var(--lp-indigo-500);
-    box-shadow: var(--lp-shadow-btn);
-    cursor: pointer;
-    transition: transform var(--lp-dur) var(--lp-ease), box-shadow var(--lp-dur) var(--lp-ease), background var(--lp-dur) var(--lp-ease), color var(--lp-dur) var(--lp-ease);
-  }
-  .btn:hover {
-    background: transparent;
-    color: var(--lp-indigo-500);
-    transform: translateY(-3px);
-    box-shadow: var(--lp-shadow-btn-hover);
-  }
-  .btn--hover {
-    background: transparent;
-    color: var(--lp-indigo-500);
-    transform: translateY(-3px);
-    box-shadow: var(--lp-shadow-btn-hover);
-  }
-  .btn--ghost {
-    background: transparent;
-    color: var(--lp-indigo-500);
-    box-shadow: none;
-  }
-  .btn--sm {
-    padding: var(--lp-space-2) var(--lp-space-5);
-    font-size: 12px;
-    letter-spacing: var(--lp-ls-wide);
-    border-radius: var(--lp-radius);
-    box-shadow: none;
-  }
 </style>

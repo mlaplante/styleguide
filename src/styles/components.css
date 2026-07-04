@@ -1,0 +1,369 @@
+/* ==========================================================================
+   La Plante Web Development — Component Library
+   Canonical, portable component CSS. Every rule uses tokens from global.css.
+   These classes are the single source of truth: the styleguide component
+   pages AND the UI-kit compositions both consume them, so the specimens
+   can't drift from real usage. Copy the markup from the styleguide's code
+   snippets together with this file to reuse a component elsewhere.
+   ========================================================================== */
+
+/* ---------- Button ---------- */
+.lp-btn {
+  display: inline-block;
+  padding: var(--lp-space-4) var(--lp-space-10);
+  background: var(--lp-indigo-500);
+  color: var(--lp-white);
+  text-decoration: none;
+  border-radius: var(--lp-radius-md);
+  font-family: var(--lp-font-display);
+  font-weight: var(--lp-w-bold);
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  border: 2px solid var(--lp-indigo-500);
+  box-shadow: var(--lp-shadow-btn);
+  cursor: pointer;
+  transition:
+    transform var(--lp-dur) var(--lp-ease),
+    box-shadow var(--lp-dur) var(--lp-ease),
+    background var(--lp-dur) var(--lp-ease),
+    color var(--lp-dur) var(--lp-ease);
+}
+.lp-btn:hover,
+.lp-btn.is-lifted {
+  background: transparent;
+  color: var(--lp-indigo-500);
+  transform: translateY(-3px);
+  box-shadow: var(--lp-shadow-btn-hover);
+}
+.lp-btn--ghost {
+  background: transparent;
+  color: var(--lp-indigo-500);
+  box-shadow: none;
+}
+.lp-btn--sm {
+  padding: var(--lp-space-2) var(--lp-space-5);
+  font-size: 12px;
+  letter-spacing: var(--lp-ls-wide);
+  border-radius: var(--lp-radius);
+  box-shadow: none;
+}
+
+/* ---------- Category pill ---------- */
+.lp-pill {
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: var(--lp-radius-pill);
+  font-family: var(--lp-font-mono);
+  font-size: var(--lp-t-micro);
+  font-weight: var(--lp-w-medium);
+  letter-spacing: 0.3px;
+}
+.lp-pill--blog   { background: rgba(41, 128, 185, 0.08); color: var(--lp-blog-blue-500); }
+.lp-pill--indigo { background: var(--lp-indigo-100);     color: var(--lp-indigo-500); }
+.lp-pill--teal   { background: rgba(0, 150, 136, 0.10);  color: var(--lp-accent-teal); }
+.lp-pill--purple { background: rgba(156, 39, 176, 0.10); color: var(--lp-accent-purple); }
+
+/* ---------- Status badge ---------- */
+.lp-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 3px 10px 3px 8px;
+  border-radius: var(--lp-radius-pill);
+  font-family: var(--lp-font-mono);
+  font-size: var(--lp-t-micro);
+  font-weight: var(--lp-w-medium);
+  border: 1px solid currentColor;
+}
+.lp-status::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  border-radius: var(--lp-radius-full);
+  background: currentColor;
+}
+.lp-status--ok   { color: var(--lp-accent-green); }
+.lp-status--warn { color: #b8860b; }
+.lp-status--err  { color: var(--lp-code-accent); }
+.lp-status--info { color: var(--lp-blog-blue-500); }
+
+/* ---------- Callouts ---------- */
+.lp-callout {
+  padding: var(--lp-space-4) var(--lp-space-5);
+  border-radius: var(--lp-radius-md);
+  font-family: var(--lp-font-display);
+  font-size: var(--lp-t-ui);
+  line-height: var(--lp-lh-normal);
+  border-left: 3px solid currentColor;
+  background: var(--lp-indigo-100);
+  color: var(--lp-ink-800);
+}
+.lp-callout strong { color: currentColor; margin-right: 4px; }
+.lp-callout--info    { background: var(--lp-indigo-100);     border-left-color: var(--lp-indigo-500); }
+.lp-callout--success { background: rgba(76, 175, 80, 0.10);  border-left-color: var(--lp-accent-green); }
+.lp-callout--warn    { background: rgba(184, 134, 11, 0.10); border-left-color: #b8860b; }
+.lp-callout--error   { background: rgba(199, 37, 78, 0.10);  border-left-color: var(--lp-code-accent); }
+
+.lp-pullquote {
+  margin: 0;
+  padding: var(--lp-space-4) var(--lp-space-6);
+  background: rgba(63, 81, 181, 0.04);
+  border-left: 3px solid var(--lp-indigo-500);
+  color: var(--lp-fg-2);
+  font-style: italic;
+  border-radius: 0 var(--lp-radius-lg) var(--lp-radius-lg) 0;
+  font-size: var(--lp-t-base);
+  line-height: var(--lp-lh-body);
+}
+
+/* ---------- Post card ---------- */
+.lp-post-card {
+  display: block;
+  padding: var(--lp-space-5) var(--lp-space-6);
+  background: var(--lp-white);
+  border: 1px solid var(--lp-line-2);
+  border-radius: var(--lp-radius-xl);
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+  transition:
+    transform var(--lp-dur-fast) var(--lp-ease),
+    border-color var(--lp-dur-fast) var(--lp-ease),
+    box-shadow var(--lp-dur-fast) var(--lp-ease);
+}
+.lp-post-card:hover {
+  transform: translateY(-2px);
+  border-color: var(--lp-ink-100);
+  box-shadow: var(--lp-shadow-card);
+}
+.lp-post-meta {
+  display: flex;
+  align-items: center;
+  gap: var(--lp-space-2);
+  margin-bottom: var(--lp-space-2);
+  font-family: var(--lp-font-mono);
+  font-size: var(--lp-t-micro);
+}
+.lp-post-meta .lp-post-date,
+.lp-post-meta .lp-post-read { color: var(--lp-ink-100); }
+.lp-post-meta .lp-post-sep  { color: var(--lp-line); }
+.lp-post-title {
+  margin: 0 0 var(--lp-space-2);
+  font-size: 20px;
+  font-weight: var(--lp-w-semibold);
+  color: var(--lp-ink-900);
+  line-height: 1.35;
+}
+.lp-post-excerpt {
+  margin: 0;
+  color: var(--lp-ink-300);
+  font-size: var(--lp-t-meta);
+  line-height: 1.6;
+}
+
+/* ---------- Service card ---------- */
+.lp-service {
+  display: flex;
+  flex-direction: column;
+  gap: var(--lp-space-2);
+  color: var(--lp-indigo-500);
+}
+.lp-service-glyph {
+  width: 64px;
+  height: 64px;
+  border-radius: 14px;
+  background: var(--lp-indigo-100);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--lp-indigo-500);
+}
+.lp-service-title {
+  margin: var(--lp-space-1) 0 0;
+  font-size: 16px;
+  font-weight: var(--lp-w-bold);
+  text-transform: uppercase;
+  letter-spacing: var(--lp-ls-wider);
+  color: var(--lp-ink-600);
+}
+.lp-service-copy {
+  margin: 0;
+  color: var(--lp-fg-2);
+  font-size: var(--lp-t-caption);
+  line-height: var(--lp-lh-body);
+}
+
+/* ---------- Timeline ---------- */
+.lp-timeline {
+  list-style: none;
+  padding: var(--lp-space-5) 0;
+  margin: 0;
+  position: relative;
+}
+.lp-timeline::before {
+  content: '';
+  position: absolute;
+  height: 100%;
+  width: 1px;
+  left: 0;
+  top: 0;
+  background: var(--lp-line);
+}
+.lp-timeline li {
+  margin-bottom: var(--lp-space-8);
+  position: relative;
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  gap: var(--lp-space-3);
+}
+.lp-timeline li:last-child { margin-bottom: 0; }
+.lp-tl-date,
+.lp-tl-body { padding-left: var(--lp-space-8); }
+.lp-tl-body { position: relative; }
+.lp-tl-body::before {
+  content: '';
+  height: 12px;
+  width: 12px;
+  border-radius: var(--lp-radius-full);
+  border: 1px solid var(--lp-ink-100);
+  background: var(--lp-paper-3);
+  position: absolute;
+  left: -6px;
+  top: 4px;
+}
+.lp-timeline li.current .lp-tl-body::before {
+  border-color: rgba(0, 0, 0, 0.2);
+  background: var(--lp-indigo-500);
+}
+.lp-tl-date {
+  font-family: var(--lp-font-mono);
+  font-size: var(--lp-t-caption);
+  color: var(--lp-fg-2);
+}
+.lp-tl-org {
+  margin: 0 0 var(--lp-space-1);
+  font-size: var(--lp-t-ui);
+  font-weight: var(--lp-w-bold);
+  color: var(--lp-ink-800);
+}
+.lp-tl-role {
+  color: var(--lp-fg-2);
+  font-size: var(--lp-t-caption);
+}
+.lp-tl-body p {
+  color: var(--lp-fg-2);
+  font-size: var(--lp-t-caption);
+  line-height: 1.7;
+  margin: var(--lp-space-2) 0 0;
+}
+@media (max-width: 640px) {
+  .lp-timeline li { grid-template-columns: 1fr; }
+  .lp-tl-date { padding-bottom: var(--lp-space-1); }
+}
+
+/* ---------- Blog nav ---------- */
+.lp-blog-nav {
+  background: linear-gradient(135deg, var(--lp-blog-blue-500) 0%, var(--lp-blog-blue-600) 100%);
+  box-shadow: var(--lp-shadow-blog-nav);
+}
+.lp-blog-nav.is-sticky {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+}
+.lp-blog-nav-inner {
+  max-width: var(--lp-blog-nav-w, none);
+  margin: 0 auto;
+  padding: var(--lp-space-4) var(--lp-space-6);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.lp-blog-brand {
+  color: var(--lp-white);
+  font-family: var(--lp-font-mono);
+  font-size: var(--lp-t-ui);
+  font-weight: var(--lp-w-bold);
+  letter-spacing: 1.5px;
+  text-transform: lowercase;
+  cursor: pointer;
+  text-decoration: none;
+}
+.lp-blog-links {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  gap: var(--lp-space-6);
+}
+.lp-blog-links a {
+  color: rgba(255, 255, 255, 0.85);
+  font-family: var(--lp-font-mono);
+  font-size: var(--lp-t-caption);
+  letter-spacing: var(--lp-ls-wide);
+  text-transform: lowercase;
+  cursor: pointer;
+  text-decoration: none;
+  transition: color var(--lp-dur-fast) var(--lp-ease);
+}
+.lp-blog-links a:hover,
+.lp-blog-links a.active { color: var(--lp-white); }
+/* Static fallback width so the bar shows in browsers without scroll-timeline. */
+.lp-blog-progress {
+  height: 3px;
+  background: var(--lp-link-dark);
+  width: 38%;
+}
+@supports (animation-timeline: scroll()) {
+  .lp-blog-progress {
+    width: 0%;
+    animation: lp-blog-progress-scroll linear;
+    animation-timeline: scroll(root);
+  }
+  @keyframes lp-blog-progress-scroll { from { width: 0%; } to { width: 100%; } }
+}
+
+/* ---------- Floating-label field ---------- */
+.lp-field { position: relative; }
+.lp-field input,
+.lp-field textarea {
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid var(--lp-line);
+  outline: none;
+  padding: var(--lp-space-2) 0;
+  width: 100%;
+  font-family: inherit;
+  font-size: var(--lp-t-ui);
+  color: var(--lp-fg-1);
+  box-sizing: border-box;
+  resize: vertical;
+  -webkit-appearance: none;
+  box-shadow: none;
+}
+.lp-field:focus-within input,
+.lp-field:focus-within textarea,
+.lp-field.focus input,
+.lp-field.focus textarea { border-bottom-color: var(--lp-indigo-500); }
+.lp-field label {
+  position: absolute;
+  left: 0;
+  top: 6px;
+  font-family: var(--lp-font-mono);
+  font-size: var(--lp-t-meta);
+  color: var(--lp-ink-200);
+  font-weight: var(--lp-w-light);
+  transition:
+    top var(--lp-dur) var(--lp-ease),
+    font-size var(--lp-dur) var(--lp-ease),
+    color var(--lp-dur) var(--lp-ease);
+  pointer-events: none;
+}
+.lp-field:focus-within label,
+.lp-field.focus label,
+.lp-field.filled label {
+  top: -15px;
+  font-size: var(--lp-t-micro);
+  color: var(--lp-indigo-500);
+}

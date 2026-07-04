@@ -1,85 +1,29 @@
 ---
 import DocsLayout from '../../layouts/DocsLayout.astro';
+import Timeline from '../../components/brand/Timeline.astro';
+import CodeSnippet from '../../components/CodeSnippet.astro';
 
 const entries = [
   { date: 'January 2026 — Present',     org: 'Proforma', role: 'SVP of Information Security and Operations', current: true },
   { date: 'April 2022 — January 2026',  org: 'Proforma', role: 'Vice President of Technology' },
   { date: 'Nov 2021 — April 2022',      org: 'Proforma', role: 'Director of Engineering' },
 ];
+
+const snippet = `<ul class="lp-timeline">
+  <li class="current">
+    <div class="lp-tl-date">January 2026 — Present</div>
+    <div class="lp-tl-body">
+      <h4 class="lp-tl-org">Proforma</h4>
+      <span class="lp-tl-role">SVP of Information Security and Operations</span>
+      <p>Optional supporting paragraph.</p>
+    </div>
+  </li>
+  <!-- …more <li> entries (omit class="current") -->
+</ul>
+
+<!-- Styles: .lp-timeline in src/styles/components.css -->`;
 ---
 <DocsLayout title="Timeline" description="Career timeline — rule, dot, current-position indicator.">
-  <ul class="tl">
-    {entries.map((e) => (
-      <li class={e.current ? 'current' : ''}>
-        <div class="date">{e.date}</div>
-        <div class="content">
-          <h4>{e.org}</h4>
-          <span class="role">{e.role}</span>
-        </div>
-      </li>
-    ))}
-  </ul>
+  <Timeline entries={entries} />
+  <CodeSnippet code={snippet} />
 </DocsLayout>
-
-<style>
-  .tl {
-    list-style: none;
-    padding: var(--lp-space-5) 0;
-    margin: 0;
-    position: relative;
-  }
-  .tl::before {
-    content: '';
-    position: absolute;
-    height: 100%;
-    width: 1px;
-    left: 0;
-    top: 0;
-    background: var(--lp-line);
-  }
-  li {
-    margin-bottom: var(--lp-space-8);
-    position: relative;
-    display: grid;
-    grid-template-columns: 180px 1fr;
-    gap: var(--lp-space-3);
-  }
-  li:last-child { margin-bottom: 0; }
-  .date,
-  .content { padding-left: var(--lp-space-8); }
-  .content { position: relative; }
-  .content::before {
-    content: '';
-    height: 12px;
-    width: 12px;
-    border-radius: var(--lp-radius-full);
-    border: 1px solid var(--lp-ink-100);
-    background: var(--lp-paper-3);
-    position: absolute;
-    left: -6px;
-    top: 4px;
-  }
-  li.current .content::before {
-    border-color: rgba(0, 0, 0, 0.2);
-    background: var(--lp-indigo-500);
-  }
-  .date {
-    font-family: var(--lp-font-mono);
-    font-size: var(--lp-t-caption);
-    color: var(--lp-fg-2);
-  }
-  h4 {
-    margin: 0 0 var(--lp-space-1);
-    font-size: var(--lp-t-ui);
-    font-weight: var(--lp-w-bold);
-    color: var(--lp-ink-800);
-  }
-  .role {
-    color: var(--lp-fg-2);
-    font-size: var(--lp-t-caption);
-  }
-  @media (max-width: 640px) {
-    li { grid-template-columns: 1fr; }
-    .date { padding-bottom: var(--lp-space-1); }
-  }
-</style>

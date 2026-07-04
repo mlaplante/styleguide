@@ -1,0 +1,36 @@
+---
+/**
+ * Sticky blog nav with scroll-driven reading-progress bar.
+ * Styles live in src/styles/components.css (.lp-blog-nav).
+ */
+export interface BlogNavLink {
+  label: string;
+  href?: string;
+  active?: boolean;
+}
+export interface Props {
+  brand: string;
+  links: BlogNavLink[];
+  /** Stick to the top of the viewport (used by full compositions). */
+  sticky?: boolean;
+  /** Max-width of the inner bar, e.g. "1080px". Defaults to full width. */
+  innerWidth?: string;
+}
+const { brand, links, sticky = false, innerWidth } = Astro.props;
+---
+<nav
+  class={`lp-blog-nav${sticky ? ' is-sticky' : ''}`}
+  style={innerWidth ? `--lp-blog-nav-w: ${innerWidth}` : undefined}
+>
+  <div class="lp-blog-nav-inner">
+    <a class="lp-blog-brand" href="#">{brand}</a>
+    <ul class="lp-blog-links">
+      {links.map((l) => (
+        <li>
+          <a href={l.href ?? '#'} class={l.active ? 'active' : undefined}>{l.label}</a>
+        </li>
+      ))}
+    </ul>
+  </div>
+  <div class="lp-blog-progress"></div>
+</nav>
