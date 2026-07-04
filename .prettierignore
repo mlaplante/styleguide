@@ -1,0 +1,10 @@
+# Build output & deps
+dist/
+node_modules/
+.astro/
+
+# Lockfile
+package-lock.json
+
+# Original design bundle — kept verbatim as the porting source of truth
+project/
