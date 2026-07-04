@@ -1,0 +1,12 @@
+---
+/**
+ * Inline alert callout. Styles live in src/styles/components.css (.lp-callout).
+ */
+export interface Props {
+  variant?: 'info' | 'success' | 'warn' | 'error';
+}
+const { variant = 'info' } = Astro.props;
+---
+<div class={`lp-callout lp-callout--${variant}`}>
+  <slot />
+</div>

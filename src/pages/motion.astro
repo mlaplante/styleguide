@@ -7,7 +7,7 @@ const durations = [
   { name: 'slow', token: '--lp-dur-slow', value: '0.6s', use: 'panel sweep · radial reveal' },
 ];
 ---
-<DocsLayout title="Motion" description="Duration and easing tokens. Hover the cards to see each duration in action.">
+<DocsLayout title="Motion" description="Duration and easing tokens. Hover the cards to see each duration in action; click a token to copy it.">
   <section class="set">
     <h2>Durations</h2>
     <div class="grid">
@@ -18,6 +18,7 @@ const durations = [
             <div class="card-name">{d.name}</div>
             <div class="card-value">{d.value}</div>
             <div class="card-use">{d.use}</div>
+            <button class="sg-copy" type="button" data-copy={`var(${d.token})`}>{d.token}</button>
           </div>
         </div>
       ))}
@@ -27,8 +28,8 @@ const durations = [
   <section class="set">
     <h2>Easing</h2>
     <ul class="easing">
-      <li><code>--lp-ease</code><span>ease — most transitions</span></li>
-      <li><code>--lp-ease-out</code><span>ease-out — entering elements</span></li>
+      <li><button class="sg-copy code" type="button" data-copy="var(--lp-ease)">--lp-ease</button><span>ease — most transitions</span></li>
+      <li><button class="sg-copy code" type="button" data-copy="var(--lp-ease-out)">--lp-ease-out</button><span>ease-out — entering elements</span></li>
     </ul>
   </section>
 </DocsLayout>
@@ -86,6 +87,10 @@ const durations = [
     color: var(--lp-ink-400);
     margin-top: var(--lp-space-2);
   }
+  .card-meta :global(.sg-copy) {
+    margin-top: var(--lp-space-2);
+    color: var(--lp-ink-300);
+  }
 
   .easing { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: var(--lp-space-2); }
   .easing li {
@@ -96,7 +101,7 @@ const durations = [
     border-bottom: 1px solid var(--lp-line-2);
   }
   .easing li:last-child { border-bottom: none; }
-  .easing code {
+  .easing :global(.sg-copy.code) {
     font-family: var(--lp-font-mono);
     font-size: var(--lp-t-meta);
     background: var(--lp-code-bg-light);
@@ -104,6 +109,7 @@ const durations = [
     padding: 2px 8px;
     border-radius: var(--lp-radius);
     justify-self: start;
+    opacity: 1;
   }
   .easing span {
     color: var(--lp-fg-2);

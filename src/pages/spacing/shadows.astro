@@ -9,12 +9,13 @@ const shadows = [
   { name: 'Button hover', note: '10/30 · 50% indigo',  token: '--lp-shadow-btn-hover', kind: 'indigo-btn-hover' },
 ];
 ---
-<DocsLayout title="Spacing — Shadows" description="Elevation tokens — depth cues used across components.">
+<DocsLayout title="Spacing — Shadows" description="Elevation tokens — depth cues used across components. Click a token to copy it.">
   <div class="sg-frame--row frame">
     {shadows.map((s) => (
       <div class="sg-stack">
         <div class={`tile tile--${s.kind}`} style={`box-shadow: var(${s.token})`}></div>
         <div class="sg-meta">{s.name}<small>{s.note}</small></div>
+        <button class="sg-copy" type="button" data-copy={`var(${s.token})`}>{s.token}</button>
       </div>
     ))}
   </div>

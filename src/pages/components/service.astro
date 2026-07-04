@@ -1,28 +1,35 @@
 ---
 import DocsLayout from '../../layouts/DocsLayout.astro';
+import ServiceCard from '../../components/brand/ServiceCard.astro';
+import CodeSnippet from '../../components/CodeSnippet.astro';
+
+const snippet = `<div class="lp-service">
+  <div class="lp-service-glyph" aria-hidden="true">
+    <svg><!-- 44×44 monoline glyph --></svg>
+  </div>
+  <h4 class="lp-service-title">Security Architecture</h4>
+  <p class="lp-service-copy">Supporting copy for the service.</p>
+</div>
+
+<!-- Styles: .lp-service in src/styles/components.css -->`;
 ---
 <DocsLayout title="Service" description="Service card — monoline glyph + uppercase title + supporting copy.">
   <div class="frame">
-    <div class="svc">
-      <div class="glyph" aria-hidden="true">
-        <svg width="44" height="44" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.5">
-          <path d="M32 6 L52 14 V32 C52 46 42 54 32 58 C22 54 12 46 12 32 V14 Z" />
-          <path d="M24 32 L30 38 L42 26" stroke-linecap="round" stroke-linejoin="round" />
-        </svg>
-      </div>
-      <h4>Security Architecture</h4>
-      <p>Assess your infrastructure, identify gaps, design defense-in-depth strategies tailored to your risk profile.</p>
-    </div>
-    <div class="svc">
-      <div class="glyph" aria-hidden="true">
-        <svg width="44" height="44" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.5">
-          <path d="M18 44 C10 44 6 38 6 32 C6 24 14 20 20 22 C22 14 30 10 38 14 C46 10 56 18 54 28 C60 30 60 42 52 44 Z" />
-        </svg>
-      </div>
-      <h4>Cloud Security Strategy</h4>
-      <p>Build secure multi-cloud architectures across AWS, Azure, and GCP with zero-trust principles and continuous monitoring.</p>
-    </div>
+    <ServiceCard title="Security Architecture">
+      <svg slot="glyph" width="44" height="44" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.5">
+        <path d="M32 6 L52 14 V32 C52 46 42 54 32 58 C22 54 12 46 12 32 V14 Z" />
+        <path d="M24 32 L30 38 L42 26" stroke-linecap="round" stroke-linejoin="round" />
+      </svg>
+      Assess your infrastructure, identify gaps, design defense-in-depth strategies tailored to your risk profile.
+    </ServiceCard>
+    <ServiceCard title="Cloud Security Strategy">
+      <svg slot="glyph" width="44" height="44" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.5">
+        <path d="M18 44 C10 44 6 38 6 32 C6 24 14 20 20 22 C22 14 30 10 38 14 C46 10 56 18 54 28 C60 30 60 42 52 44 Z" />
+      </svg>
+      Build secure multi-cloud architectures across AWS, Azure, and GCP with zero-trust principles and continuous monitoring.
+    </ServiceCard>
   </div>
+  <CodeSnippet code={snippet} />
 </DocsLayout>
 
 <style>
@@ -33,36 +40,6 @@ import DocsLayout from '../../layouts/DocsLayout.astro';
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: var(--lp-space-8);
-  }
-  .svc {
-    display: flex;
-    flex-direction: column;
-    gap: var(--lp-space-2);
-    color: var(--lp-indigo-500);
-  }
-  .glyph {
-    width: 64px;
-    height: 64px;
-    border-radius: 14px;
-    background: var(--lp-indigo-100);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--lp-indigo-500);
-  }
-  .svc h4 {
-    margin: var(--lp-space-1) 0 0;
-    font-size: 16px;
-    font-weight: var(--lp-w-bold);
-    text-transform: uppercase;
-    letter-spacing: var(--lp-ls-wider);
-    color: var(--lp-ink-600);
-  }
-  .svc p {
-    margin: 0;
-    color: var(--lp-fg-2);
-    font-size: var(--lp-t-caption);
-    line-height: var(--lp-lh-body);
   }
   @media (max-width: 640px) {
     .frame { grid-template-columns: 1fr; }

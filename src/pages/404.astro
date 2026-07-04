@@ -1,0 +1,37 @@
+---
+import DocsLayout from '../layouts/DocsLayout.astro';
+---
+<DocsLayout title="Page not found" description="That page doesn't exist in the styleguide.">
+  <div class="wrap">
+    <p class="code-mark">404</p>
+    <p class="msg">
+      The page you're looking for isn't part of the styleguide — it may have moved
+      when a section was reorganized.
+    </p>
+    <a class="lp-btn lp-btn--sm" href="/">Back to the overview</a>
+  </div>
+</DocsLayout>
+
+<style>
+  .wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--lp-space-4);
+    padding: var(--lp-space-6) 0;
+  }
+  .code-mark {
+    font-family: var(--lp-font-mono);
+    font-size: var(--lp-t-xl);
+    font-weight: var(--lp-w-bold);
+    color: var(--lp-indigo-500);
+    margin: 0;
+    line-height: 1;
+  }
+  .msg {
+    margin: 0;
+    color: var(--lp-fg-2);
+    font-size: var(--lp-t-ui);
+    max-width: 48ch;
+  }
+</style>

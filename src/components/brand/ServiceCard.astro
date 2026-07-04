@@ -1,0 +1,18 @@
+---
+/**
+ * Service card — monoline glyph tile + uppercase title + supporting copy.
+ * Styles live in src/styles/components.css (.lp-service).
+ * Pass the glyph SVG via the "glyph" slot and the copy via the default slot.
+ */
+export interface Props {
+  title: string;
+}
+const { title } = Astro.props;
+---
+<div class="lp-service">
+  <div class="lp-service-glyph" aria-hidden="true">
+    <slot name="glyph" />
+  </div>
+  <h4 class="lp-service-title">{title}</h4>
+  <p class="lp-service-copy"><slot /></p>
+</div>

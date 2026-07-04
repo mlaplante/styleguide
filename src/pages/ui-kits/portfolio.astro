@@ -1,255 +1,229 @@
 ---
 import DocsLayout from '../../layouts/DocsLayout.astro';
+import Button from '../../components/brand/Button.astro';
+import ServiceCard from '../../components/brand/ServiceCard.astro';
+import Timeline from '../../components/brand/Timeline.astro';
+import FloatingField from '../../components/brand/FloatingField.astro';
+
+const experience = [
+  {
+    date: 'January 2026 — Present',
+    org: 'Proforma',
+    role: 'SVP of Information Security and Operations',
+    body: 'Leading information security strategy and operational excellence across the organization. Establishing and maintaining comprehensive security frameworks, driving compliance with industry standards, and fostering a culture of security awareness.',
+    current: true,
+  },
+  {
+    date: 'April 2022 — January 2026',
+    org: 'Proforma',
+    role: 'Vice President of Technology',
+    body: 'Led and managed technology teams while driving security and compliance innovation. Spearheaded strategic initiatives to enhance infrastructure security, implement robust compliance frameworks, and foster a culture of continuous improvement.',
+  },
+  {
+    date: 'November 2021 — April 2022',
+    org: 'Proforma',
+    role: 'Director of Engineering',
+    body: "Responsible for the continued development of the company's multi-million dollar business management solution. Led development teams in greenfield and remediation work, monthly trainings, and 1-1 coaching.",
+  },
+  {
+    date: 'July 2019 — November 2021',
+    org: 'Proforma',
+    role: 'Software Development Manager',
+    body: 'Led development teams in executing greenfield and remediation tasks, with monthly trainings with team members and coaching of team leaders.',
+  },
+  {
+    date: 'June 2015 — February 2019',
+    org: 'FireEye',
+    role: 'Senior Web Engineer',
+    body: "Created all Front End Development practices for FireEye's next-generation threat portal, FireEye Intelligence Portal, using React and Redux.",
+  },
+];
 ---
 <DocsLayout title="UI Kit — Portfolio" description="Full portfolio composition.">
+  <div class="p-root">
 
-  <!-- ===== NAV ===== -->
-  <nav class="p-nav">
-    <div class="p-container p-nav-inner">
-      <button class="p-menu-btn" aria-label="Toggle menu">
-        <span class="p-lines">
-          <span class="p-l p-l1"></span>
-          <span class="p-l p-l2"></span>
-          <span class="p-l p-l3"></span>
-        </span>
-      </button>
-      <button class="p-dark-toggle" aria-label="Toggle dark mode">☀️</button>
-      <div class="p-menu">
-        <ul>
-          <li><a href="#">Home</a></li>
-          <li><a href="#">About</a></li>
-          <li><a href="#">Services</a></li>
-          <li><a href="#">Skills</a></li>
-          <li><a href="#">Experience</a></li>
-          <li><a href="#">Contact</a></li>
-          <li><a href="#">Blog</a></li>
-          <li><a href="#">Uses</a></li>
+    <!-- ===== NAV ===== -->
+    <nav class="p-nav">
+      <div class="p-container p-nav-inner">
+        <button class="p-menu-btn" aria-label="Toggle menu">
+          <span class="p-lines">
+            <span class="p-l p-l1"></span>
+            <span class="p-l p-l2"></span>
+            <span class="p-l p-l3"></span>
+          </span>
+        </button>
+        <button class="p-dark-toggle" aria-label="Toggle dark mode">☀️</button>
+        <div class="p-menu">
+          <ul>
+            <li><a href="#">Home</a></li>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Services</a></li>
+            <li><a href="#">Skills</a></li>
+            <li><a href="#">Experience</a></li>
+            <li><a href="#">Contact</a></li>
+            <li><a href="#">Blog</a></li>
+            <li><a href="#">Uses</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <!-- ===== HERO ===== -->
+    <section class="p-hero" id="home">
+      <div class="p-container">
+        <div class="p-portrait" role="img" aria-label="Michael LaPlante — placeholder portrait">
+          <div class="p-portrait-inner">
+            <img src="/assets/laplante-logo-white.png" width="310" height="110" alt="La Plante Web Development" loading="lazy" decoding="async" />
+            <span class="p-portrait-note">portrait placeholder</span>
+          </div>
+        </div>
+        <h1 class="p-hero-name">I am <strong>Michael<br/>La Plante</strong></h1>
+        <p class="p-hero-tagline">SVP of Information Security and Operations</p>
+        <div class="p-hero-cta">
+          <Button href="#contact">Schedule a Consultation</Button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== ABOUT ===== -->
+    <section class="p-section" id="about">
+      <div class="p-container">
+        <div class="p-section-header">
+          <h2 class="p-eyebrow">about me</h2>
+        </div>
+        <p class="p-about-lead">
+          I'm an accomplished technology executive with comprehensive expertise in cybersecurity strategy, enterprise operations, and innovative software engineering.
+        </p>
+        <p class="p-about-body">
+          With over 15 years of distinguished professional experience, I spearhead mission-critical technology initiatives as SVP of Information Security and Operations, delivering measurable impact across complex enterprise environments. My career trajectory showcases proven success in software engineering excellence, advanced security architecture, strategic team leadership, and operational transformation.
+        </p>
+        <p class="p-about-body">
+          I architect and implement secure, scalable enterprise-grade technology solutions while cultivating high-performing teams that consistently exceed objectives and drive meaningful organizational change.
+        </p>
+        <ul class="p-social">
+          <li><a href="#">LinkedIn</a></li>
+          <li><a href="#">Facebook</a></li>
+          <li><a href="#">Twitter</a></li>
+          <li><a href="#">Github</a></li>
         </ul>
       </div>
-    </div>
-  </nav>
+    </section>
 
-  <!-- ===== HERO ===== -->
-  <section class="p-hero" id="home">
-    <div class="p-container">
-      <div class="p-portrait" role="img" aria-label="Michael LaPlante — placeholder portrait">
-        <div class="p-portrait-inner">
-          <img src="/assets/laplante-logo-white.png" width="310" height="110" alt="La Plante Web Development" loading="lazy" decoding="async" />
-          <span class="p-portrait-note">portrait placeholder</span>
+    <!-- ===== FUN FACTS ===== -->
+    <section class="p-section p-bg-flat" id="funfacts">
+      <div class="p-container">
+        <div class="p-section-header">
+          <h2 class="p-eyebrow">by the numbers</h2>
+        </div>
+        <div class="p-funfacts">
+          <div class="p-funfact">
+            <strong>$800M</strong>
+            <span>Company secured</span>
+          </div>
+          <div class="p-funfact">
+            <strong>15+</strong>
+            <span>Years in enterprise security</span>
+          </div>
+          <div class="p-funfact">
+            <strong>70+</strong>
+            <span>Speaking engagements</span>
+          </div>
+          <div class="p-funfact">
+            <strong>500+</strong>
+            <span>Clients served</span>
+          </div>
         </div>
       </div>
-      <h1 class="p-hero-name">I am <strong>Michael<br/>La Plante</strong></h1>
-      <p class="p-hero-tagline">SVP of Information Security and Operations</p>
-      <div class="p-hero-cta">
-        <a class="p-btn" href="#contact">Schedule a Consultation</a>
-      </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- ===== ABOUT ===== -->
-  <section class="p-section" id="about">
-    <div class="p-container">
-      <div class="p-section-header">
-        <h2 class="p-eyebrow">about me</h2>
-      </div>
-      <p class="p-about-lead">
-        I'm an accomplished technology executive with comprehensive expertise in cybersecurity strategy, enterprise operations, and innovative software engineering.
-      </p>
-      <p class="p-about-body">
-        With over 15 years of distinguished professional experience, I spearhead mission-critical technology initiatives as SVP of Information Security and Operations, delivering measurable impact across complex enterprise environments. My career trajectory showcases proven success in software engineering excellence, advanced security architecture, strategic team leadership, and operational transformation.
-      </p>
-      <p class="p-about-body">
-        I architect and implement secure, scalable enterprise-grade technology solutions while cultivating high-performing teams that consistently exceed objectives and drive meaningful organizational change.
-      </p>
-      <ul class="p-social">
-        <li><a href="#">LinkedIn</a></li>
-        <li><a href="#">Facebook</a></li>
-        <li><a href="#">Twitter</a></li>
-        <li><a href="#">Github</a></li>
-      </ul>
-    </div>
-  </section>
+    <!-- ===== SERVICES ===== -->
+    <section class="p-section p-bg-paper" id="services">
+      <div class="p-container">
+        <div class="p-section-header">
+          <h2 class="p-eyebrow">consulting services</h2>
+        </div>
+        <div class="p-service-grid">
 
-  <!-- ===== FUN FACTS ===== -->
-  <section class="p-section p-bg-flat" id="funfacts">
-    <div class="p-container">
-      <div class="p-section-header">
-        <h2 class="p-eyebrow">by the numbers</h2>
-      </div>
-      <div class="p-funfacts">
-        <div class="p-funfact">
-          <strong>$800M</strong>
-          <span>Company secured</span>
-        </div>
-        <div class="p-funfact">
-          <strong>15+</strong>
-          <span>Years in enterprise security</span>
-        </div>
-        <div class="p-funfact">
-          <strong>70+</strong>
-          <span>Speaking engagements</span>
-        </div>
-        <div class="p-funfact">
-          <strong>500+</strong>
-          <span>Clients served</span>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ===== SERVICES ===== -->
-  <section class="p-section p-bg-paper" id="services">
-    <div class="p-container">
-      <div class="p-section-header">
-        <h2 class="p-eyebrow">consulting services</h2>
-      </div>
-      <div class="p-service-grid">
-
-        <!-- Security Architecture -->
-        <div class="p-service">
-          <div class="p-service-icon">
-            <svg width="56" height="56" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.5">
+          <ServiceCard title="Security Architecture">
+            <svg slot="glyph" width="44" height="44" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.5">
               <path d="M32 6 L52 14 V32 C52 46 42 54 32 58 C22 54 12 46 12 32 V14 Z" />
               <path d="M24 32 L30 38 L42 26" />
             </svg>
-          </div>
-          <h4>Security Architecture</h4>
-          <p>Assess your infrastructure, identify gaps, and design defense-in-depth strategies tailored to your risk profile and compliance requirements.</p>
-        </div>
+            Assess your infrastructure, identify gaps, and design defense-in-depth strategies tailored to your risk profile and compliance requirements.
+          </ServiceCard>
 
-        <!-- Cloud Security Strategy -->
-        <div class="p-service">
-          <div class="p-service-icon">
-            <svg width="56" height="56" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.5">
+          <ServiceCard title="Cloud Security Strategy">
+            <svg slot="glyph" width="44" height="44" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.5">
               <path d="M18 44 C10 44 6 38 6 32 C6 24 14 20 20 22 C22 14 30 10 38 14 C46 10 56 18 54 28 C60 30 60 42 52 44 Z" />
             </svg>
-          </div>
-          <h4>Cloud Security Strategy</h4>
-          <p>Build secure multi-cloud architectures across AWS, Azure, and GCP with zero-trust principles, least-privilege access, and continuous monitoring.</p>
-        </div>
+            Build secure multi-cloud architectures across AWS, Azure, and GCP with zero-trust principles, least-privilege access, and continuous monitoring.
+          </ServiceCard>
 
-        <!-- Compliance & Risk -->
-        <div class="p-service">
-          <div class="p-service-icon">
-            <svg width="56" height="56" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.5">
+          <ServiceCard title="Compliance & Risk">
+            <svg slot="glyph" width="44" height="44" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.5">
               <rect x="14" y="28" width="36" height="28" rx="3" />
               <path d="M20 28 V20 C20 14 26 8 32 8 C38 8 44 14 44 20 V28" />
               <circle cx="32" cy="40" r="3" fill="currentColor" />
               <path d="M32 43 V49" />
             </svg>
-          </div>
-          <h4>Compliance &amp; Risk</h4>
-          <p>Navigate SOC 2, ISO 27001, HIPAA, and PCI-DSS with practical frameworks that satisfy auditors without slowing your teams down.</p>
-        </div>
+            Navigate SOC 2, ISO 27001, HIPAA, and PCI-DSS with practical frameworks that satisfy auditors without slowing your teams down.
+          </ServiceCard>
 
-        <!-- Engineering Leadership -->
-        <div class="p-service">
-          <div class="p-service-icon">
-            <svg width="56" height="56" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.5">
+          <ServiceCard title="Engineering Leadership">
+            <svg slot="glyph" width="44" height="44" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.5">
               <path d="M24 44 C18 40 16 32 18 26 C22 14 38 12 44 22 C48 28 46 38 40 44 V50 H24 Z" />
               <path d="M26 54 H38" />
               <path d="M28 58 H36" />
             </svg>
-          </div>
-          <h4>Engineering Leadership</h4>
-          <p>Scale engineering organizations, establish DevSecOps practices, and build the security culture that keeps your company out of the headlines.</p>
+            Scale engineering organizations, establish DevSecOps practices, and build the security culture that keeps your company out of the headlines.
+          </ServiceCard>
+
         </div>
-
-      </div>
-      <div class="p-center">
-        <a class="p-btn" href="#contact">Discuss Your Needs</a>
-      </div>
-    </div>
-  </section>
-
-  <!-- ===== TIMELINE ===== -->
-  <section class="p-section p-bg-flat" id="experience">
-    <div class="p-container">
-      <div class="p-section-header">
-        <h2 class="p-eyebrow">my experience</h2>
-      </div>
-      <ul class="p-timeline">
-        <li class="current">
-          <div class="p-tl-date">January 2026 — Present</div>
-          <div class="p-tl-content">
-            <h4>Proforma</h4>
-            <span class="p-tl-role">SVP of Information Security and Operations</span>
-            <p>Leading information security strategy and operational excellence across the organization. Establishing and maintaining comprehensive security frameworks, driving compliance with industry standards, and fostering a culture of security awareness.</p>
-          </div>
-        </li>
-        <li>
-          <div class="p-tl-date">April 2022 — January 2026</div>
-          <div class="p-tl-content">
-            <h4>Proforma</h4>
-            <span class="p-tl-role">Vice President of Technology</span>
-            <p>Led and managed technology teams while driving security and compliance innovation. Spearheaded strategic initiatives to enhance infrastructure security, implement robust compliance frameworks, and foster a culture of continuous improvement.</p>
-          </div>
-        </li>
-        <li>
-          <div class="p-tl-date">November 2021 — April 2022</div>
-          <div class="p-tl-content">
-            <h4>Proforma</h4>
-            <span class="p-tl-role">Director of Engineering</span>
-            <p>Responsible for the continued development of the company's multi-million dollar business management solution. Led development teams in greenfield and remediation work, monthly trainings, and 1-1 coaching.</p>
-          </div>
-        </li>
-        <li>
-          <div class="p-tl-date">July 2019 — November 2021</div>
-          <div class="p-tl-content">
-            <h4>Proforma</h4>
-            <span class="p-tl-role">Software Development Manager</span>
-            <p>Led development teams in executing greenfield and remediation tasks, with monthly trainings with team members and coaching of team leaders.</p>
-          </div>
-        </li>
-        <li>
-          <div class="p-tl-date">June 2015 — February 2019</div>
-          <div class="p-tl-content">
-            <h4>FireEye</h4>
-            <span class="p-tl-role">Senior Web Engineer</span>
-            <p>Created all Front End Development practices for FireEye's next-generation threat portal, FireEye Intelligence Portal, using React and Redux.</p>
-          </div>
-        </li>
-      </ul>
-    </div>
-  </section>
-
-  <!-- ===== CONTACT ===== -->
-  <section class="p-section p-bg-paper" id="contact">
-    <div class="p-container">
-      <div class="p-section-header">
-        <h2 class="p-eyebrow">contact me</h2>
-      </div>
-      <form class="p-contact-form">
-        <div class="p-form-group">
-          <div class="p-mi">
-            <input type="text" placeholder=" " />
-            <label>Name</label>
-          </div>
+        <div class="p-center">
+          <Button href="#contact">Discuss Your Needs</Button>
         </div>
-        <div class="p-form-group">
-          <div class="p-mi">
-            <input type="email" placeholder=" " />
-            <label>Email</label>
-          </div>
-        </div>
-        <div class="p-form-group">
-          <div class="p-mi">
-            <textarea rows="3" placeholder=" "></textarea>
-            <label>Message</label>
-          </div>
-        </div>
-        <button type="submit" class="p-btn">Send Message</button>
-      </form>
-    </div>
-  </section>
+      </div>
+    </section>
 
-  <!-- ===== FOOTER ===== -->
-  <footer class="p-footer">
-    <div class="p-container">
-      <p class="p-copyright">Copyright &copy; LaPlante Web Development 2006–2026.</p>
-    </div>
-  </footer>
+    <!-- ===== TIMELINE ===== -->
+    <section class="p-section p-bg-flat" id="experience">
+      <div class="p-container">
+        <div class="p-section-header">
+          <h2 class="p-eyebrow">my experience</h2>
+        </div>
+        <Timeline entries={experience} />
+      </div>
+    </section>
 
+    <!-- ===== CONTACT ===== -->
+    <section class="p-section p-bg-paper" id="contact">
+      <div class="p-container">
+        <div class="p-section-header">
+          <h2 class="p-eyebrow">contact me</h2>
+        </div>
+        <form class="p-contact-form">
+          <div class="p-form-group">
+            <FloatingField label="Name" />
+          </div>
+          <div class="p-form-group">
+            <FloatingField label="Email" type="email" />
+          </div>
+          <div class="p-form-group">
+            <FloatingField label="Message" type="textarea" />
+          </div>
+          <Button type="submit">Send Message</Button>
+        </form>
+      </div>
+    </section>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="p-footer">
+      <div class="p-container">
+        <p class="p-copyright">Copyright &copy; LaPlante Web Development 2006–2026.</p>
+      </div>
+    </footer>
+
+  </div>
 </DocsLayout>
 
 <script is:inline>
@@ -269,29 +243,26 @@ import DocsLayout from '../../layouts/DocsLayout.astro';
         dark.textContent = on ? '🌙' : '☀️';
       });
     }
-    document.querySelectorAll('.p-mi input, .p-mi textarea').forEach((el) => {
-      const wrap = el.closest('.p-mi');
-      const sync = () => {
-        wrap.classList.toggle('filled', !!el.value);
-      };
-      el.addEventListener('focus',  () => wrap.classList.add('focus'));
-      el.addEventListener('blur',   () => { wrap.classList.remove('focus'); sync(); });
-      el.addEventListener('input',  sync);
+    // Keep floating labels risen when a field has a value (focus is CSS-only).
+    document.querySelectorAll('.p-contact-form .lp-field input, .p-contact-form .lp-field textarea').forEach((el) => {
+      const wrap = el.closest('.lp-field');
+      const sync = () => wrap.classList.toggle('filled', !!el.value);
+      el.addEventListener('input', sync);
+      el.addEventListener('blur', sync);
       sync();
     });
   })();
 </script>
 
 <style is:global>
-/* Portfolio UI kit — scoped overrides. Pulls tokens from colors_and_type.css */
+/* Portfolio UI kit — composition-level styles. Component styles (buttons,
+   service cards, timeline, floating fields) come from src/styles/components.css. */
 
-html, body { margin: 0; }
-body {
-  font-family: var(--lp-font-display);
+.p-root {
   background: var(--lp-paper);
   color: var(--lp-ink-900);
+  font-family: var(--lp-font-display);
 }
-* { box-sizing: border-box; }
 
 .p-container {
   max-width: 1024px;
@@ -458,31 +429,6 @@ body {
 }
 .p-hero-cta { margin-top: 30px; }
 
-/* ---------- Buttons ---------- */
-.p-btn {
-  display: inline-block;
-  padding: 16px 40px;
-  background: var(--lp-indigo-500);
-  color: #fff;
-  text-decoration: none;
-  border-radius: 6px;
-  font-weight: 700;
-  font-size: 15px;
-  font-family: var(--lp-font-display);
-  text-transform: uppercase;
-  letter-spacing: 1.5px;
-  border: 2px solid var(--lp-indigo-500);
-  box-shadow: 0 4px 15px rgba(63,81,181,0.4);
-  cursor: pointer;
-  transition: all .3s ease;
-}
-.p-btn:hover {
-  background: transparent;
-  color: var(--lp-indigo-500);
-  transform: translateY(-3px);
-  box-shadow: 0 10px 30px rgba(63,81,181,0.5);
-}
-
 /* ---------- Section scaffolding ---------- */
 .p-section { padding-top: 90px; padding-bottom: 10px; }
 .p-section.p-bg-paper { background: var(--lp-paper); }
@@ -562,86 +508,12 @@ body {
 
 /* ---------- Services ---------- */
 .p-service-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px 48px; margin-bottom: 40px; }
-.p-service { color: var(--lp-indigo-500); }
-.p-service-icon { font-size: 68px; line-height: 1em; color: var(--lp-indigo-500); margin-bottom: 10px; }
-.p-service h4 {
-  margin: 10px 0 0;
-  font-size: 18px;
-  text-transform: uppercase;
-  font-weight: 700;
-  letter-spacing: 2px;
-  color: var(--lp-ink-600);
-}
-.p-service p {
-  margin: 15px 0 0;
-  color: rgba(0,0,0,.6);
-  line-height: 1.8;
-  font-size: 14px;
-}
 .p-center { text-align: center; margin-top: 32px; }
-
-/* ---------- Timeline ---------- */
-.p-timeline { list-style: none; padding: 20px 0; margin: 0; position: relative; }
-.p-timeline::before {
-  content: ''; position: absolute;
-  height: 100%; width: 1px; left: 0; top: 0;
-  background: var(--lp-line);
-}
-.p-timeline li {
-  margin-bottom: 45px; position: relative;
-  display: grid; grid-template-columns: 1fr 1fr; gap: 12px;
-}
-.p-tl-date, .p-tl-content { padding-left: 35px; }
-.p-tl-date {
-  font-family: var(--lp-font-mono);
-  font-size: 14px;
-  color: rgba(0,0,0,.6);
-}
-.p-tl-content { position: relative; }
-.p-tl-content::before {
-  content: ''; position: absolute;
-  left: -6px; top: 0;
-  height: 12px; width: 12px; border-radius: 50%;
-  border: 1px solid #BBB;
-  background: var(--lp-paper-3);
-}
-.p-timeline li.current .p-tl-content::before {
-  background: var(--lp-indigo-500);
-  border-color: rgba(0,0,0,.2);
-}
-.p-tl-content h4 { margin: 0 0 4px; font-size: 17px; font-weight: 700; }
-.p-tl-role { color: rgba(0,0,0,.6); font-size: 14px; }
-.p-tl-content p { color: rgba(0,0,0,.6); font-size: 14px; line-height: 1.7; margin: 10px 0 0; }
 
 /* ---------- Contact ---------- */
 .p-contact-form { max-width: 640px; }
 .p-form-group { margin-bottom: 20px; }
-.p-mi { position: relative; margin-top: 5px; }
-.p-mi input, .p-mi textarea {
-  background: transparent;
-  border: none;
-  border-bottom: 1px solid #ddd;
-  outline: none;
-  padding: 10px 0;
-  width: 100%;
-  font-family: inherit;
-  font-size: 16px;
-  color: #333;
-  -webkit-appearance: none;
-  box-shadow: none;
-}
-.p-mi textarea { min-height: 80px; resize: vertical; }
-.p-mi.focus input, .p-mi.focus textarea { border-bottom-color: var(--lp-indigo-500); }
-.p-mi label {
-  position: absolute; left: 0; top: 12px;
-  font-family: var(--lp-font-mono);
-  font-size: 14px; color: #808080; font-weight: 300;
-  transition: all .3s ease;
-  pointer-events: none;
-}
-.p-mi.focus label, .p-mi.filled label {
-  top: -12px; font-size: 12px; color: var(--lp-indigo-500);
-}
+.p-contact-form .lp-field { margin-top: 5px; }
 .p-alert {
   background: rgba(63,81,181,.08);
   color: #202020;
@@ -660,8 +532,8 @@ body {
   margin: 0;
 }
 
-/* ---------- Dark mode ---------- */
-body.p-dark { background: #1a1a1a; color: #e0e0e0; }
+/* ---------- Dark mode (kit demo) ---------- */
+body.p-dark .p-root { background: #1a1a1a; color: #e0e0e0; }
 body.p-dark .p-hero { background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%); }
 body.p-dark .p-section.p-bg-paper,
 body.p-dark .p-section.p-bg-flat { background: #1a1a1a; }
@@ -670,16 +542,18 @@ body.p-dark .p-about-lead { color: #fff; }
 body.p-dark .p-about-body,
 body.p-dark .p-social a,
 body.p-dark .p-funfact span,
-body.p-dark .p-service p,
-body.p-dark .p-tl-role,
-body.p-dark .p-tl-date,
-body.p-dark .p-tl-content p,
+body.p-dark .lp-service-copy,
+body.p-dark .lp-tl-role,
+body.p-dark .lp-tl-date,
+body.p-dark .lp-tl-body p,
 body.p-dark .p-copyright { color: #b0b0b0; }
 body.p-dark .p-funfact strong,
-body.p-dark .p-service h4,
-body.p-dark .p-tl-content h4 { color: #fff; }
+body.p-dark .lp-service-title,
+body.p-dark .lp-tl-org { color: #fff; }
+body.p-dark .lp-service-glyph { background: rgba(99,102,241,.18); }
 body.p-dark .p-dark-toggle { border-color: rgba(255,255,255,.3); }
-body.p-dark .p-mi input, body.p-dark .p-mi textarea { color: #e0e0e0; border-bottom-color: #444; }
-body.p-dark .p-mi label { color: #999; }
+body.p-dark .lp-field input,
+body.p-dark .lp-field textarea { color: #e0e0e0; border-bottom-color: #444; }
+body.p-dark .lp-field label { color: #999; }
 body.p-dark .p-alert { background: rgba(63,81,181,.15); color: #fff; }
 </style>

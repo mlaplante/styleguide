@@ -1,19 +1,32 @@
 ---
 import DocsLayout from '../../layouts/DocsLayout.astro';
+import PostCard from '../../components/brand/PostCard.astro';
+import CodeSnippet from '../../components/CodeSnippet.astro';
+
+const snippet = `<a class="lp-post-card" href="#">
+  <div class="lp-post-meta">
+    <span class="lp-pill lp-pill--blog">dev-session</span>
+    <span class="lp-post-date">Apr 16, 2026</span>
+    <span class="lp-post-sep">·</span>
+    <span class="lp-post-read">7 min read</span>
+  </div>
+  <h3 class="lp-post-title">Post title</h3>
+  <p class="lp-post-excerpt">One-or-two sentence excerpt.</p>
+</a>
+
+<!-- Styles: .lp-post-card in src/styles/components.css -->`;
 ---
 <DocsLayout title="Post Card" description="Blog post card used in the writing list.">
   <div class="frame">
-    <a class="card" href="#">
-      <div class="meta">
-        <span class="cat">dev-session</span>
-        <span class="date">Apr 16, 2026</span>
-        <span class="sep">·</span>
-        <span class="read">7 min read</span>
-      </div>
-      <h3>Netlify to Cloudflare Workers contact form</h3>
-      <p>Migrating the portfolio's contact form off Netlify Functions and onto a Cloudflare Worker — with Turnstile, rate-limiting, and zero Netlify-specific code left behind.</p>
-    </a>
+    <PostCard
+      category="dev-session"
+      date="Apr 16, 2026"
+      readTime="7 min read"
+      title="Netlify to Cloudflare Workers contact form"
+      excerpt="Migrating the portfolio's contact form off Netlify Functions and onto a Cloudflare Worker — with Turnstile, rate-limiting, and zero Netlify-specific code left behind."
+    />
   </div>
+  <CodeSnippet code={snippet} />
 </DocsLayout>
 
 <style>
@@ -24,49 +37,5 @@ import DocsLayout from '../../layouts/DocsLayout.astro';
     display: flex;
     justify-content: center;
   }
-  .card {
-    display: block;
-    padding: var(--lp-space-5) var(--lp-space-6);
-    background: var(--lp-white);
-    border: 1px solid var(--lp-line-2);
-    border-radius: var(--lp-radius-xl);
-    text-decoration: none;
-    color: inherit;
-    max-width: 460px;
-    width: 100%;
-    box-shadow: var(--lp-shadow-card);
-    transition: transform var(--lp-dur-fast) var(--lp-ease), border-color var(--lp-dur-fast) var(--lp-ease);
-  }
-  .card:hover { transform: translateY(-2px); border-color: var(--lp-ink-100); }
-  .meta {
-    display: flex;
-    align-items: center;
-    gap: var(--lp-space-2);
-    font-family: var(--lp-font-mono);
-    font-size: var(--lp-t-micro);
-  }
-  .date,
-  .read { color: var(--lp-ink-100); }
-  .sep { color: var(--lp-line); margin: 0 4px; }
-  .cat {
-    background: rgba(41, 128, 185, 0.08);
-    color: var(--lp-blog-blue-500);
-    padding: 3px 10px;
-    border-radius: var(--lp-radius-pill);
-    font-size: var(--lp-t-micro);
-    font-weight: var(--lp-w-medium);
-  }
-  h3 {
-    font-size: var(--lp-t-ui);
-    font-weight: var(--lp-w-semibold);
-    color: var(--lp-ink-900);
-    margin: var(--lp-space-2) 0 6px;
-    line-height: 1.35;
-  }
-  p {
-    font-size: var(--lp-t-caption);
-    color: var(--lp-ink-300);
-    margin: 0;
-    line-height: var(--lp-lh-normal);
-  }
+  .frame :global(.lp-post-card) { max-width: 460px; width: 100%; }
 </style>

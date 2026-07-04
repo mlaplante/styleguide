@@ -1,25 +1,38 @@
 ---
 import DocsLayout from '../../layouts/DocsLayout.astro';
+import FloatingField from '../../components/brand/FloatingField.astro';
+import CodeSnippet from '../../components/CodeSnippet.astro';
+
+const snippet = `<div class="lp-field">
+  <input type="text" placeholder=" " />
+  <label>Name</label>
+</div>
+
+<!-- Styles: .lp-field in src/styles/components.css.
+     Focus is handled by :focus-within; toggle the "filled" class with JS
+     when the field has a value so the label stays risen:
+       field.classList.toggle('filled', !!input.value) -->`;
 ---
 <DocsLayout title="Input" description="Underlined text input with a floating-label pattern (Material-ish, custom).">
   <div class="sg-frame--stack">
     <div>
       <div class="lbl">Empty</div>
-      <div class="mi"><input type="text" placeholder=" " /><label>Name</label></div>
+      <FloatingField label="Name" />
     </div>
     <div>
       <div class="lbl">Focused</div>
-      <div class="mi mi--focus"><input type="text" placeholder=" " /><label>Email</label></div>
+      <FloatingField label="Email" state="focus" />
     </div>
     <div>
       <div class="lbl">Filled</div>
-      <div class="mi mi--filled"><input type="text" value="michael@laplante.dev" placeholder=" " /><label>Email</label></div>
+      <FloatingField label="Email" state="filled" value="michael@laplante.dev" />
     </div>
     <div>
       <div class="lbl">Textarea</div>
-      <div class="mi mi--filled"><textarea rows="3" placeholder=" ">Tell us about the engagement.</textarea><label>Message</label></div>
+      <FloatingField label="Message" type="textarea" state="filled" value="Tell us about the engagement." />
     </div>
   </div>
+  <CodeSnippet code={snippet} />
 </DocsLayout>
 
 <style>
@@ -31,38 +44,5 @@ import DocsLayout from '../../layouts/DocsLayout.astro';
     color: var(--lp-ink-100);
     margin-bottom: var(--lp-space-2);
   }
-  .mi { position: relative; max-width: 420px; }
-  .mi input,
-  .mi textarea {
-    background: transparent;
-    border: none;
-    border-bottom: 1px solid var(--lp-line);
-    outline: none;
-    padding: var(--lp-space-2) 0;
-    width: 100%;
-    font-family: inherit;
-    font-size: var(--lp-t-ui);
-    color: var(--lp-fg-1);
-    box-sizing: border-box;
-    resize: vertical;
-  }
-  .mi--focus input,
-  .mi--focus textarea { border-bottom-color: var(--lp-indigo-500); }
-  .mi label {
-    position: absolute;
-    left: 0;
-    top: 6px;
-    font-family: var(--lp-font-mono);
-    font-size: var(--lp-t-meta);
-    color: var(--lp-ink-200);
-    font-weight: var(--lp-w-light);
-    transition: top var(--lp-dur) var(--lp-ease), font-size var(--lp-dur) var(--lp-ease), color var(--lp-dur) var(--lp-ease);
-    pointer-events: none;
-  }
-  .mi--filled label,
-  .mi--focus label {
-    top: -15px;
-    font-size: var(--lp-t-micro);
-    color: var(--lp-indigo-500);
-  }
+  .sg-frame--stack :global(.lp-field) { max-width: 420px; }
 </style>

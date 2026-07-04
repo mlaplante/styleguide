@@ -1,0 +1,19 @@
+---
+/**
+ * Collapsible code snippet with a copy button, used on component pages.
+ * Styling (.sg-code) lives in global.css; copying is handled by the
+ * data-copy delegation script in DocsLayout.
+ */
+export interface Props {
+  code: string;
+  label?: string;
+}
+const { code, label = 'HTML' } = Astro.props;
+---
+<details class="sg-code">
+  <summary>{label}</summary>
+  <div class="sg-code-body">
+    <button class="sg-code-copy" type="button" data-copy={code}>copy</button>
+    <pre><code>{code}</code></pre>
+  </div>
+</details>

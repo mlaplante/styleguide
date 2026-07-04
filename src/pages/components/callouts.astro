@@ -1,29 +1,43 @@
 ---
 import DocsLayout from '../../layouts/DocsLayout.astro';
+import Callout from '../../components/brand/Callout.astro';
+import CodeSnippet from '../../components/CodeSnippet.astro';
+
+const snippet = `<div class="lp-callout lp-callout--info">
+  <strong>Heads up.</strong> Informational message.
+</div>
+<!-- Variants: lp-callout--info / --success / --warn / --error -->
+
+<blockquote class="lp-pullquote">
+  "Pull quote used in long-form copy."
+</blockquote>
+
+<!-- Styles: .lp-callout / .lp-pullquote in src/styles/components.css -->`;
 ---
 <DocsLayout title="Callouts" description="Inline alerts and pull-quote callouts used in long-form copy.">
   <div class="stack">
-    <div class="callout callout--info">
+    <Callout variant="info">
       <strong>Heads up.</strong> Form submissions are rate-limited to 10 requests per 15 minutes per IP.
-    </div>
+    </Callout>
 
-    <div class="callout callout--success">
+    <Callout variant="success">
       <strong>Saved.</strong> Your changes are live on production.
-    </div>
+    </Callout>
 
-    <div class="callout callout--warn">
+    <Callout variant="warn">
       <strong>Heads up.</strong> Scheduled maintenance window starts Saturday 2 AM ET.
-    </div>
+    </Callout>
 
-    <div class="callout callout--error">
+    <Callout variant="error">
       <strong>Couldn't send.</strong> Network blocked the request — check your connection and try again.
-    </div>
+    </Callout>
 
-    <blockquote class="pullquote">
+    <blockquote class="lp-pullquote">
       "The point isn't that Cloudflare is better than Netlify — it's that our infrastructure should
       survive a vendor outage, a pricing change, or a routine platform pivot without rewriting the app."
     </blockquote>
   </div>
+  <CodeSnippet code={snippet} />
 </DocsLayout>
 
 <style>
@@ -31,33 +45,5 @@ import DocsLayout from '../../layouts/DocsLayout.astro';
     display: flex;
     flex-direction: column;
     gap: var(--lp-space-4);
-  }
-  .callout {
-    padding: var(--lp-space-4) var(--lp-space-5);
-    border-radius: var(--lp-radius-md);
-    font-family: var(--lp-font-display);
-    font-size: var(--lp-t-ui);
-    line-height: var(--lp-lh-normal);
-    border-left: 3px solid currentColor;
-    background: var(--lp-indigo-100);
-    color: var(--lp-ink-800);
-  }
-  .callout strong { color: currentColor; margin-right: 4px; }
-
-  .callout--info    { background: var(--lp-indigo-100);          border-left-color: var(--lp-indigo-500); }
-  .callout--success { background: rgba(76, 175, 80, 0.10);       border-left-color: var(--lp-accent-green); }
-  .callout--warn    { background: rgba(184, 134, 11, 0.10);      border-left-color: #b8860b; }
-  .callout--error   { background: rgba(199, 37, 78, 0.10);       border-left-color: var(--lp-code-accent); }
-
-  .pullquote {
-    margin: 0;
-    padding: var(--lp-space-4) var(--lp-space-6);
-    background: rgba(63, 81, 181, 0.04);
-    border-left: 3px solid var(--lp-indigo-500);
-    color: var(--lp-fg-2);
-    font-style: italic;
-    border-radius: 0 var(--lp-radius-lg) var(--lp-radius-lg) 0;
-    font-size: var(--lp-t-base);
-    line-height: var(--lp-lh-body);
   }
 </style>

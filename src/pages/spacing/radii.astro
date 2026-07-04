@@ -11,12 +11,13 @@ const radii = [
   { name: 'full', token: '--lp-radius-full', note: '50% · avatar' },
 ];
 ---
-<DocsLayout title="Spacing — Radii" description="Corner-radius tokens.">
+<DocsLayout title="Spacing — Radii" description="Corner-radius tokens. Click a token to copy it.">
   <div class="sg-frame--row">
     {radii.map((r) => (
       <div class="sg-stack">
         <div class={`box${r.wide ? ' box--wide' : ''}`} style={`border-radius: var(${r.token})`}></div>
         <div class="sg-meta">{r.name}<small>{r.note}</small></div>
+        <button class="sg-copy" type="button" data-copy={`var(${r.token})`}>{r.token}</button>
       </div>
     ))}
   </div>

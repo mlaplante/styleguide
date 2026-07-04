@@ -224,8 +224,69 @@
 }
 
 /* --------------------------------------------------------------------------
+   Docs-chrome theme — tokens for the styleguide's own frame (topbar, sidebar,
+   page background). Specimens inside the preview panel keep the brand's
+   light rendering; only the chrome flips in dark mode.
+   -------------------------------------------------------------------------- */
+
+:root {
+  color-scheme: light;
+  --sidebar-w: 260px;
+  --topbar-h: 64px;
+  --sg-bg: var(--lp-bg-1);
+  --sg-surface: var(--lp-white);
+  --sg-surface-2: var(--lp-paper-2);
+  --sg-border: var(--lp-border-subtle);
+  --sg-fg: var(--lp-ink-900);
+  --sg-fg-muted: var(--lp-ink-400);
+  --sg-fg-soft: var(--lp-ink-300);
+  --sg-nav-link: var(--lp-ink-500);
+  --sg-nav-hover-bg: var(--lp-indigo-100);
+  --sg-nav-hover-fg: var(--lp-indigo-700);
+}
+
+:root[data-theme='dark'] {
+  color-scheme: dark;
+  --sg-bg: var(--lp-dark-bg);
+  --sg-surface: var(--lp-dark-surface);
+  --sg-surface-2: #14203a;
+  --sg-border: var(--lp-dark-border);
+  --sg-fg: var(--lp-dark-text);
+  --sg-fg-muted: var(--lp-dark-text-2);
+  --sg-fg-soft: var(--lp-dark-muted);
+  --sg-nav-link: var(--lp-dark-text-2);
+  --sg-nav-hover-bg: rgba(99, 102, 241, 0.18);
+  --sg-nav-hover-fg: #a5b4fc;
+}
+
+/* Elements that only show in one chrome theme (e.g. light/dark logo). */
+.sg-dark-only { display: none; }
+:root[data-theme='dark'] .sg-dark-only { display: block; }
+:root[data-theme='dark'] .sg-light-only { display: none; }
+
+/* --------------------------------------------------------------------------
    Semantic typography — element-level defaults.
    -------------------------------------------------------------------------- */
+
+*,
+*::before,
+*::after { box-sizing: border-box; }
+
+:focus-visible {
+  outline: 2px solid var(--lp-indigo-500);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
 
 body {
   font-family: var(--lp-font-body);
@@ -426,3 +487,96 @@ body {
 }
 .sg-swatch .sg-swatch-hex { opacity: 0.85; }
 .sg-swatch--outline { border: 1px solid var(--lp-line-2); }
+
+/* Skip-to-content link — visually hidden until keyboard-focused */
+.skip-link {
+  position: absolute;
+  left: var(--lp-space-2);
+  top: -100px;
+  z-index: 100;
+  background: var(--lp-indigo-500);
+  color: var(--lp-white);
+  padding: var(--lp-space-2) var(--lp-space-4);
+  border-radius: var(--lp-radius-md);
+  text-decoration: none;
+  font-family: var(--lp-font-display);
+  font-size: var(--lp-t-caption);
+  font-weight: var(--lp-w-medium);
+}
+.skip-link:focus { top: var(--lp-space-2); }
+
+/* Click-to-copy token chip. Copy behavior comes from the data-copy
+   delegation script in DocsLayout; the chip swaps to "✓ copied" briefly. */
+.sg-copy {
+  display: inline-block;
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+  font-family: var(--lp-font-mono);
+  font-size: var(--lp-t-micro);
+  letter-spacing: 0.3px;
+  color: inherit;
+  text-align: left;
+  cursor: pointer;
+  opacity: 0.85;
+}
+.sg-copy:hover {
+  opacity: 1;
+  text-decoration: underline dotted;
+  text-underline-offset: 3px;
+}
+.sg-copy.copied { opacity: 1; text-decoration: none; }
+.sg-swatch-tokens {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  align-items: flex-start;
+}
+
+/* Collapsible code snippet (CodeSnippet.astro) */
+.sg-code {
+  margin-top: var(--lp-space-6);
+  border: 1px solid var(--lp-line-2);
+  border-radius: var(--lp-radius-lg);
+  overflow: hidden;
+}
+.sg-code + .sg-code { margin-top: var(--lp-space-3); }
+.sg-code summary {
+  cursor: pointer;
+  padding: var(--lp-space-3) var(--lp-space-4);
+  font-family: var(--lp-font-mono);
+  font-size: var(--lp-t-micro);
+  letter-spacing: var(--lp-ls-wider);
+  text-transform: uppercase;
+  color: var(--lp-ink-300);
+  background: var(--lp-paper-2);
+  user-select: none;
+}
+.sg-code summary::marker { color: var(--lp-ink-100); }
+.sg-code-body { position: relative; background: var(--lp-code-bg); }
+.sg-code pre {
+  margin: 0;
+  padding: var(--lp-space-4) var(--lp-space-5);
+  overflow-x: auto;
+}
+.sg-code code {
+  font-family: var(--lp-font-mono);
+  font-size: var(--lp-t-caption);
+  line-height: 1.7;
+  color: #e6edf3;
+}
+.sg-code-copy {
+  position: absolute;
+  top: var(--lp-space-2);
+  right: var(--lp-space-2);
+  background: rgba(255, 255, 255, 0.08);
+  color: #e6edf3;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: var(--lp-radius);
+  font-family: var(--lp-font-mono);
+  font-size: var(--lp-t-micro);
+  padding: 3px 10px;
+  cursor: pointer;
+}
+.sg-code-copy:hover { background: rgba(255, 255, 255, 0.15); }

@@ -2,34 +2,40 @@
 import DocsLayout from '../../layouts/DocsLayout.astro';
 
 const inks = [
-  { name: 'Ink 900', hex: '#111827', bg: 'var(--lp-ink-900)', fg: 'var(--lp-white)' },
-  { name: 'Ink 800', hex: '#1A1A1A', bg: 'var(--lp-ink-800)', fg: 'var(--lp-white)' },
-  { name: 'Ink 600', hex: '#202020', bg: 'var(--lp-ink-600)', fg: 'var(--lp-white)' },
-  { name: 'Ink 500', hex: '#374151', bg: 'var(--lp-ink-500)', fg: 'var(--lp-white)' },
-  { name: 'Ink 300', hex: '#6B7280', bg: 'var(--lp-ink-300)', fg: 'var(--lp-white)' },
-  { name: 'Ink 100', hex: '#9CA3AF', bg: 'var(--lp-ink-100)', fg: 'var(--lp-white)' },
+  { name: 'Ink 900', hex: '#111827', token: '--lp-ink-900', fg: 'var(--lp-white)' },
+  { name: 'Ink 800', hex: '#1A1A1A', token: '--lp-ink-800', fg: 'var(--lp-white)' },
+  { name: 'Ink 600', hex: '#202020', token: '--lp-ink-600', fg: 'var(--lp-white)' },
+  { name: 'Ink 500', hex: '#374151', token: '--lp-ink-500', fg: 'var(--lp-white)' },
+  { name: 'Ink 300', hex: '#6B7280', token: '--lp-ink-300', fg: 'var(--lp-white)' },
+  { name: 'Ink 100', hex: '#9CA3AF', token: '--lp-ink-100', fg: 'var(--lp-white)' },
 ];
 const papers = [
-  { name: 'Line',    hex: '#E0E0E0', bg: 'var(--lp-line)' },
-  { name: 'Line 2',  hex: '#E5E7EB', bg: 'var(--lp-line-2)' },
-  { name: 'Paper 3', hex: '#F0F0F0', bg: 'var(--lp-paper-3)' },
-  { name: 'Paper',   hex: '#F1F1F1', bg: 'var(--lp-paper)' },
-  { name: 'Paper 2', hex: '#F8F9FA', bg: 'var(--lp-paper-2)' },
-  { name: 'White',   hex: '#FFFFFF', bg: 'var(--lp-white)' },
+  { name: 'Line',    hex: '#E0E0E0', token: '--lp-line' },
+  { name: 'Line 2',  hex: '#E5E7EB', token: '--lp-line-2' },
+  { name: 'Paper 3', hex: '#F0F0F0', token: '--lp-paper-3' },
+  { name: 'Paper',   hex: '#F1F1F1', token: '--lp-paper' },
+  { name: 'Paper 2', hex: '#F8F9FA', token: '--lp-paper-2' },
+  { name: 'White',   hex: '#FFFFFF', token: '--lp-white' },
 ];
 ---
-<DocsLayout title="Colors — Neutrals" description="Neutral palette: text inks and paper backgrounds.">
+<DocsLayout title="Colors — Neutrals" description="Neutral palette: text inks and paper backgrounds. Click a token or hex value to copy it.">
   <div class="sg-swatches grid">
     {inks.map((s) => (
-      <div class="sg-swatch" style={`background:${s.bg};color:${s.fg}`}>
+      <div class="sg-swatch" style={`background:var(${s.token});color:${s.fg}`}>
         <div class="sg-swatch-name">{s.name}</div>
-        <div class="sg-swatch-hex">{s.hex}</div>
+        <div class="sg-swatch-tokens">
+          <button class="sg-copy" type="button" data-copy={`var(${s.token})`}>{s.token}</button>
+          <button class="sg-copy" type="button" data-copy={s.hex}>{s.hex}</button>
+        </div>
       </div>
     ))}
     {papers.map((s) => (
-      <div class="sg-swatch sg-swatch--outline" style={`background:${s.bg}`}>
+      <div class="sg-swatch sg-swatch--outline" style={`background:var(${s.token})`}>
         <div class="sg-swatch-name">{s.name}</div>
-        <div class="sg-swatch-hex">{s.hex}</div>
+        <div class="sg-swatch-tokens">
+          <button class="sg-copy" type="button" data-copy={`var(${s.token})`}>{s.token}</button>
+          <button class="sg-copy" type="button" data-copy={s.hex}>{s.hex}</button>
+        </div>
       </div>
     ))}
   </div>
@@ -37,6 +43,7 @@ const papers = [
 
 <style>
   .grid { grid-template-columns: repeat(6, 1fr); }
+  .grid :global(.sg-copy) { font-size: 10px; }
   @media (max-width: 900px) { .grid { grid-template-columns: repeat(3, 1fr); } }
   @media (max-width: 480px) { .grid { grid-template-columns: repeat(2, 1fr); } }
 </style>

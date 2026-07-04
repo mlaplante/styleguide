@@ -12,12 +12,13 @@ const scale = [
   { token: '--lp-space-30', step: '30', px: 120, note: 'hero' },
 ];
 ---
-<DocsLayout title="Spacing — Scale" description="Spacing scale used across components and sections.">
+<DocsLayout title="Spacing — Scale" description="Spacing scale used across components and sections. Click a token to copy it.">
   <div class="sg-frame--row">
     {scale.map((s) => (
       <div class="sg-stack">
         <div class="bar" style={`width: var(${s.token})`}></div>
         <div class="sg-meta">{s.step}<small>{s.px} px{s.note ? ` · ${s.note}` : ''}</small></div>
+        <button class="sg-copy" type="button" data-copy={`var(${s.token})`}>{s.token}</button>
       </div>
     ))}
   </div>

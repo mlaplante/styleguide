@@ -1,0 +1,29 @@
+---
+/**
+ * Career timeline — rule, dots, current-position indicator.
+ * Styles live in src/styles/components.css (.lp-timeline).
+ */
+export interface TimelineEntry {
+  date: string;
+  org: string;
+  role: string;
+  body?: string;
+  current?: boolean;
+}
+export interface Props {
+  entries: TimelineEntry[];
+}
+const { entries } = Astro.props;
+---
+<ul class="lp-timeline">
+  {entries.map((e) => (
+    <li class={e.current ? 'current' : undefined}>
+      <div class="lp-tl-date">{e.date}</div>
+      <div class="lp-tl-body">
+        <h4 class="lp-tl-org">{e.org}</h4>
+        <span class="lp-tl-role">{e.role}</span>
+        {e.body && <p>{e.body}</p>}
+      </div>
+    </li>
+  ))}
+</ul>

@@ -2,27 +2,30 @@
 import DocsLayout from '../../layouts/DocsLayout.astro';
 
 const indigo = [
-  { name: 'Indigo 500', hex: '#3F51B5', role: 'Primary / Hero',  bg: 'var(--lp-indigo-500)', fg: 'var(--lp-white)' },
-  { name: 'Indigo 600', hex: '#3849A1', role: 'Hover',           bg: 'var(--lp-indigo-600)', fg: 'var(--lp-white)' },
-  { name: 'Indigo 700', hex: '#303F8C', role: 'Pressed',         bg: 'var(--lp-indigo-700)', fg: 'var(--lp-white)' },
-  { name: 'Indigo 10%', hex: 'rgba(63,81,181,.1)', role: 'Eyebrow wash', bg: 'var(--lp-indigo-100)', fg: 'var(--lp-indigo-500)', outline: true },
+  { name: 'Indigo 500', hex: '#3F51B5', token: '--lp-indigo-500', role: 'Primary / Hero',  fg: 'var(--lp-white)' },
+  { name: 'Indigo 600', hex: '#3849A1', token: '--lp-indigo-600', role: 'Hover',           fg: 'var(--lp-white)' },
+  { name: 'Indigo 700', hex: '#303F8C', token: '--lp-indigo-700', role: 'Pressed',         fg: 'var(--lp-white)' },
+  { name: 'Indigo 10%', hex: 'rgba(63,81,181,.1)', token: '--lp-indigo-100', role: 'Eyebrow wash', fg: 'var(--lp-indigo-500)', outline: true },
 ];
 const blog = [
-  { name: 'Blog 500',  hex: '#2980B9', role: 'Blog nav start', bg: 'var(--lp-blog-blue-500)', fg: 'var(--lp-white)' },
-  { name: 'Blog 600',  hex: '#1A6DA3', role: 'Blog nav end',   bg: 'var(--lp-blog-blue-600)', fg: 'var(--lp-white)' },
-  { name: 'Blog 700',  hex: '#1A5276', role: 'Dark nav',        bg: 'var(--lp-blog-blue-700)', fg: 'var(--lp-white)' },
-  { name: 'Link Dark', hex: '#60A5FA', role: 'Dark-mode link',  bg: 'var(--lp-link-dark)',     fg: 'var(--lp-dark-bg)' },
+  { name: 'Blog 500',  hex: '#2980B9', token: '--lp-blog-blue-500', role: 'Blog nav start', fg: 'var(--lp-white)' },
+  { name: 'Blog 600',  hex: '#1A6DA3', token: '--lp-blog-blue-600', role: 'Blog nav end',   fg: 'var(--lp-white)' },
+  { name: 'Blog 700',  hex: '#1A5276', token: '--lp-blog-blue-700', role: 'Dark nav',       fg: 'var(--lp-white)' },
+  { name: 'Link Dark', hex: '#60A5FA', token: '--lp-link-dark',     role: 'Dark-mode link', fg: 'var(--lp-dark-bg)' },
 ];
 ---
-<DocsLayout title="Colors — Primary" description="Primary brand palette.">
+<DocsLayout title="Colors — Primary" description="Primary brand palette. Click a token or hex value to copy it.">
   <div class="sg-swatches grid">
     {[...indigo, ...blog].map((s) => (
-      <div class={`sg-swatch ${s.outline ? 'sg-swatch--outline' : ''}`} style={`background:${s.bg};color:${s.fg}`}>
+      <div class={`sg-swatch ${s.outline ? 'sg-swatch--outline' : ''}`} style={`background:var(${s.token});color:${s.fg}`}>
         <div>
           <div class="sg-swatch-name">{s.name}</div>
           <div class="sg-swatch-role">{s.role}</div>
         </div>
-        <div class="sg-swatch-hex">{s.hex}</div>
+        <div class="sg-swatch-tokens">
+          <button class="sg-copy" type="button" data-copy={`var(${s.token})`}>{s.token}</button>
+          <button class="sg-copy" type="button" data-copy={s.hex}>{s.hex}</button>
+        </div>
       </div>
     ))}
   </div>
