@@ -1,0 +1,57 @@
+---
+name: styleguide-debugging-playbook
+description: Use when the styleguide Astro site is misbehaving and you need to triage FAST — build fails after a dependency bump or npm install (Node engine error, Astro API error, Vite version conflict); a font, script, or image works on localhost:4321 but is broken/missing/blocked only on the deployed brand.michaellaplante.com site; a font renders in a system fallback typeface instead of Poppins or Roboto Mono; browser console shows "Refused to load ... violates ... Content-Security-Policy directive" for font-src, style-src, script-src, img-src, or connect-src; CSS rules from one page bleed into another page or component (style leak, is:global suspect); a newly created page builds fine but doesn't appear in the sidebar or the landing-page card grid; a token renders as the literal text "var(--lp-...)" or paints the wrong color (typo'd or undeclared --lp-* / --sg-* custom property); prettier or format:check reports failures.
+---
+
+# Styleguide debugging playbook
+
+Symptom-to-triage runbook for the `styleguide` Astro site (repo root: this repo). For each row: run
+the ONE discriminating command first — it tells you which branch you're on before you touch code.
+This skill does not fix root causes itself; it routes you to the owning sibling skill and to
+`styleguide-change-control`, which gates any behavior change regardless of which row you land on.
+
+## When NOT to use this skill
+
+- You already know the root cause and just need the full architectural rationale (why CSP is shaped
+  this way, why components.css is a single file, the 3-layer lineage) → `styleguide-architecture-contract`.
+- You're deciding whether a change is allowed / how to classify it / whether to merge the weekly
+  deps PR → `styleguide-change-control`.
+- You want the full token/class catalog (every `--lp-*`/`--sg-*` name, every `lp-*`/`sg-*` class) →
+  `styleguide-design-tokens-reference`.
+- You're planning the Astro major-version upgrade itself (not debugging a single failed bump) →
+  `styleguide-astro-upgrade-campaign`.
+- You want a past-incident narrative (what broke before, why, how it was resolved) →
+  `styleguide-failure-archaeology`.
+- You need measurement tooling (Lighthouse, a11y scan) rather than a symptom lookup →
+  `styleguide-diagnostics-and-tooling`.
+
+## Triage table
+
+| # | Symptom | Likely cause | Discriminating check (run this first) | Fix | Deeper-fix owner |
+|---|---|---|---|---|---|
+| 1 | `npm install` / `npm run build` fails after a dependency bump (manual or the weekly `deps/weekly-update` PR) | Node below engine floor; Astro major changed an API; two resolved Vite versions colliding | `node -v` (must be `>=22.12.0`, per `.nvmrc`=`22` and `package.json engines`) **and** `npm ls vite` (as of 2026-07-05 this repo resolves a single deduped `vite@8.0.16` via `astro@7.0.3` — a SECOND resolved Vite version is the signal, not the norm here) | Use Node 22+ (`nvm use`); bisect the PR diff; if Vite duplicated, identify which new dep pulls its own Vite | `styleguide-astro-upgrade-campaign` (the gated campaign); cross-ref `dependabot-major-bump-package-json-only-clean-merge-hides-stale-lock-and-peer-cap` (clean `package.json` diff can hide a stale lockfile); cross-ref `astro6-cloudflare-require-dist-vite-duplication` for the diagnostic pattern only — that skill assumes the CF SSR adapter + `@tailwindcss/vite`, neither of which this repo has |
+| 2 | A resource (font/script/image) works at `http://localhost:4321` but is blocked or missing only on the deployed site | `public/_headers` (Cloudflare Pages headers mechanism) only applies in production — `astro dev` never enforces CSP, so a dev-only pass tells you nothing | Open browser DevTools **Console** on the deployed URL and look for `Refused to load ... because it violates the following Content Security Policy directive: "..."` — the message names the exact directive | Do NOT add a CSP exception ad hoc; self-host the resource under `'self'` or drop it | `styleguide-change-control` (CSP is a non-negotiable with rationale); `styleguide-run-and-operate` (owns `_headers`/deploy mechanics) |
+| 3 | Font renders in a system fallback instead of Poppins / Roboto Mono | Either the self-hosted `.woff2` path in `src/styles/global.css` `@font-face` `src: url('../../node_modules/@fontsource/...')` 404s (e.g. a `@fontsource` package got bumped/removed), or CSP `font-src 'self'` blocked a non-self font request | DevTools **Network** tab, filter `font`: 404 → path/package problem; request blocked with a CSP console error → policy problem, not a path problem. Confirm the font shipped: after `npm run build`, `dist/_astro/` should contain 9 woff2 files (Poppins 300/400/500/600/700 + Roboto Mono 300/400/500/700 — latin subset only; non-latin glyphs will fall back by design) | Fix the relative path in `global.css` to match the installed `@fontsource` package's file layout, or rebuild after reinstalling | `styleguide-architecture-contract` (self-hosting + CSP posture rationale); ignore `project/README.md`/`project/SKILL.md` here — they still describe a Google Fonts `@import` that the live site no longer uses (documented drift, see `styleguide-failure-archaeology`) |
+| 4 | A style rule leaks from one page into another | `<style is:global>` on a page bypasses Astro's default scoped styles. **As of 2026-07-05, exactly 2 files use `is:global`** — `src/pages/ui-kits/blog.astro` and `src/pages/ui-kits/portfolio.astro` — each with every selector prefixed by a page-unique root class (`.b-*`, `.p-*` respectively). This is a rule-vs-code tension worth naming explicitly: the documented non-negotiable says scoped `<style>`, never `is:global`, yet these 2 files use it anyway — treat the prefixing as the de facto leak-guard regardless of whether it was a deliberate exception | `grep -rn "is:global" src/pages/` — should return only those 2 files. A 3rd hit is a new page violating the "scoped `<style>`" rule. If one of those 2 files has a rule NOT prefixed with its root class, that unprefixed rule is the leak | Convert to a scoped `<style>` (drop `is:global`), or add the page's unique class prefix to every selector | `styleguide-architecture-contract` (owns invariants/known weak points — the rationale/sanction call on this rule-vs-code tension lives there); `styleguide-docs-and-writing` (README "Adding a page" convention); `styleguide-change-control` (scoped-style is a non-negotiable with rationale) |
+| 5 | New page builds fine but doesn't show in the sidebar or the landing-page card grid | Forgot to register the route in `src/data/nav.ts` — the single source of truth both `Sidebar.astro` and `index.astro`'s card grid read from | `grep -n "<your-href-or-label>" src/data/nav.ts` — zero hits confirms this is the cause | Add `{ href: '/<group>/<name>', label: '...' }` under the correct group in `src/data/nav.ts` | `styleguide-architecture-contract` (nav.ts-as-single-source-of-truth architecture); `styleguide-docs-and-writing` (add-a-page template) |
+| 6 | Element shows the literal text `var(--lp-something)` or paints the wrong/black/transparent color | Custom-property name is typo'd (case-sensitive, exact match) or was never declared under `:root` in `src/styles/global.css` | `grep -n -- "--lp-<name>:" src/styles/global.css` (or `--sg-<name>:` for chrome tokens) — zero hits means the name doesn't exist. In DevTools, the **Computed** panel shows the unresolved `var()` with the token name struck through when it can't resolve | Correct the token name to an existing one (exact case), or confirm the page's layout actually imports `global.css` | `styleguide-design-tokens-reference` (the full catalog of all `--lp-*`/`--sg-*` names) |
+| 7 | `prettier --check` / `npm run format:check` fails | A file wasn't run through `npm run format` before commit, or an editor auto-formatted `.astro` with a different config than `.prettierrc` (`prettier-plugin-astro`, `singleQuote`, `printWidth: 100`) | `npx prettier --check <path>` locally names the exact failing file(s). Note: as of 2026-07-05 the only GitHub Actions workflow (`.github/workflows/update-dependencies.yml`) runs `npm run build` only — it does **not** run `format:check` — so this currently surfaces on manual/local runs or PR review, not an automated CI gate | `npm run format` (runs `prettier --write .`), review the diff, commit | `styleguide-validation-and-qa` (acceptance gate; wiring `format:check` into CI is a gap — candidate, not yet done); `styleguide-change-control` (nothing merges without a clean format pass regardless of automation) |
+
+## Provenance and maintenance
+
+Facts below verified against this repo as of **2026-07-05**. Re-verify with the commands shown if
+behavior seems off — dependency versions and CI wiring are the most likely to drift.
+
+| Fact | Re-verify with |
+|---|---|
+| Node engine floor `>=22.12.0` | `grep -A1 '"engines"' package.json` |
+| Astro/Vite resolved versions (7.0.3 / 8.0.16, single deduped Vite) | `npm ls astro vite` |
+| `_headers` CSP directives | `cat public/_headers` |
+| Font `@font-face` src paths + which fonts self-hosted | `grep -n "src: url" src/styles/global.css \| head` |
+| `is:global` usage sites (should be exactly 2) | `grep -rln "is:global" src/pages/` |
+| nav.ts is still the sidebar/landing single source of truth | `grep -n "NavGroup\|export const nav" src/data/nav.ts` |
+| Only workflow present, and whether it now runs `format:check` | `cat .github/workflows/*.yml` |
+| Build still emits 24 pages / dist size | `npm run build` (watch for "N page(s) built" line) |
+
+Only `styleguide-change-control` gates a behavior change found via this playbook — this skill only
+tells you where to look and which branch you're on, never authorizes a fix on its own.
