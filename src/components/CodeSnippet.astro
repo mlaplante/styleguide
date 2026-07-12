@@ -14,7 +14,7 @@ const { code, label = 'HTML' } = Astro.props;
 <details class="sg-code">
   <summary>{label}</summary>
   <div class="sg-code-body">
-    <button class="sg-code-copy" type="button" data-copy={code}>copy</button>
+    <button class="sg-code-copy" type="button" data-copy={code} aria-label="Copy code">copy</button>
     <pre><code>{code}</code></pre>
   </div>
 </details>

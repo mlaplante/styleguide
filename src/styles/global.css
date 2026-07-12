@@ -294,6 +294,10 @@
   outline-offset: 2px;
 }
 
+:root[data-theme='dark'] :focus-visible {
+  outline-color: var(--lp-link-dark);
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
@@ -644,4 +648,11 @@ body {
 }
 .sg-code-copy:hover {
   background: rgba(255, 255, 255, 0.15);
+}
+
+@media (max-width: 640px) {
+  .sg-row {
+    grid-template-columns: 1fr;
+    gap: var(--lp-space-2);
+  }
 }
