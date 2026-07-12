@@ -11,14 +11,11 @@ export interface Props {
   lifted?: boolean;
 }
 const { href, type = 'button', variant = 'primary', lifted = false } = Astro.props;
-const classes = [
-  'lp-btn',
-  variant !== 'primary' && `lp-btn--${variant}`,
-  lifted && 'is-lifted',
-]
+const classes = ['lp-btn', variant !== 'primary' && `lp-btn--${variant}`, lifted && 'is-lifted']
   .filter(Boolean)
   .join(' ');
 ---
+
 {
   href ? (
     <a class={classes} href={href}>

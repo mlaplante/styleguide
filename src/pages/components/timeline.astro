@@ -4,9 +4,14 @@ import Timeline from '../../components/brand/Timeline.astro';
 import CodeSnippet from '../../components/CodeSnippet.astro';
 
 const entries = [
-  { date: 'January 2026 — Present',     org: 'Proforma', role: 'SVP of Information Security and Operations', current: true },
-  { date: 'April 2022 — January 2026',  org: 'Proforma', role: 'Vice President of Technology' },
-  { date: 'Nov 2021 — April 2022',      org: 'Proforma', role: 'Director of Engineering' },
+  {
+    date: 'January 2026 — Present',
+    org: 'Proforma',
+    role: 'SVP of Information Security and Operations',
+    current: true,
+  },
+  { date: 'April 2022 — January 2026', org: 'Proforma', role: 'Vice President of Technology' },
+  { date: 'Nov 2021 — April 2022', org: 'Proforma', role: 'Director of Engineering' },
 ];
 
 const snippet = `<ul class="lp-timeline">
@@ -23,6 +28,7 @@ const snippet = `<ul class="lp-timeline">
 
 <!-- Styles: .lp-timeline in src/styles/components.css -->`;
 ---
+
 <DocsLayout title="Timeline" description="Career timeline — rule, dot, current-position indicator.">
   <Timeline entries={entries} />
   <CodeSnippet code={snippet} />

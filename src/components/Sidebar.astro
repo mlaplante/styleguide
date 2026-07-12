@@ -3,27 +3,36 @@ import { nav } from '../data/nav';
 
 const current = Astro.url.pathname.replace(/\/$/, '');
 ---
+
 <aside class="sidebar">
   <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="sg-nav">
     <span class="nav-toggle-icon" aria-hidden="true"></span>
     Menu
   </button>
   <nav id="sg-nav" aria-label="Styleguide pages">
-    {nav.map((g) => (
-      <section aria-label={g.title}>
-        <p class="group-label">{g.title}</p>
-        <ul>
-          {g.items.map((it) => {
-            const active = current === it.href;
-            return (
-              <li>
-                <a href={it.href} class={active ? 'active' : ''} aria-current={active ? 'page' : undefined}>{it.label}</a>
-              </li>
-            );
-          })}
-        </ul>
-      </section>
-    ))}
+    {
+      nav.map((g) => (
+        <section aria-label={g.title}>
+          <p class="group-label">{g.title}</p>
+          <ul>
+            {g.items.map((it) => {
+              const active = current === it.href;
+              return (
+                <li>
+                  <a
+                    href={it.href}
+                    class={active ? 'active' : ''}
+                    aria-current={active ? 'page' : undefined}
+                  >
+                    {it.label}
+                  </a>
+                </li>
+              );
+            })}
+          </ul>
+        </section>
+      ))
+    }
   </nav>
 </aside>
 
@@ -51,8 +60,12 @@ const current = Astro.url.pathname.replace(/\/$/, '');
     overflow-y: auto;
     font-family: var(--lp-font-display);
   }
-  .nav-toggle { display: none; }
-  nav section + section { margin-top: var(--lp-space-6); }
+  .nav-toggle {
+    display: none;
+  }
+  nav section + section {
+    margin-top: var(--lp-space-6);
+  }
   .group-label {
     font-family: var(--lp-font-mono);
     font-size: 10px;
@@ -62,8 +75,14 @@ const current = Astro.url.pathname.replace(/\/$/, '');
     margin: 0 0 var(--lp-space-2) var(--lp-space-2);
     font-weight: var(--lp-w-bold);
   }
-  ul { list-style: none; margin: 0; padding: 0; }
-  li { margin: 0; }
+  ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  li {
+    margin: 0;
+  }
   a {
     display: block;
     padding: var(--lp-space-2) var(--lp-space-3);
@@ -72,9 +91,14 @@ const current = Astro.url.pathname.replace(/\/$/, '');
     text-decoration: none;
     font-size: 13px;
     font-weight: var(--lp-w-medium);
-    transition: background var(--lp-dur-fast) var(--lp-ease), color var(--lp-dur-fast) var(--lp-ease);
+    transition:
+      background var(--lp-dur-fast) var(--lp-ease),
+      color var(--lp-dur-fast) var(--lp-ease);
   }
-  a:hover { background: var(--sg-nav-hover-bg); color: var(--sg-nav-hover-fg); }
+  a:hover {
+    background: var(--sg-nav-hover-bg);
+    color: var(--sg-nav-hover-fg);
+  }
   a.active {
     background: var(--lp-indigo-500);
     color: var(--lp-white);
@@ -114,16 +138,27 @@ const current = Astro.url.pathname.replace(/\/$/, '');
       border-radius: 1px;
       background: currentColor;
     }
-    .nav-toggle-icon { position: relative; }
+    .nav-toggle-icon {
+      position: relative;
+    }
     .nav-toggle-icon::before,
     .nav-toggle-icon::after {
       content: '';
       position: absolute;
       left: 0;
     }
-    .nav-toggle-icon::before { top: -5px; }
-    .nav-toggle-icon::after { top: 5px; }
-    nav { display: none; padding-top: var(--lp-space-3); }
-    .sidebar.open nav { display: block; }
+    .nav-toggle-icon::before {
+      top: -5px;
+    }
+    .nav-toggle-icon::after {
+      top: 5px;
+    }
+    nav {
+      display: none;
+      padding-top: var(--lp-space-3);
+    }
+    .sidebar.open nav {
+      display: block;
+    }
   }
 </style>

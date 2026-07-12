@@ -15,15 +15,18 @@ export interface Props {
 }
 const { entries } = Astro.props;
 ---
+
 <ul class="lp-timeline">
-  {entries.map((e) => (
-    <li class={e.current ? 'current' : undefined}>
-      <div class="lp-tl-date">{e.date}</div>
-      <div class="lp-tl-body">
-        <h4 class="lp-tl-org">{e.org}</h4>
-        <span class="lp-tl-role">{e.role}</span>
-        {e.body && <p>{e.body}</p>}
-      </div>
-    </li>
-  ))}
+  {
+    entries.map((e) => (
+      <li class={e.current ? 'current' : undefined}>
+        <div class="lp-tl-date">{e.date}</div>
+        <div class="lp-tl-body">
+          <h4 class="lp-tl-org">{e.org}</h4>
+          <span class="lp-tl-role">{e.role}</span>
+          {e.body && <p>{e.body}</p>}
+        </div>
+      </li>
+    ))
+  }
 </ul>

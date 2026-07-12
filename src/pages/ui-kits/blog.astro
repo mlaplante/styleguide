@@ -10,7 +10,8 @@ const posts = [
     date: 'May 2025',
     readTime: '8 min read',
     title: 'Migrating the Contact Form from Netlify Functions to Cloudflare Workers',
-    excerpt: "When Netlify announced their function pricing changes, I started looking for alternatives. Here's how I moved the portfolio contact form to Cloudflare Workers without breaking Turnstile or rate-limiting.",
+    excerpt:
+      "When Netlify announced their function pricing changes, I started looking for alternatives. Here's how I moved the portfolio contact form to Cloudflare Workers without breaking Turnstile or rate-limiting.",
   },
   {
     category: 'thought-leadership',
@@ -18,7 +19,8 @@ const posts = [
     date: 'Mar 2025',
     readTime: '5 min read',
     title: 'Why Zero-Trust Is a Mindset, Not a Product',
-    excerpt: "Every vendor claims to sell zero-trust. What they're actually selling is a perimeter with better marketing. Here's how to tell the difference and build the real thing.",
+    excerpt:
+      "Every vendor claims to sell zero-trust. What they're actually selling is a perimeter with better marketing. Here's how to tell the difference and build the real thing.",
   },
   {
     category: 'dev-session',
@@ -26,7 +28,8 @@ const posts = [
     date: 'Jan 2025',
     readTime: '12 min read',
     title: 'Building a Multi-Tenant Rate Limiter on Cloudflare KV',
-    excerpt: 'A walkthrough of implementing a sliding-window rate limiter using Cloudflare Workers and KV storage, with per-tenant configuration and real-time burst detection.',
+    excerpt:
+      'A walkthrough of implementing a sliding-window rate limiter using Cloudflare Workers and KV storage, with per-tenant configuration and real-time burst detection.',
   },
   {
     category: 'thought-leadership',
@@ -34,13 +37,14 @@ const posts = [
     date: 'Nov 2024',
     readTime: '6 min read',
     title: 'SOC 2 Without the Consultant: What We Learned Doing It In-House',
-    excerpt: "Most mid-market companies overpay for SOC 2 compliance. We ran our own program, picked our own auditor, and came in under budget — here's what worked and what didn't.",
+    excerpt:
+      "Most mid-market companies overpay for SOC 2 compliance. We ran our own program, picked our own auditor, and came in under budget — here's what worked and what didn't.",
   },
 ] as const;
 ---
+
 <DocsLayout title="UI Kit — Blog" description="Full blog composition.">
   <div class="b-root">
-
     <!-- ===== NAV ===== -->
     <BlogNav
       brand="Michael LaPlante"
@@ -56,22 +60,24 @@ const posts = [
 
     <!-- ===== SHELL ===== -->
     <div class="b-shell">
-
       <!-- Post List -->
       <div class="b-list">
         <header class="b-list-header">
           <h1 class="b-list-title">Writing</h1>
-          <p class="b-list-sub">Development sessions, security notes, and thoughts on building resilient systems.</p>
+          <p class="b-list-sub">
+            Development sessions, security notes, and thoughts on building resilient systems.
+          </p>
         </header>
         <div class="b-posts">
-          {posts.map((p) => (
-            <PostCard {...p} />
-          ))}
+          {posts.map((p) => <PostCard {...p} />)}
         </div>
       </div>
 
       <!-- Article (expanded view of post 1) -->
-      <article class="b-article" style="margin-top: 60px; padding-top: 40px; border-top: 2px dashed var(--lp-line-2);">
+      <article
+        class="b-article"
+        style="margin-top: 60px; padding-top: 40px; border-top: 2px dashed var(--lp-line-2);"
+      >
         <button class="b-back">← back to writing</button>
         <header class="b-article-header">
           <div class="lp-post-meta">
@@ -80,14 +86,19 @@ const posts = [
             <span class="lp-post-sep">·</span>
             <span class="lp-post-read">8 min read</span>
           </div>
-          <h1 class="b-article-title">Migrating the Contact Form from Netlify Functions to Cloudflare Workers</h1>
-          <p class="b-article-lead">When Netlify announced their function pricing changes, I started looking for alternatives for the portfolio contact form.</p>
+          <h1 class="b-article-title">
+            Migrating the Contact Form from Netlify Functions to Cloudflare Workers
+          </h1>
+          <p class="b-article-lead">
+            When Netlify announced their function pricing changes, I started looking for
+            alternatives for the portfolio contact form.
+          </p>
         </header>
         <div class="b-article-body">
           <p>
-            When Netlify announced their function pricing changes, I started looking for alternatives
-            for the portfolio contact form. The existing setup was a standard serverless function —
-            short, pragmatic, and locked to a single vendor.
+            When Netlify announced their function pricing changes, I started looking for
+            alternatives for the portfolio contact form. The existing setup was a standard
+            serverless function — short, pragmatic, and locked to a single vendor.
           </p>
           <h2>Goal</h2>
           <p>
@@ -119,137 +130,169 @@ const posts = [
           </p>
         </div>
       </article>
-
     </div>
-
   </div>
 </DocsLayout>
 
 <style is:global>
-/* Blog UI kit — composition-level styles. Component styles (nav, cards,
+  /* Blog UI kit — composition-level styles. Component styles (nav, cards,
    pills, meta rows) come from src/styles/components.css. */
 
-.b-root {
-  background: var(--lp-paper-2);
-  color: var(--lp-ink-500);
-  font-family: var(--lp-font-display);
-  -webkit-font-smoothing: antialiased;
-}
+  .b-root {
+    background: var(--lp-paper-2);
+    color: var(--lp-ink-500);
+    font-family: var(--lp-font-display);
+    -webkit-font-smoothing: antialiased;
+  }
 
-/* ---------- Shell ---------- */
-.b-shell { max-width: 780px; margin: 0 auto; padding: 56px 28px 120px; }
+  /* ---------- Shell ---------- */
+  .b-shell {
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 56px 28px 120px;
+  }
 
-/* ---------- List ---------- */
-.b-list-header { margin-bottom: 40px; }
-.b-list-title {
-  font-size: 40px;
-  font-weight: var(--lp-w-bold);
-  color: var(--lp-ink-900);
-  margin: 0 0 10px;
-  letter-spacing: var(--lp-ls-tight);
-}
-.b-list-sub {
-  font-size: var(--lp-t-base);
-  color: var(--lp-ink-300);
-  margin: 0;
-  max-width: 560px;
-  line-height: 1.6;
-}
-.b-posts { display: flex; flex-direction: column; gap: var(--lp-space-4); }
+  /* ---------- List ---------- */
+  .b-list-header {
+    margin-bottom: 40px;
+  }
+  .b-list-title {
+    font-size: 40px;
+    font-weight: var(--lp-w-bold);
+    color: var(--lp-ink-900);
+    margin: 0 0 10px;
+    letter-spacing: var(--lp-ls-tight);
+  }
+  .b-list-sub {
+    font-size: var(--lp-t-base);
+    color: var(--lp-ink-300);
+    margin: 0;
+    max-width: 560px;
+    line-height: 1.6;
+  }
+  .b-posts {
+    display: flex;
+    flex-direction: column;
+    gap: var(--lp-space-4);
+  }
 
-/* ---------- Article ---------- */
-.b-back {
-  background: transparent;
-  border: none;
-  padding: 0 0 18px;
-  color: var(--lp-blog-blue-500);
-  font-family: var(--lp-font-mono);
-  font-size: var(--lp-t-caption);
-  letter-spacing: 0.5px;
-  cursor: pointer;
-  text-transform: lowercase;
-}
-.b-article-header {
-  padding-bottom: 30px;
-  border-bottom: 1px solid var(--lp-line-2);
-  margin-bottom: 36px;
-}
-.b-article-title {
-  margin: 12px 0 14px;
-  font-size: 40px;
-  font-weight: var(--lp-w-bold);
-  letter-spacing: var(--lp-ls-tight);
-  line-height: 1.15;
-  color: var(--lp-ink-900);
-}
-.b-article-lead {
-  font-size: 19px;
-  line-height: 1.55;
-  color: var(--lp-ink-400);
-  margin: 0;
-}
+  /* ---------- Article ---------- */
+  .b-back {
+    background: transparent;
+    border: none;
+    padding: 0 0 18px;
+    color: var(--lp-blog-blue-500);
+    font-family: var(--lp-font-mono);
+    font-size: var(--lp-t-caption);
+    letter-spacing: 0.5px;
+    cursor: pointer;
+    text-transform: lowercase;
+  }
+  .b-article-header {
+    padding-bottom: 30px;
+    border-bottom: 1px solid var(--lp-line-2);
+    margin-bottom: 36px;
+  }
+  .b-article-title {
+    margin: 12px 0 14px;
+    font-size: 40px;
+    font-weight: var(--lp-w-bold);
+    letter-spacing: var(--lp-ls-tight);
+    line-height: 1.15;
+    color: var(--lp-ink-900);
+  }
+  .b-article-lead {
+    font-size: 19px;
+    line-height: 1.55;
+    color: var(--lp-ink-400);
+    margin: 0;
+  }
 
-.b-article-body { font-size: var(--lp-t-base); line-height: var(--lp-lh-body); color: var(--lp-ink-500); }
-.b-article-body h2 {
-  margin: 44px 0 16px;
-  font-size: var(--lp-t-md);
-  font-weight: var(--lp-w-bold);
-  color: var(--lp-ink-900);
-  letter-spacing: var(--lp-ls-snug);
-}
-.b-article-body p { margin: 0 0 20px; }
-.b-article-body ul { padding-left: 22px; margin: 0 0 20px; }
-.b-article-body li { margin-bottom: 6px; }
-.b-article-body code {
-  font-family: var(--lp-font-mono);
-  font-size: 15px;
-  background: rgba(41, 128, 185, 0.08);
-  color: var(--lp-blog-blue-600);
-  padding: 2px 6px;
-  border-radius: var(--lp-radius);
-}
-.b-article-body blockquote {
-  margin: 28px 0;
-  padding: 18px 24px;
-  background: rgba(63, 81, 181, 0.04);
-  border-left: 3px solid var(--lp-indigo-500);
-  color: var(--lp-ink-400);
-  font-style: italic;
-  border-radius: 0 var(--lp-radius-lg) var(--lp-radius-lg) 0;
-}
+  .b-article-body {
+    font-size: var(--lp-t-base);
+    line-height: var(--lp-lh-body);
+    color: var(--lp-ink-500);
+  }
+  .b-article-body h2 {
+    margin: 44px 0 16px;
+    font-size: var(--lp-t-md);
+    font-weight: var(--lp-w-bold);
+    color: var(--lp-ink-900);
+    letter-spacing: var(--lp-ls-snug);
+  }
+  .b-article-body p {
+    margin: 0 0 20px;
+  }
+  .b-article-body ul {
+    padding-left: 22px;
+    margin: 0 0 20px;
+  }
+  .b-article-body li {
+    margin-bottom: 6px;
+  }
+  .b-article-body code {
+    font-family: var(--lp-font-mono);
+    font-size: 15px;
+    background: rgba(41, 128, 185, 0.08);
+    color: var(--lp-blog-blue-600);
+    padding: 2px 6px;
+    border-radius: var(--lp-radius);
+  }
+  .b-article-body blockquote {
+    margin: 28px 0;
+    padding: 18px 24px;
+    background: rgba(63, 81, 181, 0.04);
+    border-left: 3px solid var(--lp-indigo-500);
+    color: var(--lp-ink-400);
+    font-style: italic;
+    border-radius: 0 var(--lp-radius-lg) var(--lp-radius-lg) 0;
+  }
 
-/* ---------- Dark mode (kit demo) ---------- */
-body.b-dark .b-root { background: var(--lp-dark-bg); color: var(--lp-dark-text-2); }
-body.b-dark .lp-blog-nav { background: linear-gradient(135deg, var(--lp-blog-blue-700) 0%, var(--lp-blog-blue-900) 100%); }
-body.b-dark .b-list-title,
-body.b-dark .lp-post-title,
-body.b-dark .b-article-title,
-body.b-dark .b-article-body h2 { color: #f1f5f9; }
-body.b-dark .b-list-sub,
-body.b-dark .lp-post-excerpt,
-body.b-dark .b-article-lead,
-body.b-dark .b-article-body { color: #cbd5e1; }
-body.b-dark .lp-post-card {
-  background: #1e293b;
-  border-color: #334155;
-}
-body.b-dark .lp-post-card:hover { border-color: #475569; }
-body.b-dark .b-article-header { border-color: #334155; }
-body.b-dark .lp-pill--blog {
-  background: rgba(96,165,250,.15);
-  color: #60a5fa;
-}
-body.b-dark .lp-pill--indigo {
-  background: rgba(129,140,248,.15);
-  color: #818cf8;
-}
-body.b-dark .b-article-body code {
-  background: rgba(96,165,250,.15);
-  color: #93c5fd;
-}
-body.b-dark .b-article-body blockquote {
-  background: rgba(129,140,248,.08);
-  border-color: #818cf8;
-  color: #cbd5e1;
-}
+  /* ---------- Dark mode (kit demo) ---------- */
+  body.b-dark .b-root {
+    background: var(--lp-dark-bg);
+    color: var(--lp-dark-text-2);
+  }
+  body.b-dark .lp-blog-nav {
+    background: linear-gradient(135deg, var(--lp-blog-blue-700) 0%, var(--lp-blog-blue-900) 100%);
+  }
+  body.b-dark .b-list-title,
+  body.b-dark .lp-post-title,
+  body.b-dark .b-article-title,
+  body.b-dark .b-article-body h2 {
+    color: #f1f5f9;
+  }
+  body.b-dark .b-list-sub,
+  body.b-dark .lp-post-excerpt,
+  body.b-dark .b-article-lead,
+  body.b-dark .b-article-body {
+    color: #cbd5e1;
+  }
+  body.b-dark .lp-post-card {
+    background: #1e293b;
+    border-color: #334155;
+  }
+  body.b-dark .lp-post-card:hover {
+    border-color: #475569;
+  }
+  body.b-dark .b-article-header {
+    border-color: #334155;
+  }
+  body.b-dark .lp-pill--blog {
+    background: rgba(96, 165, 250, 0.15);
+    color: #60a5fa;
+  }
+  body.b-dark .lp-pill--indigo {
+    background: rgba(129, 140, 248, 0.15);
+    color: #818cf8;
+  }
+  body.b-dark .b-article-body code {
+    background: rgba(96, 165, 250, 0.15);
+    color: #93c5fd;
+  }
+  body.b-dark .b-article-body blockquote {
+    background: rgba(129, 140, 248, 0.08);
+    border-color: #818cf8;
+    color: #cbd5e1;
+  }
 </style>

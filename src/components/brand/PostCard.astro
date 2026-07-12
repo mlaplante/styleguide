@@ -11,8 +11,17 @@ export interface Props {
   title: string;
   excerpt: string;
 }
-const { href = '#', category, categoryVariant = 'blog', date, readTime, title, excerpt } = Astro.props;
+const {
+  href = '#',
+  category,
+  categoryVariant = 'blog',
+  date,
+  readTime,
+  title,
+  excerpt,
+} = Astro.props;
 ---
+
 <a class="lp-post-card" href={href}>
   <div class="lp-post-meta">
     <span class={`lp-pill lp-pill--${categoryVariant}`}>{category}</span>

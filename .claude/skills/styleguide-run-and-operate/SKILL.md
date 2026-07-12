@@ -11,26 +11,26 @@ config file contents, or dependency versions — see `styleguide-build-and-env` 
 
 ## When NOT to use this skill
 
-| Situation | Use instead |
-|---|---|
-| Setting up the dev environment, reading `astro.config.mjs`/`tsconfig.json`/`.prettierrc`/`engines`, resolving versions | `styleguide-build-and-env` |
-| Deciding whether a change is safe to merge/deploy, the weekly deps-PR rule, non-negotiables rationale | `styleguide-change-control` |
-| Measuring performance (Lighthouse, bundle size budgets, Core Web Vitals) | `web-perf` / `cloudflare:web-perf` (general perf tools — this repo has no perf-scripts of its own; see `styleguide-diagnostics-and-tooling`) |
-| robots.txt policy re: AI crawlers/training bots | `robots-txt-ai-bots-training-vs-retrieval` |
-| Adding automated tests / defining the acceptance gate | `styleguide-validation-and-qa` |
-| You're about to add `@astrojs/cloudflare`, `wrangler.toml`, or SSR | Stop — this is a **static** build, not Workers/adapter-based. Read the caveat below first, and any change still gates through `styleguide-change-control`. |
+| Situation                                                                                                              | Use instead                                                                                                                                                |
+| ---------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Setting up the dev environment, reading `astro.config.mjs`/`tsconfig.json`/`.prettierrc`/`engines`, resolving versions | `styleguide-build-and-env`                                                                                                                                 |
+| Deciding whether a change is safe to merge/deploy, the weekly deps-PR rule, non-negotiables rationale                  | `styleguide-change-control`                                                                                                                                |
+| Measuring performance (Lighthouse, bundle size budgets, Core Web Vitals)                                               | `web-perf` / `cloudflare:web-perf` (general perf tools — this repo has no perf-scripts of its own; see `styleguide-diagnostics-and-tooling`)               |
+| robots.txt policy re: AI crawlers/training bots                                                                        | `robots-txt-ai-bots-training-vs-retrieval`                                                                                                                 |
+| Adding automated tests / defining the acceptance gate                                                                  | `styleguide-validation-and-qa`                                                                                                                             |
+| You're about to add `@astrojs/cloudflare`, `wrangler.toml`, or SSR                                                     | Stop — this is a **static** build, not Workers/adapter-based. Read the caveat below first, and any change still gates through `styleguide-change-control`. |
 
 ## Command anatomy
 
 All commands run from repo root (`skills/`). Scripts are declared in `package.json`:
 
-| Command | Runs | Result |
-|---|---|---|
-| `npm run dev` | `astro dev` | Dev server at `http://localhost:4321` |
-| `npm run build` | `astro build` | Static output written to `dist/` |
-| `npm run preview` | `astro preview` | Serves the already-built `dist/` locally |
-| `npm run format` | `prettier --write .` | Formats in place (astro-aware via `prettier-plugin-astro`) |
-| `npm run format:check` | `prettier --check .` | CI-safe check, no writes |
+| Command                | Runs                 | Result                                                     |
+| ---------------------- | -------------------- | ---------------------------------------------------------- |
+| `npm run dev`          | `astro dev`          | Dev server at `http://localhost:4321`                      |
+| `npm run build`        | `astro build`        | Static output written to `dist/`                           |
+| `npm run preview`      | `astro preview`      | Serves the already-built `dist/` locally                   |
+| `npm run format`       | `prettier --write .` | Formats in place (astro-aware via `prettier-plugin-astro`) |
+| `npm run format:check` | `prettier --check .` | CI-safe check, no writes                                   |
 
 There is **no test suite** in this repo (no vitest/playwright/jest). The only automated gates are
 `npm run build` succeeding and `npm run format:check`. Everything else is manual visual review —
@@ -72,20 +72,20 @@ Deploy is **git-integration, static build** — NOT wrangler, NOT the `@astrojs/
 There is no `wrangler.toml` and no adapter entry in `astro.config.mjs` in this repo. Confirm with:
 `grep -c adapter astro.config.mjs` → should be `0`.
 
-| Trigger | Result |
-|---|---|
-| Push to `main` | Production deploy → https://brand.michaellaplante.com |
-| Push to any other branch | Preview deploy, unique preview URL |
+| Trigger                  | Result                                                |
+| ------------------------ | ----------------------------------------------------- |
+| Push to `main`           | Production deploy → https://brand.michaellaplante.com |
+| Push to any other branch | Preview deploy, unique preview URL                    |
 
 **CF Pages build configuration** (set in the Cloudflare dashboard, not in-repo — there is no
 `wrangler.toml`/`wrangler.jsonc` here):
 
-| Setting | Value |
-|---|---|
-| Framework preset | Astro |
-| Build command | `npm run build` |
-| Output directory | `dist` |
-| Env var | `NODE_VERSION=22` |
+| Setting          | Value             |
+| ---------------- | ----------------- |
+| Framework preset | Astro             |
+| Build command    | `npm run build`   |
+| Output directory | `dist`            |
+| Env var          | `NODE_VERSION=22` |
 
 Because this is a static build, `dist/` is uploaded as-is and served from CF's edge — no CF
 Worker runtime, so bindings/`wrangler dev`/`_worker.js`/Durable Objects/KV don't apply. Treat
@@ -104,13 +104,13 @@ verbatim to `dist/` at build time, and Cloudflare Pages natively recognizes a `_
 the site root to attach response headers per path-glob — no build step or plugin needed. Effective
 rules (verified against `public/_headers`):
 
-| Path glob | Headers |
-|---|---|
+| Path glob        | Headers                                                                                                                                                                                                              |
+| ---------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `/*` (all paths) | `X-Content-Type-Options: nosniff`; `Referrer-Policy: strict-origin-when-cross-origin`; a locked-down `Permissions-Policy` (every listed feature `=()`, i.e. denied, except `fullscreen=(self)`); the CSP (see below) |
-| `/_astro/*` | `Cache-Control: public, max-age=31536000, immutable` |
-| `/assets/*` | `Cache-Control: public, max-age=31536000, immutable` |
+| `/_astro/*`      | `Cache-Control: public, max-age=31536000, immutable`                                                                                                                                                                 |
+| `/assets/*`      | `Cache-Control: public, max-age=31536000, immutable`                                                                                                                                                                 |
 
-The CSP string itself (`default-src 'self'`, `script-src 'self' 'unsafe-inline'`, etc.) and *why*
+The CSP string itself (`default-src 'self'`, `script-src 'self' 'unsafe-inline'`, etc.) and _why_
 it's shaped that way (why `unsafe-inline` is required, why external CDNs silently break prod) is
 owned by `styleguide-change-control` — don't restate the rationale here, just know that editing
 `public/_headers` is a behavior change and must gate through that skill. The immutable long-cache
@@ -120,12 +120,14 @@ change is impossible, not just unlikely.
 ## robots.txt + sitemap behavior
 
 `public/robots.txt` (copied verbatim to `dist/robots.txt`):
+
 ```
 User-agent: *
 Allow: /
 
 Sitemap: https://brand.michaellaplante.com/sitemap-index.xml
 ```
+
 Allows all crawlers, all paths — this is a public documentation site, not a private app. The
 sitemap is generated by the `@astrojs/sitemap` integration declared in `astro.config.mjs`
 (`site: 'https://brand.michaellaplante.com'` + `integrations: [sitemap()]`), which emits
@@ -141,13 +143,13 @@ Facts below were verified 2026-07-05 by reading `package.json`, `README.md`, `pu
 `public/robots.txt`, `astro.config.mjs`, and running `npm run build` against this repo. Re-verify
 with:
 
-| Fact | Re-verify with |
-|---|---|
-| Dev port (4321) | `npm run dev` and read the printed local URL — Astro's default port can change across major versions |
-| Page count (24) / build time (~400ms) / dist size (~492K) | `npm run build` (prints page count + duration); `du -sh dist` |
-| index.html count per route type | `find dist -name "index.html" \| wc -l` (expect 23) plus `dist/404.html` flat = 24 |
-| woff2 font file count (9) | `find dist -name "*.woff2" \| wc -l` |
-| No adapter present | `grep -c adapter astro.config.mjs` (expect `0`) |
-| `_headers` rules unchanged | `cat public/_headers` and diff against the table above |
-| `robots.txt` unchanged | `cat public/robots.txt` |
+| Fact                                                       | Re-verify with                                                                                                                                                                                          |
+| ---------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Dev port (4321)                                            | `npm run dev` and read the printed local URL — Astro's default port can change across major versions                                                                                                    |
+| Page count (24) / build time (~400ms) / dist size (~492K)  | `npm run build` (prints page count + duration); `du -sh dist`                                                                                                                                           |
+| index.html count per route type                            | `find dist -name "index.html" \| wc -l` (expect 23) plus `dist/404.html` flat = 24                                                                                                                      |
+| woff2 font file count (9)                                  | `find dist -name "*.woff2" \| wc -l`                                                                                                                                                                    |
+| No adapter present                                         | `grep -c adapter astro.config.mjs` (expect `0`)                                                                                                                                                         |
+| `_headers` rules unchanged                                 | `cat public/_headers` and diff against the table above                                                                                                                                                  |
+| `robots.txt` unchanged                                     | `cat public/robots.txt`                                                                                                                                                                                 |
 | CF Pages build config (preset/command/output/NODE_VERSION) | Cloudflare dashboard → this Pages project → Settings → Builds (not stored in-repo; README.md "Deployment" section is the fallback source, currently matches dashboard as of this writing but can drift) |

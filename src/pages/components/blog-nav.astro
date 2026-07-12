@@ -19,18 +19,20 @@ const snippet = `<nav class="lp-blog-nav is-sticky">
      Drop is-sticky to render in-flow. The progress bar is scroll-driven
      (animation-timeline) with a static 38% fallback. -->`;
 ---
-<DocsLayout title="Blog Nav" description="Sticky blog nav with a scroll-driven reading-progress bar.">
+
+<DocsLayout
+  title="Blog Nav"
+  description="Sticky blog nav with a scroll-driven reading-progress bar."
+>
   <div class="frame">
     <BlogNav
       brand="Michael LaPlante"
-      links={[
-        { label: 'blog', active: true },
-        { label: 'about' },
-        { label: 'contact' },
-      ]}
+      links={[{ label: 'blog', active: true }, { label: 'about' }, { label: 'contact' }]}
     />
     <div class="body-pad">
-      <div class="caption">Sticky blog nav · reading progress bar (scroll-timeline, falls back to a static 38% bar)</div>
+      <div class="caption">
+        Sticky blog nav · reading progress bar (scroll-timeline, falls back to a static 38% bar)
+      </div>
     </div>
   </div>
   <CodeSnippet code={snippet} />

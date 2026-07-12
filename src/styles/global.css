@@ -9,118 +9,127 @@
   font-style: normal;
   font-weight: 300;
   font-display: swap;
-  src: url('../../node_modules/@fontsource/poppins/files/poppins-latin-300-normal.woff2') format('woff2');
+  src: url('../../node_modules/@fontsource/poppins/files/poppins-latin-300-normal.woff2')
+    format('woff2');
 }
 @font-face {
   font-family: 'Poppins';
   font-style: normal;
   font-weight: 400;
   font-display: swap;
-  src: url('../../node_modules/@fontsource/poppins/files/poppins-latin-400-normal.woff2') format('woff2');
+  src: url('../../node_modules/@fontsource/poppins/files/poppins-latin-400-normal.woff2')
+    format('woff2');
 }
 @font-face {
   font-family: 'Poppins';
   font-style: normal;
   font-weight: 500;
   font-display: swap;
-  src: url('../../node_modules/@fontsource/poppins/files/poppins-latin-500-normal.woff2') format('woff2');
+  src: url('../../node_modules/@fontsource/poppins/files/poppins-latin-500-normal.woff2')
+    format('woff2');
 }
 @font-face {
   font-family: 'Poppins';
   font-style: normal;
   font-weight: 600;
   font-display: swap;
-  src: url('../../node_modules/@fontsource/poppins/files/poppins-latin-600-normal.woff2') format('woff2');
+  src: url('../../node_modules/@fontsource/poppins/files/poppins-latin-600-normal.woff2')
+    format('woff2');
 }
 @font-face {
   font-family: 'Poppins';
   font-style: normal;
   font-weight: 700;
   font-display: swap;
-  src: url('../../node_modules/@fontsource/poppins/files/poppins-latin-700-normal.woff2') format('woff2');
+  src: url('../../node_modules/@fontsource/poppins/files/poppins-latin-700-normal.woff2')
+    format('woff2');
 }
 @font-face {
   font-family: 'Roboto Mono';
   font-style: normal;
   font-weight: 300;
   font-display: swap;
-  src: url('../../node_modules/@fontsource/roboto-mono/files/roboto-mono-latin-300-normal.woff2') format('woff2');
+  src: url('../../node_modules/@fontsource/roboto-mono/files/roboto-mono-latin-300-normal.woff2')
+    format('woff2');
 }
 @font-face {
   font-family: 'Roboto Mono';
   font-style: normal;
   font-weight: 400;
   font-display: swap;
-  src: url('../../node_modules/@fontsource/roboto-mono/files/roboto-mono-latin-400-normal.woff2') format('woff2');
+  src: url('../../node_modules/@fontsource/roboto-mono/files/roboto-mono-latin-400-normal.woff2')
+    format('woff2');
 }
 @font-face {
   font-family: 'Roboto Mono';
   font-style: normal;
   font-weight: 500;
   font-display: swap;
-  src: url('../../node_modules/@fontsource/roboto-mono/files/roboto-mono-latin-500-normal.woff2') format('woff2');
+  src: url('../../node_modules/@fontsource/roboto-mono/files/roboto-mono-latin-500-normal.woff2')
+    format('woff2');
 }
 @font-face {
   font-family: 'Roboto Mono';
   font-style: normal;
   font-weight: 700;
   font-display: swap;
-  src: url('../../node_modules/@fontsource/roboto-mono/files/roboto-mono-latin-700-normal.woff2') format('woff2');
+  src: url('../../node_modules/@fontsource/roboto-mono/files/roboto-mono-latin-700-normal.woff2')
+    format('woff2');
 }
 
 :root {
   /* ---------- Color · Brand ---------- */
-  --lp-indigo-500: #3F51B5;      /* primary — portfolio accent + buttons */
+  --lp-indigo-500: #3f51b5; /* primary — portfolio accent + buttons */
   --lp-indigo-600: #3849a1;
   --lp-indigo-700: #303f8c;
   --lp-indigo-100: rgba(63, 81, 181, 0.1);
   --lp-indigo-200: rgba(63, 81, 181, 0.4);
 
-  --lp-blog-blue-500: #2980b9;   /* blog accent — sticky nav gradient start */
-  --lp-blog-blue-600: #1a6da3;   /* blog accent — gradient end */
-  --lp-blog-blue-700: #1a5276;   /* blog dark-mode nav */
+  --lp-blog-blue-500: #2980b9; /* blog accent — sticky nav gradient start */
+  --lp-blog-blue-600: #1a6da3; /* blog accent — gradient end */
+  --lp-blog-blue-700: #1a5276; /* blog dark-mode nav */
   --lp-blog-blue-900: #154360;
-  --lp-link-dark: #60a5fa;       /* dark-mode link color */
+  --lp-link-dark: #60a5fa; /* dark-mode link color */
 
   /* ---------- Color · Material accents (theme switcher) ---------- */
-  --lp-accent-blue-grey: #607D8B;
-  --lp-accent-teal:      #009688;
-  --lp-accent-pink:      #FF4081;
-  --lp-accent-blue:      #2196F3;
-  --lp-accent-green:     #4CAF50;
-  --lp-accent-purple:    #9C27B0;
+  --lp-accent-blue-grey: #607d8b;
+  --lp-accent-teal: #009688;
+  --lp-accent-pink: #ff4081;
+  --lp-accent-blue: #2196f3;
+  --lp-accent-green: #4caf50;
+  --lp-accent-purple: #9c27b0;
 
   /* ---------- Color · Neutrals ---------- */
-  --lp-ink-900: #111827;   /* strongest text */
-  --lp-ink-800: #1a1a1a;   /* dark-mode bg / body */
+  --lp-ink-900: #111827; /* strongest text */
+  --lp-ink-800: #1a1a1a; /* dark-mode bg / body */
   --lp-ink-700: #1f2937;
-  --lp-ink-600: #202020;   /* near-black text */
-  --lp-ink-500: #374151;   /* article body */
-  --lp-ink-400: #4b5563;   /* muted */
-  --lp-ink-300: #6b7280;   /* meta */
-  --lp-ink-200: #808080;   /* form labels */
+  --lp-ink-600: #202020; /* near-black text */
+  --lp-ink-500: #374151; /* article body */
+  --lp-ink-400: #4b5563; /* muted */
+  --lp-ink-300: #6b7280; /* meta */
+  --lp-ink-200: #808080; /* form labels */
   --lp-ink-100: #9ca3af;
-  --lp-line:    #E0E0E0;   /* timeline rule */
-  --lp-line-2:  #e5e7eb;   /* card borders */
-  --lp-paper:   #F1F1F1;   /* portfolio body bg */
-  --lp-paper-2: #f8f9fa;   /* blog body bg */
-  --lp-paper-3: #F0F0F0;   /* timeline dots */
-  --lp-white:   #FFFFFF;
+  --lp-line: #e0e0e0; /* timeline rule */
+  --lp-line-2: #e5e7eb; /* card borders */
+  --lp-paper: #f1f1f1; /* portfolio body bg */
+  --lp-paper-2: #f8f9fa; /* blog body bg */
+  --lp-paper-3: #f0f0f0; /* timeline dots */
+  --lp-white: #ffffff;
 
   /* ---------- Color · Dark mode ---------- */
-  --lp-dark-bg:      #0f172a;
-  --lp-dark-bg-2:    #1a1a1a;
+  --lp-dark-bg: #0f172a;
+  --lp-dark-bg-2: #1a1a1a;
   --lp-dark-surface: #1e293b;
   --lp-dark-surface-2: #222222;
-  --lp-dark-border:  #334155;
-  --lp-dark-text:    #e0e0e0;
-  --lp-dark-text-2:  #cbd5e1;
-  --lp-dark-muted:   #94a3b8;
+  --lp-dark-border: #334155;
+  --lp-dark-text: #e0e0e0;
+  --lp-dark-text-2: #cbd5e1;
+  --lp-dark-muted: #94a3b8;
 
   /* ---------- Color · Code / inline ---------- */
-  --lp-code-bg:      #0d1117;
+  --lp-code-bg: #0d1117;
   --lp-code-bg-light: #f0f1f3;
-  --lp-code-accent:  #c7254e;
+  --lp-code-accent: #c7254e;
   --lp-code-accent-dark: #e879a0;
 
   /* ---------- Color · Semantic ---------- */
@@ -138,41 +147,41 @@
 
   /* ---------- Typography · Families ---------- */
   --lp-font-display: 'Poppins', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
-  --lp-font-body:    'Poppins', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
-  --lp-font-mono:    'Roboto Mono', 'SF Mono', Menlo, Consolas, monospace;
+  --lp-font-body: 'Poppins', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --lp-font-mono: 'Roboto Mono', 'SF Mono', Menlo, Consolas, monospace;
 
   /* ---------- Typography · Weights ---------- */
-  --lp-w-light:    300;
-  --lp-w-regular:  400;
-  --lp-w-medium:   500;
+  --lp-w-light: 300;
+  --lp-w-regular: 400;
+  --lp-w-medium: 500;
   --lp-w-semibold: 600;
-  --lp-w-bold:     700;
+  --lp-w-bold: 700;
 
   /* ---------- Typography · Scale ---------- */
-  --lp-t-hero:   68px;  /* intro name */
-  --lp-t-xl:     44px;  /* about-large */
-  --lp-t-lg:     36px;  /* blog h1 */
-  --lp-t-md:     26px;  /* blog h2 */
-  --lp-t-sm:     21px;  /* blog h3 */
-  --lp-t-base:   17px;  /* article body */
-  --lp-t-ui:     16px;  /* UI base */
-  --lp-t-meta:   14px;  /* section labels, meta */
+  --lp-t-hero: 68px; /* intro name */
+  --lp-t-xl: 44px; /* about-large */
+  --lp-t-lg: 36px; /* blog h1 */
+  --lp-t-md: 26px; /* blog h2 */
+  --lp-t-sm: 21px; /* blog h3 */
+  --lp-t-base: 17px; /* article body */
+  --lp-t-ui: 16px; /* UI base */
+  --lp-t-meta: 14px; /* section labels, meta */
   --lp-t-caption: 13px;
-  --lp-t-micro:  12px;  /* eyebrows, tag pills */
+  --lp-t-micro: 12px; /* eyebrows, tag pills */
 
   /* ---------- Typography · Letter-spacing ---------- */
-  --lp-ls-tight: -0.5px;  /* large headings */
-  --lp-ls-snug:  -0.3px;  /* h2 */
+  --lp-ls-tight: -0.5px; /* large headings */
+  --lp-ls-snug: -0.3px; /* h2 */
   --lp-ls-normal: 0;
-  --lp-ls-wide:  1px;
-  --lp-ls-wider: 2px;     /* section eyebrows, labels */
-  --lp-ls-widest: 3px;    /* social links */
+  --lp-ls-wide: 1px;
+  --lp-ls-wider: 2px; /* section eyebrows, labels */
+  --lp-ls-widest: 3px; /* social links */
 
   /* ---------- Typography · Line heights ---------- */
   --lp-lh-tight: 1em;
-  --lp-lh-snug:  1.25;
+  --lp-lh-snug: 1.25;
   --lp-lh-normal: 1.5;
-  --lp-lh-body:  1.8;     /* article */
+  --lp-lh-body: 1.8; /* article */
   --lp-lh-loose: 2em;
 
   /* ---------- Spacing scale ---------- */
@@ -187,38 +196,38 @@
   --lp-space-12: 48px;
   --lp-space-14: 55px;
   --lp-space-18: 72px;
-  --lp-space-22: 90px;   /* section top pad */
-  --lp-space-30: 120px;  /* hero top pad */
+  --lp-space-22: 90px; /* section top pad */
+  --lp-space-30: 120px; /* hero top pad */
 
   /* ---------- Radii ---------- */
   --lp-radius-sm: 3px;
-  --lp-radius:    4px;    /* buttons, menu */
-  --lp-radius-md: 6px;    /* CTA */
-  --lp-radius-lg: 8px;    /* article images, code blocks */
-  --lp-radius-xl: 10px;   /* post cards */
+  --lp-radius: 4px; /* buttons, menu */
+  --lp-radius-md: 6px; /* CTA */
+  --lp-radius-lg: 8px; /* article images, code blocks */
+  --lp-radius-xl: 10px; /* post cards */
   --lp-radius-pill: 100px;
-  --lp-radius-full: 50%;  /* person image, timeline dots */
+  --lp-radius-full: 50%; /* person image, timeline dots */
 
   /* ---------- Shadows ---------- */
-  --lp-shadow-hero:   0 0 40px 0 rgba(0,0,0,.45);   /* hero section */
-  --lp-shadow-img:    0 0 25px 0 rgba(0,0,0,.15);   /* person image */
-  --lp-shadow-menu:   0 0 30px 0 rgba(0,0,0,.2);    /* menu */
-  --lp-shadow-card:   0 4px 16px 0 rgba(0,0,0,.06); /* post card hover */
-  --lp-shadow-btn:    0 4px 15px rgba(63, 81, 181, 0.4);
+  --lp-shadow-hero: 0 0 40px 0 rgba(0, 0, 0, 0.45); /* hero section */
+  --lp-shadow-img: 0 0 25px 0 rgba(0, 0, 0, 0.15); /* person image */
+  --lp-shadow-menu: 0 0 30px 0 rgba(0, 0, 0, 0.2); /* menu */
+  --lp-shadow-card: 0 4px 16px 0 rgba(0, 0, 0, 0.06); /* post card hover */
+  --lp-shadow-btn: 0 4px 15px rgba(63, 81, 181, 0.4);
   --lp-shadow-btn-hover: 0 10px 30px rgba(63, 81, 181, 0.5);
   --lp-shadow-blog-nav: 0 2px 8px rgba(0, 0, 0, 0.15);
   --lp-shadow-img-article: 0 2px 12px rgba(0, 0, 0, 0.08);
   --lp-shadow-img-article-dark: 0 2px 12px rgba(0, 0, 0, 0.3);
 
   /* ---------- Motion ---------- */
-  --lp-ease:       ease;
-  --lp-ease-out:   ease-out;
-  --lp-dur-fast:   0.2s;
-  --lp-dur:        0.3s;
-  --lp-dur-slow:   0.6s;
+  --lp-ease: ease;
+  --lp-ease-out: ease-out;
+  --lp-dur-fast: 0.2s;
+  --lp-dur: 0.3s;
+  --lp-dur-slow: 0.6s;
 
   /* ---------- Layout ---------- */
-  --lp-container: 1024px;      /* portfolio */
+  --lp-container: 1024px; /* portfolio */
   --lp-container-blog: 1080px; /* blog */
   --lp-nav-h: 64px;
 }
@@ -260,9 +269,15 @@
 }
 
 /* Elements that only show in one chrome theme (e.g. light/dark logo). */
-.sg-dark-only { display: none; }
-:root[data-theme='dark'] .sg-dark-only { display: block; }
-:root[data-theme='dark'] .sg-light-only { display: none; }
+.sg-dark-only {
+  display: none;
+}
+:root[data-theme='dark'] .sg-dark-only {
+  display: block;
+}
+:root[data-theme='dark'] .sg-light-only {
+  display: none;
+}
 
 /* --------------------------------------------------------------------------
    Semantic typography — element-level defaults.
@@ -270,7 +285,9 @@
 
 *,
 *::before,
-*::after { box-sizing: border-box; }
+*::after {
+  box-sizing: border-box;
+}
 
 :focus-visible {
   outline: 2px solid var(--lp-indigo-500);
@@ -308,7 +325,9 @@ body {
   letter-spacing: var(--lp-ls-wider);
   margin: 0;
 }
-.lp-t-hero strong { font-weight: var(--lp-w-light); }
+.lp-t-hero strong {
+  font-weight: var(--lp-w-light);
+}
 
 /* H1 — blog post */
 .lp-t-h1 {
@@ -346,7 +365,7 @@ body {
   font-size: 18px;
   font-weight: var(--lp-w-bold);
   line-height: var(--lp-lh-tight);
-  color: rgba(0,0,0,.8);
+  color: rgba(0, 0, 0, 0.8);
   text-transform: lowercase;
   letter-spacing: var(--lp-ls-wider);
   position: relative;
@@ -412,11 +431,33 @@ body {
   padding: var(--lp-space-6) var(--lp-space-8);
   box-sizing: border-box;
 }
-.sg-frame--center { display: flex; align-items: center; justify-content: center; }
-.sg-frame--stack  { display: flex; flex-direction: column; gap: var(--lp-space-5); justify-content: center; }
-.sg-frame--row    { display: flex; align-items: center; gap: var(--lp-space-5); flex-wrap: wrap; justify-content: space-around; }
-.sg-frame--paper  { background: var(--lp-paper); border-radius: var(--lp-radius-lg); }
-.sg-frame--ink    { background: var(--lp-ink-600); border-radius: var(--lp-radius-lg); color: var(--lp-white); }
+.sg-frame--center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.sg-frame--stack {
+  display: flex;
+  flex-direction: column;
+  gap: var(--lp-space-5);
+  justify-content: center;
+}
+.sg-frame--row {
+  display: flex;
+  align-items: center;
+  gap: var(--lp-space-5);
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+.sg-frame--paper {
+  background: var(--lp-paper);
+  border-radius: var(--lp-radius-lg);
+}
+.sg-frame--ink {
+  background: var(--lp-ink-600);
+  border-radius: var(--lp-radius-lg);
+  color: var(--lp-white);
+}
 
 /* Two-column spec row: label cell + specimen cell */
 .sg-row {
@@ -427,7 +468,10 @@ body {
   padding-bottom: var(--lp-space-3);
   border-bottom: 1px solid var(--lp-line-2);
 }
-.sg-row:last-child { border-bottom: none; padding-bottom: 0; }
+.sg-row:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
 
 /* Mono caption / label cell */
 .sg-meta {
@@ -454,7 +498,10 @@ body {
   align-items: center;
   gap: var(--lp-space-2);
 }
-.sg-stack .sg-meta { text-align: center; max-width: 140px; }
+.sg-stack .sg-meta {
+  text-align: center;
+  max-width: 140px;
+}
 
 /* Color swatch grid */
 .sg-swatches {
@@ -485,8 +532,12 @@ body {
   font-size: var(--lp-t-micro);
   opacity: 0.85;
 }
-.sg-swatch .sg-swatch-hex { opacity: 0.85; }
-.sg-swatch--outline { border: 1px solid var(--lp-line-2); }
+.sg-swatch .sg-swatch-hex {
+  opacity: 0.85;
+}
+.sg-swatch--outline {
+  border: 1px solid var(--lp-line-2);
+}
 
 /* Skip-to-content link — visually hidden until keyboard-focused */
 .skip-link {
@@ -503,7 +554,9 @@ body {
   font-size: var(--lp-t-caption);
   font-weight: var(--lp-w-medium);
 }
-.skip-link:focus { top: var(--lp-space-2); }
+.skip-link:focus {
+  top: var(--lp-space-2);
+}
 
 /* Click-to-copy token chip. Copy behavior comes from the data-copy
    delegation script in DocsLayout; the chip swaps to "✓ copied" briefly. */
@@ -526,7 +579,10 @@ body {
   text-decoration: underline dotted;
   text-underline-offset: 3px;
 }
-.sg-copy.copied { opacity: 1; text-decoration: none; }
+.sg-copy.copied {
+  opacity: 1;
+  text-decoration: none;
+}
 .sg-swatch-tokens {
   display: flex;
   flex-direction: column;
@@ -541,7 +597,9 @@ body {
   border-radius: var(--lp-radius-lg);
   overflow: hidden;
 }
-.sg-code + .sg-code { margin-top: var(--lp-space-3); }
+.sg-code + .sg-code {
+  margin-top: var(--lp-space-3);
+}
 .sg-code summary {
   cursor: pointer;
   padding: var(--lp-space-3) var(--lp-space-4);
@@ -553,8 +611,13 @@ body {
   background: var(--lp-paper-2);
   user-select: none;
 }
-.sg-code summary::marker { color: var(--lp-ink-100); }
-.sg-code-body { position: relative; background: var(--lp-code-bg); }
+.sg-code summary::marker {
+  color: var(--lp-ink-100);
+}
+.sg-code-body {
+  position: relative;
+  background: var(--lp-code-bg);
+}
 .sg-code pre {
   margin: 0;
   padding: var(--lp-space-4) var(--lp-space-5);
@@ -579,4 +642,6 @@ body {
   padding: 3px 10px;
   cursor: pointer;
 }
-.sg-code-copy:hover { background: rgba(255, 255, 255, 0.15); }
+.sg-code-copy:hover {
+  background: rgba(255, 255, 255, 0.15);
+}

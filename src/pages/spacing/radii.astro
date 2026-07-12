@@ -2,24 +2,35 @@
 import DocsLayout from '../../layouts/DocsLayout.astro';
 
 const radii = [
-  { name: 'sm',   token: '--lp-radius-sm',   note: '3px · alerts' },
-  { name: 'base', token: '--lp-radius',      note: '4px · menu' },
-  { name: 'md',   token: '--lp-radius-md',   note: '6px · CTA' },
-  { name: 'lg',   token: '--lp-radius-lg',   note: '8px · code / img' },
-  { name: 'xl',   token: '--lp-radius-xl',   note: '10px · cards' },
+  { name: 'sm', token: '--lp-radius-sm', note: '3px · alerts' },
+  { name: 'base', token: '--lp-radius', note: '4px · menu' },
+  { name: 'md', token: '--lp-radius-md', note: '6px · CTA' },
+  { name: 'lg', token: '--lp-radius-lg', note: '8px · code / img' },
+  { name: 'xl', token: '--lp-radius-xl', note: '10px · cards' },
   { name: 'pill', token: '--lp-radius-pill', note: '100px · tags', wide: true },
   { name: 'full', token: '--lp-radius-full', note: '50% · avatar' },
 ];
 ---
+
 <DocsLayout title="Spacing — Radii" description="Corner-radius tokens. Click a token to copy it.">
   <div class="sg-frame--row">
-    {radii.map((r) => (
-      <div class="sg-stack">
-        <div class={`box${r.wide ? ' box--wide' : ''}`} style={`border-radius: var(${r.token})`}></div>
-        <div class="sg-meta">{r.name}<small>{r.note}</small></div>
-        <button class="sg-copy" type="button" data-copy={`var(${r.token})`}>{r.token}</button>
-      </div>
-    ))}
+    {
+      radii.map((r) => (
+        <div class="sg-stack">
+          <div
+            class={`box${r.wide ? ' box--wide' : ''}`}
+            style={`border-radius: var(${r.token})`}
+          />
+          <div class="sg-meta">
+            {r.name}
+            <small>{r.note}</small>
+          </div>
+          <button class="sg-copy" type="button" data-copy={`var(${r.token})`}>
+            {r.token}
+          </button>
+        </div>
+      ))
+    }
   </div>
 </DocsLayout>
 
@@ -29,5 +40,7 @@ const radii = [
     height: 68px;
     background: var(--lp-indigo-500);
   }
-  .box--wide { width: 120px; }
+  .box--wide {
+    width: 120px;
+  }
 </style>

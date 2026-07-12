@@ -13,7 +13,11 @@ const snippet = `<div class="lp-field">
      when the field has a value so the label stays risen:
        field.classList.toggle('filled', !!input.value) -->`;
 ---
-<DocsLayout title="Input" description="Underlined text input with a floating-label pattern (Material-ish, custom).">
+
+<DocsLayout
+  title="Input"
+  description="Underlined text input with a floating-label pattern (Material-ish, custom)."
+>
   <div class="sg-frame--stack">
     <div>
       <div class="lbl">Empty</div>
@@ -29,7 +33,12 @@ const snippet = `<div class="lp-field">
     </div>
     <div>
       <div class="lbl">Textarea</div>
-      <FloatingField label="Message" type="textarea" state="filled" value="Tell us about the engagement." />
+      <FloatingField
+        label="Message"
+        type="textarea"
+        state="filled"
+        value="Tell us about the engagement."
+      />
     </div>
   </div>
   <CodeSnippet code={snippet} />
@@ -44,5 +53,7 @@ const snippet = `<div class="lp-field">
     color: var(--lp-ink-100);
     margin-bottom: var(--lp-space-2);
   }
-  .sg-frame--stack :global(.lp-field) { max-width: 420px; }
+  .sg-frame--stack :global(.lp-field) {
+    max-width: 420px;
+  }
 </style>

@@ -7,7 +7,7 @@ description: Use when writing or reviewing copy, choosing colors/type/spacing/sh
 
 This is the **why**, not the **what**. For every exact `--lp-*` token name/value and every `lp-*`/`sg-*`
 class, see sibling skill `styleguide-design-tokens-reference` — that is the catalog. This skill teaches
-the design reasoning so a mid-level engineer (or a model) can make a *new* on-brand decision, not just
+the design reasoning so a mid-level engineer (or a model) can make a _new_ on-brand decision, not just
 copy an existing one.
 
 Brand doctrine facts below are marked **SACRED** where straying is a real failure per the maintainer,
@@ -15,7 +15,7 @@ not a nitpick. Everything else is guidance for extending the system in spirit.
 
 ## Two accents, one meaning each
 
-- **Portfolio indigo `#3F51B5`** (Material 500) — the *only* primary accent on the portfolio surface
+- **Portfolio indigo `#3F51B5`** (Material 500) — the _only_ primary accent on the portfolio surface
   (hero fill, CTA buttons, section-eyebrow underline wash, active timeline node, focus ring). It reads
   structured and corporate-adjacent — deliberately, because the audience is CTOs/VPs/security-conscious
   founders who read "flashy" as "not enterprise-ready."
@@ -34,15 +34,15 @@ not a nitpick. Everything else is guidance for extending the system in spirit.
 
 ## Typography: two families, one job each
 
-- **Poppins** (300/400/500/600/700) carries *structure* — headings, hero, body, buttons, labels.
-- **Roboto Mono** (300/400/500/700) adds *"engineering" texture* — section eyebrows, meta/timestamps,
+- **Poppins** (300/400/500/600/700) carries _structure_ — headings, hero, body, buttons, labels.
+- **Roboto Mono** (300/400/500/700) adds _"engineering" texture_ — section eyebrows, meta/timestamps,
   footer copyright, nav labels, inline code, numeric proof captions. The split is strict: never use mono
   for a heading, never use Poppins for an eyebrow.
 - **Fonts are self-hosted via `@font-face`/`@fontsource` woff2 (latin subset), full stop.** Do not
   reference "Google Fonts `@import`" — that describes an older bundle and is stale for the live system;
   the CSP (`font-src 'self'`) makes an external font request a silent production break, not just a
   style deviation. See `styleguide-change-control` for the CSP non-negotiable.
-- **Hero name is 68px / weight 300 / 2px tracking** — deliberately *light-weight* against the heavy solid
+- **Hero name is 68px / weight 300 / 2px tracking** — deliberately _light-weight_ against the heavy solid
   indigo hero block, so the name reads as elegant contrast rather than competing with the fill for
   visual weight. This pairing (huge + light) is the signature hero move; don't default to a bold hero
   numeral just because it's big.
@@ -54,12 +54,12 @@ not a nitpick. Everything else is guidance for extending the system in spirit.
 
 ## Casing rules (apply per role, not blanket)
 
-| Role | Casing | Notes |
-|---|---|---|
-| Section eyebrows | lowercase, mono, letter-spaced | underlined with a 40%-opacity indigo wash — a highlighter, not a solid rule |
-| Service titles / labels | UPPERCASE, 2px tracking | structural labels, not body copy |
-| Headings | Title Case | never all-caps, ever |
-| Button labels | UPPERCASE, ~1.5px tracking | e.g. "DISCUSS YOUR NEEDS" — slightly tighter tracking than eyebrows/labels, don't conflate the two |
+| Role                    | Casing                         | Notes                                                                                              |
+| ----------------------- | ------------------------------ | -------------------------------------------------------------------------------------------------- |
+| Section eyebrows        | lowercase, mono, letter-spaced | underlined with a 40%-opacity indigo wash — a highlighter, not a solid rule                        |
+| Service titles / labels | UPPERCASE, 2px tracking        | structural labels, not body copy                                                                   |
+| Headings                | Title Case                     | never all-caps, ever                                                                               |
+| Button labels           | UPPERCASE, ~1.5px tracking     | e.g. "DISCUSS YOUR NEEDS" — slightly tighter tracking than eyebrows/labels, don't conflate the two |
 
 ## The voice (this is the part most often under-served)
 
@@ -102,18 +102,18 @@ tighter than section rhythm because they're a single continuous list, not discre
 ## Shadows: four semantic roles, not a smooth elevation ramp
 
 Don't reach for a generic "elevation 1/2/3" mental model — this system assigns each shadow a specific
-*meaning*, not a stacking height:
+_meaning_, not a stacking height:
 
 1. **Image rim** — soft, wide, very low opacity glow around the portrait. Reads as "presence," not depth.
 2. **Card hover** — tight, low-opacity, appears only on interaction (blog teaser cards). Reads as "this
    is clickable," not ambient elevation.
-3. **Hero block** — a large *inset-feeling* dark shadow that makes the solid indigo hero read as
+3. **Hero block** — a large _inset-feeling_ dark shadow that makes the solid indigo hero read as
    "pressed"/recessed rather than floating. This is the odd one out — it's the only shadow that reads
    as depth-into-the-page rather than lift-off-the-page.
 4. **Button indigo** — a colored (not neutral) shadow tinted to the button's own hue, intensifying on
    hover. Reads as "this button is charged," reinforcing the CTA's importance.
 
-There are more shadow *tokens* than four (nav-sticky, article-image, dark-mode variants) — those are
+There are more shadow _tokens_ than four (nav-sticky, article-image, dark-mode variants) — those are
 refinements of these four roles for different surfaces, not a fifth+ tier. If you need an exact value,
 that's `styleguide-design-tokens-reference`, not this skill.
 
@@ -134,7 +134,7 @@ expect to find their keyframes in this styleguide's CSS.
 ## States: hover / focus / press
 
 - **Button hover** — flips to transparent fill, lifts `translateY(-3px)`, and the shadow both grows and
-  intensifies (see shadow role 4 above). The color *inverts* rather than just darkening — a deliberate
+  intensifies (see shadow role 4 above). The color _inverts_ rather than just darkening — a deliberate
   "reveal" rather than a shade shift.
 - **Menu-item hover** — a faint wash plus a color deepen (mid-grey → near-black). Subtle, UI-chrome-level
   feedback, not a brand statement.
@@ -156,7 +156,7 @@ nodes); full pill for category tags, because a pill reads as a removable/scannab
 ## Cards and blur — the two easiest ways to go off-brand
 
 - **No new card styles (SACRED).** Portfolio has no card layer at all — services are icon + title + text
-  directly on paper. The *only* card in the whole system is the blog's "Latest from the Blog" teaser
+  directly on paper. The _only_ card in the whole system is the blog's "Latest from the Blog" teaser
   card. If you're tempted to wrap something in a card because "it needs visual separation," that's a
   signal to use whitespace/borders instead, not a new card.
 - **No `backdrop-filter`/blur anywhere (SACRED).** Transparency in this system always carries semantic
@@ -184,7 +184,7 @@ Facts verified against the repo on 2026-07-05 (repo root: `/Users/mlaplante/.sup
   distilled from) states fonts load via "Google Fonts `@import`." This is stale — the live
   `src/styles/global.css` self-hosts Poppins + Roboto Mono via `@font-face`/`@fontsource` woff2. Trust
   the live CSS, not the bundle doc, for delivery mechanism; the bundle doc is still the best source for
-  the *doctrine* (voice, casing, palette meaning) captured in this skill.
+  the _doctrine_ (voice, casing, palette meaning) captured in this skill.
 - Re-verify palette/type-scale doctrine values: `grep -E "lp-t-hero|lp-t-base|lp-lh-body|lp-indigo-500|lp-blog-blue" src/styles/global.css`
 - Re-verify the one-gradient rule still holds (no new `linear-gradient`/`radial-gradient` introduced):
   `grep -rn "gradient(" src/styles/`

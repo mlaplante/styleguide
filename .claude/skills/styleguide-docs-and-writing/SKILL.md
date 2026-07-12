@@ -8,25 +8,25 @@ description: Use when adding or renaming a styleguide page or component and need
 Owns the docs of record (`README.md`, `src/data/nav.ts`, `CodeSnippet` blocks), house
 writing style for this repo's own prose, and external positioning (this site is the public
 brand face at `brand.michaellaplante.com` and must stay consistent with `michaellaplante.com`
-and not over-claim). Does not own brand voice *doctrine* (palette/casing/tone rules) or the
+and not over-claim). Does not own brand voice _doctrine_ (palette/casing/tone rules) or the
 token/class catalog — see cross-refs below.
 
 ## When NOT to use this skill
 
-| If you need... | Use instead |
-|---|---|
-| The full brand voice/casing/palette doctrine (not just a pointer to it) | `laplante-brand-reference` |
-| The token/class catalog (`--lp-*`, `--sg-*`, `lp-*`, `sg-*`) | `styleguide-design-tokens-reference` |
-| Whether a change is safe to merge, or the non-negotiables list with rationale | `styleguide-change-control` |
-| Why the repo is structured this way (3-layer lineage, CSP rationale, etc.) | `styleguide-architecture-contract` |
-| dev/build/preview commands, CF Pages deploy mechanics, `_headers`/robots/sitemap *behavior* | `styleguide-run-and-operate` |
-| Historical investigations / upgrade incidents | `styleguide-failure-archaeology` |
-| Recreating the toolchain, engines, config file contents | `styleguide-build-and-env` |
+| If you need...                                                                              | Use instead                          |
+| ------------------------------------------------------------------------------------------- | ------------------------------------ |
+| The full brand voice/casing/palette doctrine (not just a pointer to it)                     | `laplante-brand-reference`           |
+| The token/class catalog (`--lp-*`, `--sg-*`, `lp-*`, `sg-*`)                                | `styleguide-design-tokens-reference` |
+| Whether a change is safe to merge, or the non-negotiables list with rationale               | `styleguide-change-control`          |
+| Why the repo is structured this way (3-layer lineage, CSP rationale, etc.)                  | `styleguide-architecture-contract`   |
+| dev/build/preview commands, CF Pages deploy mechanics, `_headers`/robots/sitemap _behavior_ | `styleguide-run-and-operate`         |
+| Historical investigations / upgrade incidents                                               | `styleguide-failure-archaeology`     |
+| Recreating the toolchain, engines, config file contents                                     | `styleguide-build-and-env`           |
 
 Any change you make as a result of this skill (editing `nav.ts`, `README.md`,
 `public/robots.txt`, `astro.config.mjs`) is a real change to a live docs-of-record file —
 route it through `styleguide-change-control` before it lands on `main` like any other change.
-This skill tells you *what* to keep in sync and *how to write it*; it does not grant a bypass
+This skill tells you _what_ to keep in sync and _how to write it_; it does not grant a bypass
 of the merge gate.
 
 ## 1. Adding a page — docs-of-record checklist
@@ -39,9 +39,9 @@ Reproduced and verified against `README.md` "Adding a page" (as of 2026-07-05):
    - the `nav` array (sidebar groups: `Foundations`, `Components`, `UI Kits` as of 2026-07-05),
    - the `landing` array (the landing-page card grid, keyed by `visual` type:
      `'logo' | 'colors' | 'type' | 'spacing' | 'motion' | 'components' | 'ui-kits'`).
-   One edit to `nav.ts` updates the sidebar AND the landing grid — do not hand-edit either
-   surface separately. Adding a page to a group already represented in `landing` (e.g. a new
-   `components/*` page) usually needs only a `nav` entry, not a new `landing` entry.
+     One edit to `nav.ts` updates the sidebar AND the landing grid — do not hand-edit either
+     surface separately. Adding a page to a group already represented in `landing` (e.g. a new
+     `components/*` page) usually needs only a `nav` entry, not a new `landing` entry.
 3. Use `var(--lp-*)` tokens (never raw hex/px) and `sg-*` scaffolding classes for preview
    chrome (`sg-row`, `sg-meta`, `sg-stack`, `sg-swatch`, etc.).
 4. Update `README.md`'s "What's in the repo" bullet list if the new page changes the shape of
@@ -65,6 +65,7 @@ Reproduced and verified against `README.md` "Adding or changing a component" (as
    const snippet = `<a class="lp-btn" href="#">Schedule a Consultation</a>
    <!-- Styles: .lp-btn in src/styles/components.css -->`;
    ---
+
    <CodeSnippet code={snippet} />
    ```
    `CodeSnippet.astro` (19 lines) takes `code: string` and optional `label` (default `'HTML'`),
@@ -105,7 +106,7 @@ see `styleguide-architecture-contract` for the 3-layer lineage). Keep them consi
   ```
   User-agent: *
   Allow: /
-  
+
   Sitemap: https://brand.michaellaplante.com/sitemap-index.xml
   ```
   This is a blanket allow for all user agents, with no AI-training-bot-specific rules. If asked
@@ -128,6 +129,7 @@ when explaining why re-sync matters, and follow the re-sync procedure below when
 a similar mismatch.
 
 **What happened (verified via `git log`/`git show`, 2026-07-05):**
+
 - Commit `c511b8d` ("fix(ci): require Node >=22.12.0 for Astro 6") was accurate when written —
   at that commit, `package.json` genuinely pinned `"astro": "^6.4.6"`.
 - Commit `be4d2c9` later bumped `astro` from `^6.4.6` to `^7.0.0` ("Bump astro ^6.4.6 -> ^7.0.0
@@ -163,13 +165,13 @@ it's current:**
 Facts below verified 2026-07-05 against this repo's working tree (`skills` branch). Re-verify
 before trusting them if time has passed:
 
-| Fact | Re-verify with |
-|---|---|
-| Resolved Astro version (7.0.3 as of 2026-07-05) | `grep -A2 '"node_modules/astro"' package-lock.json \| grep version` |
-| `README.md` "Adding a page" / "Adding or changing a component" steps still match this text | `git diff HEAD -- README.md` (after reading current file) |
-| `nav.ts` groups (`Foundations`, `Components`, `UI Kits`) and `landing` visual keys | `cat src/data/nav.ts` |
-| `CodeSnippet.astro` prop shape (`code`, `label = 'HTML'`) | `cat src/components/CodeSnippet.astro` |
-| `astro.config.mjs` `site:` value and integrations | `cat astro.config.mjs` |
-| `public/robots.txt` contents | `cat public/robots.txt` |
-| Astro-6→7 bump commit history cited above | `git log --oneline -- package.json` |
-| Page count (golden inventory, owned by `styleguide-validation-and-qa`) | `npm run build 2>&1 | grep "page(s) built"` |
+| Fact                                                                                       | Re-verify with                                                      |
+| ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------- |
+| Resolved Astro version (7.0.3 as of 2026-07-05)                                            | `grep -A2 '"node_modules/astro"' package-lock.json \| grep version` |
+| `README.md` "Adding a page" / "Adding or changing a component" steps still match this text | `git diff HEAD -- README.md` (after reading current file)           |
+| `nav.ts` groups (`Foundations`, `Components`, `UI Kits`) and `landing` visual keys         | `cat src/data/nav.ts`                                               |
+| `CodeSnippet.astro` prop shape (`code`, `label = 'HTML'`)                                  | `cat src/components/CodeSnippet.astro`                              |
+| `astro.config.mjs` `site:` value and integrations                                          | `cat astro.config.mjs`                                              |
+| `public/robots.txt` contents                                                               | `cat public/robots.txt`                                             |
+| Astro-6→7 bump commit history cited above                                                  | `git log --oneline -- package.json`                                 |
+| Page count (golden inventory, owned by `styleguide-validation-and-qa`)                     | `npm run build 2>&1                                                 | grep "page(s) built"` |

@@ -17,19 +17,19 @@ merge anything itself.
 
 ## When NOT to use this skill
 
-| If you need... | Use instead |
-|---|---|
-| The actual enforcement scripts and how to run them today | `styleguide-diagnostics-and-tooling` |
-| The non-negotiables list with rationale + merge gate | `styleguide-change-control` |
-| The token/class catalog (every `--lp-*`/`--sg-*` name) | `styleguide-design-tokens-reference` |
-| Brand doctrine (palette, type scale, voice) | `laplante-brand-reference` |
-| General a11y keyboard-nav patterns (not styleguide-specific) | `accessibility-keyboard-navigation` |
-| General perf measurement technique (not styleguide-specific) | `web-perf` / `cloudflare:web-perf` |
-| To actually merge one of these candidates | `styleguide-change-control` first, always |
+| If you need...                                               | Use instead                               |
+| ------------------------------------------------------------ | ----------------------------------------- |
+| The actual enforcement scripts and how to run them today     | `styleguide-diagnostics-and-tooling`      |
+| The non-negotiables list with rationale + merge gate         | `styleguide-change-control`               |
+| The token/class catalog (every `--lp-*`/`--sg-*` name)       | `styleguide-design-tokens-reference`      |
+| Brand doctrine (palette, type scale, voice)                  | `laplante-brand-reference`                |
+| General a11y keyboard-nav patterns (not styleguide-specific) | `accessibility-keyboard-navigation`       |
+| General perf measurement technique (not styleguide-specific) | `web-perf` / `cloudflare:web-perf`        |
+| To actually merge one of these candidates                    | `styleguide-change-control` first, always |
 
 ## The maintainer's three frontier directions
 
-Each is real, scoped to *this repo's* actual assets — not generic advice. As of 2026-07-05,
+Each is real, scoped to _this repo's_ actual assets — not generic advice. As of 2026-07-05,
 none has a line of code in the repo.
 
 ### 1. Enforcement tooling — rules described, not enforced
@@ -52,7 +52,7 @@ none has a line of code in the repo.
   pages (`blog.astro`, `portfolio.astro`) are deliberate hi-fi reproductions of the real site
   including its dark mode (raw one-off colors, a body-class `is:global` toggle, a dark-mode
   nav gradient), and `index.astro` uses raw hex in inline preview-swatch tiles that exist to
-  *show* those colors. Wiring these scripts into CI unmodified would put a red X on every PR
+  _show_ those colors. Wiring these scripts into CI unmodified would put a red X on every PR
   from day one, not just on real regressions. Before wiring into CI: agree and implement an
   allowlist (the `ui-kits/` pages plus the `index.astro` preview swatches) per
   `styleguide-diagnostics-and-tooling`'s C6 interpretation, routed through
@@ -73,7 +73,7 @@ none has a line of code in the repo.
 
 - **Why it falls short today:** verified — no vitest, no Playwright, no jest anywhere in
   `package.json`/lockfile. The only gate is `npm run build` succeeding (emits "24 page(s)
-  built") plus `npm run format:check`. Everything about how a page actually *renders* —
+  built") plus `npm run format:check`. Everything about how a page actually _renders_ —
   layout, contrast, dark mode — is manual eyeball review.
 - **This repo's asset:** a fully static `dist/` (~492K, no auth, no dynamic state to
   fight), a stable 24-page golden route set (§ the golden inventory — index, 404, logo,
@@ -89,8 +89,8 @@ none has a line of code in the repo.
      against them.
   3. Add an automated a11y scan (e.g. axe-core) over the same 24 routes for contrast/
      landmark/alt-text violations, reporting rule ID + node, not just pass/fail.
-  Cross-ref `accessibility-keyboard-navigation` for general a11y patterns and `web-perf` for
-  measurement-harness habits — both assume a different host app; adapt, don't copy.
+     Cross-ref `accessibility-keyboard-navigation` for general a11y patterns and `web-perf` for
+     measurement-harness habits — both assume a different host app; adapt, don't copy.
 - **You have a result when:** there is a committed baseline screenshot for all 24 pages ×
   2 themes, and CI has failed at least once on a real, visible, non-flaky pixel diff or a
   real axe violation with a rule ID.
@@ -99,7 +99,7 @@ none has a line of code in the repo.
 
 - **Why it falls short today:** the 120 `--lp-*` tokens are well-centralized (real
   strength — see asset below) but CSS custom properties in `src/styles/global.css` are the
-  *only* output. Reusing this palette anywhere else (a JSON design-token file, a future
+  _only_ output. Reusing this palette anywhere else (a JSON design-token file, a future
   non-CSS target) today means hand-copying values out of a stylesheet.
 - **This repo's asset:** the tokens are already centralized in exactly one place — the
   `:root` block in `src/styles/global.css` — with a consistent `--lp-<family>-<step>`
@@ -132,13 +132,13 @@ uses for body copy? WCAG 2.x contrast ratio, computed (not eyeballed) via the st
 relative-luminance formula (`L = 0.2126R + 0.7152G + 0.0722B` in linearized sRGB;
 `ratio = (L_lighter + 0.05) / (L_darker + 0.05)`), against white `#FFFFFF`:
 
-| Token | Hex | Used for | Ratio vs white | AA normal text (≥4.5:1) | AAA normal text (≥7:1) |
-|---|---|---|---|---|---|
-| `--lp-indigo-500` | `#3F51B5` | primary/button accent | **6.87:1** | pass | fail (short by 0.13) |
-| `--lp-fg-1` (`--lp-ink-900`) | `#111827` | strongest text | **17.74:1** | pass | pass |
-| `--lp-fg-2` (`--lp-ink-500`) | `#374151` | article body | **10.31:1** | pass | pass |
-| `--lp-fg-3` (`--lp-ink-300`) | `#6B7280` | meta text | **4.83:1** | pass | fail |
-| `--lp-fg-mute` (`--lp-ink-200`) | `#808080` | form labels | **3.95:1** | **fail** | fail |
+| Token                           | Hex       | Used for              | Ratio vs white | AA normal text (≥4.5:1) | AAA normal text (≥7:1) |
+| ------------------------------- | --------- | --------------------- | -------------- | ----------------------- | ---------------------- |
+| `--lp-indigo-500`               | `#3F51B5` | primary/button accent | **6.87:1**     | pass                    | fail (short by 0.13)   |
+| `--lp-fg-1` (`--lp-ink-900`)    | `#111827` | strongest text        | **17.74:1**    | pass                    | pass                   |
+| `--lp-fg-2` (`--lp-ink-500`)    | `#374151` | article body          | **10.31:1**    | pass                    | pass                   |
+| `--lp-fg-3` (`--lp-ink-300`)    | `#6B7280` | meta text             | **4.83:1**     | pass                    | fail                   |
+| `--lp-fg-mute` (`--lp-ink-200`) | `#808080` | form labels           | **3.95:1**     | **fail**                | fail                   |
 
 The last row is a genuine, computed finding, not hypothetical: `--lp-fg-mute` /
 `--lp-ink-200` is used as the actual text color of `.lp-field label` in

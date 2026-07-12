@@ -13,20 +13,44 @@ const snippet = `<div class="lp-service">
 
 <!-- Styles: .lp-service in src/styles/components.css -->`;
 ---
-<DocsLayout title="Service" description="Service card — monoline glyph + uppercase title + supporting copy.">
+
+<DocsLayout
+  title="Service"
+  description="Service card — monoline glyph + uppercase title + supporting copy."
+>
   <div class="frame">
     <ServiceCard title="Security Architecture">
-      <svg slot="glyph" width="44" height="44" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.5">
-        <path d="M32 6 L52 14 V32 C52 46 42 54 32 58 C22 54 12 46 12 32 V14 Z" />
-        <path d="M24 32 L30 38 L42 26" stroke-linecap="round" stroke-linejoin="round" />
+      <svg
+        slot="glyph"
+        width="44"
+        height="44"
+        viewBox="0 0 64 64"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="1.5"
+      >
+        <path d="M32 6 L52 14 V32 C52 46 42 54 32 58 C22 54 12 46 12 32 V14 Z"></path>
+        <path d="M24 32 L30 38 L42 26" stroke-linecap="round" stroke-linejoin="round"></path>
       </svg>
-      Assess your infrastructure, identify gaps, design defense-in-depth strategies tailored to your risk profile.
+      Assess your infrastructure, identify gaps, design defense-in-depth strategies tailored to your risk
+      profile.
     </ServiceCard>
     <ServiceCard title="Cloud Security Strategy">
-      <svg slot="glyph" width="44" height="44" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.5">
-        <path d="M18 44 C10 44 6 38 6 32 C6 24 14 20 20 22 C22 14 30 10 38 14 C46 10 56 18 54 28 C60 30 60 42 52 44 Z" />
+      <svg
+        slot="glyph"
+        width="44"
+        height="44"
+        viewBox="0 0 64 64"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="1.5"
+      >
+        <path
+          d="M18 44 C10 44 6 38 6 32 C6 24 14 20 20 22 C22 14 30 10 38 14 C46 10 56 18 54 28 C60 30 60 42 52 44 Z"
+        ></path>
       </svg>
-      Build secure multi-cloud architectures across AWS, Azure, and GCP with zero-trust principles and continuous monitoring.
+      Build secure multi-cloud architectures across AWS, Azure, and GCP with zero-trust principles and
+      continuous monitoring.
     </ServiceCard>
   </div>
   <CodeSnippet code={snippet} />
@@ -42,6 +66,8 @@ const snippet = `<div class="lp-service">
     gap: var(--lp-space-8);
   }
   @media (max-width: 640px) {
-    .frame { grid-template-columns: 1fr; }
+    .frame {
+      grid-template-columns: 1fr;
+    }
   }
 </style>

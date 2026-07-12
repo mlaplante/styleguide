@@ -11,14 +11,14 @@ proposes adding tests.
 
 ## When NOT to use this skill
 
-| If you need... | Use instead |
-|---|---|
-| The actual diagnostic/lint scripts (raw-hex grep, `is:global` grep, external-URL grep) | `styleguide-diagnostics-and-tooling` |
-| Command anatomy for `dev`/`build`/`preview`, `dist/` layout, CF Pages deploy | `styleguide-run-and-operate` |
-| The merge/deploy gate, change taxonomy, non-negotiables-with-rationale, deps-PR rule | `styleguide-change-control` — **this skill never makes the merge call itself**, it only defines the evidence you bring to that gate |
-| Triaging a live/deployed failure | `styleguide-debugging-playbook` |
-| The broader automation roadmap beyond the first candidate test layer | `styleguide-raising-the-bar` |
-| Keyboard/screen-reader a11y technique itself | `accessibility-keyboard-navigation` |
+| If you need...                                                                         | Use instead                                                                                                                         |
+| -------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------- |
+| The actual diagnostic/lint scripts (raw-hex grep, `is:global` grep, external-URL grep) | `styleguide-diagnostics-and-tooling`                                                                                                |
+| Command anatomy for `dev`/`build`/`preview`, `dist/` layout, CF Pages deploy           | `styleguide-run-and-operate`                                                                                                        |
+| The merge/deploy gate, change taxonomy, non-negotiables-with-rationale, deps-PR rule   | `styleguide-change-control` — **this skill never makes the merge call itself**, it only defines the evidence you bring to that gate |
+| Triaging a live/deployed failure                                                       | `styleguide-debugging-playbook`                                                                                                     |
+| The broader automation roadmap beyond the first candidate test layer                   | `styleguide-raising-the-bar`                                                                                                        |
+| Keyboard/screen-reader a11y technique itself                                           | `accessibility-keyboard-navigation`                                                                                                 |
 
 ## The brutal truth: there is no test suite
 
@@ -30,12 +30,12 @@ here. Do not claim otherwise, and do not invent a script path.
 
 ## The current acceptance gate (4 items — all must be green)
 
-| # | Check | Command | What "pass" means |
-|---|---|---|---|
-| 1 | Build succeeds | `npm run build` | Output includes **"24 page(s) built"** — the golden count (§ below). Fewer/more pages means a route broke or a stray file leaked in. |
-| 2 | Format check | `npm run format:check` | Prettier (`prettier-plugin-astro`) exits clean, no `[warn]` lines. |
-| 3 | Manual visual review | `npm run dev` (http://localhost:4321) or `npm run build && npm run preview` | Human eyes on every page your change could touch — see the golden-inventory checklist below. Command anatomy owned by `styleguide-run-and-operate`. |
-| 4 | Diagnostics clean | (owned by `styleguide-diagnostics-and-tooling`) | That sibling skill's checks report no violations. Don't re-derive or copy its specific greps here — cross-reference it. |
+| #   | Check                | Command                                                                     | What "pass" means                                                                                                                                   |
+| --- | -------------------- | --------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 1   | Build succeeds       | `npm run build`                                                             | Output includes **"24 page(s) built"** — the golden count (§ below). Fewer/more pages means a route broke or a stray file leaked in.                |
+| 2   | Format check         | `npm run format:check`                                                      | Prettier (`prettier-plugin-astro`) exits clean, no `[warn]` lines.                                                                                  |
+| 3   | Manual visual review | `npm run dev` (http://localhost:4321) or `npm run build && npm run preview` | Human eyes on every page your change could touch — see the golden-inventory checklist below. Command anatomy owned by `styleguide-run-and-operate`. |
+| 4   | Diagnostics clean    | (owned by `styleguide-diagnostics-and-tooling`)                             | That sibling skill's checks report no violations. Don't re-derive or copy its specific greps here — cross-reference it.                             |
 
 **Known current state (verified 2026-07-05, branch `skills`, clean working tree):** running
 `npm run format:check` on this checkout reports style issues — currently red (re-run
@@ -65,16 +65,16 @@ Source of truth for the list: `src/data/nav.ts` (sidebar + landing grid) cross-c
 `Sidebar.astro`, `global.css`, `components.css`), review **all 24**; when it touches one page or
 one `lp-*` component, review that page plus any `ui-kits/` page that reuses the same component.
 
-| Group | Routes to check | Watch for |
-|---|---|---|
-| Root | `/`, `/404` | Landing card grid matches `nav.ts` `landing[]`; 404 renders instead of erroring |
-| Foundations — misc | `/logo`, `/motion` | Logo renders on both light/dark tiles; duration/easing specimens unchanged |
-| Foundations — colors | `/colors/primary`, `/colors/accent-palette`, `/colors/neutrals` | Click-to-copy still copies the right `--lp-*` token string |
-| Foundations — type | `/type/hero`, `/type/headings`, `/type/body`, `/type/eyebrow` | Poppins/Roboto Mono render (no fallback-font flash — self-hosted, no external font requests) |
-| Foundations — spacing | `/spacing/scale`, `/spacing/radii`, `/spacing/shadows` | Values match the token, not a hardcoded px |
-| Components | `/components/buttons`, `/input`, `/blog-nav`, `/post-card`, `/service`, `/timeline`, `/badges`, `/callouts` | `CodeSnippet` markup matches the live rendered markup (they drift independently — see `styleguide-architecture-contract`) |
-| UI Kits | `/ui-kits/blog`, `/ui-kits/portfolio` | Same `lp-*` classes as the component pages — a UI-kit-only visual difference means `components.css` and the kit disagree |
-| Cross-cutting | any page | Dark-mode toggle still shows only ☀️/🌙; no new gradient/card/blur appeared; open browser devtools console and confirm no CSP violation (why CSP matters: `styleguide-change-control`) |
+| Group                 | Routes to check                                                                                             | Watch for                                                                                                                                                                              |
+| --------------------- | ----------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Root                  | `/`, `/404`                                                                                                 | Landing card grid matches `nav.ts` `landing[]`; 404 renders instead of erroring                                                                                                        |
+| Foundations — misc    | `/logo`, `/motion`                                                                                          | Logo renders on both light/dark tiles; duration/easing specimens unchanged                                                                                                             |
+| Foundations — colors  | `/colors/primary`, `/colors/accent-palette`, `/colors/neutrals`                                             | Click-to-copy still copies the right `--lp-*` token string                                                                                                                             |
+| Foundations — type    | `/type/hero`, `/type/headings`, `/type/body`, `/type/eyebrow`                                               | Poppins/Roboto Mono render (no fallback-font flash — self-hosted, no external font requests)                                                                                           |
+| Foundations — spacing | `/spacing/scale`, `/spacing/radii`, `/spacing/shadows`                                                      | Values match the token, not a hardcoded px                                                                                                                                             |
+| Components            | `/components/buttons`, `/input`, `/blog-nav`, `/post-card`, `/service`, `/timeline`, `/badges`, `/callouts` | `CodeSnippet` markup matches the live rendered markup (they drift independently — see `styleguide-architecture-contract`)                                                              |
+| UI Kits               | `/ui-kits/blog`, `/ui-kits/portfolio`                                                                       | Same `lp-*` classes as the component pages — a UI-kit-only visual difference means `components.css` and the kit disagree                                                               |
+| Cross-cutting         | any page                                                                                                    | Dark-mode toggle still shows only ☀️/🌙; no new gradient/card/blur appeared; open browser devtools console and confirm no CSP violation (why CSP matters: `styleguide-change-control`) |
 
 ## Pre-merge acceptance checklist (copy-paste into a PR description)
 
@@ -97,12 +97,12 @@ Adding any of these is a **behavior change to CI/tooling** and must be classifie
 through `styleguide-change-control` before it lands — this skill only sketches the shape a
 first layer could take.
 
-| Candidate layer | What it would catch | Rough shape |
-|---|---|---|
-| 1. Build-smoke assertion | Silent route loss/duplication | Wrap `npm run build`, assert the page count in its output equals 24 (or the then-current golden count) instead of eyeballing the log |
-| 2. Link-check | Broken internal `href`s (e.g. `nav.ts` pointing at a route that no longer exists) | Crawl `dist/` after build, verify every internal link resolves to a real emitted file |
-| 3. Visual regression | Unintended pixel/layout drift on a specimen page | Screenshot-diff the 24 golden pages pre/post change; needs a baseline-image strategy decision (open) |
-| 4. Accessibility scan | Contrast, focus order, ARIA gaps | See `accessibility-keyboard-navigation` for technique; would run per golden page |
+| Candidate layer          | What it would catch                                                               | Rough shape                                                                                                                          |
+| ------------------------ | --------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------ |
+| 1. Build-smoke assertion | Silent route loss/duplication                                                     | Wrap `npm run build`, assert the page count in its output equals 24 (or the then-current golden count) instead of eyeballing the log |
+| 2. Link-check            | Broken internal `href`s (e.g. `nav.ts` pointing at a route that no longer exists) | Crawl `dist/` after build, verify every internal link resolves to a real emitted file                                                |
+| 3. Visual regression     | Unintended pixel/layout drift on a specimen page                                  | Screenshot-diff the 24 golden pages pre/post change; needs a baseline-image strategy decision (open)                                 |
+| 4. Accessibility scan    | Contrast, focus order, ARIA gaps                                                  | See `accessibility-keyboard-navigation` for technique; would run per golden page                                                     |
 
 Full "how far should this system's automation go" roadmap (token pipeline, enforcement
 tooling, the evidence-bar philosophy) is owned by `styleguide-raising-the-bar` — this section

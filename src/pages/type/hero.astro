@@ -1,10 +1,14 @@
 ---
 import DocsLayout from '../../layouts/DocsLayout.astro';
 ---
-<DocsLayout title="Type — Hero" description="Hero type specimen — Poppins 300 with wide letter-spacing.">
+
+<DocsLayout
+  title="Type — Hero"
+  description="Hero type specimen — Poppins 300 with wide letter-spacing."
+>
   <div class="hero">
     <div class="label">Hero · Poppins 300 / 54–68px / 2px tracking</div>
-    <h1>I am <strong>Michael<br>La Plante</strong></h1>
+    <h1>I am <strong>Michael<br />La Plante</strong></h1>
     <div class="tag">SVP of Information Security and Operations</div>
   </div>
 </DocsLayout>
@@ -25,7 +29,9 @@ import DocsLayout from '../../layouts/DocsLayout.astro';
     letter-spacing: var(--lp-ls-wider);
     margin: 0;
   }
-  .hero h1 strong { font-weight: var(--lp-w-light); }
+  .hero h1 strong {
+    font-weight: var(--lp-w-light);
+  }
   .tag {
     font-family: var(--lp-font-mono);
     font-size: var(--lp-t-ui);

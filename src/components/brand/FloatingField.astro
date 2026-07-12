@@ -16,11 +16,16 @@ export interface Props {
 const { label, type = 'text', value, rows = 3, state } = Astro.props;
 const classes = `lp-field${state ? ` ${state}` : ''}`;
 ---
+
 <div class={classes}>
-  {type === 'textarea' ? (
-    <textarea rows={rows} placeholder=" ">{value}</textarea>
-  ) : (
-    <input type={type} value={value} placeholder=" " />
-  )}
+  {
+    type === 'textarea' ? (
+      <textarea rows={rows} placeholder=" ">
+        {value}
+      </textarea>
+    ) : (
+      <input type={type} value={value} placeholder=" " />
+    )
+  }
   <label>{label}</label>
 </div>

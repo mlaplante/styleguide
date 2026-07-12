@@ -10,40 +10,68 @@ const inks = [
   { name: 'Ink 100', hex: '#9CA3AF', token: '--lp-ink-100', fg: 'var(--lp-white)' },
 ];
 const papers = [
-  { name: 'Line',    hex: '#E0E0E0', token: '--lp-line' },
-  { name: 'Line 2',  hex: '#E5E7EB', token: '--lp-line-2' },
+  { name: 'Line', hex: '#E0E0E0', token: '--lp-line' },
+  { name: 'Line 2', hex: '#E5E7EB', token: '--lp-line-2' },
   { name: 'Paper 3', hex: '#F0F0F0', token: '--lp-paper-3' },
-  { name: 'Paper',   hex: '#F1F1F1', token: '--lp-paper' },
+  { name: 'Paper', hex: '#F1F1F1', token: '--lp-paper' },
   { name: 'Paper 2', hex: '#F8F9FA', token: '--lp-paper-2' },
-  { name: 'White',   hex: '#FFFFFF', token: '--lp-white' },
+  { name: 'White', hex: '#FFFFFF', token: '--lp-white' },
 ];
 ---
-<DocsLayout title="Colors — Neutrals" description="Neutral palette: text inks and paper backgrounds. Click a token or hex value to copy it.">
+
+<DocsLayout
+  title="Colors — Neutrals"
+  description="Neutral palette: text inks and paper backgrounds. Click a token or hex value to copy it."
+>
   <div class="sg-swatches grid">
-    {inks.map((s) => (
-      <div class="sg-swatch" style={`background:var(${s.token});color:${s.fg}`}>
-        <div class="sg-swatch-name">{s.name}</div>
-        <div class="sg-swatch-tokens">
-          <button class="sg-copy" type="button" data-copy={`var(${s.token})`}>{s.token}</button>
-          <button class="sg-copy" type="button" data-copy={s.hex}>{s.hex}</button>
+    {
+      inks.map((s) => (
+        <div class="sg-swatch" style={`background:var(${s.token});color:${s.fg}`}>
+          <div class="sg-swatch-name">{s.name}</div>
+          <div class="sg-swatch-tokens">
+            <button class="sg-copy" type="button" data-copy={`var(${s.token})`}>
+              {s.token}
+            </button>
+            <button class="sg-copy" type="button" data-copy={s.hex}>
+              {s.hex}
+            </button>
+          </div>
         </div>
-      </div>
-    ))}
-    {papers.map((s) => (
-      <div class="sg-swatch sg-swatch--outline" style={`background:var(${s.token})`}>
-        <div class="sg-swatch-name">{s.name}</div>
-        <div class="sg-swatch-tokens">
-          <button class="sg-copy" type="button" data-copy={`var(${s.token})`}>{s.token}</button>
-          <button class="sg-copy" type="button" data-copy={s.hex}>{s.hex}</button>
+      ))
+    }
+    {
+      papers.map((s) => (
+        <div class="sg-swatch sg-swatch--outline" style={`background:var(${s.token})`}>
+          <div class="sg-swatch-name">{s.name}</div>
+          <div class="sg-swatch-tokens">
+            <button class="sg-copy" type="button" data-copy={`var(${s.token})`}>
+              {s.token}
+            </button>
+            <button class="sg-copy" type="button" data-copy={s.hex}>
+              {s.hex}
+            </button>
+          </div>
         </div>
-      </div>
-    ))}
+      ))
+    }
   </div>
 </DocsLayout>
 
 <style>
-  .grid { grid-template-columns: repeat(6, 1fr); }
-  .grid :global(.sg-copy) { font-size: 10px; }
-  @media (max-width: 900px) { .grid { grid-template-columns: repeat(3, 1fr); } }
-  @media (max-width: 480px) { .grid { grid-template-columns: repeat(2, 1fr); } }
+  .grid {
+    grid-template-columns: repeat(6, 1fr);
+  }
+  .grid :global(.sg-copy) {
+    font-size: 10px;
+  }
+  @media (max-width: 900px) {
+    .grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+  @media (max-width: 480px) {
+    .grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
 </style>

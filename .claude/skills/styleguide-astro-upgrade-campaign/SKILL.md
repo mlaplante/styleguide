@@ -12,16 +12,16 @@ weekly deps PR because Astro majors have broken this project before (see Phase 1
 
 ## When NOT to use this skill
 
-| Situation | Use instead |
-|---|---|
-| Routine minor/patch bump, no major crossed, weekly PR build is green | Just verify via `styleguide-change-control`'s merge checklist — this whole campaign is overkill |
-| Deciding whether ANY change (not just a version bump) is safe to merge | `styleguide-change-control` — this skill's Phase 7 routes there, it does not replace it |
-| A live/deployed failure with no upgrade in progress | `styleguide-debugging-playbook` |
-| Recreating the env / reading config file anatomy (astro.config.mjs, tsconfig.json, engines) | `styleguide-build-and-env` |
-| Command anatomy for `dev`/`build`/`preview`, CF Pages deploy mechanics | `styleguide-run-and-operate` |
-| What already happened in past upgrades (4→6→7 history, commit hashes) | `styleguide-failure-archaeology` |
-| Running the enforcement/lint scripts themselves | `styleguide-diagnostics-and-tooling` |
-| You're about to add `@astrojs/cloudflare`, `wrangler`, or SSR "to fix" an upgrade error | Stop — wrong axis. This repo is a **static** build (`astro.config.mjs` has no adapter). See the fence below. |
+| Situation                                                                                   | Use instead                                                                                                  |
+| ------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------ |
+| Routine minor/patch bump, no major crossed, weekly PR build is green                        | Just verify via `styleguide-change-control`'s merge checklist — this whole campaign is overkill              |
+| Deciding whether ANY change (not just a version bump) is safe to merge                      | `styleguide-change-control` — this skill's Phase 7 routes there, it does not replace it                      |
+| A live/deployed failure with no upgrade in progress                                         | `styleguide-debugging-playbook`                                                                              |
+| Recreating the env / reading config file anatomy (astro.config.mjs, tsconfig.json, engines) | `styleguide-build-and-env`                                                                                   |
+| Command anatomy for `dev`/`build`/`preview`, CF Pages deploy mechanics                      | `styleguide-run-and-operate`                                                                                 |
+| What already happened in past upgrades (4→6→7 history, commit hashes)                       | `styleguide-failure-archaeology`                                                                             |
+| Running the enforcement/lint scripts themselves                                             | `styleguide-diagnostics-and-tooling`                                                                         |
+| You're about to add `@astrojs/cloudflare`, `wrangler`, or SSR "to fix" an upgrade error     | Stop — wrong axis. This repo is a **static** build (`astro.config.mjs` has no adapter). See the fence below. |
 
 ---
 
@@ -77,15 +77,18 @@ npm install
 ```
 
 Or, if you want `npm-check-updates` to help pick the version:
+
 ```bash
 npx npm-check-updates --target major --filter astro
 npm install
 ```
 
 After install, **read the diff**, don't just glance at `package.json`:
+
 ```bash
 git diff package.json package-lock.json | grep -E '"(astro|vite|@astrojs/sitemap)"' -A1
 ```
+
 A clean-looking `package.json` diff can still hide a stale-lockfile or peer-range problem —
 cross-ref `dependabot-major-bump-package-json-only-clean-merge-hides-stale-lock-and-peer-cap`.
 
@@ -104,14 +107,14 @@ don't wave it through).
 
 If it does NOT match, branch here — do not force through, do not add flags to suppress errors:
 
-| Observation | Root cause | Action |
-|---|---|---|
-| `require_dist is not a function` (or similar Vite pre-bundling/CJS-ESM error) | Two copies of Vite resolved in the tree (typically from a second package with its own nested Vite, e.g. a Tailwind Vite plugin) | Run `npm ls vite` to confirm duplication before assuming this applies. Cross-ref `astro6-cloudflare-require-dist-vite-duplication` — note that skill's repro is a Cloudflare **adapter** project; the underlying Vite-duplication mechanism can still apply here even without the adapter, so verify with `npm ls vite`, don't skip it just because we're static. |
-| `npm EBADENGINE` / "Astro requires Node ..." / engine mismatch | The new astro major raised its Node floor | Bump the floor in lockstep: `package.json` `engines.node`, `.nvmrc`, and `.github/workflows/update-dependencies.yml`'s `setup-node` `node-version`. Historical precedent: commit `c511b8d` did exactly this (`>=20` → `>=22.12.0`) when Astro 6 raised its floor — see `styleguide-failure-archaeology`. |
-| Error mentioning `@astrojs/cloudflare`, SSR adapter config, `locals`, or Cloudflare runtime env | **Known wrong path for this repo** — N/A here | We ship a static build with no adapter configured (verify: `astro.config.mjs` is 7 lines — `site` + `sitemap()` only, no `adapter` key). Do NOT add the adapter to make an error go away. If someone is deliberately introducing SSR alongside the upgrade, that is a separate architectural decision requiring its own `styleguide-change-control` review, not a fix folded into this campaign. |
-| `@astrojs/sitemap` peer-dependency warning or error | Integration hasn't caught up to astro's new peer range | Bump `@astrojs/sitemap` to the version satisfying the new range, re-run Phase 3. |
-| Prettier / `prettier-plugin-astro` warnings only, build still green | Cosmetic, not a build blocker | `npm run format`, then `npm run format:check` to confirm clean. |
-| Anything else / unclear | Unknown — do not guess | Stop. Use `styleguide-debugging-playbook` for live triage. Once resolved, the incident belongs in `styleguide-failure-archaeology`. |
+| Observation                                                                                     | Root cause                                                                                                                      | Action                                                                                                                                                                                                                                                                                                                                                                                           |
+| ----------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `require_dist is not a function` (or similar Vite pre-bundling/CJS-ESM error)                   | Two copies of Vite resolved in the tree (typically from a second package with its own nested Vite, e.g. a Tailwind Vite plugin) | Run `npm ls vite` to confirm duplication before assuming this applies. Cross-ref `astro6-cloudflare-require-dist-vite-duplication` — note that skill's repro is a Cloudflare **adapter** project; the underlying Vite-duplication mechanism can still apply here even without the adapter, so verify with `npm ls vite`, don't skip it just because we're static.                                |
+| `npm EBADENGINE` / "Astro requires Node ..." / engine mismatch                                  | The new astro major raised its Node floor                                                                                       | Bump the floor in lockstep: `package.json` `engines.node`, `.nvmrc`, and `.github/workflows/update-dependencies.yml`'s `setup-node` `node-version`. Historical precedent: commit `c511b8d` did exactly this (`>=20` → `>=22.12.0`) when Astro 6 raised its floor — see `styleguide-failure-archaeology`.                                                                                         |
+| Error mentioning `@astrojs/cloudflare`, SSR adapter config, `locals`, or Cloudflare runtime env | **Known wrong path for this repo** — N/A here                                                                                   | We ship a static build with no adapter configured (verify: `astro.config.mjs` is 7 lines — `site` + `sitemap()` only, no `adapter` key). Do NOT add the adapter to make an error go away. If someone is deliberately introducing SSR alongside the upgrade, that is a separate architectural decision requiring its own `styleguide-change-control` review, not a fix folded into this campaign. |
+| `@astrojs/sitemap` peer-dependency warning or error                                             | Integration hasn't caught up to astro's new peer range                                                                          | Bump `@astrojs/sitemap` to the version satisfying the new range, re-run Phase 3.                                                                                                                                                                                                                                                                                                                 |
+| Prettier / `prettier-plugin-astro` warnings only, build still green                             | Cosmetic, not a build blocker                                                                                                   | `npm run format`, then `npm run format:check` to confirm clean.                                                                                                                                                                                                                                                                                                                                  |
+| Anything else / unclear                                                                         | Unknown — do not guess                                                                                                          | Stop. Use `styleguide-debugging-playbook` for live triage. Once resolved, the incident belongs in `styleguide-failure-archaeology`.                                                                                                                                                                                                                                                              |
 
 ---
 
@@ -138,6 +141,7 @@ upgrade — or any auto-formatting it triggered — didn't regress a non-negotia
 ```bash
 npm run preview   # serves the just-built dist/
 ```
+
 Load every route and eyeball it in both light and dark chrome mode: `/`, `/404`, `/logo`, `/motion`,
 `/colors/{primary,accent-palette,neutrals}`, `/type/{hero,headings,body,eyebrow}`,
 `/spacing/{scale,radii,shadows}`,
@@ -162,7 +166,7 @@ whose gate you must pass before anything touches `main`:
   major, sweep `README.md` and commit messages for any hardcoded major-version claims and fix them
   (cross-ref `styleguide-docs-and-writing`).
 - Record the new baseline (astro/vite versions, Node floor, page count, vuln count) somewhere
-  durable — it's Phase 0 for the *next* campaign.
+  durable — it's Phase 0 for the _next_ campaign.
 
 ---
 
@@ -188,17 +192,17 @@ whose gate you must pass before anything touches `main`:
 
 ## Cross-references
 
-| Topic | Skill |
-|---|---|
-| Merge/deploy gate, non-negotiables, deps-PR merge rule | `styleguide-change-control` |
-| Full incident chronicle (the 4→6→7 history, exact commit hashes) | `styleguide-failure-archaeology` |
-| Package.json-only-diff-hides-lockfile-drift trap | `dependabot-major-bump-package-json-only-clean-merge-hides-stale-lock-and-peer-cap` |
-| Live triage of a red build / unclear failure | `styleguide-debugging-playbook` |
-| Config file anatomy, env recreation, resolved versions | `styleguide-build-and-env` |
-| Command anatomy, CF Pages deploy mechanics, `dist/` shape | `styleguide-run-and-operate` |
-| Enforcement/lint scripts to run post-bump | `styleguide-diagnostics-and-tooling` |
-| README/doc drift fixes after promotion | `styleguide-docs-and-writing` |
-| Vite-duplication error pattern (assumes CF adapter — verify applicability with `npm ls vite`) | `astro6-cloudflare-require-dist-vite-duplication` |
+| Topic                                                                                         | Skill                                                                               |
+| --------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- |
+| Merge/deploy gate, non-negotiables, deps-PR merge rule                                        | `styleguide-change-control`                                                         |
+| Full incident chronicle (the 4→6→7 history, exact commit hashes)                              | `styleguide-failure-archaeology`                                                    |
+| Package.json-only-diff-hides-lockfile-drift trap                                              | `dependabot-major-bump-package-json-only-clean-merge-hides-stale-lock-and-peer-cap` |
+| Live triage of a red build / unclear failure                                                  | `styleguide-debugging-playbook`                                                     |
+| Config file anatomy, env recreation, resolved versions                                        | `styleguide-build-and-env`                                                          |
+| Command anatomy, CF Pages deploy mechanics, `dist/` shape                                     | `styleguide-run-and-operate`                                                        |
+| Enforcement/lint scripts to run post-bump                                                     | `styleguide-diagnostics-and-tooling`                                                |
+| README/doc drift fixes after promotion                                                        | `styleguide-docs-and-writing`                                                       |
+| Vite-duplication error pattern (assumes CF adapter — verify applicability with `npm ls vite`) | `astro6-cloudflare-require-dist-vite-duplication`                                   |
 
 ---
 
@@ -208,16 +212,16 @@ Facts below verified 2026-07-05 by reading `package.json`, `package-lock.json`,
 `astro.config.mjs`, `.github/workflows/update-dependencies.yml`, and by running `npm run build`
 and `npm audit` in this repo:
 
-| Fact (as of 2026-07-05) | Value | Re-verify with |
-|---|---|---|
-| Resolved astro version | 7.0.3 | `grep -A2 '"node_modules/astro"' package-lock.json \| grep version` |
-| Resolved vite version (transitive) | 8.0.16 | `grep -A2 '"node_modules/vite"' package-lock.json \| grep version` |
-| Node engine floor | `>=22.12.0` | `grep -A2 '"node"' package.json` |
-| Golden page count | 24 | `npm run build` → look for "N page(s) built" |
-| Vulnerabilities | 0 | `npm audit` |
-| Only integration in `astro.config.mjs` | `@astrojs/sitemap` | `cat astro.config.mjs` |
-| Weekly deps workflow mechanism | `npx npm-check-updates --upgrade && npm install`, verified with `npm run build`, PR to `deps/weekly-update` | `cat .github/workflows/update-dependencies.yml` |
-| CF Pages Node env var | `NODE_VERSION=22` | `grep -A1 'NODE_VERSION' README.md` |
+| Fact (as of 2026-07-05)                | Value                                                                                                       | Re-verify with                                                      |
+| -------------------------------------- | ----------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------- |
+| Resolved astro version                 | 7.0.3                                                                                                       | `grep -A2 '"node_modules/astro"' package-lock.json \| grep version` |
+| Resolved vite version (transitive)     | 8.0.16                                                                                                      | `grep -A2 '"node_modules/vite"' package-lock.json \| grep version`  |
+| Node engine floor                      | `>=22.12.0`                                                                                                 | `grep -A2 '"node"' package.json`                                    |
+| Golden page count                      | 24                                                                                                          | `npm run build` → look for "N page(s) built"                        |
+| Vulnerabilities                        | 0                                                                                                           | `npm audit`                                                         |
+| Only integration in `astro.config.mjs` | `@astrojs/sitemap`                                                                                          | `cat astro.config.mjs`                                              |
+| Weekly deps workflow mechanism         | `npx npm-check-updates --upgrade && npm install`, verified with `npm run build`, PR to `deps/weekly-update` | `cat .github/workflows/update-dependencies.yml`                     |
+| CF Pages Node env var                  | `NODE_VERSION=22`                                                                                           | `grep -A1 'NODE_VERSION' README.md`                                 |
 
 Next check to run before starting any future campaign: `npm outdated` — as of 2026-07-05 it shows
 astro `7.0.6` available (patch only, no major yet); re-run it to see if a major has since appeared.

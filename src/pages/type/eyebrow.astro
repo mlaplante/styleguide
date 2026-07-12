@@ -2,19 +2,25 @@
 import DocsLayout from '../../layouts/DocsLayout.astro';
 
 const specimens = [
-  { label: 'Portfolio eyebrow',       text: 'about me',       theme: 'portfolio' },
+  { label: 'Portfolio eyebrow', text: 'about me', theme: 'portfolio' },
   { label: 'Portfolio eyebrow · alt', text: 'by the numbers', theme: 'portfolio' },
-  { label: 'Blog eyebrow',            text: 'latest posts',   theme: 'blog' },
+  { label: 'Blog eyebrow', text: 'latest posts', theme: 'blog' },
 ];
 ---
-<DocsLayout title="Type — Eyebrow" description="Lowercase mono eyebrow underlined with an indigo (portfolio) or blue (blog) wash.">
+
+<DocsLayout
+  title="Type — Eyebrow"
+  description="Lowercase mono eyebrow underlined with an indigo (portfolio) or blue (blog) wash."
+>
   <div class="sg-frame--stack">
-    {specimens.map((s) => (
-      <div>
-        <div class="lbl">{s.label}</div>
-        <span class={`eyebrow eyebrow--${s.theme}`}>{s.text}</span>
-      </div>
-    ))}
+    {
+      specimens.map((s) => (
+        <div>
+          <div class="lbl">{s.label}</div>
+          <span class={`eyebrow eyebrow--${s.theme}`}>{s.text}</span>
+        </div>
+      ))
+    }
   </div>
 </DocsLayout>
 
@@ -42,7 +48,9 @@ const specimens = [
     opacity: 0.4;
     z-index: -1;
   }
-  .eyebrow--blog::after { background: var(--lp-blog-blue-500); }
+  .eyebrow--blog::after {
+    background: var(--lp-blog-blue-500);
+  }
   .lbl {
     font-family: var(--lp-font-mono);
     font-size: var(--lp-t-micro);

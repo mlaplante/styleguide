@@ -14,7 +14,11 @@ const snippet = `<div class="lp-callout lp-callout--info">
 
 <!-- Styles: .lp-callout / .lp-pullquote in src/styles/components.css -->`;
 ---
-<DocsLayout title="Callouts" description="Inline alerts and pull-quote callouts used in long-form copy.">
+
+<DocsLayout
+  title="Callouts"
+  description="Inline alerts and pull-quote callouts used in long-form copy."
+>
   <div class="stack">
     <Callout variant="info">
       <strong>Heads up.</strong> Form submissions are rate-limited to 10 requests per 15 minutes per IP.
@@ -34,7 +38,8 @@ const snippet = `<div class="lp-callout lp-callout--info">
 
     <blockquote class="lp-pullquote">
       "The point isn't that Cloudflare is better than Netlify — it's that our infrastructure should
-      survive a vendor outage, a pricing change, or a routine platform pivot without rewriting the app."
+      survive a vendor outage, a pricing change, or a routine platform pivot without rewriting the
+      app."
     </blockquote>
   </div>
   <CodeSnippet code={snippet} />

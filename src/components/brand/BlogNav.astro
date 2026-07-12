@@ -18,6 +18,7 @@ export interface Props {
 }
 const { brand, links, sticky = false, innerWidth } = Astro.props;
 ---
+
 <nav
   class={`lp-blog-nav${sticky ? ' is-sticky' : ''}`}
   style={innerWidth ? `--lp-blog-nav-w: ${innerWidth}` : undefined}
@@ -25,11 +26,15 @@ const { brand, links, sticky = false, innerWidth } = Astro.props;
   <div class="lp-blog-nav-inner">
     <a class="lp-blog-brand" href="#">{brand}</a>
     <ul class="lp-blog-links">
-      {links.map((l) => (
-        <li>
-          <a href={l.href ?? '#'} class={l.active ? 'active' : undefined}>{l.label}</a>
-        </li>
-      ))}
+      {
+        links.map((l) => (
+          <li>
+            <a href={l.href ?? '#'} class={l.active ? 'active' : undefined}>
+              {l.label}
+            </a>
+          </li>
+        ))
+      }
     </ul>
   </div>
   <div class="lp-blog-progress"></div>

@@ -16,6 +16,7 @@ const snippet = `<a class="lp-post-card" href="#">
 
 <!-- Styles: .lp-post-card in src/styles/components.css -->`;
 ---
+
 <DocsLayout title="Post Card" description="Blog post card used in the writing list.">
   <div class="frame">
     <PostCard
@@ -37,5 +38,8 @@ const snippet = `<a class="lp-post-card" href="#">
     display: flex;
     justify-content: center;
   }
-  .frame :global(.lp-post-card) { max-width: 460px; width: 100%; }
+  .frame :global(.lp-post-card) {
+    max-width: 460px;
+    width: 100%;
+  }
 </style>

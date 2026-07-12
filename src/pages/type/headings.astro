@@ -2,21 +2,40 @@
 import DocsLayout from '../../layouts/DocsLayout.astro';
 
 const rows = [
-  { label: 'H1',         spec: '700 / 36 / -0.5',     cls: 'h1',   text: 'Securing multi-cloud environments' },
-  { label: 'H2',         spec: '700 / 26 / -0.3',     cls: 'h2',   text: 'Practical strategies for DevSecOps teams' },
-  { label: 'H3',         spec: '600 / 21 / 0',        cls: 'h3',   text: 'Threat modelling in production' },
-  { label: 'H4 · Label', spec: '700 / 18 / 2px / UPPER', cls: 'h4', text: 'Cloud Security Strategy' },
-  { label: 'Stat',       spec: '600 / 66 / 1em',      cls: 'stat', text: '$800M' },
+  { label: 'H1', spec: '700 / 36 / -0.5', cls: 'h1', text: 'Securing multi-cloud environments' },
+  {
+    label: 'H2',
+    spec: '700 / 26 / -0.3',
+    cls: 'h2',
+    text: 'Practical strategies for DevSecOps teams',
+  },
+  { label: 'H3', spec: '600 / 21 / 0', cls: 'h3', text: 'Threat modelling in production' },
+  {
+    label: 'H4 · Label',
+    spec: '700 / 18 / 2px / UPPER',
+    cls: 'h4',
+    text: 'Cloud Security Strategy',
+  },
+  { label: 'Stat', spec: '600 / 66 / 1em', cls: 'stat', text: '$800M' },
 ];
 ---
-<DocsLayout title="Type — Headings" description="Heading specimens — display family is Poppins, dialled down at small sizes for body work.">
+
+<DocsLayout
+  title="Type — Headings"
+  description="Heading specimens — display family is Poppins, dialled down at small sizes for body work."
+>
   <div class="sg-frame--stack">
-    {rows.map((r) => (
-      <div class="sg-row">
-        <div class="sg-meta">{r.label}<small>{r.spec}</small></div>
-        <div class={r.cls}>{r.text}</div>
-      </div>
-    ))}
+    {
+      rows.map((r) => (
+        <div class="sg-row">
+          <div class="sg-meta">
+            {r.label}
+            <small>{r.spec}</small>
+          </div>
+          <div class={r.cls}>{r.text}</div>
+        </div>
+      ))
+    }
   </div>
 </DocsLayout>
 

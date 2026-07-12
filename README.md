@@ -41,6 +41,7 @@ Requires Node ≥ 22.12 (see `engines` in `package.json`).
 Pushes to `main` deploy automatically to Cloudflare Pages. Other branches get preview URLs.
 
 **Build config (Cloudflare Pages):**
+
 - Framework preset: Astro
 - Build command: `npm run build`
 - Output directory: `dist`
@@ -53,6 +54,7 @@ Pushes to `main` deploy automatically to Cloudflare Pages. Other branches get pr
    ---
    import DocsLayout from '../../layouts/DocsLayout.astro';
    ---
+
    <DocsLayout title="My Page" description="What this shows.">
      <!-- content -->
    </DocsLayout>

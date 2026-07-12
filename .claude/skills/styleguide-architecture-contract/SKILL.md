@@ -13,23 +13,23 @@ see `styleguide-change-control` (nothing here overrides that gate).
 
 ## When NOT to use this skill
 
-| You need... | Use instead |
-|---|---|
+| You need...                                                    | Use instead                          |
+| -------------------------------------------------------------- | ------------------------------------ |
 | Exact `--lp-*`/`--sg-*` token values, `lp-*`/`sg-*` class list | `styleguide-design-tokens-reference` |
-| Brand palette/type/spacing/motion/voice doctrine | `laplante-brand-reference` |
-| Whether a change is allowed and how to gate/ship it | `styleguide-change-control` |
-| Chronicle of past incidents/upgrades | `styleguide-failure-archaeology` |
-| Live symptom → fix triage | `styleguide-debugging-playbook` |
-| Local env setup, config file anatomy | `styleguide-build-and-env` |
-| Command anatomy, CF Pages deploy mechanics | `styleguide-run-and-operate` |
+| Brand palette/type/spacing/motion/voice doctrine               | `laplante-brand-reference`           |
+| Whether a change is allowed and how to gate/ship it            | `styleguide-change-control`          |
+| Chronicle of past incidents/upgrades                           | `styleguide-failure-archaeology`     |
+| Live symptom → fix triage                                      | `styleguide-debugging-playbook`      |
+| Local env setup, config file anatomy                           | `styleguide-build-and-env`           |
+| Command anatomy, CF Pages deploy mechanics                     | `styleguide-run-and-operate`         |
 
 ## 1. The three-layer lineage (do not confuse these)
 
-| Layer | What | Role |
-|---|---|---|
-| `resumesite` (`mlaplante/resumesite` on GitHub) | The REAL product: michaellaplante.com portfolio + blog | Source of the brand. NOT in this repo. |
-| `project/` (this repo) | Original "Claude Design" bundle extracted from resumesite: its own `SKILL.md` + `README.md` + static HTML previews + `colors_and_type.css` | Historical source-of-truth for which prototype each `src/` page was ported from. Read-only reference — do not treat it as current. |
-| `src/` (this repo) | The live Astro styleguide site | Documents layer 1, using tokens distilled from layer 2. This is what deploys. |
+| Layer                                           | What                                                                                                                                       | Role                                                                                                                               |
+| ----------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------- |
+| `resumesite` (`mlaplante/resumesite` on GitHub) | The REAL product: michaellaplante.com portfolio + blog                                                                                     | Source of the brand. NOT in this repo.                                                                                             |
+| `project/` (this repo)                          | Original "Claude Design" bundle extracted from resumesite: its own `SKILL.md` + `README.md` + static HTML previews + `colors_and_type.css` | Historical source-of-truth for which prototype each `src/` page was ported from. Read-only reference — do not treat it as current. |
+| `src/` (this repo)                              | The live Astro styleguide site                                                                                                             | Documents layer 1, using tokens distilled from layer 2. This is what deploys.                                                      |
 
 **Why it matters:** the layers drift, and that's expected, not a bug to silently "fix" by copying
 one into another. Verified drift as of 2026-07-05: `project/README.md` (line ~202) says fonts load
@@ -74,7 +74,7 @@ statement — resolved version is Astro 7.x per `package-lock.json` (exact pin o
 - `src/data/nav.ts` (74 lines) exports two arrays: `nav: NavGroup[]` (Foundations / Components / UI
   Kits groups, consumed by `src/components/Sidebar.astro`) and `landing: LandingSection[]`
   (consumed by `src/pages/index.astro`'s card grid — verify: `grep -n "from '../data/nav'"
-  src/pages/index.astro`). **One file drives both surfaces**: add a page → add one entry to `nav`
+src/pages/index.astro`). **One file drives both surfaces**: add a page → add one entry to `nav`
   (and usually `landing`) → Sidebar and the landing grid both pick it up. No second registration
   point exists.
 - `Sidebar.astro` (129 lines) computes the active link via `Astro.url.pathname`; an inline
@@ -84,6 +84,7 @@ statement — resolved version is Astro 7.x per `package-lock.json` (exact pin o
 
 Verified CSP line from `public/_headers` (2026-07-05; full header anatomy including the other
 security headers and cache-control rules is owned by `styleguide-build-and-env`):
+
 ```
 Content-Security-Policy: default-src 'self'; base-uri 'self'; object-src 'none';
 frame-ancestors 'none'; form-action 'self'; img-src 'self' data:; font-src 'self';
@@ -92,6 +93,7 @@ upgrade-insecure-requests
 ```
 
 **Why `'unsafe-inline'` is on `script-src` and `style-src`, currently:**
+
 - Astro's scoped `<style>` blocks (used throughout `src/pages/**` and `src/components/**`) compile
   to inline `<style>` tags with scoped attribute selectors — without `style-src 'unsafe-inline'`
   those are blocked.
@@ -101,7 +103,7 @@ upgrade-insecure-requests
 - **Real weak point, not a shrug.** Nonces/hashes would remove the need for `'unsafe-inline'` but
   aren't implemented. Tightening this is `candidate` work — a security-posture change, so it gates
   through `styleguide-change-control`; tooling angle belongs in `styleguide-raising-the-bar`.
-- Upside: any external script/font/style/image CDN reference is *silently blocked in production*
+- Upside: any external script/font/style/image CDN reference is _silently blocked in production_
   (browser-level, not a build error) since `default-src 'self'` allowlists no external host. That's
   why "just add a CDN" is a production-breaking anti-pattern — see `styleguide-change-control`.
 
@@ -136,12 +138,12 @@ adapter exists — not relevant here; consult them only "if you ever add SSR/the
 
 ## 7. Known weak points (stated plainly, not hidden)
 
-| Weak point | Where | Status |
-|---|---|---|
-| No test suite (no vitest/playwright/jest) | whole repo | `npm run build` succeeding + `npm run format:check` is the only automated gate; candidate work tracked in `styleguide-validation-and-qa` |
-| README drift | top-level `README.md` never states an Astro major version at all (drift is silence — commit subjects `c511b8d`, `be0a6e3`, `77efdff` say "Astro 6" as history but no doc/commit ever announced the 6→7 crossing); `project/README.md` (says Google Fonts `@import`; actual is self-hosted) | See §1; maintaining docs is owned by `styleguide-docs-and-writing` |
-| `unsafe-inline` in CSP | `public/_headers` | Required by current architecture (§4); tightening is `candidate`, gates through `styleguide-change-control` |
-| `node_modules`-relative `@font-face url()` | `src/styles/global.css` | Works today, coupled to `@fontsource` internal layout (§5) |
+| Weak point                                 | Where                                                                                                                                                                                                                                                                                      | Status                                                                                                                                   |
+| ------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------- |
+| No test suite (no vitest/playwright/jest)  | whole repo                                                                                                                                                                                                                                                                                 | `npm run build` succeeding + `npm run format:check` is the only automated gate; candidate work tracked in `styleguide-validation-and-qa` |
+| README drift                               | top-level `README.md` never states an Astro major version at all (drift is silence — commit subjects `c511b8d`, `be0a6e3`, `77efdff` say "Astro 6" as history but no doc/commit ever announced the 6→7 crossing); `project/README.md` (says Google Fonts `@import`; actual is self-hosted) | See §1; maintaining docs is owned by `styleguide-docs-and-writing`                                                                       |
+| `unsafe-inline` in CSP                     | `public/_headers`                                                                                                                                                                                                                                                                          | Required by current architecture (§4); tightening is `candidate`, gates through `styleguide-change-control`                              |
+| `node_modules`-relative `@font-face url()` | `src/styles/global.css`                                                                                                                                                                                                                                                                    | Works today, coupled to `@fontsource` internal layout (§5)                                                                               |
 
 ## Provenance and maintenance
 

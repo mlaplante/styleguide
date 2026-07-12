@@ -3,7 +3,7 @@ name: Update dependencies
 on:
   schedule:
     # Every Monday at 09:00 UTC
-    - cron: "0 9 * * 1"
+    - cron: '0 9 * * 1'
   workflow_dispatch:
 
 permissions:
@@ -32,8 +32,8 @@ jobs:
         uses: peter-evans/create-pull-request@v7
         with:
           branch: deps/weekly-update
-          commit-message: "chore(deps): update all packages to latest"
-          title: "chore(deps): weekly dependency update"
+          commit-message: 'chore(deps): update all packages to latest'
+          title: 'chore(deps): weekly dependency update'
           body: |
             Automated weekly dependency update.
 

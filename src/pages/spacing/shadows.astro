@@ -2,22 +2,38 @@
 import DocsLayout from '../../layouts/DocsLayout.astro';
 
 const shadows = [
-  { name: 'Image rim',    note: '25px · 15%',          token: '--lp-shadow-img',       kind: 'paper' },
-  { name: 'Card hover',   note: '4/16 · 6%',           token: '--lp-shadow-card',      kind: 'paper' },
-  { name: 'Hero block',   note: '40px · 45%',          token: '--lp-shadow-hero',      kind: 'indigo' },
-  { name: 'Button',       note: '4/15 · 40% indigo',   token: '--lp-shadow-btn',       kind: 'indigo-btn' },
-  { name: 'Button hover', note: '10/30 · 50% indigo',  token: '--lp-shadow-btn-hover', kind: 'indigo-btn-hover' },
+  { name: 'Image rim', note: '25px · 15%', token: '--lp-shadow-img', kind: 'paper' },
+  { name: 'Card hover', note: '4/16 · 6%', token: '--lp-shadow-card', kind: 'paper' },
+  { name: 'Hero block', note: '40px · 45%', token: '--lp-shadow-hero', kind: 'indigo' },
+  { name: 'Button', note: '4/15 · 40% indigo', token: '--lp-shadow-btn', kind: 'indigo-btn' },
+  {
+    name: 'Button hover',
+    note: '10/30 · 50% indigo',
+    token: '--lp-shadow-btn-hover',
+    kind: 'indigo-btn-hover',
+  },
 ];
 ---
-<DocsLayout title="Spacing — Shadows" description="Elevation tokens — depth cues used across components. Click a token to copy it.">
+
+<DocsLayout
+  title="Spacing — Shadows"
+  description="Elevation tokens — depth cues used across components. Click a token to copy it."
+>
   <div class="sg-frame--row frame">
-    {shadows.map((s) => (
-      <div class="sg-stack">
-        <div class={`tile tile--${s.kind}`} style={`box-shadow: var(${s.token})`}></div>
-        <div class="sg-meta">{s.name}<small>{s.note}</small></div>
-        <button class="sg-copy" type="button" data-copy={`var(${s.token})`}>{s.token}</button>
-      </div>
-    ))}
+    {
+      shadows.map((s) => (
+        <div class="sg-stack">
+          <div class={`tile tile--${s.kind}`} style={`box-shadow: var(${s.token})`} />
+          <div class="sg-meta">
+            {s.name}
+            <small>{s.note}</small>
+          </div>
+          <button class="sg-copy" type="button" data-copy={`var(${s.token})`}>
+            {s.token}
+          </button>
+        </div>
+      ))
+    }
   </div>
 </DocsLayout>
 
@@ -39,6 +55,10 @@ const shadows = [
     background: var(--lp-indigo-500);
   }
   .tile--indigo-btn,
-  .tile--indigo-btn-hover { border-radius: var(--lp-radius-md); }
-  .tile--indigo-btn-hover { transform: translateY(-3px); }
+  .tile--indigo-btn-hover {
+    border-radius: var(--lp-radius-md);
+  }
+  .tile--indigo-btn-hover {
+    transform: translateY(-3px);
+  }
 </style>
