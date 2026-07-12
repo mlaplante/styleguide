@@ -12,20 +12,22 @@ export interface Props {
   value?: string;
   rows?: number;
   state?: 'focus' | 'filled';
+  id?: string;
 }
-const { label, type = 'text', value, rows = 3, state } = Astro.props;
+const { label, type = 'text', value, rows = 3, state, id } = Astro.props;
 const classes = `lp-field${state ? ` ${state}` : ''}`;
+const inputId = id ?? label.toLowerCase().replace(/[^a-z0-9]+/g, '-');
 ---
 
 <div class={classes}>
   {
     type === 'textarea' ? (
-      <textarea rows={rows} placeholder=" ">
+      <textarea id={inputId} rows={rows} placeholder=" ">
         {value}
       </textarea>
     ) : (
-      <input type={type} value={value} placeholder=" " />
+      <input id={inputId} type={type} value={value} placeholder=" " />
     )
   }
-  <label>{label}</label>
+  <label for={inputId}>{label}</label>
 </div>

@@ -4,8 +4,8 @@ import FloatingField from '../../components/brand/FloatingField.astro';
 import CodeSnippet from '../../components/CodeSnippet.astro';
 
 const snippet = `<div class="lp-field">
-  <input type="text" placeholder=" " />
-  <label>Name</label>
+  <input id="name" type="text" placeholder=" " />
+  <label for="name">Name</label>
 </div>
 
 <!-- Styles: .lp-field in src/styles/components.css.
@@ -21,19 +21,20 @@ const snippet = `<div class="lp-field">
   <div class="sg-frame--stack">
     <div>
       <div class="lbl">Empty</div>
-      <FloatingField label="Name" />
+      <FloatingField id="name-empty" label="Name" />
     </div>
     <div>
       <div class="lbl">Focused</div>
-      <FloatingField label="Email" state="focus" />
+      <FloatingField id="email-focused" label="Email" state="focus" />
     </div>
     <div>
       <div class="lbl">Filled</div>
-      <FloatingField label="Email" state="filled" value="michael@laplante.dev" />
+      <FloatingField id="email-filled" label="Email" state="filled" value="michael@laplante.dev" />
     </div>
     <div>
       <div class="lbl">Textarea</div>
       <FloatingField
+        id="message-filled"
         label="Message"
         type="textarea"
         state="filled"
