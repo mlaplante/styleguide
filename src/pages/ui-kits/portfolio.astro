@@ -45,15 +45,28 @@ const experience = [
     <!-- ===== NAV ===== -->
     <nav class="p-nav">
       <div class="p-container p-nav-inner">
-        <button class="p-menu-btn" aria-label="Toggle menu">
+        <button
+          class="p-menu-btn"
+          type="button"
+          aria-label="Toggle menu"
+          aria-expanded="false"
+          aria-controls="portfolio-menu"
+        >
           <span class="p-lines">
             <span class="p-l p-l1"></span>
             <span class="p-l p-l2"></span>
             <span class="p-l p-l3"></span>
           </span>
         </button>
-        <button class="p-dark-toggle" aria-label="Toggle dark mode">☀️</button>
-        <div class="p-menu">
+        <button
+          class="p-dark-toggle"
+          type="button"
+          aria-label="Switch to dark mode"
+          aria-pressed="false"
+        >
+          ☀️
+        </button>
+        <div id="portfolio-menu" class="p-menu">
           <ul>
             <li><a href="#">Home</a></li>
             <li><a href="#">About</a></li>
@@ -283,7 +296,8 @@ const experience = [
     const dark = document.querySelector('.p-dark-toggle');
     if (burg && nav) {
       burg.addEventListener('click', () => {
-        nav.classList.toggle('open');
+        const open = nav.classList.toggle('open');
+        burg.setAttribute('aria-expanded', String(open));
         nav.querySelectorAll('.p-l').forEach((l) => l.classList.toggle('x'));
       });
     }
@@ -291,6 +305,8 @@ const experience = [
       dark.addEventListener('click', () => {
         const on = document.body.classList.toggle('p-dark');
         dark.textContent = on ? '🌙' : '☀️';
+        dark.setAttribute('aria-pressed', String(on));
+        dark.setAttribute('aria-label', on ? 'Switch to light mode' : 'Switch to dark mode');
       });
     }
     // Keep floating labels risen when a field has a value (focus is CSS-only).
@@ -712,7 +728,7 @@ const experience = [
     color: #e0e0e0;
   }
   body.p-dark .p-hero {
-    background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+    background: var(--lp-dark-bg-2);
   }
   body.p-dark .p-section.p-bg-paper,
   body.p-dark .p-section.p-bg-flat {
@@ -756,5 +772,22 @@ const experience = [
   body.p-dark .p-alert {
     background: rgba(63, 81, 181, 0.15);
     color: #fff;
+  }
+
+  @media (max-width: 640px) {
+    .p-hero {
+      padding-top: 140px;
+      padding-bottom: var(--lp-space-18);
+    }
+    .p-hero-name {
+      font-size: clamp(48px, 15vw, var(--lp-t-hero));
+    }
+    .p-hero-tagline {
+      font-size: var(--lp-t-ui);
+    }
+    .p-funfacts,
+    .p-service-grid {
+      grid-template-columns: 1fr;
+    }
   }
 </style>

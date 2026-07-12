@@ -63,7 +63,7 @@ const posts = [
       <!-- Post List -->
       <div class="b-list">
         <header class="b-list-header">
-          <h1 class="b-list-title">Writing</h1>
+          <h1 id="writing" class="b-list-title">Writing</h1>
           <p class="b-list-sub">
             Development sessions, security notes, and thoughts on building resilient systems.
           </p>
@@ -78,7 +78,7 @@ const posts = [
         class="b-article"
         style="margin-top: 60px; padding-top: 40px; border-top: 2px dashed var(--lp-line-2);"
       >
-        <button class="b-back">← back to writing</button>
+        <a class="b-back" href="#writing">← back to writing</a>
         <header class="b-article-header">
           <div class="lp-post-meta">
             <span class="lp-pill lp-pill--blog">dev-session</span>
@@ -178,6 +178,7 @@ const posts = [
 
   /* ---------- Article ---------- */
   .b-back {
+    display: inline-block;
     background: transparent;
     border: none;
     padding: 0 0 18px;
@@ -187,6 +188,7 @@ const posts = [
     letter-spacing: 0.5px;
     cursor: pointer;
     text-transform: lowercase;
+    text-decoration: none;
   }
   .b-article-header {
     padding-bottom: 30px;
@@ -254,7 +256,7 @@ const posts = [
     color: var(--lp-dark-text-2);
   }
   body.b-dark .lp-blog-nav {
-    background: linear-gradient(135deg, var(--lp-blog-blue-700) 0%, var(--lp-blog-blue-900) 100%);
+    background: var(--lp-blog-blue-700);
   }
   body.b-dark .b-list-title,
   body.b-dark .lp-post-title,
@@ -294,5 +296,15 @@ const posts = [
     background: rgba(129, 140, 248, 0.08);
     border-color: #818cf8;
     color: #cbd5e1;
+  }
+
+  @media (max-width: 640px) {
+    .b-shell {
+      padding: var(--lp-space-8) var(--lp-space-5) var(--lp-space-18);
+    }
+    .b-list-title,
+    .b-article-title {
+      font-size: var(--lp-t-lg);
+    }
   }
 </style>
