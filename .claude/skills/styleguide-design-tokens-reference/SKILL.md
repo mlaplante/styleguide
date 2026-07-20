@@ -11,7 +11,7 @@ anything not listed here — this is a curated subset, not a full dump.
 
 **Source of truth**: `src/styles/global.css` (tokens, chrome theme, scaffolding) and
 `src/styles/components.css` (component classes). Everything below is verified against those two
-files as of 2026-07-05.
+files as of the 2026 executive-brief refresh (ink/signal palette, Space Grotesk display).
 
 ## When NOT to use this skill
 
@@ -26,39 +26,42 @@ files as of 2026-07-05.
 
 ---
 
-## 1. `--lp-*` design tokens (120 total, `:root` in `global.css`)
+## 1. `--lp-*` design tokens (134 total, `:root` in `global.css`)
 
-Not all 120 rows are reproduced — one representative row per family with its **resolved value**.
+Not all 134 rows are reproduced — one representative row per family with its **resolved value**.
 Grep the file for the full family (commands in Provenance).
 
-| Family                 | Representative token(s)                                                     | Resolved value                                                                        | Notes                                                                                                 |
-| ---------------------- | --------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- |
-| Indigo (primary)       | `--lp-indigo-500`                                                           | `#3F51B5`                                                                             | portfolio accent + buttons; `-600`/`-700` are hover/darker; `-100`/`-200` are rgba tints              |
-| Blog blue              | `--lp-blog-blue-500` → `-600`                                               | `#2980b9` → `#1a6da3`                                                                 | the ONE sanctioned gradient (135°, sticky blog nav); `-700`/`-900` are dark-mode nav shades           |
-| Link (dark mode)       | `--lp-link-dark`                                                            | `#60a5fa`                                                                             | dark-mode link color, also used as blog progress-bar fill                                             |
-| Material accents       | `--lp-accent-blue-grey/teal/pink/blue/green/purple`                         | `#607D8B` / `#009688` / `#FF4081` / `#2196F3` / `#4CAF50` / `#9C27B0`                 | opt-in theme-switcher accents, not defaults                                                           |
-| Ink scale (neutrals)   | `--lp-ink-900` … `--lp-ink-100`                                             | `#111827` (900, strongest text) → `#9ca3af` (100)                                     | 9 steps; also `--lp-line`/`--lp-line-2` (borders), `--lp-paper`/`-2`/`-3` (backgrounds), `--lp-white` |
-| bg/fg semantic aliases | `--lp-fg-1`, `--lp-bg-2`                                                    | `var(--lp-ink-900)` → `#111827`; `var(--lp-paper-2)` → `#f8f9fa`                      | these are `var()` aliases onto the ink/paper scale, not new hex values — resolve one hop              |
-| Dark mode              | `--lp-dark-bg`, `--lp-dark-surface`, `--lp-dark-text`                       | `#0f172a`, `#1e293b`, `#e0e0e0`                                                       | 8 tokens total: `-bg`, `-bg-2`, `-surface`, `-surface-2`, `-border`, `-text`, `-text-2`, `-muted`     |
-| Code/inline            | `--lp-code-bg`, `--lp-code-accent`                                          | `#0d1117` (dark code block bg), `#c7254e` (inline-code pink)                          | plus `-bg-light` (`#f0f1f3`) and `-accent-dark` (`#e879a0`)                                           |
-| Font families          | `--lp-font-display`, `--lp-font-body`, `--lp-font-mono`                     | `'Poppins', system-ui, ...` (display/body identical); `'Roboto Mono', 'SF Mono', ...` | both display and body currently resolve to Poppins                                                    |
-| Font weights           | `--lp-w-light` … `--lp-w-bold`                                              | `300 / 400 / 500 / 600 / 700`                                                         | 5 steps, named not numbered                                                                           |
-| Type scale             | `--lp-t-hero` … `--lp-t-micro`                                              | `68px` (hero) down to `12px` (micro)                                                  | 10 steps: hero/xl/lg/md/sm/base/ui/meta/caption/micro                                                 |
-| Letter-spacing         | `--lp-ls-tight` … `--lp-ls-widest`                                          | `-0.5px` → `3px`                                                                      | 6 steps: tight/snug/normal/wide/wider/widest                                                          |
-| Line height            | `--lp-lh-tight` … `--lp-lh-loose`                                           | `1em` → `2em`                                                                         | 5 steps: tight/snug/normal/body(1.8)/loose                                                            |
-| Spacing scale          | `--lp-space-1` … `--lp-space-30`                                            | `4px` → `120px`                                                                       | 13 steps (1,2,3,4,5,6,8,10,12,14,18,22,30 — non-contiguous numbering)                                 |
-| Radii                  | `--lp-radius-sm` … `--lp-radius-full`                                       | `3px` → `50%`                                                                         | sm/base(4px)/md(6px)/lg(8px)/xl(10px)/pill(100px)/full(50%)                                           |
-| Shadows                | `--lp-shadow-hero`, `--lp-shadow-btn`                                       | `0 0 40px 0 rgba(0,0,0,.45)`; `0 4px 15px rgba(63,81,181,.4)`                         | 9 shadow tokens, several component-specific (btn/btn-hover/card/menu/img/blog-nav/img-article(-dark)) |
-| Motion                 | `--lp-dur-fast/`, `--lp-dur`, `--lp-dur-slow`; `--lp-ease`, `--lp-ease-out` | `0.2s / 0.3s / 0.6s`; `ease` / `ease-out`                                             |                                                                                                       |
-| Container/layout       | `--lp-container`, `--lp-container-blog`, `--lp-nav-h`                       | `1024px` (portfolio), `1080px` (blog), `64px`                                         |                                                                                                       |
-| Border (semantic)      | `--lp-border`, `--lp-border-subtle`                                         | `var(--lp-line)` → `#E0E0E0`; `var(--lp-line-2)` → `#e5e7eb`                          |                                                                                                       |
+| Family                 | Representative token(s)                                                     | Resolved value                                                                                    | Notes                                                                                                                                                                                                           |
+| ---------------------- | --------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Ink / Signal (primary) | `--lp-ink`, `--lp-signal`, `--lp-signal-deep`                               | `#0A1528`, `#E2A33C`, `#B57A1E`                                                                   | executive-brief identity; also `--lp-ink-2` (`#122240`), `--lp-slate` (`#46566E`), `--lp-surface` (`#FFFFFF`), `--lp-grid-line` (rgba, hero grid)                                                               |
+| Indigo (legacy)        | `--lp-indigo-500`                                                           | `#3F51B5`                                                                                         | RETIRING — accent-switcher rail only; `-600`/`-700` hover/darker, `-100`/`-200` rgba tints; not a default                                                                                                       |
+| Blog blue (legacy)     | `--lp-blog-blue-500` → `-700`                                               | `#2980b9` → `#1a5276`                                                                             | RETIRING accent; `-700` is the end-stop of the recoloured blog-nav gradient (`--lp-ink-2 → --lp-blog-blue-700`); `-900` dark shade                                                                              |
+| Link (dark mode)       | `--lp-link-dark`                                                            | `#60a5fa`                                                                                         | dark-mode link color, also used as blog progress-bar fill                                                                                                                                                       |
+| Material accents       | `--lp-accent-blue-grey/teal/pink/blue/green/purple`                         | `#607D8B` / `#009688` / `#FF4081` / `#2196F3` / `#4CAF50` / `#9C27B0`                             | opt-in theme-switcher accents, not defaults                                                                                                                                                                     |
+| Ink scale (neutrals)   | `--lp-ink-900` … `--lp-ink-100`                                             | `#111827` (900, strongest text) → `#9ca3af` (100)                                                 | 9 steps; also `--lp-line`/`--lp-line-2` (borders), `--lp-paper`/`-2`/`-3` (backgrounds), `--lp-white`                                                                                                           |
+| bg/fg semantic aliases | `--lp-fg-1`, `--lp-bg-2`                                                    | `var(--lp-ink-900)` → `#111827`; `var(--lp-paper-2)` → `#f8f9fa`                                  | these are `var()` aliases onto the ink/paper scale, not new hex values — resolve one hop                                                                                                                        |
+| Dark mode              | `--lp-dark-bg`, `--lp-dark-surface`, `--lp-dark-text`                       | `#0f172a`, `#1e293b`, `#e0e0e0`                                                                   | 8 tokens total: `-bg`, `-bg-2`, `-surface`, `-surface-2`, `-border`, `-text`, `-text-2`, `-muted`                                                                                                               |
+| Code/inline            | `--lp-code-bg`, `--lp-code-accent`                                          | `#0d1117` (dark code block bg), `#c7254e` (inline-code pink)                                      | plus `-bg-light` (`#f0f1f3`) and `-accent-dark` (`#e879a0`)                                                                                                                                                     |
+| Font families          | `--lp-font-display`, `--lp-font-body`, `--lp-font-mono`                     | `'Space Grotesk', 'Poppins', ...` (display); `'Poppins', ...` (body); `'Roboto Mono', ...` (mono) | display = Space Grotesk (headings/hero/stat/card titles); body = Poppins; mono = Roboto Mono                                                                                                                    |
+| Font weights           | `--lp-w-light` … `--lp-w-bold`                                              | `300 / 400 / 500 / 600 / 700`                                                                     | 5 steps, named not numbered                                                                                                                                                                                     |
+| Type scale             | `--lp-t-hero` … `--lp-t-micro`                                              | `68px` (hero) down to `12px` (micro)                                                              | 10 steps: hero/xl/lg/md/sm/base/ui/meta/caption/micro                                                                                                                                                           |
+| Letter-spacing         | `--lp-ls-display`, `--lp-ls-tight` … `--lp-ls-widest`                       | `-0.02em` (display); `-0.5px` → `3px`                                                             | `--lp-ls-display` (-0.02em) is the Space Grotesk hero/heading tracking; then tight/snug/normal/wide/wider/widest                                                                                                |
+| Line height            | `--lp-lh-tight` … `--lp-lh-loose`                                           | `1em` → `2em`                                                                                     | 5 steps: tight/snug/normal/body(1.8)/loose                                                                                                                                                                      |
+| Spacing scale          | `--lp-space-1` … `--lp-space-30`                                            | `4px` → `120px`                                                                                   | 13 steps (1,2,3,4,5,6,8,10,12,14,18,22,30 — non-contiguous numbering)                                                                                                                                           |
+| Radii                  | `--lp-radius-sm` … `--lp-radius-full`                                       | `3px` → `50%`                                                                                     | sm/base(4px)/md(6px)/lg(8px)/xl(10px)/pill(100px)/full(50%)                                                                                                                                                     |
+| Shadows                | `--lp-shadow-elevated`, `--lp-shadow-elevated-hover`                        | `0 14px 36px rgba(10,21,40,.1)`; `0 18px 42px rgba(10,21,40,.14)`                                 | the card layer's resting + hover elevation (ink-tinted). Plus `-elevated-dark`, `-img`, `-card`, `-menu`, `-blog-nav`, `-img-article(-dark)`, and the retired `-btn`/`-btn-hover`/`-hero` (legacy indigo/inset) |
+| Motion                 | `--lp-dur-fast/`, `--lp-dur`, `--lp-dur-slow`; `--lp-ease`, `--lp-ease-out` | `0.2s / 0.3s / 0.6s`; `ease` / `ease-out`                                                         |                                                                                                                                                                                                                 |
+| Container/layout       | `--lp-container`, `--lp-container-blog`, `--lp-nav-h`                       | `1024px` (portfolio), `1080px` (blog), `64px`                                                     |                                                                                                                                                                                                                 |
+| Border (semantic)      | `--lp-border`, `--lp-border-subtle`                                         | `var(--lp-line)` → `#E0E0E0`; `var(--lp-line-2)` → `#e5e7eb`                                      |                                                                                                                                                                                                                 |
 
-**@font-face detail**: all 9 `@font-face` rules in `global.css` (Poppins 300/400/500/600/700,
-Roboto Mono 300/400/500/700) point `src: url(...)` at
-`../../node_modules/@fontsource/poppins/files/...woff2` — a path relative to `src/styles/`,
-reaching **into `node_modules`**, not a `src/assets` copy. Astro's bundler resolves and copies
-these at build time (see `styleguide-build-and-env` / `styleguide-run-and-operate` for the
-resulting `dist/_astro/*.woff2` output). Do not "fix" this path to point somewhere else without
+**@font-face detail**: all 10 `@font-face` rules in `global.css` (Poppins 300/400/500/600/700,
+Roboto Mono 300/400/500/700, and Space Grotesk as a single variable `300 700` face) point
+`src: url(...)` at `../../node_modules/@fontsource{,-variable}/…/files/…woff2` — a path relative
+to `src/styles/`, reaching **into `node_modules`**, not a `src/assets` copy. Space Grotesk lives
+under `@fontsource-variable/space-grotesk/files/space-grotesk-latin-wght-normal.woff2` (the
+variable package); Poppins and Roboto Mono under `@fontsource/`. Astro's bundler resolves and
+copies these at build time (see `styleguide-build-and-env` / `styleguide-run-and-operate` for the
+resulting `dist/_astro/*.woff2` output). Do not "fix" these paths to point somewhere else without
 checking the build still finds the files — it is intentional, not a bug.
 
 **Unresolved-reference gotcha**: `components.css`'s `.lp-blog-nav-inner` uses
@@ -73,24 +76,24 @@ without the fallback resolving to `none`, that's expected: there is no token to 
 These style the styleguide's OWN chrome (topbar, sidebar, page background) — never the brand
 specimens inside preview panels, which stay in light brand rendering regardless of chrome theme.
 
-| Token               | Light (`:root`)                               | Dark (`:root[data-theme='dark']`)                                                  |
-| ------------------- | --------------------------------------------- | ---------------------------------------------------------------------------------- |
-| `--sg-bg`           | `var(--lp-bg-1)` → `#FFFFFF`                  | `var(--lp-dark-bg)` → `#0f172a`                                                    |
-| `--sg-surface`      | `var(--lp-white)` → `#FFFFFF`                 | `var(--lp-dark-surface)` → `#1e293b`                                               |
-| `--sg-surface-2`    | `var(--lp-paper-2)` → `#f8f9fa`               | `#14203a` (raw hex, not a token alias)                                             |
-| `--sg-border`       | `var(--lp-border-subtle)` → `#e5e7eb`         | `var(--lp-dark-border)` → `#334155`                                                |
-| `--sg-fg`           | `var(--lp-ink-900)` → `#111827`               | `var(--lp-dark-text)` → `#e0e0e0`                                                  |
-| `--sg-fg-muted`     | `var(--lp-ink-400)` → `#4b5563`               | `var(--lp-dark-text-2)` → `#cbd5e1`                                                |
-| `--sg-fg-soft`      | `var(--lp-ink-300)` → `#6b7280`               | `var(--lp-dark-muted)` → `#94a3b8`                                                 |
-| `--sg-nav-link`     | `var(--lp-ink-500)` → `#374151`               | `var(--lp-dark-text-2)` → `#cbd5e1`                                                |
-| `--sg-nav-hover-bg` | `var(--lp-indigo-100)` → `rgba(63,81,181,.1)` | `rgba(99, 102, 241, 0.18)` (raw, **not** brand indigo — Tailwind-family `#6366f1`) |
-| `--sg-nav-hover-fg` | `var(--lp-indigo-700)` → `#303f8c`            | `#a5b4fc` (raw, same Tailwind-indigo family)                                       |
+| Token               | Light (`:root`)                       | Dark (`:root[data-theme='dark']`)      |
+| ------------------- | ------------------------------------- | -------------------------------------- |
+| `--sg-bg`           | `var(--lp-bg-1)` → `#FFFFFF`          | `var(--lp-dark-bg)` → `#0f172a`        |
+| `--sg-surface`      | `var(--lp-white)` → `#FFFFFF`         | `var(--lp-dark-surface)` → `#1e293b`   |
+| `--sg-surface-2`    | `var(--lp-paper-2)` → `#f8f9fa`       | `#14203a` (raw hex, not a token alias) |
+| `--sg-border`       | `var(--lp-border-subtle)` → `#e5e7eb` | `var(--lp-dark-border)` → `#334155`    |
+| `--sg-fg`           | `var(--lp-ink-900)` → `#111827`       | `var(--lp-dark-text)` → `#e0e0e0`      |
+| `--sg-fg-muted`     | `var(--lp-ink-400)` → `#4b5563`       | `var(--lp-dark-text-2)` → `#cbd5e1`    |
+| `--sg-fg-soft`      | `var(--lp-ink-300)` → `#6b7280`       | `var(--lp-dark-muted)` → `#94a3b8`     |
+| `--sg-nav-link`     | `var(--lp-ink-500)` → `#374151`       | `var(--lp-dark-text-2)` → `#cbd5e1`    |
+| `--sg-nav-hover-bg` | `rgba(226,163,60,.12)` (signal tint)  | `rgba(226,163,60,.18)` (signal tint)   |
+| `--sg-nav-hover-fg` | `var(--lp-signal-deep)` → `#b57a1e`   | `var(--lp-signal)` → `#e2a33c`         |
 
-**Drift note**: the two dark `--sg-nav-hover-*` values are hardcoded RGB/hex that do NOT trace
-back to any `--lp-indigo-*` token (`63,81,181`). They're a different indigo (`99,102,241` /
-`#6366f1` family). This is a real inconsistency in the source, not a transcription error —
-report it as-is if asked to audit token discipline; don't silently "fix" it by inventing a
-token alias that doesn't exist.
+**Note**: the docs-chrome nav hover now uses the brand signal amber in both themes — the light
+hover fg aliases `--lp-signal-deep`, the dark hover fg aliases `--lp-signal`, and both hover
+backgrounds are raw `rgba(226,163,60,…)` signal tints (there is no `--lp-signal` alpha token to
+alias, so the raw rgba here is intentional, consistent with how `components.css` tints the signal).
+The earlier Tailwind-indigo (`#6366f1`) drift in dark mode is gone.
 
 Two more chrome-layout custom properties live in the same `:root` block but are **not** `--sg-*`
 prefixed: `--sidebar-w: 260px` and `--topbar-h: 64px`.
@@ -122,20 +125,20 @@ present specimens consistently.
 These are `lp-` classes but live in `global.css` (semantic typography), separate from the 41
 `components.css` component classes in §5. List them here so a grep for `lp-t-` finds something:
 
-| Class           | Renders                                         | Key tokens                                                |
-| --------------- | ----------------------------------------------- | --------------------------------------------------------- |
-| `.lp-t-hero`    | huge light-weight hero name/title               | `--lp-t-hero` (68px), `--lp-w-light`, `--lp-lh-tight`     |
-| `.lp-t-h1`      | blog post H1                                    | `--lp-t-lg` (36px), `--lp-w-bold`, `--lp-ink-800`         |
-| `.lp-t-h2`      | article H2                                      | `--lp-t-md` (26px), `--lp-w-bold`                         |
-| `.lp-t-h3`      | article H3                                      | `--lp-t-sm` (21px), `--lp-w-semibold`                     |
-| `.lp-t-eyebrow` | lowercase mono eyebrow w/ indigo underline wash | mono font, `--lp-ls-wider`, `::after` indigo wash         |
-| `.lp-t-label`   | UPPERCASE service-title label                   | `--lp-font-display`, `--lp-ls-wider`                      |
-| `.lp-t-meta`    | mono meta/tagline text                          | `--lp-font-mono`, `--lp-fg-3`                             |
-| `.lp-t-body`    | article body paragraph                          | `--lp-t-base` (17px), `--lp-lh-body` (1.8)                |
-| `.lp-t-code`    | inline code span                                | `--lp-font-mono`, `--lp-code-bg-light`/`--lp-code-accent` |
+| Class           | Renders                                        | Key tokens                                                           |
+| --------------- | ---------------------------------------------- | -------------------------------------------------------------------- |
+| `.lp-t-hero`    | huge Space Grotesk medium hero name/title      | `--lp-t-hero` (68px), `--lp-w-medium`, `--lp-ls-display`, `--lp-ink` |
+| `.lp-t-h1`      | blog post H1                                   | `--lp-t-lg` (36px), `--lp-w-bold`, `--lp-ls-display`, `--lp-ink`     |
+| `.lp-t-h2`      | article H2                                     | `--lp-t-md` (26px), `--lp-w-bold`, `--lp-ls-display`                 |
+| `.lp-t-h3`      | article H3                                     | `--lp-t-sm` (21px), `--lp-w-semibold`, `--lp-ls-display`             |
+| `.lp-t-eyebrow` | UPPERCASE mono eyebrow w/ leading signal rule  | mono font, signal-deep, `::before` 24px signal rule                  |
+| `.lp-t-label`   | sentence-case Space Grotesk card/section label | `--lp-font-display`, `--lp-w-medium`, `--lp-ls-display`              |
+| `.lp-t-meta`    | mono meta/tagline text                         | `--lp-font-mono`, `--lp-fg-3`                                        |
+| `.lp-t-body`    | article body paragraph                         | `--lp-t-base` (17px), `--lp-lh-body` (1.8)                           |
+| `.lp-t-code`    | inline code span                               | `--lp-font-mono`, `--lp-code-bg-light`/`--lp-code-accent`            |
 
-For the rationale behind these specific tiers (why hero is 68px, why eyebrows are lowercase),
-see `laplante-brand-reference`.
+For the rationale behind these specific tiers (why the hero is Space Grotesk medium, why eyebrows
+are uppercase mono with a leading rule), see `laplante-brand-reference`.
 
 ---
 
@@ -145,20 +148,20 @@ see `laplante-brand-reference`.
 for why). Grouped below with modifiers and state hooks (state hooks are plain classes toggled at
 runtime/markup, not BEM modifiers — don't confuse the two).
 
-| Component            | Base class(es)                                                                                                           | Modifiers (`--x`)                          | State hooks                                                          |
-| -------------------- | ------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------ | -------------------------------------------------------------------- |
-| Button               | `.lp-btn`                                                                                                                | `--ghost`, `--sm`                          | `.is-lifted` (forces hover look)                                     |
-| Category pill        | `.lp-pill`                                                                                                               | `--blog`, `--indigo`, `--teal`, `--purple` | —                                                                    |
-| Status badge         | `.lp-status`                                                                                                             | `--ok`, `--warn`, `--err`, `--info`        | —                                                                    |
-| Callout              | `.lp-callout`                                                                                                            | `--info`, `--success`, `--warn`, `--error` | —                                                                    |
-| Pullquote            | `.lp-pullquote`                                                                                                          | —                                          | —                                                                    |
-| Post card            | `.lp-post-card`, `.lp-post-meta`, `.lp-post-title`, `.lp-post-excerpt`, `.lp-post-date`, `.lp-post-read`, `.lp-post-sep` | —                                          | —                                                                    |
-| Service card         | `.lp-service`, `.lp-service-glyph`, `.lp-service-title`, `.lp-service-copy`                                              | —                                          | —                                                                    |
-| Timeline             | `.lp-timeline`, `.lp-tl-date`, `.lp-tl-body`, `.lp-tl-org`, `.lp-tl-role`                                                | —                                          | `li.current` (marks active entry, fills the dot)                     |
-| Blog nav             | `.lp-blog-nav`, `.lp-blog-nav-inner`, `.lp-blog-brand`, `.lp-blog-links`, `.lp-blog-progress`                            | —                                          | `.is-sticky` (nav), `a.active` (current link, in `.lp-blog-links`)   |
-| Floating-label field | `.lp-field`                                                                                                              | —                                          | `.focus`, `.filled` (label float state; also native `:focus-within`) |
+| Component            | Base class(es)                                                                                                           | Modifiers (`--x`)                                      | State hooks                                                          |
+| -------------------- | ------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------ | -------------------------------------------------------------------- |
+| Button               | `.lp-btn`                                                                                                                | `--ghost`, `--sm`                                      | `.is-lifted` (forces hover look)                                     |
+| Category pill        | `.lp-pill`                                                                                                               | `--signal`, `--blog`, `--indigo`, `--teal`, `--purple` | —                                                                    |
+| Status badge         | `.lp-status`                                                                                                             | `--ok`, `--warn`, `--err`, `--info`                    | —                                                                    |
+| Callout              | `.lp-callout`                                                                                                            | `--info`, `--success`, `--warn`, `--error`             | —                                                                    |
+| Pullquote            | `.lp-pullquote`                                                                                                          | —                                                      | —                                                                    |
+| Post card            | `.lp-post-card`, `.lp-post-meta`, `.lp-post-title`, `.lp-post-excerpt`, `.lp-post-date`, `.lp-post-read`, `.lp-post-sep` | —                                                      | —                                                                    |
+| Service card         | `.lp-service`, `.lp-service-glyph`, `.lp-service-title`, `.lp-service-copy`                                              | —                                                      | —                                                                    |
+| Timeline             | `.lp-timeline`, `.lp-tl-date`, `.lp-tl-body`, `.lp-tl-org`, `.lp-tl-role`                                                | —                                                      | `li.current` (marks active entry, fills the dot)                     |
+| Blog nav             | `.lp-blog-nav`, `.lp-blog-nav-inner`, `.lp-blog-brand`, `.lp-blog-links`, `.lp-blog-progress`                            | —                                                      | `.is-sticky` (nav), `a.active` (current link, in `.lp-blog-links`)   |
+| Floating-label field | `.lp-field`                                                                                                              | —                                                      | `.focus`, `.filled` (label float state; also native `:focus-within`) |
 
-Total distinct `.lp-*` selectors in `components.css`: **41** (verified by grep, see Provenance).
+Total distinct `.lp-*` selectors in `components.css`: **42** (verified by grep, see Provenance).
 This count does NOT include the 9 `.lp-t-*` classes in §4 (those live in `global.css`).
 
 ---
@@ -191,10 +194,10 @@ history.
 ## Provenance and maintenance
 
 All facts in this skill were verified against `src/styles/global.css` and `src/styles/components.css`
-as of **2026-07-05**. Re-verify if either file has changed since:
+as of the **2026 executive-brief refresh**. Re-verify if either file has changed since:
 
 ```bash
-# --lp-* token count (expect 120)
+# --lp-* token count (expect 134)
 grep -oE '\-\-lp-[a-zA-Z0-9_-]+' src/styles/global.css | sort -u | wc -l
 
 # --sg-* token count (expect 10) + list
@@ -203,7 +206,7 @@ grep -oE '\-\-sg-[a-zA-Z0-9_-]+' src/styles/global.css | sort -u
 # sg-* scaffolding class count (expect 22)
 grep -oE '\.sg-[a-zA-Z0-9_-]+' src/styles/global.css | sort -u | wc -l
 
-# lp-* component class count in components.css (expect 41)
+# lp-* component class count in components.css (expect 42)
 grep -oE '\.lp-[a-zA-Z0-9_-]+' src/styles/components.css | sort -u | wc -l
 
 # lp-t-* typography classes in global.css (expect 9)

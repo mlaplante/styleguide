@@ -501,11 +501,46 @@ const experience = [
   }
 
   /* ---------- Hero ---------- */
+  /* Briefing-cover: ink base + a faint 48px blueprint grid, swept by a slow
+     amber radar cone. These gradients are a sanctioned brand motif (see
+     laplante-brand-reference / check-single-gradient.sh), not decoration. */
   .p-hero {
-    background: var(--lp-ink);
+    position: relative;
+    overflow: hidden;
+    background-color: var(--lp-ink);
+    background-image:
+      linear-gradient(var(--lp-grid-line) 1px, transparent 1px),
+      linear-gradient(90deg, var(--lp-grid-line) 1px, transparent 1px);
+    background-size: 48px 48px;
     padding: 120px 0 100px;
     margin-top: -68px;
     padding-top: 168px;
+  }
+  .p-hero::before {
+    content: '';
+    position: absolute;
+    inset: -55%;
+    background: conic-gradient(
+      from 220deg at 50% 50%,
+      transparent 0deg,
+      rgba(226, 163, 60, 0.06) 30deg,
+      transparent 70deg
+    );
+    pointer-events: none;
+  }
+  .p-hero > .p-container {
+    position: relative;
+    z-index: 1;
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    .p-hero::before {
+      animation: p-radar-sweep 24s linear infinite;
+    }
+    @keyframes p-radar-sweep {
+      to {
+        transform: rotate(360deg);
+      }
+    }
   }
   .p-portrait {
     width: 220px;

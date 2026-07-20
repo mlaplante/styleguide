@@ -83,23 +83,30 @@ npm install`, then `npm run build` as its own verification step, then opens a PR
 
 None of these are caught by `npm run build`. They are a human-review gate, not a tooling gate.
 
-- **One gradient only** (blog sticky-nav 135°, `#2980b9 → #1a6da3`). Rationale: stops
-  gradient creep diluting the brand toward generic SaaS. Reject a second gradient at
-  review — build cannot detect it.
+- **Gradients only in the two named brand motifs** (the blog sticky-nav reading sweep,
+  `135°, var(--lp-ink-2) → var(--lp-blog-blue-700)`; and the portfolio hero briefing-cover
+  — a `--lp-grid-line` blueprint grid + a low-alpha amber radar `conic-gradient`).
+  Rationale: stops gradient creep diluting the brand toward generic SaaS. Reject a THIRD
+  gradient at review — `check-single-gradient.sh` whitelists exactly the two motifs and
+  will flag anything else.
 - **No `backdrop-filter`/blur anywhere.** Same rationale: trend-chasing vs. brand
   discipline.
 - **Dark-mode toggle emoji is `☀️`/`🌙` only**, no emoji elsewhere in copy/headings/UI.
-- **No new card styles** — the only card is the blog teaser card; portfolio has no card
-  layer. Prevents component sprawl.
-- **Self-hosted fonts only** (Poppins + Roboto Mono via `@fontsource`). This one IS
-  partly enforced by tooling: `public/_headers` sets `font-src 'self'`, so an external
-  font request doesn't just violate style, it is blocked by the browser in production.
-  Known drift: `project/README.md` and `project/SKILL.md` (the layer-2 design bundle)
-  still describe Google Fonts `@import`; the live site (`src/styles/global.css`) moved to
-  `@fontsource` — don't let that stale doc get copied into a PR.
-- **Palette discipline**: indigo `#3F51B5` primary; the blog-blue gradient is the only
-  secondary-accent gradient; Material-style accents are opt-in tokens, never defaults;
-  warm neutrals, not true grey.
+- **One card style, used in exactly two places** — a `--lp-surface` panel with a resting
+  elevation and a signal top-edge on hover, used for portfolio **service cards** and blog
+  **post cards**. Do not invent a third/differently-styled card. Prevents component sprawl.
+- **Self-hosted fonts only** (Space Grotesk display + Poppins body + Roboto Mono, via
+  `@fontsource`/`@fontsource-variable`). This one IS partly enforced by tooling:
+  `public/_headers` sets `font-src 'self'`, so an external font request doesn't just
+  violate style, it is blocked by the browser in production. Known drift: `project/README.md`
+  and `project/SKILL.md` (the layer-2 design bundle) still describe Google Fonts `@import`;
+  the live site (`src/styles/global.css`) moved to `@fontsource` — don't let that stale doc
+  get copied into a PR.
+- **Palette discipline**: deep-navy `--lp-ink #0A1528` authority + a single warm amber
+  `--lp-signal #E2A33C` accent (`--lp-signal-deep #B57A1E` for links/hover); slate body,
+  cool paper, white surface — warm neutrals, not true grey. The old indigo `#3F51B5` and
+  blog-blue are retiring legacy tokens (`--lp-indigo-*` / `--lp-blog-blue-*`), kept only for
+  the accent-switcher rail and the blog-nav gradient — never a default in new work.
 - **CSP is load-bearing** (`public/_headers`, verified 2026-07-05): `default-src 'self';
 base-uri 'self'; object-src 'none'; frame-ancestors 'none'; form-action 'self'; img-src
 'self' data:; font-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self'

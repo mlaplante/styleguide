@@ -34,12 +34,16 @@ not a nitpick. Everything else is guidance for extending the system in spirit.
 - **Neutrals: cool paper, white surface, never true black.** `--lp-paper #F4F6F9` is the page ground;
   `--lp-surface #FFFFFF` is the card/panel; text bottoms out at navy ink, not `#000`. Don't introduce
   `#000`/`#808080`-style neutrals — they read cold and off-system.
-- **One gradient, and only one (SACRED).** The whole system uses exactly one gradient: the blog's sticky
-  "reading mode" nav bar (`.lp-blog-nav`, an ink→blue 135° sweep). Everything else — hero, buttons,
-  cards, footer — is a **flat fill**. The live site's portfolio hero carries a faint blueprint-grid and a
-  slow radar-sweep as brand texture; those are intentionally **not** reproduced in this styleguide, and
-  you must not add a second gradient (grid, glow, or otherwise) to any specimen. A new gradient is a
-  brand violation, not a style choice.
+- **Gradients are reserved for two named brand motifs (SACRED).** The system permits gradients in exactly
+  two places, each a deliberate motif — never decoration:
+  1. the blog's sticky **"reading mode" nav** (`.lp-blog-nav`) — an ink→blue 135° sweep that signals
+     "you're reading now," and
+  2. the portfolio hero **"briefing cover"** (`.p-hero`) — a faint 48px blueprint grid (two
+     `--lp-grid-line` linear-gradients) swept by a slow amber radar cone (a low-alpha `conic-gradient`
+     animated by `p-radar-sweep`, `prefers-reduced-motion`-guarded).
+     Everything else — buttons, cards, footer, section fills — is a **flat fill**. Do not add a _third_
+     gradient (glow, panel sheen, or otherwise) anywhere; a new gradient outside these two motifs is a
+     brand violation, not a style choice. (`check-single-gradient.sh` whitelists exactly these two.)
 - **Legacy accents (retiring).** Material indigo (`#3F51B5`) and blog-blue (`#2980b9→#1a5276`) survive
   only as `--lp-indigo-*` / `--lp-blog-blue-*` tokens for the not-yet-restyled accent-switcher rail and
   the one blog-nav gradient. Never reach for them in new work — default to signal/ink.
