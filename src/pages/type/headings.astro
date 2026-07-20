@@ -2,27 +2,27 @@
 import DocsLayout from '../../layouts/DocsLayout.astro';
 
 const rows = [
-  { label: 'H1', spec: '700 / 36 / -0.5', cls: 'h1', text: 'Securing multi-cloud environments' },
+  { label: 'H1', spec: '700 / 36 / -0.02em', cls: 'h1', text: 'Securing multi-cloud environments' },
   {
     label: 'H2',
-    spec: '700 / 26 / -0.3',
+    spec: '700 / 26 / -0.02em',
     cls: 'h2',
     text: 'Practical strategies for DevSecOps teams',
   },
-  { label: 'H3', spec: '600 / 21 / 0', cls: 'h3', text: 'Threat modelling in production' },
+  { label: 'H3', spec: '600 / 21 / -0.02em', cls: 'h3', text: 'Threat modelling in production' },
   {
-    label: 'H4 · Label',
-    spec: '700 / 18 / 2px / UPPER',
+    label: 'H4 · Card title',
+    spec: '500 / 20 / -0.02em',
     cls: 'h4',
     text: 'Cloud Security Strategy',
   },
-  { label: 'Stat', spec: '600 / 66 / 1em', cls: 'stat', text: '$800M' },
+  { label: 'Stat', spec: '700 / 48 / 1em', cls: 'stat', text: '$800M' },
 ];
 ---
 
 <DocsLayout
   title="Type — Headings"
-  description="Heading specimens — display family is Poppins, dialled down at small sizes for body work."
+  description="Heading specimens — display family is Space Grotesk with tight -0.02em tracking; the near-black navy ink carries the weight."
 >
   <div class="sg-frame--stack">
     {
@@ -44,36 +44,37 @@ const rows = [
     font-family: var(--lp-font-display);
     font-size: var(--lp-t-lg);
     font-weight: var(--lp-w-bold);
-    letter-spacing: var(--lp-ls-tight);
+    letter-spacing: var(--lp-ls-display);
     line-height: var(--lp-lh-snug);
-    color: var(--lp-ink-800);
+    color: var(--lp-ink);
   }
   .h2 {
     font-family: var(--lp-font-display);
     font-size: var(--lp-t-md);
     font-weight: var(--lp-w-bold);
-    letter-spacing: var(--lp-ls-snug);
-    color: var(--lp-ink-800);
+    letter-spacing: var(--lp-ls-display);
+    color: var(--lp-ink);
   }
   .h3 {
     font-family: var(--lp-font-display);
     font-size: var(--lp-t-sm);
     font-weight: var(--lp-w-semibold);
-    color: var(--lp-ink-700);
+    letter-spacing: var(--lp-ls-display);
+    color: var(--lp-ink);
   }
   .h4 {
     font-family: var(--lp-font-display);
-    font-size: 18px;
-    font-weight: var(--lp-w-bold);
-    text-transform: uppercase;
-    letter-spacing: var(--lp-ls-wider);
-    color: var(--lp-ink-800);
+    font-size: 20px;
+    font-weight: var(--lp-w-medium);
+    letter-spacing: var(--lp-ls-display);
+    color: var(--lp-ink);
   }
   .stat {
     font-family: var(--lp-font-display);
     font-size: 48px;
-    font-weight: var(--lp-w-semibold);
+    font-weight: var(--lp-w-bold);
+    letter-spacing: var(--lp-ls-tighter, -0.03em);
     line-height: var(--lp-lh-tight);
-    color: var(--lp-ink-800);
+    color: var(--lp-ink);
   }
 </style>

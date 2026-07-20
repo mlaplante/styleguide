@@ -34,7 +34,7 @@ const ogImage = Astro.site ? new URL('/assets/laplante-logo.png', Astro.site) : 
     <link
       rel="icon"
       type="image/svg+xml"
-      href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%233F51B5'/><text x='16' y='22' font-family='Poppins,system-ui,sans-serif' font-size='18' font-weight='700' fill='white' text-anchor='middle'>L</text></svg>"
+      href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%230A1528'/><text x='16' y='22' font-family='Space Grotesk,Poppins,system-ui,sans-serif' font-size='18' font-weight='700' fill='%23E2A33C' text-anchor='middle'>L</text></svg>"
     />
     <script is:inline>
       // Apply the saved (or OS-preferred) chrome theme before first paint.
@@ -152,7 +152,7 @@ const ogImage = Astro.site ? new URL('/assets/laplante-logo.png', Astro.site) : 
         margin: 0;
         background: var(--sg-bg);
         color: var(--sg-fg);
-        font-family: var(--lp-font-display);
+        font-family: var(--lp-font-body);
         font-weight: var(--lp-w-regular);
         line-height: var(--lp-lh-normal);
       }
@@ -211,12 +211,12 @@ const ogImage = Astro.site ? new URL('/assets/laplante-logo.png', Astro.site) : 
           color var(--lp-dur-fast) var(--lp-ease);
       }
       .theme-toggle:hover {
-        border-color: var(--lp-indigo-500);
-        color: var(--lp-indigo-500);
+        border-color: var(--lp-signal);
+        color: var(--lp-signal-deep);
       }
       :root[data-theme='dark'] .theme-toggle:hover {
-        border-color: var(--lp-link-dark);
-        color: var(--lp-link-dark);
+        border-color: var(--lp-signal);
+        color: var(--lp-signal);
       }
       .shell {
         display: grid;

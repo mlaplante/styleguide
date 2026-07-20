@@ -2,22 +2,22 @@
 import DocsLayout from '../../layouts/DocsLayout.astro';
 
 const specimens = [
-  { label: 'Portfolio eyebrow', text: 'about me', theme: 'portfolio' },
-  { label: 'Portfolio eyebrow · alt', text: 'by the numbers', theme: 'portfolio' },
-  { label: 'Blog eyebrow', text: 'latest posts', theme: 'blog' },
+  { label: 'Section eyebrow', text: 'About Me' },
+  { label: 'Section eyebrow · alt', text: 'By the Numbers' },
+  { label: 'Blog eyebrow', text: 'Latest Posts' },
 ];
 ---
 
 <DocsLayout
   title="Type — Eyebrow"
-  description="Lowercase mono eyebrow underlined with an indigo (portfolio) or blue (blog) wash."
+  description="Uppercase mono eyebrow prefixed with a short signal rule — the briefing-label motif. Replaces the old lowercase highlighter wash."
 >
   <div class="sg-frame--stack">
     {
       specimens.map((s) => (
         <div>
           <div class="lbl">{s.label}</div>
-          <span class={`eyebrow eyebrow--${s.theme}`}>{s.text}</span>
+          <span class="eyebrow">{s.text}</span>
         </div>
       ))
     }
@@ -26,30 +26,23 @@ const specimens = [
 
 <style>
   .eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--lp-space-3);
     font-family: var(--lp-font-mono);
-    font-size: 18px;
+    font-size: var(--lp-t-micro);
     font-weight: var(--lp-w-bold);
-    line-height: var(--lp-lh-tight);
-    color: rgba(0, 0, 0, 0.8);
-    text-transform: lowercase;
-    letter-spacing: var(--lp-ls-wider);
-    position: relative;
-    display: inline-block;
-    z-index: 1;
+    line-height: var(--lp-lh-normal);
+    color: var(--lp-signal-deep);
+    text-transform: uppercase;
+    letter-spacing: 0.09em;
   }
-  .eyebrow::after {
+  .eyebrow::before {
     content: '';
-    position: absolute;
-    bottom: 1px;
-    left: 0;
-    height: 5px;
-    width: 100%;
-    background: var(--lp-indigo-500);
-    opacity: 0.4;
-    z-index: -1;
-  }
-  .eyebrow--blog::after {
-    background: var(--lp-blog-blue-500);
+    width: 24px;
+    height: 1px;
+    background: currentColor;
+    flex: 0 0 24px;
   }
   .lbl {
     font-family: var(--lp-font-mono);

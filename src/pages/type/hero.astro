@@ -4,11 +4,11 @@ import DocsLayout from '../../layouts/DocsLayout.astro';
 
 <DocsLayout
   title="Type — Hero"
-  description="Hero type specimen — Poppins 300 with wide letter-spacing."
+  description="Hero type specimen — Space Grotesk medium, tight display tracking, on the ink briefing-cover."
 >
   <div class="hero">
-    <div class="label">Hero · Poppins 300 / 54–68px / 2px tracking</div>
-    <h1>I am <strong>Michael<br />La Plante</strong></h1>
+    <div class="briefing">Security &amp; Engineering Brief</div>
+    <h1 class="lp-t-hero">Michael<br /><strong>La Plante</strong></h1>
     <div class="tag">SVP of Information Security and Operations</div>
   </div>
 </DocsLayout>
@@ -16,36 +16,41 @@ import DocsLayout from '../../layouts/DocsLayout.astro';
 <style>
   .hero {
     color: var(--lp-white);
-    background: var(--lp-indigo-500);
-    padding: var(--lp-space-8);
+    background: var(--lp-ink);
+    padding: var(--lp-space-14) var(--lp-space-8);
     border-radius: var(--lp-radius-xl);
-    box-shadow: var(--lp-shadow-hero);
   }
-  .hero h1 {
-    font-family: var(--lp-font-display);
-    font-size: 54px;
-    font-weight: var(--lp-w-light);
-    line-height: var(--lp-lh-tight);
-    letter-spacing: var(--lp-ls-wider);
-    margin: 0;
+  .hero :global(.lp-t-hero) {
+    color: var(--lp-white);
+    font-size: clamp(44px, 8vw, 88px);
   }
-  .hero h1 strong {
-    font-weight: var(--lp-w-light);
+  .hero :global(.lp-t-hero strong) {
+    display: block;
+  }
+  .briefing {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--lp-space-3);
+    font-family: var(--lp-font-mono);
+    font-size: var(--lp-t-micro);
+    font-weight: var(--lp-w-bold);
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+    color: var(--lp-signal);
+    margin-bottom: var(--lp-space-5);
+  }
+  .briefing::before {
+    content: '';
+    width: 24px;
+    height: 1px;
+    background: currentColor;
   }
   .tag {
     font-family: var(--lp-font-mono);
     font-size: var(--lp-t-ui);
     font-weight: var(--lp-w-light);
     color: rgba(255, 255, 255, 0.6);
-    margin-top: var(--lp-space-2);
+    margin-top: var(--lp-space-4);
     letter-spacing: var(--lp-ls-wide);
-  }
-  .label {
-    font-family: var(--lp-font-mono);
-    font-size: var(--lp-t-micro);
-    letter-spacing: var(--lp-ls-wider);
-    text-transform: uppercase;
-    color: rgba(255, 255, 255, 0.45);
-    margin-bottom: var(--lp-space-3);
   }
 </style>

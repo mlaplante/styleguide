@@ -8,38 +8,50 @@
    ========================================================================== */
 
 /* ---------- Button ---------- */
+/* Solid amber signal on ink text; hover deepens the amber and lifts 1px.
+   No coloured glow — the rebrand favours a flat, confident CTA. */
 .lp-btn {
   display: inline-block;
   padding: var(--lp-space-4) var(--lp-space-10);
-  background: var(--lp-indigo-500);
-  color: var(--lp-white);
+  background: var(--lp-signal);
+  color: var(--lp-ink);
   text-decoration: none;
   border-radius: var(--lp-radius-md);
   font-family: var(--lp-font-display);
-  font-weight: var(--lp-w-bold);
+  font-weight: var(--lp-w-semibold);
   font-size: 14px;
-  text-transform: uppercase;
-  letter-spacing: 1.5px;
-  border: 2px solid var(--lp-indigo-500);
-  box-shadow: var(--lp-shadow-btn);
+  letter-spacing: 0.2px;
+  border: 2px solid var(--lp-signal);
+  box-shadow: none;
   cursor: pointer;
   transition:
-    transform var(--lp-dur) var(--lp-ease),
-    box-shadow var(--lp-dur) var(--lp-ease),
-    background var(--lp-dur) var(--lp-ease),
-    color var(--lp-dur) var(--lp-ease);
+    transform var(--lp-dur-fast) var(--lp-ease),
+    background var(--lp-dur-fast) var(--lp-ease),
+    border-color var(--lp-dur-fast) var(--lp-ease),
+    color var(--lp-dur-fast) var(--lp-ease);
 }
 .lp-btn:hover,
 .lp-btn.is-lifted {
-  background: transparent;
-  color: var(--lp-indigo-500);
-  transform: translateY(-3px);
-  box-shadow: var(--lp-shadow-btn-hover);
+  background: var(--lp-signal-deep);
+  border-color: var(--lp-signal-deep);
+  color: var(--lp-white);
+  transform: translateY(-1px);
+  box-shadow: none;
+}
+.lp-btn:active {
+  transform: translateY(0);
 }
 .lp-btn--ghost {
   background: transparent;
-  color: var(--lp-indigo-500);
+  color: var(--lp-ink);
+  border-color: currentColor;
   box-shadow: none;
+}
+.lp-btn--ghost:hover,
+.lp-btn--ghost.is-lifted {
+  background: var(--lp-ink);
+  border-color: var(--lp-ink);
+  color: var(--lp-white);
 }
 .lp-btn--sm {
   padding: var(--lp-space-2) var(--lp-space-5);
@@ -58,6 +70,10 @@
   font-size: var(--lp-t-micro);
   font-weight: var(--lp-w-medium);
   letter-spacing: 0.3px;
+}
+.lp-pill--signal {
+  background: rgba(226, 163, 60, 0.12);
+  color: var(--lp-signal-deep);
 }
 .lp-pill--blog {
   background: rgba(41, 128, 185, 0.08);
@@ -116,16 +132,16 @@
   font-size: var(--lp-t-ui);
   line-height: var(--lp-lh-normal);
   border-left: 3px solid currentColor;
-  background: var(--lp-indigo-100);
-  color: var(--lp-ink-800);
+  background: rgba(226, 163, 60, 0.1);
+  color: var(--lp-ink);
 }
 .lp-callout strong {
   color: currentColor;
   margin-right: 4px;
 }
 .lp-callout--info {
-  background: var(--lp-indigo-100);
-  border-left-color: var(--lp-indigo-500);
+  background: rgba(226, 163, 60, 0.1);
+  border-left-color: var(--lp-signal-deep);
 }
 .lp-callout--success {
   background: rgba(76, 175, 80, 0.1);
@@ -143,8 +159,8 @@
 .lp-pullquote {
   margin: 0;
   padding: var(--lp-space-4) var(--lp-space-6);
-  background: rgba(63, 81, 181, 0.04);
-  border-left: 3px solid var(--lp-indigo-500);
+  background: rgba(226, 163, 60, 0.06);
+  border-left: 3px solid var(--lp-signal);
   color: var(--lp-fg-2);
   font-style: italic;
   border-radius: 0 var(--lp-radius-lg) var(--lp-radius-lg) 0;
@@ -153,12 +169,17 @@
 }
 
 /* ---------- Post card ---------- */
+/* The one card in the system. Surface panel with a resting elevation that
+   lifts on hover and reveals a signal top-edge. */
 .lp-post-card {
+  position: relative;
   display: block;
+  overflow: hidden;
   padding: var(--lp-space-5) var(--lp-space-6);
-  background: var(--lp-white);
+  background: var(--lp-surface);
   border: 1px solid var(--lp-line-2);
-  border-radius: var(--lp-radius-xl);
+  border-radius: var(--lp-radius-lg);
+  box-shadow: var(--lp-shadow-card);
   text-decoration: none;
   color: inherit;
   cursor: pointer;
@@ -167,10 +188,23 @@
     border-color var(--lp-dur-fast) var(--lp-ease),
     box-shadow var(--lp-dur-fast) var(--lp-ease);
 }
+.lp-post-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: transparent;
+  transition: background-color var(--lp-dur-fast) var(--lp-ease);
+}
 .lp-post-card:hover {
   transform: translateY(-2px);
-  border-color: var(--lp-ink-100);
-  box-shadow: var(--lp-shadow-card);
+  border-color: transparent;
+  box-shadow: var(--lp-shadow-elevated-hover);
+}
+.lp-post-card:hover::before {
+  background: var(--lp-signal);
 }
 .lp-post-meta {
   display: flex;
@@ -190,46 +224,77 @@
 }
 .lp-post-title {
   margin: 0 0 var(--lp-space-2);
+  font-family: var(--lp-font-display);
   font-size: 20px;
-  font-weight: var(--lp-w-semibold);
-  color: var(--lp-ink-900);
-  line-height: 1.35;
+  font-weight: var(--lp-w-medium);
+  letter-spacing: var(--lp-ls-display);
+  color: var(--lp-ink);
+  line-height: 1.3;
 }
 .lp-post-excerpt {
   margin: 0;
-  color: var(--lp-ink-300);
+  color: var(--lp-slate);
   font-size: var(--lp-t-meta);
   line-height: 1.6;
 }
 
 /* ---------- Service card ---------- */
+/* The rebrand promotes services from bare icon+title+text into surface cards
+   with a resting elevation and a signal top-edge on hover. */
 .lp-service {
+  position: relative;
+  overflow: hidden;
   display: flex;
   flex-direction: column;
   gap: var(--lp-space-2);
-  color: var(--lp-indigo-500);
+  padding: var(--lp-space-6);
+  background: var(--lp-surface);
+  border-radius: var(--lp-radius-lg);
+  box-shadow: var(--lp-shadow-elevated);
+  color: var(--lp-ink);
+  transition:
+    transform var(--lp-dur-fast) var(--lp-ease),
+    box-shadow var(--lp-dur-fast) var(--lp-ease);
+}
+.lp-service::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: transparent;
+  transition: background-color var(--lp-dur-fast) var(--lp-ease);
+}
+.lp-service:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--lp-shadow-elevated-hover);
+}
+.lp-service:hover::before {
+  background: var(--lp-signal);
 }
 .lp-service-glyph {
-  width: 64px;
-  height: 64px;
-  border-radius: 14px;
-  background: var(--lp-indigo-100);
+  width: 56px;
+  height: 56px;
+  border-radius: 12px;
+  background: rgba(226, 163, 60, 0.12);
   display: flex;
   align-items: center;
   justify-content: center;
-  color: var(--lp-indigo-500);
+  color: var(--lp-signal-deep);
 }
 .lp-service-title {
-  margin: var(--lp-space-1) 0 0;
-  font-size: 16px;
-  font-weight: var(--lp-w-bold);
-  text-transform: uppercase;
-  letter-spacing: var(--lp-ls-wider);
-  color: var(--lp-ink-600);
+  margin: var(--lp-space-2) 0 0;
+  font-family: var(--lp-font-display);
+  font-size: 20px;
+  font-weight: var(--lp-w-medium);
+  letter-spacing: var(--lp-ls-display);
+  line-height: 1.2;
+  color: var(--lp-ink);
 }
 .lp-service-copy {
   margin: 0;
-  color: var(--lp-fg-2);
+  color: var(--lp-slate);
   font-size: var(--lp-t-caption);
   line-height: var(--lp-lh-body);
 }
@@ -248,7 +313,7 @@
   width: 1px;
   left: 0;
   top: 0;
-  background: var(--lp-line);
+  background: var(--lp-grid-line);
 }
 .lp-timeline li {
   margin-bottom: var(--lp-space-8);
@@ -272,15 +337,16 @@
   height: 12px;
   width: 12px;
   border-radius: var(--lp-radius-full);
-  border: 1px solid var(--lp-ink-100);
-  background: var(--lp-paper-3);
+  border: 2px solid var(--lp-white);
+  background: var(--lp-ink-100);
+  box-shadow: 0 0 0 1px var(--lp-line);
   position: absolute;
   left: -6px;
   top: 4px;
 }
 .lp-timeline li.current .lp-tl-body::before {
-  border-color: rgba(0, 0, 0, 0.2);
-  background: var(--lp-indigo-500);
+  background: var(--lp-signal);
+  box-shadow: 0 0 0 1px var(--lp-signal);
 }
 .lp-tl-date {
   font-family: var(--lp-font-mono);
@@ -289,9 +355,11 @@
 }
 .lp-tl-org {
   margin: 0 0 var(--lp-space-1);
+  font-family: var(--lp-font-display);
   font-size: var(--lp-t-ui);
-  font-weight: var(--lp-w-bold);
-  color: var(--lp-ink-800);
+  font-weight: var(--lp-w-medium);
+  letter-spacing: var(--lp-ls-display);
+  color: var(--lp-ink);
 }
 .lp-tl-role {
   color: var(--lp-fg-2);
@@ -313,8 +381,11 @@
 }
 
 /* ---------- Blog nav ---------- */
+/* The single gradient in the whole system — the blog's sticky "reading mode"
+   bar. Recoloured to the brand's ink→blue reading gradient. Everything else
+   in the system is a flat fill. */
 .lp-blog-nav {
-  background: linear-gradient(135deg, var(--lp-blog-blue-500) 0%, var(--lp-blog-blue-600) 100%);
+  background: linear-gradient(135deg, var(--lp-ink-2) 0%, var(--lp-blog-blue-700) 100%);
   box-shadow: var(--lp-shadow-blog-nav);
 }
 .lp-blog-nav.is-sticky {
@@ -359,7 +430,7 @@
 }
 .lp-blog-links a:hover,
 .lp-blog-links a.active {
-  color: var(--lp-white);
+  color: var(--lp-signal);
 }
 
 @media (max-width: 640px) {
@@ -420,7 +491,7 @@
 .lp-field:focus-within textarea,
 .lp-field.focus input,
 .lp-field.focus textarea {
-  border-bottom-color: var(--lp-indigo-500);
+  border-bottom-color: var(--lp-signal);
 }
 .lp-field label {
   position: absolute;
@@ -441,5 +512,5 @@
 .lp-field.filled label {
   top: -15px;
   font-size: var(--lp-t-micro);
-  color: var(--lp-indigo-500);
+  color: var(--lp-signal-deep);
 }

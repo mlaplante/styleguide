@@ -1,57 +1,71 @@
 ---
 import DocsLayout from '../../layouts/DocsLayout.astro';
 
-const indigo = [
+const brand = [
+  {
+    name: 'Ink',
+    hex: '#0A1528',
+    token: '--lp-ink',
+    role: 'Hero / footer / text',
+    fg: 'var(--lp-white)',
+  },
+  {
+    name: 'Ink 2',
+    hex: '#122240',
+    token: '--lp-ink-2',
+    role: 'Dark card surface',
+    fg: 'var(--lp-white)',
+  },
+  {
+    name: 'Signal',
+    hex: '#E2A33C',
+    token: '--lp-signal',
+    role: 'Accent / CTA / focus',
+    fg: 'var(--lp-ink)',
+  },
+  {
+    name: 'Signal Deep',
+    hex: '#B57A1E',
+    token: '--lp-signal-deep',
+    role: 'Links / hover / icons',
+    fg: 'var(--lp-white)',
+  },
+  {
+    name: 'Slate',
+    hex: '#46566E',
+    token: '--lp-slate',
+    role: 'Body copy / meta',
+    fg: 'var(--lp-white)',
+  },
+  {
+    name: 'Surface',
+    hex: '#FFFFFF',
+    token: '--lp-surface',
+    role: 'Card / panel',
+    fg: 'var(--lp-ink)',
+    outline: true,
+  },
+];
+const legacy = [
   {
     name: 'Indigo 500',
     hex: '#3F51B5',
     token: '--lp-indigo-500',
-    role: 'Primary / Hero',
+    role: 'Legacy accent',
     fg: 'var(--lp-white)',
   },
-  {
-    name: 'Indigo 600',
-    hex: '#3849A1',
-    token: '--lp-indigo-600',
-    role: 'Hover',
-    fg: 'var(--lp-white)',
-  },
-  {
-    name: 'Indigo 700',
-    hex: '#303F8C',
-    token: '--lp-indigo-700',
-    role: 'Pressed',
-    fg: 'var(--lp-white)',
-  },
-  {
-    name: 'Indigo 10%',
-    hex: 'rgba(63,81,181,.1)',
-    token: '--lp-indigo-100',
-    role: 'Eyebrow wash',
-    fg: 'var(--lp-indigo-500)',
-    outline: true,
-  },
-];
-const blog = [
   {
     name: 'Blog 500',
     hex: '#2980B9',
     token: '--lp-blog-blue-500',
-    role: 'Blog nav start',
-    fg: 'var(--lp-white)',
-  },
-  {
-    name: 'Blog 600',
-    hex: '#1A6DA3',
-    token: '--lp-blog-blue-600',
-    role: 'Blog nav end',
+    role: 'Legacy blog nav',
     fg: 'var(--lp-white)',
   },
   {
     name: 'Blog 700',
     hex: '#1A5276',
     token: '--lp-blog-blue-700',
-    role: 'Dark nav',
+    role: 'Blog gradient end',
     fg: 'var(--lp-white)',
   },
   {
@@ -66,11 +80,12 @@ const blog = [
 
 <DocsLayout
   title="Colors — Primary"
-  description="Primary brand palette. Click a token or hex value to copy it."
+  description="The executive-brief palette: deep-navy ink authority with a single warm amber signal. Click a token or hex value to copy it."
 >
+  <span class="lp-t-eyebrow">Brand · Current</span>
   <div class="sg-swatches grid">
     {
-      [...indigo, ...blog].map((s) => (
+      brand.map((s) => (
         <div
           class={`sg-swatch ${s.outline ? 'sg-swatch--outline' : ''}`}
           style={`background:var(${s.token});color:${s.fg}`}
@@ -91,11 +106,37 @@ const blog = [
       ))
     }
   </div>
+
+  <span class="lp-t-eyebrow legacy-label">Legacy · Retiring</span>
+  <div class="sg-swatches grid">
+    {
+      legacy.map((s) => (
+        <div class="sg-swatch" style={`background:var(${s.token});color:${s.fg}`}>
+          <div>
+            <div class="sg-swatch-name">{s.name}</div>
+            <div class="sg-swatch-role">{s.role}</div>
+          </div>
+          <div class="sg-swatch-tokens">
+            <button class="sg-copy" type="button" data-copy={`var(${s.token})`}>
+              {s.token}
+            </button>
+            <button class="sg-copy" type="button" data-copy={s.hex}>
+              {s.hex}
+            </button>
+          </div>
+        </div>
+      ))
+    }
+  </div>
 </DocsLayout>
 
 <style>
   .grid {
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(3, 1fr);
+    margin-top: var(--lp-space-4);
+  }
+  .legacy-label {
+    margin-top: var(--lp-space-10);
   }
   @media (max-width: 900px) {
     .grid {
