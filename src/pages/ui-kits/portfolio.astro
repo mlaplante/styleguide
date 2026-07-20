@@ -97,7 +97,8 @@ const experience = [
             <span class="p-portrait-note">portrait placeholder</span>
           </div>
         </div>
-        <h1 class="p-hero-name">I am <strong>Michael<br />La Plante</strong></h1>
+        <p class="p-hero-eyebrow">Security &amp; Engineering Brief</p>
+        <h1 class="p-hero-name">Michael <strong>La Plante</strong></h1>
         <p class="p-hero-tagline">SVP of Information Security and Operations</p>
         <div class="p-hero-cta">
           <Button href="#contact">Schedule a Consultation</Button>
@@ -109,7 +110,7 @@ const experience = [
     <section class="p-section" id="about">
       <div class="p-container">
         <div class="p-section-header">
-          <h2 class="p-eyebrow">about me</h2>
+          <h2 class="p-eyebrow">About Me</h2>
         </div>
         <p class="p-about-lead">
           I'm an accomplished technology executive with comprehensive expertise in cybersecurity
@@ -140,7 +141,7 @@ const experience = [
     <section class="p-section p-bg-flat" id="funfacts">
       <div class="p-container">
         <div class="p-section-header">
-          <h2 class="p-eyebrow">by the numbers</h2>
+          <h2 class="p-eyebrow">By the Numbers</h2>
         </div>
         <div class="p-funfacts">
           <div class="p-funfact">
@@ -167,7 +168,7 @@ const experience = [
     <section class="p-section p-bg-paper" id="services">
       <div class="p-container">
         <div class="p-section-header">
-          <h2 class="p-eyebrow">consulting services</h2>
+          <h2 class="p-eyebrow">Consulting Services</h2>
         </div>
         <div class="p-service-grid">
           <ServiceCard title="Security Architecture">
@@ -253,7 +254,7 @@ const experience = [
     <section class="p-section p-bg-flat" id="experience">
       <div class="p-container">
         <div class="p-section-header">
-          <h2 class="p-eyebrow">my experience</h2>
+          <h2 class="p-eyebrow">My Experience</h2>
         </div>
         <Timeline entries={experience} />
       </div>
@@ -263,7 +264,7 @@ const experience = [
     <section class="p-section p-bg-paper" id="contact">
       <div class="p-container">
         <div class="p-section-header">
-          <h2 class="p-eyebrow">contact me</h2>
+          <h2 class="p-eyebrow">Contact Me</h2>
         </div>
         <form class="p-contact-form">
           <div class="p-form-group">
@@ -328,7 +329,7 @@ const experience = [
 
   .p-root {
     background: var(--lp-paper);
-    color: var(--lp-ink-900);
+    color: var(--lp-ink);
     font-family: var(--lp-font-display);
   }
 
@@ -501,9 +502,8 @@ const experience = [
 
   /* ---------- Hero ---------- */
   .p-hero {
-    background: var(--lp-indigo-500);
+    background: var(--lp-ink);
     padding: 120px 0 100px;
-    box-shadow: 0 0 40px 0 rgba(0, 0, 0, 0.45);
     margin-top: -68px;
     padding-top: 168px;
   }
@@ -518,7 +518,7 @@ const experience = [
   .p-portrait-inner {
     width: 100%;
     height: 100%;
-    background: #303f8c;
+    background: var(--lp-ink-2);
     position: relative;
     display: flex;
     align-items: center;
@@ -553,16 +553,38 @@ const experience = [
     text-transform: uppercase;
     color: rgba(255, 255, 255, 0.55);
   }
+  .p-hero-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    margin: 0 0 18px;
+    font-family: var(--lp-font-mono);
+    font-size: 11px;
+    font-weight: 700;
+    line-height: 1.5;
+    text-transform: uppercase;
+    letter-spacing: 0.09em;
+    color: var(--lp-signal);
+  }
+  .p-hero-eyebrow::before {
+    content: '';
+    width: 24px;
+    height: 1px;
+    background: currentColor;
+    flex: 0 0 24px;
+  }
   .p-hero-name {
     color: #fff;
-    font-size: 68px;
-    font-weight: 300;
+    font-family: var(--lp-font-display);
+    font-size: clamp(44px, 8vw, 88px);
+    font-weight: var(--lp-w-medium);
     margin: 0;
-    line-height: 1em;
-    letter-spacing: 2px;
+    line-height: 0.96;
+    letter-spacing: var(--lp-ls-display);
   }
   .p-hero-name strong {
-    font-weight: 300;
+    display: block;
+    font-weight: var(--lp-w-bold);
   }
   .p-hero-tagline {
     font-family: var(--lp-font-mono);
@@ -598,39 +620,38 @@ const experience = [
   .p-eyebrow {
     margin: 0;
     font-family: var(--lp-font-mono);
-    font-size: 18px;
+    font-size: 11px;
     font-weight: 700;
-    line-height: 1em;
-    color: rgba(0, 0, 0, 0.8);
-    text-transform: lowercase;
-    letter-spacing: 2px;
-    position: relative;
-    display: inline-block;
-    z-index: 3;
+    line-height: 1.5;
+    color: var(--lp-signal-deep);
+    text-transform: uppercase;
+    letter-spacing: 0.09em;
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
   }
-  .p-eyebrow::after {
+  .p-eyebrow::before {
     content: '';
-    position: absolute;
-    bottom: 1px;
-    left: 0;
-    height: 5px;
-    width: 100%;
-    background: var(--lp-indigo-500);
-    opacity: 0.4;
-    z-index: -1;
+    width: 24px;
+    height: 1px;
+    background: currentColor;
+    flex: 0 0 24px;
   }
 
   /* ---------- About ---------- */
   .p-about-lead {
-    font-size: 44px;
-    color: rgba(0, 0, 0, 0.8);
+    font-family: var(--lp-font-display);
+    font-size: clamp(2rem, 4vw, 3.15rem);
+    color: var(--lp-ink);
     margin: 0 0 20px;
-    line-height: 1.15;
-    font-weight: 400;
+    line-height: 1.16;
+    font-weight: var(--lp-w-medium);
+    letter-spacing: var(--lp-ls-display);
     max-width: 900px;
   }
   .p-about-body {
-    color: rgba(0, 0, 0, 0.6);
+    font-family: var(--lp-font-body);
+    color: var(--lp-slate);
     font-size: 14px;
     line-height: 1.8;
     margin: 0 0 15px;
@@ -646,17 +667,18 @@ const experience = [
     margin-right: 25px;
   }
   .p-social a {
+    font-family: var(--lp-font-mono);
     text-transform: uppercase;
     font-size: 14px;
     letter-spacing: 3px;
     font-weight: 600;
-    color: rgba(0, 0, 0, 0.6);
+    color: var(--lp-slate);
     text-decoration: none;
     cursor: pointer;
     transition: color 0.3s;
   }
   .p-social a:hover {
-    color: #202020;
+    color: var(--lp-signal-deep);
   }
 
   /* ---------- Funfacts ---------- */
@@ -667,17 +689,19 @@ const experience = [
   }
   .p-funfact strong {
     display: block;
+    font-family: var(--lp-font-display);
     font-size: 66px;
-    font-weight: 600;
+    font-weight: var(--lp-w-bold);
     line-height: 1em;
+    letter-spacing: -0.03em;
     margin-bottom: 4px;
-    color: var(--lp-ink-900);
+    color: var(--lp-ink);
   }
   .p-funfact span {
     font-family: var(--lp-font-mono);
     letter-spacing: 2px;
     font-size: 14px;
-    color: rgba(0, 0, 0, 0.6);
+    color: var(--lp-slate);
   }
 
   /* ---------- Services ---------- */
@@ -703,8 +727,8 @@ const experience = [
     margin-top: 5px;
   }
   .p-alert {
-    background: rgba(63, 81, 181, 0.08);
-    color: #202020;
+    background: rgba(226, 163, 60, 0.1);
+    color: var(--lp-ink);
     padding: 20px 24px;
     border-radius: 3px;
     font-size: 15px;
@@ -713,12 +737,13 @@ const experience = [
 
   /* ---------- Footer ---------- */
   .p-footer {
-    padding: 60px 0 90px;
+    padding: 52px 0;
+    background: var(--lp-ink);
   }
   .p-copyright {
     font-family: var(--lp-font-mono);
     font-size: 16px;
-    color: rgba(0, 0, 0, 0.6);
+    color: #b9c5d5;
     margin: 0;
   }
 
@@ -728,7 +753,7 @@ const experience = [
     color: #e0e0e0;
   }
   body.p-dark .p-hero {
-    background: var(--lp-dark-bg-2);
+    background: var(--lp-ink);
   }
   body.p-dark .p-section.p-bg-paper,
   body.p-dark .p-section.p-bg-flat {
@@ -756,7 +781,7 @@ const experience = [
     color: #fff;
   }
   body.p-dark .lp-service-glyph {
-    background: rgba(99, 102, 241, 0.18);
+    background: rgba(226, 163, 60, 0.18);
   }
   body.p-dark .p-dark-toggle {
     border-color: rgba(255, 255, 255, 0.3);
@@ -770,7 +795,7 @@ const experience = [
     color: #999;
   }
   body.p-dark .p-alert {
-    background: rgba(63, 81, 181, 0.15);
+    background: rgba(226, 163, 60, 0.15);
     color: #fff;
   }
 

@@ -3,21 +3,26 @@ import DocsLayout from '../../layouts/DocsLayout.astro';
 
 const shadows = [
   { name: 'Image rim', note: '25px · 15%', token: '--lp-shadow-img', kind: 'paper' },
-  { name: 'Card hover', note: '4/16 · 6%', token: '--lp-shadow-card', kind: 'paper' },
-  { name: 'Hero block', note: '40px · 45%', token: '--lp-shadow-hero', kind: 'indigo' },
-  { name: 'Button', note: '4/15 · 40% indigo', token: '--lp-shadow-btn', kind: 'indigo-btn' },
+  { name: 'Card resting', note: '4/16 · 6%', token: '--lp-shadow-card', kind: 'paper' },
+  { name: 'Elevated', note: '14/36 · 10% ink', token: '--lp-shadow-elevated', kind: 'paper' },
   {
-    name: 'Button hover',
-    note: '10/30 · 50% indigo',
-    token: '--lp-shadow-btn-hover',
-    kind: 'indigo-btn-hover',
+    name: 'Elevated hover',
+    note: '18/42 · 14% ink',
+    token: '--lp-shadow-elevated-hover',
+    kind: 'lift',
+  },
+  {
+    name: 'Button (legacy)',
+    note: '4/15 · 40% indigo',
+    token: '--lp-shadow-btn',
+    kind: 'indigo-btn',
   },
 ];
 ---
 
 <DocsLayout
   title="Spacing — Shadows"
-  description="Elevation tokens — depth cues used across components. Click a token to copy it."
+  description="Elevation tokens — the executive-brief cards ride a resting elevation that lifts on hover. Click a token to copy it."
 >
   <div class="sg-frame--row frame">
     {
@@ -46,19 +51,14 @@ const shadows = [
   .tile {
     width: 88px;
     height: 64px;
-    background: var(--lp-white);
+    background: var(--lp-surface);
     border-radius: var(--lp-radius-lg);
   }
-  .tile--indigo,
-  .tile--indigo-btn,
-  .tile--indigo-btn-hover {
+  .tile--lift {
+    transform: translateY(-2px);
+  }
+  .tile--indigo-btn {
     background: var(--lp-indigo-500);
-  }
-  .tile--indigo-btn,
-  .tile--indigo-btn-hover {
     border-radius: var(--lp-radius-md);
-  }
-  .tile--indigo-btn-hover {
-    transform: translateY(-3px);
   }
 </style>

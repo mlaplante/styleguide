@@ -22,7 +22,7 @@ if [ ! -d src ]; then
 fi
 
 CANONICAL_FILE="src/styles/components.css"
-CANONICAL_PATTERN='linear-gradient(135deg, var(--lp-blog-blue-500) 0%, var(--lp-blog-blue-600) 100%)'
+CANONICAL_PATTERN='linear-gradient(135deg, var(--lp-ink-2) 0%, var(--lp-blog-blue-700) 100%)'
 
 all_hits=$(grep -rn 'linear-gradient(\|radial-gradient(' src --include='*.astro' --include='*.css' || true)
 

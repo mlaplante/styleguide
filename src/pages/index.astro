@@ -22,19 +22,19 @@ import { landing } from '../data/nav';
             )}
             {s.visual === 'colors' && (
               <div class="color-row">
-                <span style="background:#3F51B5" />
-                <span style="background:#2980b9" />
-                <span style="background:#009688" />
-                <span style="background:#FF4081" />
-                <span style="background:#111827" />
-                <span style="background:#F1F1F1;border:1px solid #e5e7eb" />
+                <span style="background:var(--lp-ink)" />
+                <span style="background:var(--lp-ink-2)" />
+                <span style="background:var(--lp-signal)" />
+                <span style="background:var(--lp-signal-deep)" />
+                <span style="background:var(--lp-slate)" />
+                <span style="background:var(--lp-surface);border:1px solid var(--lp-line-2)" />
               </div>
             )}
             {s.visual === 'type' && (
               <div class="type-demo">
                 <span class="type-aa">Aa</span>
                 <div class="type-stack">
-                  <span class="type-eyebrow">POPPINS · ROBOTO MONO</span>
+                  <span class="type-eyebrow">SPACE GROTESK · POPPINS · ROBOTO MONO</span>
                   <span class="type-head">Headline</span>
                   <span class="type-body">Supporting copy set in body.</span>
                 </div>
@@ -112,22 +112,22 @@ import { landing } from '../data/nav';
     position: absolute;
     inset: 0 auto 0 0;
     width: 3px;
-    background: var(--lp-indigo-500);
+    background: var(--lp-signal);
     transform: scaleY(0);
     transform-origin: top;
     transition: transform var(--lp-dur) var(--lp-ease);
   }
   .card:hover {
-    border-color: var(--lp-indigo-200);
+    border-color: transparent;
     transform: translateY(-2px);
-    box-shadow: var(--lp-shadow-btn);
+    box-shadow: var(--lp-shadow-elevated-hover);
   }
   .card:hover::before {
     transform: scaleY(1);
   }
   .card:hover .arrow {
     transform: translateX(4px);
-    color: var(--lp-indigo-500);
+    color: var(--lp-signal-deep);
   }
 
   .preview-tile {
@@ -183,8 +183,8 @@ import { landing } from '../data/nav';
     font-size: 64px;
     font-weight: var(--lp-w-bold);
     line-height: 1;
-    letter-spacing: var(--lp-ls-tight);
-    color: var(--lp-ink-900);
+    letter-spacing: var(--lp-ls-display);
+    color: var(--lp-ink);
   }
   .type-stack {
     display: flex;
@@ -201,14 +201,14 @@ import { landing } from '../data/nav';
   .type-head {
     font-family: var(--lp-font-display);
     font-size: 18px;
-    font-weight: var(--lp-w-bold);
-    color: var(--lp-ink-900);
-    letter-spacing: var(--lp-ls-snug);
+    font-weight: var(--lp-w-medium);
+    color: var(--lp-ink);
+    letter-spacing: var(--lp-ls-display);
   }
   .type-body {
-    font-family: var(--lp-font-display);
+    font-family: var(--lp-font-body);
     font-size: 12px;
-    color: var(--lp-ink-400);
+    color: var(--lp-slate);
     line-height: var(--lp-lh-normal);
   }
 
@@ -221,7 +221,7 @@ import { landing } from '../data/nav';
   }
   .spacing-demo span {
     height: 8px;
-    background: var(--lp-indigo-500);
+    background: var(--lp-signal);
     border-radius: var(--lp-radius-sm);
     transition: transform var(--lp-dur-fast) var(--lp-ease);
   }
@@ -240,7 +240,7 @@ import { landing } from '../data/nav';
     width: 14px;
     height: 14px;
     border-radius: var(--lp-radius-full);
-    background: var(--lp-indigo-500);
+    background: var(--lp-signal);
     transition: transform var(--lp-dur) var(--lp-ease);
   }
   .motion-dot--fast {
@@ -276,19 +276,20 @@ import { landing } from '../data/nav';
   .btn-demo {
     display: inline-block;
     padding: 10px 22px;
-    background: var(--lp-indigo-500);
-    color: var(--lp-white);
+    background: var(--lp-signal);
+    color: var(--lp-ink);
     border-radius: var(--lp-radius-md);
-    font-weight: var(--lp-w-bold);
-    font-size: 11px;
-    text-transform: uppercase;
-    letter-spacing: var(--lp-ls-wide);
-    border: 2px solid var(--lp-indigo-500);
-    box-shadow: var(--lp-shadow-btn);
+    font-family: var(--lp-font-display);
+    font-weight: var(--lp-w-semibold);
+    font-size: 12px;
+    letter-spacing: 0.2px;
+    border: 2px solid var(--lp-signal);
+    box-shadow: none;
   }
   .btn-demo--ghost {
     background: transparent;
-    color: var(--lp-indigo-500);
+    color: var(--lp-ink);
+    border-color: currentColor;
     box-shadow: none;
   }
 
@@ -304,7 +305,7 @@ import { landing } from '../data/nav';
   .kit-bar {
     display: block;
     height: 14px;
-    background: var(--lp-blog-blue-500);
+    background: var(--lp-ink);
   }
   .kit-body {
     padding: var(--lp-space-3) var(--lp-space-4);
@@ -341,9 +342,9 @@ import { landing } from '../data/nav';
     margin: 0 0 var(--lp-space-2);
     font-family: var(--lp-font-display);
     font-size: var(--lp-t-md);
-    font-weight: var(--lp-w-bold);
-    letter-spacing: var(--lp-ls-snug);
-    color: var(--lp-ink-900);
+    font-weight: var(--lp-w-semibold);
+    letter-spacing: var(--lp-ls-display);
+    color: var(--lp-ink);
   }
   .card p {
     margin: 0;

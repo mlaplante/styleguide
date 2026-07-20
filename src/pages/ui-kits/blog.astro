@@ -15,7 +15,7 @@ const posts = [
   },
   {
     category: 'thought-leadership',
-    categoryVariant: 'indigo',
+    categoryVariant: 'signal',
     date: 'Mar 2025',
     readTime: '5 min read',
     title: 'Why Zero-Trust Is a Mindset, Not a Product',
@@ -33,7 +33,7 @@ const posts = [
   },
   {
     category: 'thought-leadership',
-    categoryVariant: 'indigo',
+    categoryVariant: 'signal',
     date: 'Nov 2024',
     readTime: '6 min read',
     title: 'SOC 2 Without the Consultant: What We Learned Doing It In-House',
@@ -140,7 +140,7 @@ const posts = [
 
   .b-root {
     background: var(--lp-paper-2);
-    color: var(--lp-ink-500);
+    color: var(--lp-slate);
     font-family: var(--lp-font-display);
     -webkit-font-smoothing: antialiased;
   }
@@ -157,15 +157,16 @@ const posts = [
     margin-bottom: 40px;
   }
   .b-list-title {
+    font-family: var(--lp-font-display);
     font-size: 40px;
     font-weight: var(--lp-w-bold);
-    color: var(--lp-ink-900);
+    color: var(--lp-ink);
     margin: 0 0 10px;
-    letter-spacing: var(--lp-ls-tight);
+    letter-spacing: var(--lp-ls-display);
   }
   .b-list-sub {
     font-size: var(--lp-t-base);
-    color: var(--lp-ink-300);
+    color: var(--lp-slate);
     margin: 0;
     max-width: 560px;
     line-height: 1.6;
@@ -182,12 +183,12 @@ const posts = [
     background: transparent;
     border: none;
     padding: 0 0 18px;
-    color: var(--lp-blog-blue-500);
+    color: var(--lp-signal-deep);
     font-family: var(--lp-font-mono);
     font-size: var(--lp-t-caption);
     letter-spacing: 0.5px;
     cursor: pointer;
-    text-transform: lowercase;
+    text-transform: none;
     text-decoration: none;
   }
   .b-article-header {
@@ -196,31 +197,34 @@ const posts = [
     margin-bottom: 36px;
   }
   .b-article-title {
+    font-family: var(--lp-font-display);
     margin: 12px 0 14px;
     font-size: 40px;
     font-weight: var(--lp-w-bold);
-    letter-spacing: var(--lp-ls-tight);
+    letter-spacing: var(--lp-ls-display);
     line-height: 1.15;
-    color: var(--lp-ink-900);
+    color: var(--lp-ink);
   }
   .b-article-lead {
     font-size: 19px;
     line-height: 1.55;
-    color: var(--lp-ink-400);
+    color: var(--lp-slate);
     margin: 0;
   }
 
   .b-article-body {
+    font-family: var(--lp-font-body);
     font-size: var(--lp-t-base);
     line-height: var(--lp-lh-body);
-    color: var(--lp-ink-500);
+    color: var(--lp-slate);
   }
   .b-article-body h2 {
+    font-family: var(--lp-font-display);
     margin: 44px 0 16px;
     font-size: var(--lp-t-md);
     font-weight: var(--lp-w-bold);
-    color: var(--lp-ink-900);
-    letter-spacing: var(--lp-ls-snug);
+    color: var(--lp-ink);
+    letter-spacing: var(--lp-ls-display);
   }
   .b-article-body p {
     margin: 0 0 20px;
@@ -235,17 +239,17 @@ const posts = [
   .b-article-body code {
     font-family: var(--lp-font-mono);
     font-size: 15px;
-    background: rgba(41, 128, 185, 0.08);
-    color: var(--lp-blog-blue-600);
+    background: rgba(226, 163, 60, 0.1);
+    color: var(--lp-signal-deep);
     padding: 2px 6px;
     border-radius: var(--lp-radius);
   }
   .b-article-body blockquote {
     margin: 28px 0;
     padding: 18px 24px;
-    background: rgba(63, 81, 181, 0.04);
-    border-left: 3px solid var(--lp-indigo-500);
-    color: var(--lp-ink-400);
+    background: rgba(226, 163, 60, 0.06);
+    border-left: 3px solid var(--lp-signal);
+    color: var(--lp-slate);
     font-style: italic;
     border-radius: 0 var(--lp-radius-lg) var(--lp-radius-lg) 0;
   }
@@ -256,7 +260,7 @@ const posts = [
     color: var(--lp-dark-text-2);
   }
   body.b-dark .lp-blog-nav {
-    background: var(--lp-blog-blue-700);
+    background: var(--lp-ink);
   }
   body.b-dark .b-list-title,
   body.b-dark .lp-post-title,
@@ -284,17 +288,17 @@ const posts = [
     background: rgba(96, 165, 250, 0.15);
     color: #60a5fa;
   }
-  body.b-dark .lp-pill--indigo {
-    background: rgba(129, 140, 248, 0.15);
-    color: #818cf8;
+  body.b-dark .lp-pill--signal {
+    background: rgba(226, 163, 60, 0.18);
+    color: var(--lp-signal);
   }
   body.b-dark .b-article-body code {
-    background: rgba(96, 165, 250, 0.15);
-    color: #93c5fd;
+    background: rgba(226, 163, 60, 0.18);
+    color: var(--lp-signal);
   }
   body.b-dark .b-article-body blockquote {
-    background: rgba(129, 140, 248, 0.08);
-    border-color: #818cf8;
+    background: rgba(226, 163, 60, 0.08);
+    border-color: var(--lp-signal);
     color: #cbd5e1;
   }
 

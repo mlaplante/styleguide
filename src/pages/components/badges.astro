@@ -2,8 +2,8 @@
 import DocsLayout from '../../layouts/DocsLayout.astro';
 import CodeSnippet from '../../components/CodeSnippet.astro';
 
-const snippet = `<span class="lp-pill lp-pill--blog">dev-session</span>
-<span class="lp-pill lp-pill--indigo">thought-leadership</span>
+const snippet = `<span class="lp-pill lp-pill--signal">thought-leadership</span>
+<span class="lp-pill lp-pill--blog">dev-session</span>
 <span class="lp-pill lp-pill--teal">case-study</span>
 <span class="lp-pill lp-pill--purple">talk</span>
 
@@ -22,8 +22,8 @@ const snippet = `<span class="lp-pill lp-pill--blog">dev-session</span>
   <section class="set">
     <h2>Category pills · blog</h2>
     <div class="row">
+      <span class="lp-pill lp-pill--signal">thought-leadership</span>
       <span class="lp-pill lp-pill--blog">dev-session</span>
-      <span class="lp-pill lp-pill--indigo">thought-leadership</span>
       <span class="lp-pill lp-pill--teal">case-study</span>
       <span class="lp-pill lp-pill--purple">talk</span>
     </div>
@@ -43,8 +43,8 @@ const snippet = `<span class="lp-pill lp-pill--blog">dev-session</span>
     <h2>Inline code</h2>
     <p class="prose">
       Set <code class="lp-t-code">--lp-radius-md</code> on CTA buttons and
-      <code class="lp-t-code">--lp-radius-xl</code> on cards. Article body inherits
-      <code class="lp-t-code">var(--lp-font-display)</code>.
+      <code class="lp-t-code">--lp-radius-lg</code> on cards. Article body inherits
+      <code class="lp-t-code">var(--lp-font-body)</code>.
     </p>
   </section>
 
@@ -70,7 +70,7 @@ const snippet = `<span class="lp-pill lp-pill--blog">dev-session</span>
     gap: var(--lp-space-2);
   }
   .prose {
-    font-family: var(--lp-font-display);
+    font-family: var(--lp-font-body);
     font-size: var(--lp-t-base);
     line-height: var(--lp-lh-body);
     color: var(--lp-fg-2);

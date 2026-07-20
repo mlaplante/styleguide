@@ -76,18 +76,41 @@
   src: url('../../node_modules/@fontsource/roboto-mono/files/roboto-mono-latin-700-normal.woff2')
     format('woff2');
 }
+/* Space Grotesk — display family for the executive-brief identity. Variable
+   weight (300–700), latin subset, self-hosted to satisfy the CSP font-src. */
+@font-face {
+  font-family: 'Space Grotesk';
+  font-style: normal;
+  font-weight: 300 700;
+  font-display: swap;
+  src: url('../../node_modules/@fontsource-variable/space-grotesk/files/space-grotesk-latin-wght-normal.woff2')
+    format('woff2');
+}
 
 :root {
-  /* ---------- Color · Brand ---------- */
-  --lp-indigo-500: #3f51b5; /* primary — portfolio accent + buttons */
+  /* ---------- Color · Brand — Executive brief (primary) ---------- */
+  /* The current identity: deep-navy authority + a single warm amber "signal".
+     Mirrors resumesite's live briefing-cover system (style.css/blog.css :root). */
+  --lp-ink: #0a1528; /* deep navy — hero fill, footer, primary text on paper */
+  --lp-ink-2: #122240; /* elevated navy — dark-mode card surface */
+  --lp-slate: #46566e; /* muted slate — body copy, meta */
+  --lp-signal: #e2a33c; /* amber signal — CTAs, active nodes, focus ring */
+  --lp-signal-deep: #b57a1e; /* deep amber — links, hover, section rules, icons */
+  --lp-surface: #ffffff; /* card / panel surface */
+  --lp-grid-line: rgba(122, 152, 205, 0.1); /* blueprint grid + hairline rules */
+
+  /* ---------- Color · Brand — Legacy accents (retiring) ---------- */
+  /* Kept for the portfolio accent-switcher rail and not-yet-restyled surfaces.
+     New work reaches for --lp-signal / --lp-ink, not indigo or blog-blue. */
+  --lp-indigo-500: #3f51b5; /* legacy primary */
   --lp-indigo-600: #3849a1;
   --lp-indigo-700: #303f8c;
   --lp-indigo-100: rgba(63, 81, 181, 0.1);
   --lp-indigo-200: rgba(63, 81, 181, 0.4);
 
-  --lp-blog-blue-500: #2980b9; /* blog accent — sticky nav gradient start */
-  --lp-blog-blue-600: #1a6da3; /* blog accent — gradient end */
-  --lp-blog-blue-700: #1a5276; /* blog dark-mode nav */
+  --lp-blog-blue-500: #2980b9; /* legacy blog accent — sticky nav gradient start */
+  --lp-blog-blue-600: #1a6da3; /* legacy blog accent — gradient end */
+  --lp-blog-blue-700: #1a5276; /* legacy blog dark-mode nav */
   --lp-blog-blue-900: #154360;
   --lp-link-dark: #60a5fa; /* dark-mode link color */
 
@@ -111,7 +134,7 @@
   --lp-ink-100: #9ca3af;
   --lp-line: #e0e0e0; /* timeline rule */
   --lp-line-2: #e5e7eb; /* card borders */
-  --lp-paper: #f1f1f1; /* portfolio body bg */
+  --lp-paper: #f4f6f9; /* page bg — cool paper (executive brief) */
   --lp-paper-2: #f8f9fa; /* blog body bg */
   --lp-paper-3: #f0f0f0; /* timeline dots */
   --lp-white: #ffffff;
@@ -133,8 +156,8 @@
   --lp-code-accent-dark: #e879a0;
 
   /* ---------- Color · Semantic ---------- */
-  --lp-fg-1: var(--lp-ink-900);
-  --lp-fg-2: var(--lp-ink-500);
+  --lp-fg-1: var(--lp-ink); /* primary text — deep navy */
+  --lp-fg-2: var(--lp-slate); /* body copy — slate */
   --lp-fg-3: var(--lp-ink-300);
   --lp-fg-mute: var(--lp-ink-200);
   --lp-bg-1: var(--lp-white);
@@ -142,11 +165,18 @@
   --lp-bg-3: var(--lp-paper);
   --lp-border-subtle: var(--lp-line-2);
   --lp-border: var(--lp-line);
-  --lp-accent: var(--lp-indigo-500);
-  --lp-accent-blog: var(--lp-blog-blue-500);
+  --lp-accent: var(--lp-signal); /* primary accent — the amber signal */
+  --lp-accent-deep: var(--lp-signal-deep);
+  --lp-accent-ink: var(--lp-ink); /* primary dark surface */
+  --lp-accent-legacy: var(--lp-indigo-500); /* retiring indigo */
+  --lp-accent-blog: var(--lp-blog-blue-500); /* legacy blog-nav gradient */
 
   /* ---------- Typography · Families ---------- */
-  --lp-font-display: 'Poppins', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  /* Display (Space Grotesk) carries headlines, hero, stat numerals and card
+     titles; body (Poppins) carries running copy; mono (Roboto Mono) carries
+     eyebrows, meta, nav and code. Never cross the roles. */
+  --lp-font-display:
+    'Space Grotesk', 'Poppins', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
   --lp-font-body: 'Poppins', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
   --lp-font-mono: 'Roboto Mono', 'SF Mono', Menlo, Consolas, monospace;
 
@@ -170,6 +200,7 @@
   --lp-t-micro: 12px; /* eyebrows, tag pills */
 
   /* ---------- Typography · Letter-spacing ---------- */
+  --lp-ls-display: -0.02em; /* Space Grotesk hero + headings (proportional) */
   --lp-ls-tight: -0.5px; /* large headings */
   --lp-ls-snug: -0.3px; /* h2 */
   --lp-ls-normal: 0;
@@ -213,7 +244,10 @@
   --lp-shadow-img: 0 0 25px 0 rgba(0, 0, 0, 0.15); /* person image */
   --lp-shadow-menu: 0 0 30px 0 rgba(0, 0, 0, 0.2); /* menu */
   --lp-shadow-card: 0 4px 16px 0 rgba(0, 0, 0, 0.06); /* post card hover */
-  --lp-shadow-btn: 0 4px 15px rgba(63, 81, 181, 0.4);
+  --lp-shadow-elevated: 0 14px 36px rgba(10, 21, 40, 0.1); /* cards/panels (executive brief) */
+  --lp-shadow-elevated-hover: 0 18px 42px rgba(10, 21, 40, 0.14); /* elevated hover lift */
+  --lp-shadow-elevated-dark: 0 14px 36px rgba(0, 0, 0, 0.28); /* dark-mode elevated */
+  --lp-shadow-btn: 0 4px 15px rgba(63, 81, 181, 0.4); /* legacy indigo button glow */
   --lp-shadow-btn-hover: 0 10px 30px rgba(63, 81, 181, 0.5);
   --lp-shadow-blog-nav: 0 2px 8px rgba(0, 0, 0, 0.15);
   --lp-shadow-img-article: 0 2px 12px rgba(0, 0, 0, 0.08);
@@ -250,8 +284,8 @@
   --sg-fg-muted: var(--lp-ink-400);
   --sg-fg-soft: var(--lp-ink-300);
   --sg-nav-link: var(--lp-ink-500);
-  --sg-nav-hover-bg: var(--lp-indigo-100);
-  --sg-nav-hover-fg: var(--lp-indigo-700);
+  --sg-nav-hover-bg: rgba(226, 163, 60, 0.12);
+  --sg-nav-hover-fg: var(--lp-signal-deep);
 }
 
 :root[data-theme='dark'] {
@@ -264,8 +298,8 @@
   --sg-fg-muted: var(--lp-dark-text-2);
   --sg-fg-soft: var(--lp-dark-muted);
   --sg-nav-link: var(--lp-dark-text-2);
-  --sg-nav-hover-bg: rgba(99, 102, 241, 0.18);
-  --sg-nav-hover-fg: #a5b4fc;
+  --sg-nav-hover-bg: rgba(226, 163, 60, 0.18);
+  --sg-nav-hover-fg: var(--lp-signal);
 }
 
 /* Elements that only show in one chrome theme (e.g. light/dark logo). */
@@ -290,12 +324,12 @@
 }
 
 :focus-visible {
-  outline: 2px solid var(--lp-indigo-500);
+  outline: 2px solid var(--lp-signal);
   outline-offset: 2px;
 }
 
 :root[data-theme='dark'] :focus-visible {
-  outline-color: var(--lp-link-dark);
+  outline-color: var(--lp-signal);
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -320,17 +354,20 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Hero title — huge, light-weight, letter-spaced */
+/* Hero title — huge Space Grotesk, medium weight, tight display tracking.
+   The rebrand flips the old "huge + light 300" pairing to a denser, more
+   confident briefing-cover headline. */
 .lp-t-hero {
   font-family: var(--lp-font-display);
   font-size: var(--lp-t-hero);
-  font-weight: var(--lp-w-light);
-  line-height: var(--lp-lh-tight);
-  letter-spacing: var(--lp-ls-wider);
+  font-weight: var(--lp-w-medium);
+  line-height: 0.96;
+  letter-spacing: var(--lp-ls-display);
+  color: var(--lp-ink);
   margin: 0;
 }
 .lp-t-hero strong {
-  font-weight: var(--lp-w-light);
+  font-weight: var(--lp-w-bold);
 }
 
 /* H1 — blog post */
@@ -339,8 +376,8 @@ body {
   font-size: var(--lp-t-lg);
   font-weight: var(--lp-w-bold);
   line-height: var(--lp-lh-snug);
-  letter-spacing: var(--lp-ls-tight);
-  color: var(--lp-ink-800);
+  letter-spacing: var(--lp-ls-display);
+  color: var(--lp-ink);
   margin: 0 0 var(--lp-space-3);
 }
 
@@ -349,8 +386,8 @@ body {
   font-family: var(--lp-font-display);
   font-size: var(--lp-t-md);
   font-weight: var(--lp-w-bold);
-  letter-spacing: var(--lp-ls-snug);
-  color: var(--lp-ink-800);
+  letter-spacing: var(--lp-ls-display);
+  color: var(--lp-ink);
   margin: var(--lp-space-12) 0 var(--lp-space-4);
 }
 
@@ -359,43 +396,47 @@ body {
   font-family: var(--lp-font-display);
   font-size: var(--lp-t-sm);
   font-weight: var(--lp-w-semibold);
-  color: var(--lp-ink-700);
+  letter-spacing: var(--lp-ls-display);
+  color: var(--lp-ink);
   margin: 36px 0 var(--lp-space-3);
 }
 
-/* Section eyebrow — lowercased, monospaced, underlined with indigo wash */
+/* Section eyebrow / briefing label — UPPERCASE mono with a short leading
+   signal rule. Replaces the old lowercase indigo-highlighter treatment. */
 .lp-t-eyebrow {
   font-family: var(--lp-font-mono);
-  font-size: 18px;
+  font-size: var(--lp-t-micro);
   font-weight: var(--lp-w-bold);
-  line-height: var(--lp-lh-tight);
-  color: rgba(0, 0, 0, 0.8);
-  text-transform: lowercase;
-  letter-spacing: var(--lp-ls-wider);
-  position: relative;
-  display: inline-block;
-  z-index: 3;
+  line-height: var(--lp-lh-normal);
+  color: var(--lp-signal-deep);
+  text-transform: uppercase;
+  letter-spacing: 0.09em;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--lp-space-3);
   margin: 0;
 }
-.lp-t-eyebrow::after {
+.lp-t-eyebrow::before {
   content: '';
-  position: absolute;
-  bottom: 1px;
-  left: 0;
-  height: 4px;
-  width: 100%;
-  background: var(--lp-indigo-500);
-  opacity: 0.4;
-  z-index: -1;
+  width: 24px;
+  height: 1px;
+  background: currentColor;
+  flex: 0 0 24px;
+}
+:root[data-theme='dark'] .lp-t-eyebrow {
+  color: var(--lp-signal);
 }
 
-/* Service titles — uppercased, letter-spaced */
+/* Service / structural label — Space Grotesk, sentence case, tight tracking.
+   The rebrand drops the old UPPERCASE service title in favour of a calmer,
+   editorial card heading. */
 .lp-t-label {
   font-family: var(--lp-font-display);
-  font-size: 18px;
-  font-weight: var(--lp-w-bold);
-  text-transform: uppercase;
-  letter-spacing: var(--lp-ls-wider);
+  font-size: 20px;
+  font-weight: var(--lp-w-medium);
+  letter-spacing: var(--lp-ls-display);
+  line-height: 1.2;
+  color: var(--lp-ink);
 }
 
 /* Meta / intro tagline — mono, light color */
@@ -407,9 +448,9 @@ body {
   letter-spacing: var(--lp-ls-wide);
 }
 
-/* Body paragraph */
+/* Body paragraph — Poppins, tuned for long-form reading */
 .lp-t-body {
-  font-family: var(--lp-font-display);
+  font-family: var(--lp-font-body);
   font-size: var(--lp-t-base);
   line-height: var(--lp-lh-body);
   color: var(--lp-fg-2);
@@ -458,7 +499,7 @@ body {
   border-radius: var(--lp-radius-lg);
 }
 .sg-frame--ink {
-  background: var(--lp-ink-600);
+  background: var(--lp-ink);
   border-radius: var(--lp-radius-lg);
   color: var(--lp-white);
 }
@@ -549,8 +590,8 @@ body {
   left: var(--lp-space-2);
   top: -100px;
   z-index: 100;
-  background: var(--lp-indigo-500);
-  color: var(--lp-white);
+  background: var(--lp-signal);
+  color: var(--lp-ink);
   padding: var(--lp-space-2) var(--lp-space-4);
   border-radius: var(--lp-radius-md);
   text-decoration: none;
