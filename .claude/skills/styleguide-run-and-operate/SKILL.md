@@ -77,6 +77,28 @@ There is no `wrangler.toml` and no adapter entry in `astro.config.mjs` in this r
 | Push to `main`           | Production deploy → https://brand.michaellaplante.com |
 | Push to any other branch | Preview deploy, unique preview URL                    |
 
+### Confirming a deploy actually landed (verified 2026-07-31)
+
+A failed CF Pages build leaves the **previous** deploy serving, so "all pages 200" and
+"`/_astro/<hash>` filenames match my local build" are both true on a red build — and after a
+dependency patch, local and deployed output are often byte-identical anyway. The discriminating
+check is the GitHub check run for the merged SHA (no Cloudflare credentials needed):
+
+```bash
+gh api repos/mlaplante/styleguide/commits/<sha>/check-runs \
+  --jq '.check_runs[] | "\(.name) \(.status) \(.conclusion)"'
+# => Cloudflare Pages completed success
+```
+
+`gh api .../commits/<sha>/status` returns `pending` with an **empty** `statuses` array here (no
+commit statuses are configured — not "a build is running"), and `gh api .../deployments` is
+empty; neither is evidence. Two live-check false alarms on this site: Cloudflare's edge injects
+Rocket Loader (rewrites every `<script>` to `type="<hex>-text/javascript"` and appends a
+`/cdn-cgi/challenge-platform` shim), so a raw `diff dist/index.html` vs. the live HTML is never
+empty; and `/404.html` returns **308** (CF Pages redirects it to `/404`), so a "every built page
+must be 200" sweep reports one bogus failure. Full runbook:
+`cf-pages-deploy-verify-check-run-not-live-html-diff`.
+
 **CF Pages build configuration** (set in the Cloudflare dashboard, not in-repo — there is no
 `wrangler.toml`/`wrangler.jsonc` here):
 
